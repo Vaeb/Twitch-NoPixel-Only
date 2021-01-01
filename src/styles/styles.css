@@ -1,0 +1,28 @@
+body {
+    min-width: 210px;
+    min-height: 80px;
+    font: 12px 'Verdana';
+}
+
+h1 {
+    font: 16px "Helvetica";
+    font-size: 20px;
+    border-bottom: 1px solid #c5c5c5;
+}
+
+a {
+    text-decoration: none;
+    color: #333333;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+div {
+    user-select: none;
+}
+
+.button {
+    cursor: pointer;
+}
