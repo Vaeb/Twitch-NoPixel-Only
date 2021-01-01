@@ -9,8 +9,8 @@ Once installed, go to https://www.twitch.tv/directory/game/Grand%20Theft%20Auto%
 This extension is specifically aimed at NoPixel viewers on Twitch. It has two primary features:
 1. Filtering GTAV streams to exclude any non-NoPixel activity.
 2. Automatically tagging/customizing NoPixel streams based on:
-a. the active character being played.
-b. the faction (if any) that the character belongs to.
+    1. the active character being played.
+    2. the faction (if any) that the character belongs to.
 
 ##### Filtering:
 How do you know if it's a NoPixel stream? There are two ways this is checked. Firstly, this extension includes a large array of NoPixel streamers (currently 332) who are always included. Secondly, if the stream title contains the term "NoPixel" or some variant of it, such as "NP" or "No Pixel", then the stream is included.
