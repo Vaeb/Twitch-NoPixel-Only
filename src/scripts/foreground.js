@@ -1224,22 +1224,21 @@ const useColors = {
     russians: '#a35231', // #00A032
     angels: '#ff9ff3',
     snakegang: '#789500', // 789500
-    development: '#718093',
+    development: '#718093', // #cd843f
     doc: '#0984e3',
     mechanic: '#40739e',
     harmony: '#40739e',
     quickfix: '#40739e',
     tunershop: '#40739e',
     // fastlane: '#40739e',
-    // koreans, quickfix, ckr, tuner, harmony, mechanic, aztecas, marabunta, russians, sahara
     bbmc: '#ffeaa7',
-    // mersions: '#cd843f',
     police: '#0abde3',
     medical: '#badc58',
     otherfaction: '#32ff7e',
     independent: '#32ff7e',
     othernp: '#ffffff',
     other: '#81ecec',
+    // mersions, koreans, ckr, aztecas
 };
 
 // const useColors = {
