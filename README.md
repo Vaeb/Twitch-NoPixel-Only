@@ -1,5 +1,9 @@
 # Twitch-NoPixel-Only
 
+This extension is currently pending review on the Chrome Web Store.
+
+---
+
 Once installed, go to https://www.twitch.tv/directory/game/Grand%20Theft%20Auto%20V to use.
 
 This extension is specifically aimed at NoPixel viewers on Twitch. It has two primary features:
