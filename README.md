@@ -4,6 +4,8 @@ Install: https://chrome.google.com/webstore/detail/twitch-nopixel-only/jebgklbge
 
 Once installed, go to https://www.twitch.tv/directory/game/Grand%20Theft%20Auto%20V to use.
 
+---
+
 This extension is specifically aimed at NoPixel viewers on Twitch. It has two primary features:
 1. Filtering GTAV streams to exclude any non-NoPixel activity.
 2. Automatically tagging/customizing NoPixel streams based on:
