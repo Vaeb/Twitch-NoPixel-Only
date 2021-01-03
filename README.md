@@ -12,7 +12,7 @@ This extension is specifically aimed at NoPixel viewers on Twitch. It has two pr
     1. the active character being played.
     2. the faction (if any) that the character belongs to.
 
-#### Filtering
+### Filtering
 
 ##### "Does this only apply to the GTAV category on Twitch?"
 
@@ -27,7 +27,7 @@ Firstly, this extension contains a large array of NoPixel streamers (currently 3
 Secondly, if the stream title contains the term "NoPixel" or some variant of it, such as "NP" or "No Pixel", then the stream is included.
 There are several exceptions to this filtering: Streams from a few other RP servers including TFRP and TRP are still included. However, there is no individual tagging/customizing done on these streams; all of them are coloured pale-blue.
 
-#### Tagging
+### Tagging
 
 ##### "What is this 'tagging'?"
 
