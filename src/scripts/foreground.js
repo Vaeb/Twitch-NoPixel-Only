@@ -1211,26 +1211,25 @@ const npFactionsRegex = {
 
 const useColors = {
     leanbois: '#e74c3c',
-    lostmc: '#ab5179', // b71540
-    sahara: '#b71540', // #9b4d75
+    lostmc: '#ab5179',
+    sahara: '#b71540',
     changgang: '#686de0',
-    vagos: '#f1c40f', // f1c40f
+    vagos: '#f1c40f',
     gsf: '#006422',
     ssb: '#9b59b6',
     esb: '#8854d0',
     marabunta: '#2250ff',
     hoa: '#dc9461',
     doj: '#00A032',
-    russians: '#a35231', // #00A032
+    russians: '#a35231',
     angels: '#ff9ff3',
-    snakegang: '#789500', // 789500
-    development: '#718093', // #cd843f
+    snakegang: '#789500',
+    development: '#718093',
     doc: '#0984e3',
     mechanic: '#40739e',
     harmony: '#40739e',
     quickfix: '#40739e',
     tunershop: '#40739e',
-    // fastlane: '#40739e',
     bbmc: '#ffeaa7',
     police: '#0abde3',
     medical: '#badc58',
@@ -1238,8 +1237,11 @@ const useColors = {
     independent: '#32ff7e',
     othernp: '#ffffff',
     other: '#81ecec',
-    // mersions, koreans, ckr, aztecas
 };
+
+// #00A032 #cd843f #9b4d75
+// fastlane: '#40739e',
+// mersions, koreans, ckr, aztecas
 
 // const useColors = {
 //     leanbois: '#d64f35',
