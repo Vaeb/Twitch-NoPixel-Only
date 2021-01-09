@@ -739,7 +739,7 @@ const npCharacters = {
         { name: 'Aleksander Bogorov', faction: 'Angels', nicknames: ['Aleks'], displayName: 3 },
         { name: 'Elijiah "Middle E" Parks', faction: 'SSB' },
     ],
-    MOONMOON_OW: [
+    MOONMOON: [
         { name: 'Yung Dab', faction: 'CKR', leader: true, nicknames: ['The "Gnome"'] },
     ],
     MsBrit: [
