@@ -555,6 +555,9 @@ const npCharacters = {
     KatFires: [
         { name: 'Novah Walker', faction: 'Chang Gang' },
     ],
+    kClient: [
+        { name: 'Daquan "Peanut" Dumas', faction: 'Arab Mafia' },
+    ],
     Kemony: [
         { name: 'Susie Carmichael', faction: 'Snake Gang' },
     ],
@@ -751,6 +754,7 @@ const npCharacters = {
     ],
     Nakkida: [
         { name: '[Deputy] Tessa Lamb', faction: 'Police', displayName: 1 },
+        { name: 'Rachel Parker' },
     ],
     Natettvrp: [
         { name: 'Carlitos Loco', faction: 'Vagos' },
@@ -1016,7 +1020,7 @@ const npCharacters = {
         { name: 'Miguel Almerion', faction: 'Snake Gang' },
     ],
     Syraphic: [
-        { name: 'Elena Marilyn Vega' },
+        { name: 'Elena Marilyn Vega', faction: 'Sahara' },
     ],
     t3r0: [
         { name: '[Dr.] Andrew Ducksworth', faction: 'Medical', displayName: 2 },
