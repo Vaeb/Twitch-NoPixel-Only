@@ -4,6 +4,8 @@ Install: https://chrome.google.com/webstore/detail/twitch-nopixel-only/jebgklbge
 
 Once installed, go to https://www.twitch.tv/directory/game/Grand%20Theft%20Auto%20V to use.
 
+Everything is automatic, you don't have to do anything.
+
 ![Twitch NoPixel Only Screenshot](https://i.imgur.com/oZIOuVH.jpg)
 
 ---
