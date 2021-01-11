@@ -11,8 +11,8 @@
     },
     "background": {
         "scripts": [
-            "scripts/jquery-3.5.1.min.js",
-            "scripts/background.js"
+            "js/jquery-3.5.1.min.js",
+            "js/background.js"
         ]
     },
     "browser_action": {
@@ -22,13 +22,13 @@
             "48": "images/icon-48.png",
             "128": "images/icon-128.png"
         },
-        "default_popup": "popup.html",
+        "default_popup": "html/popup.html",
         "default_title": "Twitch NoPixel Only"
     },
     "content_scripts": [
         {
             "matches": ["https://www.twitch.tv/*"],
-            "js": ["scripts/foreground.js"]
+            "js": ["js/foreground.js"]
         }
     ],
     "permissions": [
