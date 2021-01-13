@@ -289,7 +289,7 @@ const npCharacters = {
         { name: 'Uchiha Jones', faction: 'Chang Gang' },
         { name: 'Joe Caine', faction: 'The Winery', displayName: 0 },
     ],
-    DaisyGray: [
+    Kiva: [
         { name: 'Andi Jones', faction: 'HOA', nicknames: ['Ant'], displayName: 3 },
     ],
     Darthbobo77: [
