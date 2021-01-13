@@ -1209,7 +1209,7 @@ const npFactionsRegex = {
     // koreans: /korean/i,
     bbmc: /bondi\b|bbmc/i,
     mersions: /\bmersion/i,
-    police: /(?<!then\b.*|!)(?:officer|deputy|(?<!private[\s-]*)detective|sergeant|lieutenant|corporal|sheriff|trooper|cadet|\b(?:ranger|dt|sgt|lt(?![^|!]*\bjones\b)|cpl|lspd|sasp|bcso|cid)\b)/i,
+    police: /(?<!then\b.*|!)(?:\bcop\b|officer|deputy|(?<!private[\s-]*)detective|sergeant|lieutenant|corporal|sheriff|trooper|cadet|\b(?:ranger|dt|sgt|lt(?![^|!]*\bjones\b)|cpl|lspd|sasp|bcso|cid)\b)/i,
     medical: /(?<!then\b.*|!)(?:doctor|\b(?:dr|ems|emt)\b)/i,
 };
 
