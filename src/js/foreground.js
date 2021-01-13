@@ -180,6 +180,9 @@ const npCharacters = {
     BoschMerchant: [
         { name: 'Anto Murphy', faction: 'Chang Gang' },
     ],
+    Braders: [
+        { name: 'Jeff Arnold' },
+    ],
     breakyx: [
         { name: 'Dris Peters', faction: 'SSB' },
     ],
@@ -364,6 +367,9 @@ const npCharacters = {
     Familybanter: [
         { name: '[Dr.]  Jayce Petra', faction: 'Medical', displayName: 0 },
         { name: 'Taran Raid', faction: 'Lost MC', displayName: 0 },
+    ],
+    Farmhouse78: [
+        { name: 'Jane Farmer' },
     ],
     Five0AnthO: [
         { name: '[Trooper] Tony Andrews', faction: 'Police', highCommand: true },
@@ -908,8 +914,15 @@ const npCharacters = {
     Rose: [
         { name: '[Deputy] Maggie Dean', faction: 'Police' },
     ],
+    Roxmiral: [
+        { name: 'Ruby Morris' },
+        { name: 'Nikki Drools', faction: 'DoC' },
+        { name: 'Sherry Lee' },
+    ],
     s0upes: [
         { name: 'James "Apples" Apeller' },
+        { name: 'Silas Grimmer' },
+        { name: 'Ezekiel "Zero" Rogaine' },
     ],
     Sal_Rosenberg: [
         { name: 'Sal Rosenberg' },
@@ -1080,6 +1093,9 @@ const npCharacters = {
     ],
     TinyStunt: [
         { name: '[EMS] Bailey Jade', faction: 'Medical' },
+    ],
+    TheDorken: [
+        { name: 'Valentina' },
     ],
     ToastRP: [
         { name: 'Paulie', faction: 'ESB' },
