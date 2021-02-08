@@ -1,0 +1,1245 @@
+{
+    "regNp": "no\\s*pixel|\\bn\\s*p\\b",
+    "regOther": "\\brp\\b|gtarp\\b|the\\s*family|\\btf(?:rp|\\b)|family\\s*rp|twitchrp|svrp|subversion[\\s-]*rp\\b|\\bt\\W*rp|\\bnon[\\s-]*stop|\\bns(?:rp|\\b)",
+    "npCharacters": {
+        "0Reed": [
+            { "name": "Reid \"Reed\" Dankleaf", "faction": "Lost MC" }
+        ],
+        "80bsaget": [
+            { "name": "Tim Lee", "faction": "Koreans" },
+            { "name": "[Officer] Bexar McCree", "faction": "Police" }
+        ],
+        "52chains": [
+            { "name": "Fidel Guevara", "nicknames": ["Don", "Cabron"] }
+        ],
+        "AaronOnAir": [
+            { "name": "[Officer] Dan Faily", "faction": "Police", "nicknames": ["585"] }
+        ],
+        "abbay": [
+            { "name": "Olivia Harvey" }
+        ],
+        "abby": [
+            { "name": "[Deputy] Ivy Wood", "faction": "Police" }
+        ],
+        "AbdulHD": [
+            { "name": "Abdul AlRahim" },
+            { "name": "Fahad AlArabi", "faction": "DoC" },
+            { "name": "[Judge] Ali Habibi", "faction": "DoJ" }
+        ],
+        "Acaibear": [
+            { "name": "[Officer] Emily Reinhart", "faction": "Police" },
+            { "name": "Jolene Mushkin", "nicknames": ["Little Red"] }
+        ],
+        "adnormaltv": [
+            { "name": "Ivan Gorbahtjov" }
+        ],
+        "AfriicanSnowball": [
+            { "name": "[Chief Justice] Buck Stanton", "faction": "DoJ" },
+            { "name": "Leland \"LJ\" Jones" }
+        ],
+        "Afro": [
+            { "name": "Dexx Martin", "faction": "GSF", "leader": true },
+            { "name": "Jacob Harth", "faction": "Dark Web", "leader": true },
+            { "name": "Chris \"CP\" Porter" },
+            { "name": "Sayid Mitra", "nicknames": ["Sayeet"], "displayName": 0 },
+            { "name": "David \"The Mime\" Wonders", "nicknames": ["\"Concrete\" Man"] },
+            { "name": "Gordon Parks", "nicknames": ["DoorLord"] }
+        ],
+        "AidenNortha": [
+            { "name": "[Deputy] Kevin Keyte", "faction": "Police" }
+        ],
+        "Airborne": [
+            { "name": "[Judge] Dennis LaBarre", "faction": "DoJ" },
+            { "name": "Unity", "faction": "Animals", "nicknames": ["Cat"] }
+        ],
+        "akaMONKEY": [
+            { "name": "Arturo Ortiz", "faction": "Vagos" },
+            { "name": "CamRon \"Peanut\" Giles", "faction": "SSB" },
+            { "name": "Timoteo \"TT\" Bushnell", "faction": "Top Shottaz", "nicknames": ["Rasta"] }
+        ],
+        "aleks": [
+            { "name": "[Chief of Police] Bobby Smith", "faction": "Police", "leader": true, "nicknames": ["Bob", "Chief"], "displayName": 1 },
+            { "name": "[FIB Agent] Heath Mercer", "faction": "Police" }
+        ],
+        "alexten0909": [
+            { "name": "Alexander Campbell", "faction": "Angels", "nicknames": ["Alex"], "displayName": 3 }
+        ],
+        "AndyMilonakis": [
+            { "name": "Lil Erf", "faction": "Chang Gang", "affiliate": true, "displayName": 0 }
+        ],
+        "AnimatedJF": [
+            { "name": "Cameron Dupres", "faction": "DoJ" }
+        ],
+        "AnneMunition": [
+            { "name": "Sequoia Springs" }
+        ],
+        "AnthonyZ": [
+            { "name": "Tony Corleone", "faction": "Leanbois" },
+            { "name": "[Officer] Anthony Copleone", "faction": "Police" }
+        ],
+        "Apitoxin11": [
+            { "name": "Trigger Freebird", "faction": "Harmony" }
+        ],
+        "APPLESHAMPOO": [
+            { "name": "[Dispatch] Nancy Ree", "faction": "Police", "displayName": 1 },
+            { "name": "Gioconda \"Gio\" Coppola" }
+        ],
+        "Armeeof1": [
+            { "name": "Milton Pointdexter" }
+        ],
+        "Ashi": [
+            { "name": "Fiona Stewart", "faction": "HOA", "nicknames": ["Fi-ho-na"] }
+        ],
+        "ashlynn": [
+            { "name": "[Officer] Brenda Pancake", "faction": "Police", "displayName": 1, "nicknames": ["Pancakes"] },
+            { "name": "Cassie Cupcakes", "faction": "Angels" }
+        ],
+        "Asteroba": [
+            { "name": "[DA] Larry Hallow", "faction": "DoJ" }
+        ],
+        "Aus24": [
+            { "name": "Jordan Walker", "faction": "Harmony" },
+            { "name": "[Officer] Jack Davenport", "faction": "Police" }
+        ],
+        "AustinCreed": [
+            { "name": "Austin Creed", "displayName": 0 }
+        ],
+        "AvaGG": [
+            { "name": "Karen Dahmer", "faction": "Chang Gang", "affiliate": true, "nicknames": ["Kawen"] }
+        ],
+        "aXed_U": [
+            { "name": "Hans Snitzel", "faction": "Prune Gang" }
+        ],
+        "Baki961": [
+            { "name": "Yoshimoto Nakanishi", "faction": "Yakuza" }
+        ],
+        "bananabrea": [
+            { "name": "Claire Seducer", "faction": "Angels" },
+            { "name": "[Officer] Tyme Reducer", "faction": "Police" }
+        ],
+        "barryscottlive": [
+            { "name": "Barry Scott" }
+        ],
+        "BCBeastly": [
+            { "name": "Herbert The Pervert" }
+        ],
+        "BennniStreams": [
+            { "name": "Pablo Madrid", "faction": "Vagos", "nicknames": ["Diablo"] }
+        ],
+        "BFLY": [
+            { "name": "[Dr.] Torah Andrews", "faction": "Medical" }
+        ],
+        "biggieferreira": [
+            { "name": "Shevy Santanna", "faction": "Vagos" }
+        ],
+        "bldrs": [
+            { "name": "Kaleb \"Kleb\" Rush", "faction": "HOA" }
+        ],
+        "bLuE622": [
+            { "name": "Boe Jangles", "faction": "Chang Gang", "affiliate": true }
+        ],
+        "bmcloughlin22": [
+            { "name": "[ADA] Lachlan Pike", "faction": "DoJ" }
+        ],
+        "Bomaah": [
+            { "name": "Viper Rodriguez", "faction": "ESB" }
+        ],
+        "BoschMerchant": [
+            { "name": "Anto Murphy", "faction": "Chang Gang" }
+        ],
+        "Braders": [
+            { "name": "Jeff Arnold" }
+        ],
+        "breakyx": [
+            { "name": "Dris Peters", "faction": "SSB" }
+        ],
+        "buddha": [
+            { "name": "Lang Buddha", "faction": "Leanbois", "leader": true, "nicknames": ["Circle Andy"] },
+            { "name": "[Deputy] Kevin Kona", "faction": "Police" }
+        ],
+        "Burn": [
+            { "name": "Johnny Silverhand" },
+            { "name": "Norman \"Norm\" Yoder" },
+            { "name": "Gordo Ramsay", "displayName": 0 }
+        ],
+        "ButterRoyaleTV": [
+            { "name": "Deejay Bartello", "faction": "Snake Gang" }
+        ],
+        "bythybeard": [
+            { "name": "Wade Willson", "faction": "Lost MC" }
+        ],
+        "CallMeGrub": [
+            { "name": "[Deputy] Isaac Richardson", "faction": "Police" }
+        ],
+        "Carmen": [
+            { "name": "Carmella Corset" }
+        ],
+        "CathFawr": [
+            { "name": "Summer Mersion", "faction": "QuickFix", "displayName": 0 },
+            { "name": "[Officer] Lydia Vale", "faction": "Police" }
+        ],
+        "Cathie": [
+            { "name": "[Deputy] Anita Cox", "faction": "Police" },
+            { "name": "Ninacska Mihkala", "faction": "Russians", "nicknames": ["Nina"], "displayName": 3 },
+            { "name": "Lil K", "faction": "SSB", "displayName": 0 }
+        ],
+        "CaussiePreacher": [
+            { "name": "[EMS] Jack Preacher", "faction": "Medical" }
+        ],
+        "Chalupa_Pants": [
+            { "name": "Julio Thomas", "faction": "HOA" }
+        ],
+        "charlieblossom": [
+            { "name": "Georgina \"Windsong\" Williams" }
+        ],
+        "Chief": [
+            { "name": "Baada Ka", "faction": "HOA", "nicknames": ["Chief"], "displayName": 3 }
+        ],
+        "Choi": [
+            { "name": "[Dr.] Choi Zhangsun", "faction": "Medical", "leader": true }
+        ],
+        "ChrisTombstone": [
+            { "name": "Flop Dugong" }
+        ],
+        "CinnamonToastKen": [
+            { "name": "Buck Colton", "faction": "Prune Gang", "nicknames": ["Book", "Bucky", "Cultan"] }
+        ],
+        "chairhandler": [
+            { "name": "Carl Crimes" }
+        ],
+        "Chaseman7GG": [
+            { "name": "Miguel Guerrero", "faction": "Vagos" }
+        ],
+        "ClassyPax": [
+            { "name": "[Dr.] Ethan Maw", "faction": "Medical", "displayName": 2 }
+        ],
+        "ConfusedDevil": [
+            { "name": "[Sheriff] Travis Tribble", "faction": "Police", "highCommand": true, "leader": true }
+        ],
+        "ConnorCronus": [
+            { "name": "[Dr.] Isaac Smith", "faction": "Medical" },
+            { "name": "Roman \"Mask\" Sionis", "nicknames": ["Black Mask"] }
+        ],
+        "Coolio": [
+            { "name": "Dequarius \"Big D\" Johnson", "faction": "Chang Gang" },
+            { "name": "[Deputy] Adam Hopping", "faction": "Police" }
+        ],
+        "CptCheeto": [
+            { "name": "[Officer] Scott Ridley", "faction": "Police" }
+        ],
+        "CrayonPonyfish": [
+            { "name": "Wilhelmina Copperpot", "displayName": 2 }
+        ],
+        "Crunchy": [
+            { "name": "Grimoire \"Gremlin\" Hauttogs" }
+        ],
+        "CrystalMushroom": [
+            { "name": "Regina Bunny" }
+        ],
+        "Crystalst": [
+            { "name": "Four Tee", "displayName": 0 }
+        ],
+        "CurtisRyan": [
+            { "name": "Curtis Swoleroid", "faction": "Sahara", "nicknames": ["\"Demon\" of Lean Street", "Curt"] },
+            { "name": "[Officer] Stephen McClane", "faction": "Police" },
+            { "name": "Cornelius \"Cornbread\" Scott", "faction": "GSF" }
+        ],
+        "curvyelephant": [
+            { "name": "[Deputy] Matt Rhodes", "faction": "Police" },
+            { "name": "Ryan Parker", "faction": "Lost MC" },
+            { "name": "Kevin Shaw" }
+        ],
+        "Curvyllama": [
+            { "name": "[Deputy] Lorenzo L", "faction": "Police", "displayName": 1 },
+            { "name": "Freya Manning", "faction": "Koreans" }
+        ],
+        "cyr": [
+            { "name": "Uchiha Jones", "faction": "Chang Gang" },
+            { "name": "Joe Caine", "faction": "The Winery", "displayName": 0 }
+        ],
+        "Kiva": [
+            { "name": "Andi Jones", "faction": "HOA", "nicknames": ["Ant"], "displayName": 3 }
+        ],
+        "Darthbobo77": [
+            { "name": "Rudi Rinsen", "faction": "Lost MC", "leader": true }
+        ],
+        "dasMEHDI": [
+            { "name": "[Officer] Brian Knight", "faction": "Police", "nicknames": ["495"] },
+            { "name": "Nino Chavez", "faction": "Sahara", "leader": true },
+            { "name": "Ryan Kindle", "faction": "HOA" },
+            { "name": "Reema", "nicknames": ["The \"Whorelord\""] }
+        ],
+        "DavidB_NP": [
+            { "name": "Vladimir \"Vlad\" Ivanov", "faction": "Russians" }
+        ],
+        "Denior13": [
+            { "name": "Keith \"Bulldog\" Dooger", "faction": "Lost MC" }
+        ],
+        "Denis3D": [
+            { "name": "Development \"Development: Denis3D\"", "faction": "Development", "nicknames": ["Dev", "Developer", "3D"] }
+        ],
+        "dibitybopty": [
+            { "name": "[Officer] Gus Gorman", "faction": "Police" }
+        ],
+        "DigiiTsuna": [
+            { "name": "[Dr.] Kai King", "faction": "Medical", "displayName": 2 }
+        ],
+        "DocWizard": [
+            { "name": "[Judge] John Bailey", "faction": "DoJ" },
+            { "name": "[Officer] TJ Walker", "faction": "Police" },
+            { "name": "Preston Landor" }
+        ],
+        "Dogbert": [
+            { "name": "[Undersheriff] Rocko Colombo", "faction": "Police", "highCommand": true },
+            { "name": "Luther Caine", "faction": "HOA" }
+        ],
+        "Doug": [
+            { "name": "Gazpacho Prince", "faction": "ESB", "nicknames": ["Pachi", "Spachi"] },
+            { "name": "William \"W\" Told", "faction": "CKR", "nicknames": ["Lil Pump"] }
+        ],
+        "Dr_Knope": [
+            { "name": "Patrit \"Mete\" Metemahaan", "faction": "HOA" }
+        ],
+        "DROwSeph420": [
+            { "name": "John \"Geno\" Collins", "faction": "GSF" }
+        ],
+        "Dunrunnin12": [
+            { "name": "Thomas \"The Narrator\" Dwayne" }
+        ],
+        "eebern": [
+            { "name": "Huck Guthrie", "faction": "HOA" }
+        ],
+        "either": [
+            { "name": "Jaden Christopher", "faction": "Snake Gang" }
+        ],
+        "ElvisRP": [
+            { "name": "[Deputy] John Dorian", "faction": "Police" }
+        ],
+        "Evee": [
+            { "name": "[Judge] Whitney Crawford", "faction": "DoJ" },
+            { "name": "Adrienne West" },
+            { "name": "Bree Matthews" },
+            { "name": "Demi Black" }
+        ],
+        "explodicy": [
+            { "name": "Ted Kindly" }
+        ],
+        "Fairlight_Excalibur": [
+            { "name": "Raja Bahadur", "faction": "QuickFix", "leader": true },
+            { "name": "[Officer] Alexander \"Fox\" Fawkes", "faction": "Police" }
+        ],
+        "Fairzz91": [
+            { "name": "Huxley Johnson", "faction": "DoC" },
+            { "name": "Paddy Patrickson", "faction": "Lost MC" }
+        ],
+        "Familybanter": [
+            { "name": "[Dr.]  Jayce Petra", "faction": "Medical", "displayName": 0 },
+            { "name": "Taran Raid", "faction": "Lost MC", "displayName": 0 }
+        ],
+        "Farmhouse78": [
+            { "name": "Jane Farmer" }
+        ],
+        "Five0AnthO": [
+            { "name": "[Trooper] Tony Andrews", "faction": "Police", "highCommand": true }
+        ],
+        "forsen": [
+            { "name": "Sven Snusberg", "faction": "Leanbois" }
+        ],
+        "FortyOne": [
+            { "name": "Jose Martin Perez", "faction": "ESB", "nicknames": ["JMP"] },
+            { "name": "[Deputy] John Archer", "faction": "Police" },
+            { "name": "Lucas Ortiz", "displayName": 0 },
+            { "name": "Don Russo", "displayName": 0 },
+            { "name": "Jacob \"Funny Man\" Storm" },
+            { "name": "Arious \"Breezy\" Campbell" }
+        ],
+        "frogbound": [
+            { "name": "Edward Nygma" },
+            { "name": "Alexander Egorov" }
+        ],
+        "Gabz": [
+            { "name": "Development \"Development: Gabz\"", "faction": "Development", "nicknames": ["Dev", "Developer", "3D"] }
+        ],
+        "GameDemented": [
+            { "name": "[Deputy] Peter Johnson", "faction": "Police" }
+        ],
+        "GattisTV": [
+            { "name": "Carlos Guzman", "faction": "Vagos" }
+        ],
+        "Gavbin_": [
+            { "name": "[Judge] Gavin Holliday", "faction": "DoJ" }
+        ],
+        "GeneralEmu": [
+            { "name": "[Officer] Lance Malton", "faction": "Police" }
+        ],
+        "Greekgodx": [
+            { "name": "Tay Tay Tyrone" }
+        ],
+        "GreenishMonkey": [
+            { "name": "Bobby Brown", "faction": "Chang Gang" }
+        ],
+        "GTAWiseGuy": [
+            { "name": "Eddie Marshall", "faction": "Tuner Shop" },
+            { "name": "[Officer] Jim Underwood", "faction": "Police" },
+            { "name": "Development \"Development: GTAWiseGuy\"", "faction": "Development", "nicknames": ["Dev", "Developer", "Handling"] }
+        ],
+        "HARMSwahy": [
+            { "name": "Blaine Burke", "faction": "Angels" }
+        ],
+        "Harryo": [
+            { "name": "Harry Brown" }
+        ],
+        "HasanAbi": [
+            { "name": "Humberto Antonio Donato Pecorino", "nicknames": ["Don"], "displayName": 5 }
+        ],
+        "Hedisaurus": [
+            { "name": "[EMS] Hedi Saurus", "faction": "Medical" },
+            { "name": "[Dispatch] Ramona Celeste", "faction": "Police", "displayName": 1 }
+        ],
+        "HeyOrbz": [
+            { "name": "[Officer] Casey Valentine", "faction": "Police" },
+            { "name": "Richie Mersion", "faction": "Mersions", "displayName": 0 }
+        ],
+        "HiredGunRP": [
+            { "name": "[Deputy] Colt Shepherd", "faction": "Police" }
+        ],
+        "Hirona": [
+            { "name": "[Officer] Olivia Copper", "faction": "Police" },
+            { "name": "Emily Maw", "faction": "Harmony" },
+            { "name": "Griselda \"Zelda\" Harth", "faction": "HOA" },
+            { "name": "Olga Sazkaljovich", "faction": "Snake Gang", "nicknames": ["Olgaa", "Olgaaa", "Olgaaaa"] }
+        ],
+        "hobbittrash": [
+            { "name": "[Deputy] Tracy Martell", "faction": "Police", "nicknames": ["Cop"] },
+            { "name": "Kayden Dell'Anno" },
+            { "name": "[Chief Justice] Katya Zamalodchikova", "faction": "DoJ" }
+        ],
+        "HonathanTV": [
+            { "name": "[Deputy] Honathan Yolo", "faction": "Police" }
+        ],
+        "Hotted89": [
+            { "name": "[Deputy] Matthew Espinoz", "faction": "Police", "nicknames": ["Airspinoz", "Air 1 Andy"] },
+            { "name": "Joaquin \"JJ\" Jimenes", "faction": "Vagos" },
+            { "name": "Allen Widemann", "faction": "Chang Gang" }
+        ],
+        "huddy_nz": [
+            { "name": "Ash Huddy Hudson", "faction": "Lunatix" }
+        ],
+        "HutchMF": [
+            { "name": "Drew \"Dead Eye Drew\"", "faction": "ESB", "nicknames": ["DeadEye"] },
+            { "name": "Hutch Hendrickson" }
+        ],
+        "IAmSoul_RP": [
+            { "name": "Johnathen Riker" }
+        ],
+        "ImClammy": [
+            { "name": "AK", "faction": "SSB" },
+            { "name": "Derek Monroe" }
+        ],
+        "INFLUXPictures": [
+            { "name": "Tony Venucci", "displayName": 0 }
+        ],
+        "Intelleqt": [
+            { "name": "Donovan \"DK\" King", "faction": "GSF" }
+        ],
+        "ironmonkeytv": [
+            { "name": "Winston Bolt", "faction": "ESB" },
+            { "name": "Dragon", "faction": "DDMC" }
+        ],
+        "ItsJustJosh": [
+            { "name": "ItsJustJosh", "faction": "SSB" }
+        ],
+        "ItsLSG": [
+            { "name": "[Officer] Jack Miller", "faction": "Police" }
+        ],
+        "ItsSammyP": [
+            { "name": "Tyrone \"Big T\" Thompson", "faction": "SSB" }
+        ],
+        "Jack": [
+            { "name": "Jack Cortair", "faction": "ESB" }
+        ],
+        "jacobpibbtv": [
+            { "name": "Jacob Pibb" }
+        ],
+        "Jayce": [
+            { "name": "Lil Loco", "faction": "Vagos", "displayName": 0 },
+            { "name": "Riley Johnson" },
+            { "name": "Pepe Roni", "displayName": 0 },
+            { "name": "Molly Minaj", "displayName": 0 },
+            { "name": "Robert \"Mr. Rodgers\" Rodgers" }
+        ],
+        "JdotField": [
+            { "name": "Miles Landon", "faction": "Sahara" },
+            { "name": "Drew Jackson", "faction": "GSF" }
+        ],
+        "jimmytulip": [
+            { "name": "Wayne Biggaz", "faction": "Chang Gang" }
+        ],
+        "JJLake": [
+            { "name": "Jay Jarvis", "faction": "Sahara" }
+        ],
+        "JoblessGarrett": [
+            { "name": "Garrett Jobless", "faction": "Chang Gang" },
+            { "name": "[Officer] Garry Berry", "faction": "Police" }
+        ],
+        "JoeSmitty123": [
+            { "name": "[Officer] Michael Murphy", "faction": "Police" }
+        ],
+        "Jonthebroski": [
+            { "name": "Denzel Williams", "faction": "Leanbois", "nicknames": ["The \"Cleaner\""] },
+            { "name": "Dio Ivanov", "faction": "Russians" },
+            { "name": "[Officer] Johnny Divine", "faction": "Police", "displayName": 0 }
+        ],
+        "JoshOG": [
+            { "name": "Mario Le-Pipe", "faction": "Chang Gang", "affiliate": true, "displayName": 0 }
+        ],
+        "JOVIAN": [
+            { "name": "[Deputy] Billiam Williams", "faction": "Police", "displayName": 1 }
+        ],
+        "JPKMoto": [
+            { "name": "[ADA] Odessa Pearson", "faction": "DoJ" },
+            { "name": "Nora Dupres" },
+            { "name": "Zee Nanakaze Mathers" }
+        ],
+        "Judd": [
+            { "name": "[Chief Justice] Coyote Russell", "faction": "DoJ", "displayName": 1 },
+            { "name": "Judd Lincoln" },
+            { "name": "Reverend I.M. Voland", "faction": "Dark Web" }
+        ],
+        "JuggsRP": [
+            { "name": "Lenny Large" }
+        ],
+        "JukeBoxEM": [
+            { "name": "Tony Foster", "faction": "ESB" }
+        ],
+        "JustJamieHDG": [
+            { "name": "Tommy Cruizer", "faction": "Tuner Shop" }
+        ],
+        "Jyeahlisa": [
+            { "name": "[Therapist] Thalia Hayes", "faction": "Medical" },
+            { "name": "Lees Grey" }
+        ],
+        "KaoruHare": [
+            { "name": "[Therapist] Kizzy Neveah", "faction": "Medical" }
+        ],
+        "KaoticaXD": [
+            { "name": "Victoria \"Vivi\" Veine", "faction": "HOA" }
+        ],
+        "Kari": [
+            { "name": "[Deputy] Mina Price", "faction": "Police" },
+            { "name": "[EMS] Khloe Brooks", "faction": "Medical" }
+        ],
+        "karnt1": [
+            { "name": "Arush", "faction": "GSF" }
+        ],
+        "KatFires": [
+            { "name": "Novah Walker", "faction": "Chang Gang" }
+        ],
+        "kClient": [
+            { "name": "Daquan \"Peanut\" Dumas", "faction": "Arab Mafia" }
+        ],
+        "Kemony": [
+            { "name": "Susie Carmichael", "faction": "Snake Gang" }
+        ],
+        "KezieEve": [
+            { "name": "Ghost Storm", "faction": "GSF" }
+        ],
+        "KillrBeauty": [
+            { "name": "Catherine Scratch", "faction": "Lost MC", "nicknames": ["Cat"], "displayName": 3 }
+        ],
+        "Kimchi": [
+            { "name": "Sun Moon", "faction": "Koreans" }
+        ],
+        "Kinamazing": [
+            { "name": "[Officer] Emma Dupont", "faction": "Police", "nicknames": ["Dupog"] }
+        ],
+        "King_1455": [
+            { "name": "Cooch Cassidy", "faction": "Lost MC" }
+        ],
+        "Kitboga": [
+            { "name": "Edna Moose" },
+            { "name": "[Deputy] Claire Annette Reed", "faction": "Police" }
+        ],
+        "Kite61": [
+            { "name": "Rusty Johnson", "faction": "ESB" }
+        ],
+        "Kiwo": [
+            { "name": "[Deputy] Lauren Forcer", "faction": "Police" },
+            { "name": "Mia Mersion", "faction": "Mersions", "displayName": 0 },
+            { "name": "Evita \"Mother\" Nimm", "faction": "Dark Web" },
+            { "name": "Ava Ridge", "faction": "Goths" }
+        ],
+        "Knut": [
+            { "name": "Bjorn Eiriksson" }
+        ],
+        "koil": [
+            { "name": "[Trooper] Kael Soze", "faction": "Police", "highCommand": true },
+            { "name": "[Officer] Francis Francer", "faction": "Police", "displayName": 1 },
+            { "name": "Otto Delmar", "faction": "The Winery", "leader": true }
+        ],
+        "Kongfue": [
+            { "name": "Karl \"KJ\" Johnny", "faction": "Vagos" }
+        ],
+        "Kyle": [
+            { "name": "Alabaster Slim", "faction": "CKR", "leader": true, "nicknames": ["Pimp"], "displayName": 2 },
+            { "name": "[Officer] Kyle Pred", "faction": "Police" },
+            { "name": "Brett Biggledoinks" },
+            { "name": "Rory O'Banion" },
+            { "name": "Wyatt Derp", "faction": "Lost MC" },
+            { "name": "Pal Gore" }
+        ],
+        "kyliebitkin": [
+            { "name": "[Officer] Brittany Angel", "faction": "Police" },
+            { "name": "Mary Mushkin", "faction": "QuickFix", "displayName": 0 }
+        ],
+        "Jackhuddo": [
+            { "name": "Shane Powers", "faction": "BBMC" }
+        ],
+        "LadyHope": [
+            { "name": "[Officer] Lily Pond", "faction": "Police" }
+        ],
+        "LAGTVMaximusBlack": [
+            { "name": "Outto-Tune \"OTT\" Tyrone", "faction": "ESB", "displayName": "OTT" }
+        ],
+        "LarryX7": [
+            { "name": "Jose \"Cousin\" Luis Santana", "faction": "Vagos" }
+        ],
+        "LaS_CS": [
+            { "name": "Jesse \"Baby Joker\" Morales", "faction": "ESB" }
+        ],
+        "LeWolfy": [
+            { "name": "[Deputy] Dante Wolf", "faction": "Police" }
+        ],
+        "LIRIK": [
+            { "name": "Clayvon Barksdale", "faction": "Leanbois" },
+            { "name": "Avon Barksdale", "faction": "Leanbois", "leader": true }
+        ],
+        "Lisilsanya": [
+            { "name": "Lei Sanya", "faction": "Medical", "displayName": 2 }
+        ],
+        "Lord_Kebun": [
+            { "name": "Mr. K", "faction": "Chang Gang", "leader": true, "displayName": 0, "nicknames": ["The \"Dragon\"", "Chang"] }
+        ],
+        "LordJasta": [
+            { "name": "Chris McGrawl" }
+        ],
+        "Loserfruit": [
+            { "name": "[EMS] Lizzie Bien", "faction": "Medical" }
+        ],
+        "Lovinurstyle": [
+            { "name": "Rose Edwards" },
+            { "name": "Leah Strong", "faction": "Fastlane" }
+        ],
+        "Lt_Raven": [
+            { "name": "[Officer] Vladimir Raven", "faction": "Police", "highCommand": true }
+        ],
+        "LtSerge": [
+            { "name": "[Dr.] Serge Cross", "faction": "Medical", "displayName": 2 }
+        ],
+        "LuckyxMoon": [
+            { "name": "[Judge] Jessica Wesker", "faction": "DoJ" }
+        ],
+        "luka_aus": [
+            { "name": "[Officer] Luka Kozlov", "faction": "Police" },
+            { "name": "Gazza Maloo", "faction": "Lost MC" }
+        ],
+        "luminariarayne": [
+            { "name": "[Officer] Ekaterina Alekseyevna", "faction": "Police", "nicknames": ["Trina"], "displayName": 1 }
+        ],
+        "Lyndi": [
+            { "name": "Violet Van Housen", "faction": "Angels" },
+            { "name": "Willow Wolfhart", "faction": "DoC" }
+        ],
+        "Lysium": [
+            { "name": "Benji Ramos", "faction": "Vagos" }
+        ],
+        "MacL0ven": [
+            { "name": "Negan Graham", "faction": "Lost MC" }
+        ],
+        "Madmoiselle": [
+            { "name": "[Therapist] Pixie Plum", "faction": "Medical" }
+        ],
+        "Maggna": [
+            { "name": "[EMS] Mari Jones", "faction": "Medical", "nicknames": ["MJ"], "displayName": 3 }
+        ],
+        "mantistobagan": [
+            { "name": "[Officer] Domenic Toretti", "faction": "Police" },
+            { "name": "Jerry Callow", "displayName": 1 },
+            { "name": "Pepe Silvia" }
+        ],
+        "Markiplier": [
+            { "name": "Stan Wheeler" }
+        ],
+        "MatchaSmash": [
+            { "name": "[EMS] Rowan Hunter", "faction": "Medical" }
+        ],
+        "MattRP": [
+            { "name": "[Officer] Jack Ripley", "faction": "Police" }
+        ],
+        "Meatwrist": [
+            { "name": "Chad \"Chodie\" Brodie", "faction": "ESB" }
+        ],
+        "meeka_a": [
+            { "name": "[EMS] William \"Middy\" Haze", "faction": "Medical" }
+        ],
+        "MEKABEAR": [
+            { "name": "Erin Cox", "faction": "Snake Gang" }
+        ],
+        "Mexi": [
+            { "name": "[Deputy] Clarence Williams", "faction": "Police", "displayName": 1 }
+        ],
+        "Mick": [
+            { "name": "Gladys Berry", "faction": "Prune Gang" }
+        ],
+        "Miggitymaan": [
+            { "name": "[Officer] Damien Alexander", "faction": "Police" }
+        ],
+        "MikeTheBard": [
+            { "name": "Hubcap Jones", "displayName": 0 },
+            { "name": "Jack Nova", "displayName": 0 }
+        ],
+        "mikezout14": [
+            { "name": "[Deputy] Michael Rodgers", "faction": "Police" }
+        ],
+        "MiltonTPike1": [
+            { "name": "Kiki Chanel" },
+            { "name": "Merlin Edmondstoune" },
+            { "name": "William \"Bill Ding\" Ding", "nicknames": ["Bill"] }
+        ],
+        "Ming": [
+            { "name": "Ming Jingtai" }
+        ],
+        "MinusFive": [
+            { "name": "[Officer] Jason Bidwell", "faction": "Police" }
+        ],
+        "MIQQA": [
+            { "name": "[EMS] Janus Lee", "faction": "Medical" }
+        ],
+        "Moboking": [
+            { "name": "[Deputy] Ellis Pinzon", "faction": "Police", "nicknames": ["Ronaldo"] },
+            { "name": "Aleksander Bogorov", "faction": "Angels", "nicknames": ["Aleks"], "displayName": 3 },
+            { "name": "Elijiah \"Middle E\" Parks", "faction": "SSB" }
+        ],
+        "moistcr1tikal": [
+            { "name": "Charles White" }
+        ],
+        "MOONMOON": [
+            { "name": "Yung Dab", "faction": "CKR", "leader": true, "nicknames": ["The \"Gnome\""] }
+        ],
+        "MsBrit": [
+            { "name": "[EMS] Tori Corleone", "faction": "Medical" }
+        ],
+        "MurphyBraun": [
+            { "name": "[Justice] Holden", "faction": "DoJ" },
+            { "name": "Murphy Braun" }
+        ],
+        "Mythematic": [
+            { "name": "Mike Rosoftsam", "faction": "Leanbois", "affiliate": true }
+        ],
+        "Nakkida": [
+            { "name": "[Deputy] Tessa Lamb", "faction": "Police", "displayName": 1 },
+            { "name": "Rachel Parker" }
+        ],
+        "Natettvrp": [
+            { "name": "Carlitos Loco", "faction": "Vagos" }
+        ],
+        "Navajo": [
+            { "name": "Clarence Carter" }
+        ],
+        "NefariousCharm": [
+            { "name": "[EMS] Maya Jane", "faction": "Medical" }
+        ],
+        "Nerdandi": [
+            { "name": "Petunia Susan Brookshire" }
+        ],
+        "netsirk": [
+            { "name": "[EMS] Nettie Machete", "faction": "Medical" }
+        ],
+        "NewFaceSuper": [
+            { "name": "Davey Doherty", "faction": "Prune Gang" }
+        ],
+        "Nidas": [
+            { "name": "Leslie Ling", "displayName": 0, "nicknames": ["Lingberg"] }
+        ],
+        "Nikez": [
+            { "name": "Development \"Development: Nikez\"", "faction": "Development", "nicknames": ["Dev", "Developer"] },
+            { "name": "[Officer] Cody Sharp", "faction": "Police" }
+        ],
+        "NikkisARiot": [
+            { "name": "[Deputy] Jenny Hall", "faction": "Police", "nicknames": ["Jebby"] }
+        ],
+        "Nmplol": [
+            { "name": "Buddy Black" }
+        ],
+        "NotoriousNorman": [
+            { "name": "Chips Ahoy" }
+        ],
+        "Nottics": [
+            { "name": "Raul Rodriguez", "faction": "Snake Gang", "nicknames": ["Rauuulllll"] }
+        ],
+        "NovalokHD": [
+            { "name": "[Officer] Ben Casanova", "faction": "Police" }
+        ],
+        "NymN": [
+            { "name": "Frank Fritugo" }
+        ],
+        "o_Oakleyz_o": [
+            { "name": "[Deputy] Samuel Holtz", "faction": "Police" }
+        ],
+        "OccamsSabre": [
+            { "name": "Benjamin Crane" },
+            { "name": "[Justice] Ray Montag", "faction": "DoJ" },
+            { "name": "Jeffrey Bundy" }
+        ],
+        "OfficialTaco": [
+            { "name": "Charles \"Taco\" Prince", "faction": "Chang Gang" }
+        ],
+        "OfficialWhitey": [
+            { "name": "[Officer] Alex Casterman", "faction": "Police" },
+            { "name": "Finlay" }
+        ],
+        "OG_Tyger": [
+            { "name": "[Officer] Peter Frost", "faction": "Police" }
+        ],
+        "OhMadOne": [
+            { "name": "Ginzu Okada" }
+        ],
+        "OllyPop": [
+            { "name": "Ivy Poppins" }
+        ],
+        "OwenSeven": [
+            { "name": "[Officer] Owen Svensen", "faction": "Police" }
+        ],
+        "Pengwin": [
+            { "name": "[Deputy] Jerry Perkins", "faction": "Police" }
+        ],
+        "PENTA": [
+            { "name": "Jordan Steele", "displayName": 0, "nicknames": ["\"Parking\" God", "Phoenix Messiah"] },
+            { "name": "[Deputy] Randy Wrangler", "faction": "Police", "nicknames": ["Wranglin"] },
+            { "name": "Ricky Robins", "faction": "Leanbois" },
+            { "name": "Chase Clouter" }
+        ],
+        "PlasticLittle": [
+            { "name": "Parson \"Frosty\" Brown", "faction": "Lost MC" }
+        ],
+        "PmsProxy": [
+            { "name": "[Officer] Kira Light", "faction": "Police" },
+            { "name": "Ella Stone" }
+        ],
+        "pokelawls": [
+            { "name": "Bogg Dann" }
+        ],
+        "pokimane": [
+            { "name": "Celine LaCroix" }
+        ],
+        "Pons": [
+            { "name": "[Officer] Chet Manley", "faction": "Police" },
+            { "name": "[Officer] Bodean Tucker", "faction": "Police", "nicknames": ["Bo"] }
+        ],
+        "PriddyFresh": [
+            { "name": "Tupac Shakur" }
+        ],
+        "Primal": [
+            { "name": "[Officer] Kareem Lyon", "faction": "Police", "displayName": 1 }
+        ],
+        "Pssychotic": [
+            { "name": "Jason Paul", "faction": "Lost MC", "nicknames": ["JP"] },
+            { "name": "Hades", "faction": "Animals", "nicknames": ["Dog"] }
+        ],
+        "qozmyox": [
+            { "name": "Fernando \"Mario\" Reyes", "faction": "Snake Gang", "nicknames": ["\"Mario\" from the Barrio"] }
+        ],
+        "qurquru": [
+            { "name": "[Officer] Vladimir Reznik", "faction": "Police" }
+        ],
+        "RaidedAU": [
+            { "name": "[Officer] Gage Draider", "faction": "Police" },
+            { "name": "Development \"Development: Raided\"", "faction": "Development", "nicknames": ["Dev", "Developer"] }
+        ],
+        "Ramee": [
+            { "name": "Ramee El-Rahman", "faction": "Chang Gang", "nicknames": ["The \"Warlord\"", "The \"Vulture\"", "SBS Patient-0"] },
+            { "name": "[Park Ranger] Conan Clarkson", "faction": "Police" }
+        ],
+        "Rasta": [
+            { "name": "Mary Livingston", "faction": "Prune Gang" },
+            { "name": "Dunn Robinson", "faction": "ESB" }
+        ],
+        "RatedEpicz": [
+            { "name": "Randy Bullet", "faction": "Chang Gang", "nicknames": ["Lazy-Eye Bullet"] },
+            { "name": "[Officer] A.J. Hunter", "faction": "Police" }
+        ],
+        "ray308win": [
+            { "name": "[FIB Agent] Lyonel Winchester", "faction": "Police" }
+        ],
+        "ReinaRP": [
+            { "name": "Mona Sanchez" }
+        ],
+        "RemiTheSiren": [
+            { "name": "Wednesday Mushkin", "faction": "HOA" }
+        ],
+        "reno_raines": [
+            { "name": "Manny McDaniels", "faction": "HOA" }
+        ],
+        "RevRoach": [
+            { "name": "Happy D'Klown" }
+        ],
+        "RickMongoLIVE": [
+            { "name": "[ADA] Rick Mongo", "faction": "DoJ" }
+        ],
+        "rlly": [
+            { "name": "Kelly Smith", "faction": "Prune Gang" }
+        ],
+        "RobotNinjaPants": [
+            { "name": "[ADA] Jacob Slate", "faction": "DoJ" }
+        ],
+        "roflgator": [
+            { "name": "Robert Spowylamywanowski", "nicknames": ["Rob"], "displayName": 3 }
+        ],
+        "Rose": [
+            { "name": "[Deputy] Maggie Dean", "faction": "Police" }
+        ],
+        "Roxmiral": [
+            { "name": "Ruby Morris" },
+            { "name": "Nikki Drools", "faction": "DoC" },
+            { "name": "Sherry Lee" }
+        ],
+        "s0upes": [
+            { "name": "James \"Apples\" Apeller" },
+            { "name": "Silas Grimmer" },
+            { "name": "Ezekiel \"Zero\" Rogaine" }
+        ],
+        "Saiiren": [
+            { "name": "Ai Musori", "nicknames": ["Bitch"], "faction": "Burger Shot", "displayName": 0 }
+        ],
+        "Sal_Rosenberg": [
+            { "name": "Sal Rosenberg" }
+        ],
+        "Sams": [
+            { "name": "Dimitri Barkov", "faction": "HOA" }
+        ],
+        "Sareff": [
+            { "name": "Violet Noreguarde", "faction": "Vagos" },
+            { "name": "Chasity Dawes" }
+        ],
+        "SAVx": [
+            { "name": "Johnny Cassle" }
+        ],
+        "Sax850": [
+            { "name": "Motya Satovksy", "faction": "Russians" },
+            { "name": "[Officer] Olof Gunnarsson", "faction": "Police" }
+        ],
+        "SayeedBlack": [
+            { "name": "Arush Patel \"Speedy\" Santana", "faction": "Vagos", "leader": true, "nicknames": ["El Jefe"] },
+            { "name": "[ADA] Sayeed White", "faction": "DoJ" }
+        ],
+        "shaggy_steve": [
+            { "name": "[Deputy] Jimmy Gordon", "faction": "Police" }
+        ],
+        "Shindur": [
+            { "name": "[Deputy] Joey Keys", "faction": "Police" }
+        ],
+        "Shortyyguy": [
+            { "name": "Eddie Delish", "faction": "Leanbois" }
+        ],
+        "Shotz": [
+            { "name": "Vinny Pistone", "faction": "Chang Gang" },
+            { "name": "[Officer] John Mineo", "faction": "Police" }
+        ],
+        "shroud": [
+            { "name": "Richard Hard" }
+        ],
+        "SiirToast": [
+            { "name": "Anton Belov", "faction": "Russians" }
+        ],
+        "Silent": [
+            { "name": "Juan Carlos \"Flippy\" Hernandez", "faction": "Snake Gang", "leader": true, "nicknames": ["FLIPPPPY", "FLIPPPY", "FLIPPPPPY"] },
+            { "name": "[Officer] Joel Garcia", "faction": "Police" }
+        ],
+        "SilentSentry": [
+            { "name": "Ron Otterman" }
+        ],
+        "Simplyje2ns": [
+            { "name": "Jean Steele" }
+        ],
+        "SirPink": [
+            { "name": "Reginald \"Reggie\" Bigglesby" }
+        ],
+        "Slasher2099": [
+            { "name": "[Officer] Darrel McCormik", "faction": "Police" },
+            { "name": "[K9 Trooper] Fenton", "faction": "Police", "nicknames": ["Fentons"] }
+        ],
+        "SmokySloth": [
+            { "name": "Bovice Wilkinson" },
+            { "name": "Tayvadius \"Chef\" Jamarcus Livingston III", "faction": "GSF" }
+        ],
+        "sock22": [
+            { "name": "[Deputy] Richard Dark", "faction": "Police" }
+        ],
+        "SodaKite": [
+            { "name": "Ellie Dono", "faction": "Leanbois" }
+        ],
+        "sodapoppin": [
+            { "name": "Kevin Whipaloo", "faction": "The Winery" }
+        ],
+        "Spaceboy": [
+            { "name": "Melbert \"Mel\" Rickenbacker", "faction": "Prune Gang" }
+        ],
+        "Spekel": [
+            { "name": "Sonya Summers", "nicknames": ["Black Betty"] },
+            { "name": "[Officer] Scarlett Winters", "faction": "Police" }
+        ],
+        "spicybackpain": [
+            { "name": "Kray-Tor Skullfondler", "faction": "HOA" }
+        ],
+        "Ssaab": [
+            { "name": "Al Saab", "faction": "Leanbois", "displayName": 2 },
+            { "name": "[Officer] Sam Baas", "faction": "Police", "displayName": 2 }
+        ],
+        "steamcharlie": [
+            { "name": "[Deputy] Sydney Bearmont", "faction": "Police", "displayName": 1 }
+        ],
+        "stitchybird": [
+            { "name": "Daphne Tillamuck Valentino", "faction": "Lunatix" }
+        ],
+        "Stoner_Minded": [
+            { "name": "[Officer] Frank Williams", "faction": "Police", "displayName": 1 }
+        ],
+        "SullyRP": [
+            { "name": "Jack \"Sully\" Sullivan" }
+        ],
+        "summit1g": [
+            { "name": "Charles Johnson", "faction": "Chang Gang" }
+        ],
+        "Sunni": [
+            { "name": "Hilda Bulking", "faction": "Vagos" }
+        ],
+        "Sur_Lee": [
+            { "name": "Mitch \"Dumbass\" Bader" }
+        ],
+        "SwizzMB": [
+            { "name": "Miguel Almerion", "faction": "Snake Gang" }
+        ],
+        "Syraphic": [
+            { "name": "Elena Marilyn Vega", "faction": "Sahara" }
+        ],
+        "t3r0": [
+            { "name": "[Dr.] Andrew Ducksworth", "faction": "Medical", "displayName": 2 }
+        ],
+        "tara_": [
+            { "name": "[EMS] Sarah Ableton", "faction": "Medical" }
+        ],
+        "Tasara22": [
+            { "name": "Tuesday Phillips" }
+        ],
+        "Tehrani": [
+            { "name": "Boris Ivanov", "faction": "Russians", "leader": true },
+            { "name": "Hector Guzman", "faction": "Vagos" }
+        ],
+        "TenguOP": [
+            { "name": "Wally Veloce" }
+        ],
+        "TezMate": [
+            { "name": "[Deputy] Nicholas Riggs", "faction": "Police" }
+        ],
+        "TFNeraZe": [
+            { "name": "[Deputy] Michael Dunning", "faction": "Police" }
+        ],
+        "thaCOOP": [
+            { "name": "[Officer] Luke Holliday", "faction": "Police" },
+            { "name": "[Judge] Coop Holliday", "faction": "DoJ", "displayName": 1 },
+            { "name": "Matthew Payne", "displayName": 2 },
+            { "name": "Remee El-Rahman" }
+        ],
+        "the_halfhand": [
+            { "name": "Sully" }
+        ],
+        "TheDondi": [
+            { "name": "Arthur Hammond", "nicknames": ["The \"Doctor\""] },
+            { "name": "[Officer] Delaney", "faction": "Police" }
+        ],
+        "TheGeekEntry": [
+            { "name": "Stacey Doyle" },
+            { "name": "Jenn Bordeaux", "nicknames": ["Frenchie", "French"] }
+        ],
+        "TheGhostman": [
+            { "name": "Bobby Schmegal" }
+        ],
+        "theLGX": [
+            { "name": "Bryce Miller", "nicknames": ["BDawg"] }
+        ],
+        "Timmac": [
+            { "name": "[Officer] T.J. Mack", "faction": "Police" },
+            { "name": "Gomer Colton", "faction": "CKR", "nicknames": ["Gomey"] }
+        ],
+        "Timmy2": [
+            { "name": "Chino G", "faction": "Vagos" },
+            { "name": "Cardell \"CJ\" Jones", "faction": "SSB" }
+        ],
+        "TinySpark": [
+            { "name": "Daisy Dukakis", "displayName": 0 }
+        ],
+        "TinyStunt": [
+            { "name": "[EMS] Bailey Jade", "faction": "Medical" }
+        ],
+        "TheDorken": [
+            { "name": "Valentina" }
+        ],
+        "ToastRP": [
+            { "name": "Paulie", "faction": "ESB" }
+        ],
+        "Tobiii": [
+            { "name": "Development \"Development: Tobiii\"", "faction": "Development", "nicknames": ["Dev", "Developer"] }
+        ],
+        "travpiper": [
+            { "name": "Carlos \"Cheddar\" Sanchez", "faction": "HOA" },
+            { "name": "Warren Wallace" },
+            { "name": "Charlie Colcord" }
+        ],
+        "traycee": [
+            { "name": "Lexi Law", "faction": "Angels" }
+        ],
+        "TwistedBones": [
+            { "name": "Marcus Black", "faction": "GSF" }
+        ],
+        "TwistedManifest": [
+            { "name": "Jack Valentino", "faction": "Lunatix" }
+        ],
+        "UberHaxorNova": [
+            { "name": "Siz Fulker", "faction": "HOA", "leader": true }
+        ],
+        "uhSnow": [
+            { "name": "[Trooper] Jackie Snow", "faction": "Police" },
+            { "name": "Mikey Mersion" }
+        ],
+        "Umadbrahlive": [
+            { "name": "Leonel Martinez", "faction": "Vagos", "displayName": 2 },
+            { "name": "Sergio Lopez", "faction": "Marabunta", "leader": true },
+            { "name": "Big E", "faction": "SSB", "leader": true, "nicknames": ["Big L"], "displayName": 0 }
+        ],
+        "Vader": [
+            { "name": "Eugene Zuckerberg", "faction": "Leanbois", "nicknames": ["Old Man"] },
+            { "name": "Tuong Ru Kim" }
+        ],
+        "VADIKUS007": [
+            { "name": "Yuri Grozniy" }
+        ],
+        "Vaerinis": [
+            { "name": "[Assistant Chief of Police] Thomas Metzger", "faction": "Police", "highCommand": true }
+        ],
+        "VaguePWNage": [
+            { "name": "Ramsay", "faction": "SSB" }
+        ],
+        "ValorWasTaken": [
+            { "name": "Esteban Julio-Cruz-Perez-Rodriguez", "faction": "Marabunta" }
+        ],
+        "Viviana": [
+            { "name": "Griselda Ambrose", "nicknames": ["Granny"] },
+            { "name": "Lana Valentine" }
+        ],
+        "VTechas": [
+            { "name": "Daryl Dixon", "faction": "HOA" }
+        ],
+        "Wayward": [
+            { "name": "[Judge] Wayne Ardson", "faction": "DoJ" },
+            { "name": "Jack \"The Joker\" Knaves", "nicknames": ["The \"Joker\""] },
+            { "name": "Bowser" }
+        ],
+        "Wehtuns": [
+            { "name": "[DA] Lawrence Splainer", "faction": "DoJ" }
+        ],
+        "Whippy": [
+            { "name": "[Officer] Crocodile Steve", "faction": "Police" },
+            { "name": "Irwin Dundee", "faction": "BBMC", "leader": true, "displayName": 2 },
+            { "name": "James Tinklebottom" }
+        ],
+        "Whiteboylemons": [
+            { "name": "[Officer] Aaron Byson", "faction": "Police" },
+            { "name": "[EMS] Boba Stone", "faction": "Medical" }
+        ],
+        "WuPingNOTEggRoll": [
+            { "name": "Wu \"Egg Roll\" Ping" }
+        ],
+        "Xiceman": [
+            { "name": "Mike Wadum", "faction": "Vagos", "nicknames": ["El Gringo"] },
+            { "name": "[Deputy] Mike Bayo", "faction": "Police" }
+        ],
+        "XMOTHATRUCKAX": [
+            { "name": "Ronald \"Red\" Juggler", "faction": "Koreans" }
+        ],
+        "xReklez": [
+            { "name": "Chico", "faction": "Vagos" },
+            { "name": "AJ", "faction": "SSB" }
+        ],
+        "YoinksOG": [
+            { "name": "Doug Canada" }
+        ],
+        "yooApollo": [
+            { "name": "Martin Julio-Perez-Cruz-Rodriguez", "faction": "Marabunta" }
+        ],
+        "Zaquelle": [
+            { "name": "[Officer] Mackenzie Hayes", "faction": "Police" }
+        ],
+        "Ziggy": [
+            { "name": "[Deputy] Ziggy Buggs", "faction": "Police", "displayName": 1 },
+            { "name": "Norman Bones", "displayName": 0 }
+        ],
+        "Zotbot": [
+            { "name": "[Physiotherapist] Leon Marks", "faction": "Medical" }
+        ]
+    },
+    "npFactionsRegex": {
+        "leanbois": "leans*boi|\blba?\b",
+        "lostmc": "losts*mc|thes*lost\b",
+        "sahara": "\bsahara\b",
+        "ckr": "cop[^|!]*\brecord|\bckr\b",
+        "changgang": "changs*gang|\bcga?\b",
+        "vagos": "vagos|yellow",
+        "gsf": "grove|\bgsf\b",
+        "ssb": "balla|\bssb\b",
+        "esb": "\besb\b|east[s-]*side",
+        "marabunta": "\bmarabunta",
+        "development": "\bdevelop",
+        "hoa": "\bhoa\b|hogss*ofs*anarchy|home[s-]*owners[s-]*association",
+        "angels": "\bangels?\b",
+        "snakegang": "\b(?:snake|hydra|mario)s*gang\b",
+        "doc": "\bdoc\b|\bcorrection",
+        "mechanic": "\bmechanic\b",
+        "harmony": "\bharmony\b",
+        "quickfix": "\bquick[s-]*fix",
+        "tunershop": "\btuner[s-]*shop\b",
+        "fastlane": "\bfast[s-]*lane",
+        "bbmc": "bondi\b|bbmc",
+        "mersions": "\bmersion",
+        "police": "(?<!then\b.*|!)(?:\bcop\b|officer|deputy|(?<!private[s-]*)detective|sergeant|lieutenant|corporal|sheriff|trooper|cadet|\b(?:ranger|dt|sgt|lt(?![^|!]*\bjones\b)|cpl|lspd|sasp|bcso|cid)\b)",
+        "medical": "(?<!then\b.*|!)(?:doctor|\b(?:dr|ems|emt)\b)"
+    },
+    "useColors": {
+        "leanbois": "#e74c3c",
+        "lostmc": "#ab5179",
+        "sahara": "#b71540",
+        "changgang": "#686de0",
+        "vagos": "#f1c40f",
+        "gsf": "#006422",
+        "ssb": "#9b59b6",
+        "esb": "#8854d0",
+        "marabunta": "#2250ff",
+        "hoa": "#dc9461",
+        "doj": "#00A032",
+        "russians": "#a35231",
+        "angels": "#ff9ff3",
+        "snakegang": "#789500",
+        "development": "#718093",
+        "doc": "#0984e3",
+        "mechanic": "#40739e",
+        "harmony": "#40739e",
+        "quickfix": "#40739e",
+        "tunershop": "#40739e",
+        "bbmc": "#ffeaa7",
+        "police": "#0abde3",
+        "medical": "#badc58",
+        "otherfaction": "#32ff7e",
+        "independent": "#32ff7e",
+        "othernp": "#ffffff",
+        "other": "#81ecec"
+    }
+}
