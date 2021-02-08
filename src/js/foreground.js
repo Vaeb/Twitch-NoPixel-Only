@@ -25,7 +25,7 @@ const stopOnMin = true;
 const checkOther = true;
 const regNp = /no\s*pixel|\bn\s*p\b/i;
 // const regOther = /the\s*family|\btf(?:rp|\b)|family\s*rp|twitchrp|\bt\W*rp\b|benefactor|\bob(?:rp|\b)|dondi|\bsvrp|subversion/i;
-const regOther = /the\s*family|\btf(?:rp|\b)|family\s*rp|twitchrp|\bt\W*rp|\bnon[\s-]*stop|\bns(?:rp|\b)/i;
+const regOther = /\brp\b|gtarp\b|the\s*family|\btf(?:rp|\b)|family\s*rp|twitchrp|svrp|subversion[\s-]*rp\b|\bt\W*rp|\bnon[\s-]*stop|\bns(?:rp|\b)/i;
 const intervalSeconds = 0.7;
 
 let keepDeleting = true;
@@ -191,6 +191,7 @@ const npCharacters = {
         { name: '[Deputy] Kevin Kona', faction: 'Police' },
     ],
     Burn: [
+        { name: 'Johnny Silverhand' },
         { name: 'Norman "Norm" Yoder' },
         { name: 'Gordo Ramsay', displayName: 0 },
     ],
@@ -374,6 +375,9 @@ const npCharacters = {
     Five0AnthO: [
         { name: '[Trooper] Tony Andrews', faction: 'Police', highCommand: true },
     ],
+    forsen: [
+        { name: 'Sven Snusberg', faction: 'Leanbois' },
+    ],
     FortyOne: [
         { name: 'Jose Martin Perez', faction: 'ESB', nicknames: ['JMP'] },
         { name: '[Deputy] John Archer', faction: 'Police' },
@@ -417,6 +421,9 @@ const npCharacters = {
     ],
     Harryo: [
         { name: 'Harry Brown' },
+    ],
+    HasanAbi: [
+        { name: 'Humberto Antonio Donato Pecorino', nicknames: ['Don'], displayName: 5 },
     ],
     Hedisaurus: [
         { name: '[EMS] Hedi Saurus', faction: 'Medical' },
@@ -595,6 +602,9 @@ const npCharacters = {
         { name: 'Evita "Mother" Nimm', faction: 'Dark Web' },
         { name: 'Ava Ridge', faction: 'Goths' },
     ],
+    Knut: [
+        { name: 'Bjorn Eiriksson' },
+    ],
     koil: [
         { name: '[Trooper] Kael Soze', faction: 'Police', highCommand: true },
         { name: '[Officer] Francis Francer', faction: 'Police', displayName: 1 },
@@ -634,7 +644,8 @@ const npCharacters = {
         { name: '[Deputy] Dante Wolf', faction: 'Police' },
     ],
     LIRIK: [
-        { name: 'Avon Barksdale', faction: 'Leanbois' },
+        { name: 'Clayvon Barksdale', faction: 'Leanbois' },
+        { name: 'Avon Barksdale', faction: 'Leanbois', leader: true },
     ],
     Lisilsanya: [
         { name: 'Lei Sanya', faction: 'Medical', displayName: 2 },
@@ -745,6 +756,9 @@ const npCharacters = {
         { name: 'Aleksander Bogorov', faction: 'Angels', nicknames: ['Aleks'], displayName: 3 },
         { name: 'Elijiah "Middle E" Parks', faction: 'SSB' },
     ],
+    moistcr1tikal: [
+        { name: 'Charles White' },
+    ],
     MOONMOON: [
         { name: 'Yung Dab', faction: 'CKR', leader: true, nicknames: ['The "Gnome"'] },
     ],
@@ -801,6 +815,9 @@ const npCharacters = {
     ],
     NovalokHD: [
         { name: '[Officer] Ben Casanova', faction: 'Police' },
+    ],
+    NymN: [
+        { name: 'Frank Fritugo' },
     ],
     o_Oakleyz_o: [
         { name: '[Deputy] Samuel Holtz', faction: 'Police' },
@@ -911,6 +928,9 @@ const npCharacters = {
     RobotNinjaPants: [
         { name: '[ADA] Jacob Slate', faction: 'DoJ' },
     ],
+    roflgator: [
+        { name: 'Robert Spowylamywanowski', nicknames: ['Rob'], displayName: 3 },
+    ],
     Rose: [
         { name: '[Deputy] Maggie Dean', faction: 'Police' },
     ],
@@ -923,6 +943,9 @@ const npCharacters = {
         { name: 'James "Apples" Apeller' },
         { name: 'Silas Grimmer' },
         { name: 'Ezekiel "Zero" Rogaine' },
+    ],
+    Saiiren: [
+        { name: 'Ai Musori', nicknames: ['Bitch'], faction: 'Burger Shot', displayName: 0 },
     ],
     Sal_Rosenberg: [
         { name: 'Sal Rosenberg' },
@@ -1005,7 +1028,7 @@ const npCharacters = {
         { name: 'Kray-Tor Skullfondler', faction: 'HOA' },
     ],
     Ssaab: [
-        { name: 'Al Saab', faction: 'Sahara', displayName: 2 },
+        { name: 'Al Saab', faction: 'Leanbois', displayName: 2 },
         { name: '[Officer] Sam Baas', faction: 'Police', displayName: 2 },
     ],
     steamcharlie: [
@@ -1133,6 +1156,9 @@ const npCharacters = {
         { name: 'Eugene Zuckerberg', faction: 'Leanbois', nicknames: ['Old Man'] },
         { name: 'Tuong Ru Kim' },
     ],
+    VADIKUS007: [
+        { name: 'Yuri Grozniy' },
+    ],
     Vaerinis: [
         { name: '[Assistant Chief of Police] Thomas Metzger', faction: 'Police', highCommand: true },
     ],
@@ -1193,9 +1219,9 @@ const npCharacters = {
         { name: '[Deputy] Ziggy Buggs', faction: 'Police', displayName: 1 },
         { name: 'Norman Bones', displayName: 0 },
     ],
-    Zombie_Barricades: [
-        { name: 'Tyrone Biggums', faction: 'ESB', leader: true, nicknames: ['WAR', 'WWWAAAARR'] },
-    ],
+    // Zombie_Barricades: [
+    //     { name: 'Tyrone Biggums', faction: 'ESB', leader: true, nicknames: ['WAR', 'WWWAAAARR'] },
+    // ],
     Zotbot: [
         { name: '[Physiotherapist] Leon Marks', faction: 'Medical' },
     ],
@@ -1454,13 +1480,14 @@ const deleteOthers = () => {
 
         const isOtherCheck = checkOther && regOther.test(title);
 
-        if (isOtherCheck) {
+        const isNpCheck = regNp.test(title);
+        const characters = npCharacters[channelName];
+
+        // if (isOtherCheck && !(characters || isNpCheck)) {
+        if (!(characters || isNpCheck)) {
             liveEl.innerText = '';
             channelEl.style.color = useColors.other;
         } else {
-            const isNpCheck = regNp.test(title);
-            const characters = npCharacters[channelName];
-
             let nowCharacter;
             let factionNames = [];
 
