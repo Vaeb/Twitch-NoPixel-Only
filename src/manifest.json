@@ -34,6 +34,7 @@
     "permissions": [
         "tabs",
         "storage",
-        "https://www.twitch.tv/*"
+        "https://www.twitch.tv/*",
+        "https://raw.githubusercontent.com/Vaeb/Twitch-NoPixel-Only/master/src/js/characters.json"
     ]
 }

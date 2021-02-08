@@ -18,14 +18,16 @@ String.prototype.indexOfRegex = function (regex, startPos) {
     return indexOf >= 0 ? indexOf + (startPos || 0) : indexOf;
 };
 
+const objectMap = (obj, fn) => Object.fromEntries(Object.entries(obj).map(([k, v], i) => [k, fn(v, k, i)]));
+
 // Settings
 
 const minViewers = 1;
 const stopOnMin = true;
 const checkOther = true;
-const regNp = /no\s*pixel|\bn\s*p\b/i;
+let regNp = /no\s*pixel|\bn\s*p\b/i;
 // const regOther = /the\s*family|\btf(?:rp|\b)|family\s*rp|twitchrp|\bt\W*rp\b|benefactor|\bob(?:rp|\b)|dondi|\bsvrp|subversion/i;
-const regOther = /\brp\b|gtarp\b|the\s*family|\btf(?:rp|\b)|family\s*rp|twitchrp|svrp|subversion[\s-]*rp\b|\bt\W*rp|\bnon[\s-]*stop|\bns(?:rp|\b)/i;
+let regOther = /\brp\b|gtarp\b|the\s*family|\btf(?:rp|\b)|family\s*rp|twitchrp|svrp|subversion[\s-]*rp\b|\bt\W*rp|\bnon[\s-]*stop|\bns(?:rp|\b)/i;
 const intervalSeconds = 0.7;
 
 let keepDeleting = true;
@@ -34,7 +36,7 @@ let interval;
 
 let wasZero = false;
 
-const npCharacters = {
+let npCharacters = {
     '0Reed': [
         { name: 'Reid "Reed" Dankleaf', faction: 'Lost MC' },
     ],
@@ -1227,7 +1229,7 @@ const npCharacters = {
     ],
 };
 
-const npFactionsRegex = {
+let npFactionsRegex = {
     leanbois: /lean\s*boi|\blba?\b/i,
     lostmc: /lost\s*mc|the\s*lost\b/i,
     sahara: /\bsahara\b/i,
@@ -1255,7 +1257,7 @@ const npFactionsRegex = {
     medical: /(?<!then\b.*|!)(?:doctor|\b(?:dr|ems|emt)\b)/i,
 };
 
-const useColors = {
+let useColors = {
     leanbois: '#e74c3c',
     lostmc: '#ab5179',
     sahara: '#b71540',
@@ -1284,6 +1286,20 @@ const useColors = {
     othernp: '#ffffff',
     other: '#81ecec',
 };
+
+console.log(npFactionsRegex);
+
+fetch('https://raw.githubusercontent.com/Vaeb/Twitch-NoPixel-Only/master/src/js/characters.json')
+    .then(r => r.json())
+    .then((result) => {
+        if (result.regNp != null) regNp = new RegExp(result.regNp, 'i');
+        if (result.regOther != null) regOther = new RegExp(result.regOther, 'i');
+        if (result.npCharacters != null) npCharacters = result.npCharacters;
+        if (result.npFactionsRegex != null) npFactionsRegex = objectMap(result.npFactionsRegex, regStr => new RegExp(regStr, 'i'));
+        if (result.useColors != null) useColors = result.useColors;
+        console.log(npFactionsRegex);
+    })
+    .catch(err => console.log('Character settings fetch error:', err));
 
 // #00A032 #cd843f #9b4d75
 // fastlane: '#40739e',

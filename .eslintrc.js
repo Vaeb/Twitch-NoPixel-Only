@@ -53,13 +53,14 @@ module.exports = {
         'no-underscore-dangle': 'off',
         'no-unused-vars': ['warn', { vars: 'all', args: 'after-used', ignoreRestSiblings: true }],
         'object-curly-newline': ['error', { minProperties: 7, multiline: true, consistent: true }],
-        'prefer-destructuring': [
-            'error',
-            {
-                array: false,
-                object: true,
-            },
-        ],
+        // 'prefer-destructuring': [
+        //     'error',
+        //     {
+        //         array: false,
+        //         object: true,
+        //     },
+        // ],
+        'prefer-destructuring': 'off',
         // "quote-props": "off"
     },
 };
