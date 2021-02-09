@@ -776,6 +776,9 @@
         "netsirk": [
             { "name": "[EMS] Nettie Machete", "faction": "Medical" }
         ],
+        "NeveRossa": [
+            { "name": "Dawn Hearte" }
+        ],
         "NewFaceSuper": [
             { "name": "Davey Doherty", "faction": "Prune Gang" }
         ],
