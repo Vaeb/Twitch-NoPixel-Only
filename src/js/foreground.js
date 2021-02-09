@@ -421,7 +421,6 @@ const filterStreams = async () => {
 
         if (interval == null) {
             console.log('[TNO] Starting interval');
-            console.log('int', 1000 * intervalSeconds);
             interval = setInterval(deleteOthers, 1000 * intervalSeconds); // Interval gets ended when minViewers is reached
             deleteOthers();
             return true;
