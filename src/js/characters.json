@@ -1224,6 +1224,9 @@
             { "name": "[Deputy] Ziggy Buggs", "faction": "Police", "displayName": 1 },
             { "name": "Norman Bones", "displayName": 0 }
         ],
+        "Zoil": [
+            { "name": "Skunkz Wallace" }
+        ],
         "Zotbot": [
             { "name": "[Physiotherapist] Leon Marks", "faction": "Medical" }
         ]
