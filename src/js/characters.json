@@ -296,7 +296,7 @@
             { "name": "Preston Landor" }
         ],
         "Dogbert": [
-            { "name": "[Undersheriff] Rocko Colombo", "faction": "Police", "highCommand": true },
+            { "name": "[Deputy] Rocko Colombo", "faction": "Police" },
             { "name": "Luther Caine", "faction": "HOA" }
         ],
         "Doug": [
@@ -1137,7 +1137,7 @@
             { "name": "Yuri Grozniy" }
         ],
         "Vaerinis": [
-            { "name": "[Assistant Chief of Police] Thomas Metzger", "faction": "Police", "highCommand": true }
+            { "name": "[Officer] Thomas Metzger", "faction": "Police" }
         ],
         "VaguePWNage": [
             { "name": "Ramsay", "faction": "SSB" }
