@@ -119,7 +119,12 @@ let stopInterval;
 const filterStreams = async () => {
     console.log('Fetching recent character data');
 
-    let fetchResult = await fetch('https://raw.githubusercontent.com/Vaeb/Twitch-NoPixel-Only/master/src/js/characters.json');
+    let fetchResult = await fetch(
+        'https://raw.githubusercontent.com/Vaeb/Twitch-NoPixel-Only/master/src/js/characters.json',
+        {
+            headers: { 'Cache-Control': 'no-cache', pragma: 'no-cache' },
+        }
+    );
     fetchResult = await fetchResult.json();
 
     if (fetchResult.regNp != null) regNp = new RegExp(fetchResult.regNp, 'i');
