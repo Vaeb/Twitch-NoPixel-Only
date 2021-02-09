@@ -972,7 +972,7 @@
             { "name": "[Officer] Joel Garcia", "faction": "Police" }
         ],
         "SilentSentry": [
-            { "name": "Michael Michaels Jr.", "nicknames": ["MMJR"], "displayName": 4 },
+            { "name": "Michael Michaels Jr.", "nicknames": ["MMJR"], "displayName": 0 },
             { "name": "Iroquois Plisken" },
             { "name": "Ziggy Flint" },
             { "name": "Ron Otterman" }
