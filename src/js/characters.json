@@ -699,7 +699,7 @@
             { "name": "[EMS] William \"Middy\" Haze", "faction": "Medical" }
         ],
         "MEKABEAR": [
-            { "name": "Erin Cox", "faction": "Snake Gang" }
+            { "name": "Erin Cox" }
         ],
         "Mexi": [
             { "name": "[Deputy] Clarence Williams", "faction": "Police", "displayName": 1 }
@@ -919,6 +919,7 @@
         "Roxmiral": [
             { "name": "Ruby Morris" },
             { "name": "Nikki Drools", "faction": "DoC" },
+            { "name": "Sherry Paie", "displayName": 0 },
             { "name": "Sherry Lee" }
         ],
         "s0upes": [
@@ -1119,6 +1120,9 @@
         ],
         "Tobiii": [
             { "name": "Development \"Development: Tobiii\"", "faction": "Development", "nicknames": ["Dev", "Developer"] }
+        ],
+        "Trainwreckstv": [
+            { "name": "Douglas Buck" }
         ],
         "travpiper": [
             { "name": "Carlos \"Cheddar\" Sanchez", "faction": "HOA" },
