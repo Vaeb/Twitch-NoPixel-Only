@@ -30,6 +30,9 @@
             { "name": "[Officer] Emily Reinhart", "faction": "Police" },
             { "name": "Jolene Mushkin", "nicknames": ["Little Red"] }
         ],
+        "adeptthebest": [
+            { "name": "Hannah Hiltop" }
+        ],
         "adnormaltv": [
             { "name": "Ivan Gorbahtjov" }
         ],
@@ -730,6 +733,7 @@
             { "name": "Charles White" }
         ],
         "MOONMOON": [
+            { "name": "Lenny Hawk" },
             { "name": "Yung Dab", "faction": "CKR", "leader": true, "nicknames": ["The \"Gnome\""] }
         ],
         "MsBrit": [
@@ -1022,6 +1026,9 @@
         "Sur_Lee": [
             { "name": "Mitch \"Dumbass\" Bader" }
         ],
+        "Surefour": [
+            { "name": "Kenny Hawk" }
+        ],
         "SwizzMB": [
             { "name": "Miguel Almerion", "faction": "Snake Gang" }
         ],
@@ -1164,6 +1171,10 @@
         ],
         "WuPingNOTEggRoll": [
             { "name": "Wu \"Egg Roll\" Ping" }
+        ],
+        "xQcOW": [
+            { "name": "Jean Paul", "nicknames": ["X", "Ghost Rider", "Rider"] },
+            { "name": "Jean Pierre" }
         ],
         "Xiceman": [
             { "name": "Mike Wadum", "faction": "Vagos", "nicknames": ["El Gringo"] },
