@@ -61,7 +61,7 @@
             { "name": "Timoteo \"TT\" Bushnell", "faction": "Top Shottaz", "nicknames": ["Rasta"] }
         ],
         "aleks": [
-            { "name": "[Chief of Police] Bobby Smith", "faction": "Police", "leader": true, "nicknames": ["Bob", "Chief"], "displayName": 1 },
+            { "name": "[Officer] Bobby Smith", "faction": "Police", "nicknames": ["Bob"], "displayName": 1 },
             { "name": "[FIB Agent] Heath Mercer", "faction": "Police" }
         ],
         "alexten0909": [
@@ -220,7 +220,7 @@
             { "name": "[Dr.] Ethan Maw", "faction": "Medical", "displayName": 2 }
         ],
         "ConfusedDevil": [
-            { "name": "[Sheriff] Travis Tribble", "faction": "Police", "highCommand": true, "leader": true }
+            { "name": "[Deputy] Travis Tribble", "faction": "Police" }
         ],
         "ConnorCronus": [
             { "name": "[Dr.] Isaac Smith", "faction": "Medical" },
@@ -876,7 +876,7 @@
         ],
         "RatedEpicz": [
             { "name": "Randy Bullet", "faction": "Chang Gang", "nicknames": ["Lazy-Eye Bullet"] },
-            { "name": "[Officer] A.J. Hunter", "faction": "Police" }
+            { "name": "[Trooper] AJ Hunter", "faction": "Police" }
         ],
         "ray308win": [
             { "name": "[FIB Agent] Lyonel Winchester", "faction": "Police" }
