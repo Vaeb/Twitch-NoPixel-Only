@@ -132,6 +132,9 @@
         "biggieferreira": [
             { "name": "Shevy Santanna", "faction": "Vagos" }
         ],
+        "Blaustoise": [
+            { "name": "Mickey S", "nicknames": ["Downbad"] }
+        ],
         "bldrs": [
             { "name": "Kaleb \"Kleb\" Rush", "faction": "HOA" }
         ],
@@ -305,6 +308,9 @@
         ],
         "Dunrunnin12": [
             { "name": "Thomas \"The Narrator\" Dwayne" }
+        ],
+        "Dyrus": [
+            { "name": "Louis Hill" }
         ],
         "eebern": [
             { "name": "Huck Guthrie", "faction": "HOA" }
@@ -507,7 +513,7 @@
             { "name": "Reverend I.M. Voland", "faction": "Dark Web" }
         ],
         "JuggsRP": [
-            { "name": "Lenny Large" }
+            { "name": "Lenny Large", "faction": "Burger Shot" }
         ],
         "JukeBoxEM": [
             { "name": "Tony Foster", "faction": "ESB" }
@@ -893,7 +899,7 @@
             { "name": "[ADA] Jacob Slate", "faction": "DoJ" }
         ],
         "roflgator": [
-            { "name": "Robert Spowylamywanowski", "nicknames": ["Rob"], "displayName": 3 }
+            { "name": "Robert Spowylamywanowski", "nicknames": ["Rob"], "faction": "Burger Shot", "displayName": 3 }
         ],
         "Rose": [
             { "name": "[Deputy] Maggie Dean", "faction": "Police" }
@@ -979,7 +985,7 @@
             { "name": "Ellie Dono", "faction": "Leanbois" }
         ],
         "sodapoppin": [
-            { "name": "Kevin Whipaloo", "faction": "The Winery" }
+            { "name": "Kevin Whipaloo", "faction": "Burger Shot" }
         ],
         "Spaceboy": [
             { "name": "Melbert \"Mel\" Rickenbacker", "faction": "Prune Gang" }
