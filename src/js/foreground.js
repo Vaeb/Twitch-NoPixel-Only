@@ -143,8 +143,6 @@ const filterStreams = async () => {
     regOther = new RegExp(fetchResult.regOther, 'i');
     npFactionsRegex = objectMap(fetchResult.npFactionsRegex, regStr => new RegExp(regStr, 'i'));
 
-    console.log(minViewers);
-
     console.log('Fetched data!');
 
     for (const [streamer, characters] of Object.entries(npCharacters)) {
