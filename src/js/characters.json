@@ -594,7 +594,7 @@
             { "name": "Karl \"KJ\" Johnny", "faction": "Vagos" }
         ],
         "Kyle": [
-            { "name": "Alabaster Slim", "leader": true, "nicknames": ["Pimp"], "displayName": 2 },
+            { "name": "Alabaster Slim", "nicknames": ["Pimp"], "displayName": 2 },
             { "name": "[Officer] Kyle Pred", "faction": "Police" },
             { "name": "Brett Biggledoinks" },
             { "name": "Rory O'Banion" },
@@ -741,7 +741,7 @@
         ],
         "MOONMOON": [
             { "name": "Lenny Hawk", "displayName": 0 },
-            { "name": "Yung Dab", "leader": true, "nicknames": ["The \"Gnome\""] }
+            { "name": "Yung Dab", "nicknames": ["The \"Gnome\""] }
         ],
         "MsBrit": [
             { "name": "[EMS] Tori Corleone", "faction": "Medical" }
