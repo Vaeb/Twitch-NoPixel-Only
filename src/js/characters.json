@@ -651,6 +651,9 @@
         "LuckyxMoon": [
             { "name": "[Judge] Jessica Wesker", "faction": "DoJ" }
         ],
+        "ludwig": [
+            { "name": "Klevin Ballsworth" }
+        ],
         "luka_aus": [
             { "name": "[Officer] Luka Kozlov", "faction": "Police" },
             { "name": "Gazza Maloo", "faction": "Lost MC" }
