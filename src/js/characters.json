@@ -1,6 +1,6 @@
 {
     "regNp": "no\\s*pixel|\\bn\\s*p\\b",
-    "regOther": "\\brp\\b|gtarp\\b|the\\s*family|\\btf(?:rp|\\b)|family\\s*rp|twitchrp|\\bt\\W*rp|\\bnon[\\s-]*stop|\\bns(?:rp|\\b)",
+    "regOther": "the\\s*family|\\btf(?:rp|\\b)|family\\s*rp|twitchrp|\\bt\\W*rp|\\bnon[\\s-]*stop|\\bns(?:rp|\\b)",
     "npCharacters": {
         "0Reed": [
             { "name": "Reid \"Reed\" Dankleaf", "faction": "Lost MC" }
