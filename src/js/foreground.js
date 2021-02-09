@@ -22,10 +22,10 @@ const objectMap = (obj, fn) => Object.fromEntries(Object.entries(obj).map(([k, v
 
 // Settings
 
-const minViewers = 1;
-const stopOnMin = true;
-const checkOther = true;
-const intervalSeconds = 0.7;
+let minViewers;
+let stopOnMin;
+let checkOther;
+let intervalSeconds;
 
 const allowAll = true;
 
@@ -133,11 +133,17 @@ const filterStreams = async () => {
     let fetchResult = await fetch(myRequest);
     fetchResult = await fetchResult.json();
 
-    if (fetchResult.regNp != null) regNp = new RegExp(fetchResult.regNp, 'i');
-    if (fetchResult.regOther != null) regOther = new RegExp(fetchResult.regOther, 'i');
-    if (fetchResult.npCharacters != null) npCharacters = fetchResult.npCharacters;
-    if (fetchResult.npFactionsRegex != null) npFactionsRegex = objectMap(fetchResult.npFactionsRegex, regStr => new RegExp(regStr, 'i'));
-    if (fetchResult.useColors != null) useColors = fetchResult.useColors;
+    if (fetchResult == null || fetchResult.npCharacters == null) {
+        console.log('Failed to fetch character data:', fetchResult);
+        return;
+    }
+
+    ({ minViewers, stopOnMin, checkOther, intervalSeconds, npCharacters, useColors } = fetchResult);
+    regNp = new RegExp(fetchResult.regNp, 'i');
+    regOther = new RegExp(fetchResult.regOther, 'i');
+    npFactionsRegex = objectMap(fetchResult.npFactionsRegex, regStr => new RegExp(regStr, 'i'));
+
+    console.log(minViewers);
 
     console.log('Fetched data!');
 
@@ -415,6 +421,7 @@ const filterStreams = async () => {
 
         if (interval == null) {
             console.log('[TNO] Starting interval');
+            console.log('int', 1000 * intervalSeconds);
             interval = setInterval(deleteOthers, 1000 * intervalSeconds); // Interval gets ended when minViewers is reached
             deleteOthers();
             return true;

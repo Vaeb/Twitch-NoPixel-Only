@@ -1,4 +1,8 @@
 {
+    "minViewers": 1,
+    "stopOnMin": true,
+    "checkOther": true,
+    "intervalSeconds": 0.7,
     "regNp": "no\\s*pixel|\\bn\\s*p\\b",
     "regOther": "the\\s*family|\\btf(?:rp|\\b)|family\\s*rp|twitchrp|\\bt\\W*rp|\\bnon[\\s-]*stop|\\bns(?:rp|\\b)",
     "npCharacters": {
