@@ -733,7 +733,7 @@
             { "name": "Charles White" }
         ],
         "MOONMOON": [
-            { "name": "Lenny Hawk", "displayName": 1 },
+            { "name": "Lenny Hawk", "displayName": 0 },
             { "name": "Yung Dab", "faction": "CKR", "leader": true, "nicknames": ["The \"Gnome\""] }
         ],
         "MsBrit": [
