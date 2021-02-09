@@ -1173,8 +1173,8 @@
             { "name": "Wu \"Egg Roll\" Ping" }
         ],
         "xQcOW": [
-            { "name": "Jean Paul", "nicknames": ["X", "Ghost Rider", "Rider"] },
-            { "name": "Jean Pierre" }
+            { "name": "Jean Paul", "nicknames": ["X", "Ghost Rider", "Rider"], "displayName": 0 },
+            { "name": "Jean Pierre", "displayName": 0 }
         ],
         "Xiceman": [
             { "name": "Mike Wadum", "faction": "Vagos", "nicknames": ["El Gringo"] },
