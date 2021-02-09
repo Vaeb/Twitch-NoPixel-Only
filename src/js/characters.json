@@ -302,7 +302,7 @@
         ],
         "Doug": [
             { "name": "Gazpacho Prince", "faction": "ESB", "nicknames": ["Pachi", "Spachi"] },
-            { "name": "William \"W\" Told", "faction": "CKR", "nicknames": ["Lil Pump"] }
+            { "name": "William \"W\" Told", "nicknames": ["Lil Pump"] }
         ],
         "Dr_Knope": [
             { "name": "Patrit \"Mete\" Metemahaan", "faction": "HOA" }
@@ -594,7 +594,7 @@
             { "name": "Karl \"KJ\" Johnny", "faction": "Vagos" }
         ],
         "Kyle": [
-            { "name": "Alabaster Slim", "faction": "CKR", "leader": true, "nicknames": ["Pimp"], "displayName": 2 },
+            { "name": "Alabaster Slim", "leader": true, "nicknames": ["Pimp"], "displayName": 2 },
             { "name": "[Officer] Kyle Pred", "faction": "Police" },
             { "name": "Brett Biggledoinks" },
             { "name": "Rory O'Banion" },
@@ -741,7 +741,7 @@
         ],
         "MOONMOON": [
             { "name": "Lenny Hawk", "displayName": 0 },
-            { "name": "Yung Dab", "faction": "CKR", "leader": true, "nicknames": ["The \"Gnome\""] }
+            { "name": "Yung Dab", "leader": true, "nicknames": ["The \"Gnome\""] }
         ],
         "MsBrit": [
             { "name": "[EMS] Tori Corleone", "faction": "Medical" }
@@ -1100,7 +1100,7 @@
         ],
         "Timmac": [
             { "name": "[Officer] T.J. Mack", "faction": "Police" },
-            { "name": "Gomer Colton", "faction": "CKR", "nicknames": ["Gomey"] }
+            { "name": "Gomer Colton", "nicknames": ["Gomey"] }
         ],
         "Timmy2": [
             { "name": "Chino G", "faction": "Vagos" },
