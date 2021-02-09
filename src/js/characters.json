@@ -987,7 +987,7 @@
             { "name": "Jean Steele" }
         ],
         "SirPink": [
-            { "name": "Reginald \"Reggie\" Bigglesby" }
+            { "name": "Reginald \"Reggie\" Bigglesby", "faction": "Leanbois" }
         ],
         "Slasher2099": [
             { "name": "[Officer] Darrel McCormik", "faction": "Police" },
