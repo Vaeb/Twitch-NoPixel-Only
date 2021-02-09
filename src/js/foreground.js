@@ -27,6 +27,8 @@ const stopOnMin = true;
 const checkOther = true;
 const intervalSeconds = 0.7;
 
+const allowAll = true;
+
 let keepDeleting = true;
 let onPage = false;
 let interval;
@@ -259,8 +261,10 @@ const filterStreams = async () => {
             const isNpCheck = regNp.test(title);
             const characters = npCharacters[channelName];
 
-            // if (isOtherCheck && !(characters || isNpCheck)) {
-            if (!(characters || isNpCheck)) {
+            let useOther = !(characters || isNpCheck);
+            if (!allowAll) useOther = useOther && isOtherCheck;
+
+            if (useOther) {
                 liveEl.innerText = '';
                 channelEl.style.color = useColors.other;
             } else {

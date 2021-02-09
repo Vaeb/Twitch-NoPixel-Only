@@ -1,7 +1,7 @@
 {
     "name": "Twitch NoPixel Only",
     "description": "NoPixel-specific filtering for the Twitch GTA page",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "manifest_version": 2,
     "icons": {
         "16": "images/icon-16.png",
