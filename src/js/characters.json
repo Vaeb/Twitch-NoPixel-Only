@@ -335,6 +335,9 @@
             { "name": "Bree Matthews" },
             { "name": "Demi Black" }
         ],
+        "EsfandTV": [
+            { "name": "Ali Farmand" }
+        ],
         "explodicy": [
             { "name": "Ted Kindly" }
         ],
@@ -969,7 +972,7 @@
             { "name": "[Officer] John Mineo", "faction": "Police" }
         ],
         "Shrimp_": [
-            { "name": "Bradley Kickass" }
+            { "name": "Bradley Kickass", "displayName": 0 }
         ],
         "shroud": [
             { "name": "Richard Hard" }
