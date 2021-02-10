@@ -255,7 +255,7 @@ const filterStreams = async () => {
 
         let isFirstRemove = true;
         if (elements.length > 0 || !wasZero) {
-            console.log('[TNO] There are so many elements:', elements.length);
+            console.log('[TNO] _There are so many elements:', elements.length);
             wasZero = elements.length === 0;
         }
 
@@ -419,9 +419,8 @@ const filterStreams = async () => {
 
             englishTag.click();
             console.log('selected english');
-            setTimeout(() => {
-                window.location.reload();
-            }, 110);
+            // setTimeout(() => window.location.reload(), 110);
+            $(':focus').blur();
         } else {
             console.log('has english tag');
         }
@@ -430,28 +429,31 @@ const filterStreams = async () => {
     onPage = /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V/.test(window.location.href);
 
     activateInterval = async () => {
-        const status = await getStorage('tnoStatus');
+        let status = await getStorage('tnoStatus');
+        if (status === undefined) status = true;
         console.log('[TNO] Extension enabled:', status);
-        if (status === false) return false;
+        if (status === false || interval != null) {
+            console.log(`[TNO] Couldn't start interval (status: ${status}, interval: ${interval})`);
+            return false;
+        }
 
         selectEnglish();
 
-        if (interval == null) {
-            console.log('[TNO] Starting interval');
-            interval = setInterval(deleteOthers, 1000 * intervalSeconds); // Interval gets ended when minViewers is reached
-            deleteOthers();
+        console.log('[TNO] Starting interval');
+        interval = setInterval(deleteOthers, 1000 * intervalSeconds); // Interval gets ended when minViewers is reached
+        deleteOthers();
 
-            const $followBtn = $(await waitForElement('[data-test-selector="follow-game-button-component"]'));
-            console.log($followBtn);
-            const $container = $followBtn.parent().parent();
-            const $setEnglishBtn = $('<button>Twitch NoPixel Only: Settings</button>');
-            $container.append($setEnglishBtn);
+        const $followBtn = $(await waitForElement('[data-test-selector="follow-game-button-component"]'));
+        const $container = $followBtn.parent().parent();
+        const $setEnglishBtn = $('<button>⚙️ Twitch NoPixel Only</button>');
+        $setEnglishBtn.addClass($followBtn.attr('class'));
+        $setEnglishBtn.css({
+            margin: '0 0 0 10px',
+            padding: '0 10px',
+        });
+        $container.append($setEnglishBtn);
 
-            return true;
-        }
-
-        console.log("[TNO] Couldn't start interval (already active)");
-        return false;
+        return true;
     };
 
     stopInterval = () => {
