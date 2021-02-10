@@ -366,46 +366,65 @@ const filterStreams = async () => {
         });
     };
 
+    const waitForElement = async (selector, maxTime = Infinity) => {
+        let el;
+        let timer;
+
+        if (typeof selector === 'string') {
+            const selectorString = selector;
+            selector = () => document.querySelector(selectorString);
+        }
+
+        const initStamp = +new Date();
+
+        while ((el = selector()) == null) {
+            // eslint-disable-next-line
+            await new Promise((resolve) => {
+                cancelAnimationFrame(timer);
+                timer = requestAnimationFrame(resolve);
+            });
+
+            if ((+new Date() - initStamp) >= maxTime) {
+                console.log('waitForElement timed out after', maxTime, 'ms');
+                break;
+            }
+        }
+
+        return el;
+    };
+
     // Automatically select English tag for GTAV
-    const selectEnglish = () => {
-        let englishInterval;
-        let hasClicked = false;
-        englishInterval = setInterval(() => {
-            if (hasClicked) {
-                clearInterval(englishInterval);
-                window.location.reload();
-            }
-            const englishXPath = '//div[contains(concat(" ", normalize-space(@class), " "), " tw-pd-x-1 tw-pd-y-05 ") and text()="English"]';
-            const englishTag = document.evaluate(englishXPath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-            if (englishTag != null) {
-                hasClicked = true;
-                englishTag.click();
-                console.log('selected english');
-            }
-        }, 100);
+    const selectEnglish = async () => {
+        await waitForElement('.animated-tag--no-bounce, [data-a-target="form-tag-add-filter-suggested"]');
 
         const hasEnglishTag = document.querySelector('button[data-a-target="form-tag-English"]') != null;
 
         if (!hasEnglishTag) {
-            const inp = document.querySelector('#dropdown-search-input');
-            inp.select();
+            let englishTag;
+
+            while (englishTag == null) {
+                const inp = document.querySelector('#dropdown-search-input');
+                inp.select();
+
+                console.log('looking for english');
+
+                // eslint-disable-next-line no-await-in-loop
+                englishTag = await waitForElement(() => {
+                    const englishXPath = '//div[contains(concat(" ", normalize-space(@class), " "), " tw-pd-x-1 tw-pd-y-05 ") and text()="English"]';
+                    return document.evaluate(englishXPath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                }, 1000);
+            }
+
+            // if (englishTag == null) return;
+
+            englishTag.click();
+            console.log('selected english');
+            setTimeout(() => {
+                window.location.reload();
+            }, 110);
         } else {
             console.log('has english tag');
         }
-    };
-
-    const checkForEnglish = async () => {
-        let trendingInterval;
-        trendingInterval = setInterval(() => {
-            const pElements = document.querySelectorAll('div[data-a-target="tags-filter-dropdown"] p');
-            for (const pEl of pElements) {
-                if (pEl.innerText === 'Trending') {
-                    clearInterval(trendingInterval);
-                    selectEnglish();
-                    break;
-                }
-            }
-        }, 100);
     };
 
     onPage = /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V/.test(window.location.href);
@@ -415,12 +434,19 @@ const filterStreams = async () => {
         console.log('[TNO] Extension enabled:', status);
         if (status === false) return false;
 
-        checkForEnglish();
+        selectEnglish();
 
         if (interval == null) {
             console.log('[TNO] Starting interval');
             interval = setInterval(deleteOthers, 1000 * intervalSeconds); // Interval gets ended when minViewers is reached
             deleteOthers();
+
+            const $followBtn = $(await waitForElement('[data-test-selector="follow-game-button-component"]'));
+            console.log($followBtn);
+            const $container = $followBtn.parent().parent();
+            const $setEnglishBtn = $('<button>Twitch NoPixel Only: Settings</button>');
+            $container.append($setEnglishBtn);
+
             return true;
         }
 
