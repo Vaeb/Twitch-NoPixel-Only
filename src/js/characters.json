@@ -835,7 +835,9 @@
             { "name": "[Officer] Owen Svensen", "faction": "Police" }
         ],
         "Pengwin": [
-            { "name": "[Deputy] Jerry Perkins", "faction": "Police" }
+            { "name": "[Deputy] Jerry Perkins", "faction": "Police" },
+            { "name": "Dustin \"Dark Shadow\" Manson" },
+            { "name": "Kenneth \"Ken-sama\" Foreman" }
         ],
         "PENTA": [
             { "name": "Jordan Steele", "displayName": 0, "nicknames": ["\"Parking\" God", "Phoenix Messiah"] },
