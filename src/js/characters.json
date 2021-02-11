@@ -1323,8 +1323,8 @@
         "bbmc": "#cfba57",
         "police": "#0a0de3",
         "medical": "#9adc58",
-        "otherfaction": "#12cf7e",
-        "independent": "#12cf7e",
+        "otherfaction": "#12af7e",
+        "independent": "#12af7e",
         "othernp": "#000000",
         "other": "#619c9c"
     }
