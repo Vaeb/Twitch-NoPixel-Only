@@ -65,7 +65,7 @@ let useColors = {};
 let useColorsDark = {};
 let useColorsLight = {};
 
-// #00A032 #cd843f #9b4d75
+// #00A032 #cd843f #9b4d75 #b71540
 // fastlane: '#40739e',
 // mersions, koreans, ckr, aztecas
 
