@@ -5,6 +5,8 @@
 
 console.log('[TNO] Loading Twitch NoPixel Only...');
 
+const allowAll = false;
+
 const getStorage = (key, defaultVal = undefined) => new Promise((resolve) => {
     const useDefault = defaultVal !== undefined;
 
@@ -44,8 +46,6 @@ let minViewers;
 let stopOnMin;
 let checkOther;
 let intervalSeconds;
-
-const allowAll = true;
 
 let keepDeleting = true;
 let onPage = false;
