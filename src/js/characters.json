@@ -1266,7 +1266,7 @@
         "police": "(?<!then\\b.*|!)(?:\\bcop\\b|chief of police|officer|deputy|(?<!private[s-]*)detective|sergeant|lieutenant|corporal|sheriff|trooper|cadet|\\b(?:ranger|dt|sgt|lt(?![^|!]*\\bjones\\b)|cpl|lspd|sasp|bcso|cid)\\b)",
         "medical": "(?<!then\\b.*|!)(?:doctor|\\b(?:dr|ems|emt)\\b)"
     },
-    "useColors": {
+    "useColorsDark": {
         "leanbois": "#e74c3c",
         "lostmc": "#ab5179",
         "sahara": "#b71540",
@@ -1294,5 +1294,34 @@
         "independent": "#32ff7e",
         "othernp": "#ffffff",
         "other": "#81ecec"
+    },
+    "useColorsLight": {
+        "leanbois": "#e74c3c",
+        "lostmc": "#ab5179",
+        "sahara": "#b71540",
+        "changgang": "#686de0",
+        "vagos": "#f1c40f",
+        "gsf": "#006422",
+        "ssb": "#9b59b6",
+        "esb": "#8854d0",
+        "marabunta": "#2250ff",
+        "hoa": "#dc9461",
+        "doj": "#00A032",
+        "russians": "#a35231",
+        "angels": "#ff9ff3",
+        "snakegang": "#789500",
+        "development": "#718093",
+        "doc": "#0984e3",
+        "mechanic": "#40739e",
+        "harmony": "#40739e",
+        "quickfix": "#40739e",
+        "tunershop": "#40739e",
+        "bbmc": "#ffeaa7",
+        "police": "#0abde3",
+        "medical": "#badc58",
+        "otherfaction": "#32ff7e",
+        "independent": "#32ff7e",
+        "othernp": "#000000",
+        "other": "#81acac"
     }
 }

@@ -62,6 +62,8 @@ let npCharacters = [];
 let npFactionsRegex = {};
 
 let useColors = {};
+let useColorsDark = {};
+let useColorsLight = {};
 
 // #00A032 #cd843f #9b4d75
 // fastlane: '#40739e',
@@ -156,10 +158,18 @@ const filterStreams = async () => {
         return;
     }
 
-    ({ minViewers, stopOnMin, checkOther, intervalSeconds, npCharacters, useColors } = fetchResult);
+    ({ minViewers, stopOnMin, checkOther, intervalSeconds, npCharacters, useColorsDark, useColorsLight } = fetchResult);
     regNp = new RegExp(fetchResult.regNp, 'i');
     regOther = new RegExp(fetchResult.regOther, 'i');
     npFactionsRegex = objectMap(fetchResult.npFactionsRegex, regStr => new RegExp(regStr, 'i'));
+
+    const bodyHexColor = getComputedStyle(document.body).getPropertyValue('--color-background-body');
+
+    if (bodyHexColor === '#f7f7f8') {
+        useColors = useColorsLight;
+    } else {
+        useColors = useColorsDark;
+    }
 
     console.log('Fetched data!');
 
@@ -296,6 +306,8 @@ const filterStreams = async () => {
 
             let useOther = !(characters || isNpCheck);
             if (!allowAll) useOther = useOther && isOtherCheck;
+
+            // channelEl.parentElement.style.backgroundColor = '#0e0e10';
 
             if (useOther) {
                 liveEl.innerText = '';
