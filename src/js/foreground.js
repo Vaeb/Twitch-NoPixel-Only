@@ -164,9 +164,11 @@ const filterStreams = async () => {
     npFactionsRegex = objectMap(fetchResult.npFactionsRegex, regStr => new RegExp(regStr, 'i'));
 
     const bodyHexColor = getComputedStyle(document.body).getPropertyValue('--color-background-body');
+    let isDark = true;
 
     if (bodyHexColor === '#f7f7f8') {
         useColors = useColorsLight;
+        isDark = false;
     } else {
         useColors = useColorsDark;
     }
@@ -346,23 +348,29 @@ const filterStreams = async () => {
                     }
                 }
 
+                const useTextColor = '#000';
+                // const useTextColor = isDark ? '#000' : '#f7f7f8';
+
                 if (nowCharacter) {
                     const nowColor = useColors[nowCharacter.factionUse];
+                    const nowColorDark = useColorsDark[nowCharacter.factionUse];
                     channelEl.style.color = nowColor;
-                    liveElDiv.style.backgroundColor = nowColor;
-                    liveEl.style.color = '#000';
+                    liveElDiv.style.backgroundColor = nowColorDark;
+                    liveEl.style.color = useTextColor;
                     liveEl.innerText = `${nowCharacter.leader ? '♛ ' : ''}${nowCharacter.displayName}`;
                 } else if (factionNames.length) {
                     const nowColor = useColors[factionNames[0]] || useColors.independent;
+                    const nowColorDark = useColorsDark[factionNames[0]] || useColorsDark.independent;
                     channelEl.style.color = nowColor;
-                    liveElDiv.style.backgroundColor = nowColor;
-                    liveEl.style.color = '#000';
+                    liveElDiv.style.backgroundColor = nowColorDark;
+                    liveEl.style.color = useTextColor;
                     liveEl.innerText = `< ${fullFactionMap[factionNames[0]] || factionNames[0]} >`;
                 } else if (characters) {
                     const nowColor = useColors[characters[0].factionUse];
+                    const nowColorDark = useColorsDark[characters[0].factionUse];
                     channelEl.style.color = nowColor;
-                    liveElDiv.style.backgroundColor = nowColor;
-                    liveEl.style.color = '#000';
+                    liveElDiv.style.backgroundColor = nowColorDark;
+                    liveEl.style.color = useTextColor;
                     liveEl.innerText = `? ${characters[0].displayName} ?`;
                 } else if (isNpCheck) {
                     liveEl.innerText = '';
