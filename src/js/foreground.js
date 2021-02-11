@@ -5,9 +5,27 @@
 
 console.log('[TNO] Loading Twitch NoPixel Only...');
 
-const getStorage = key => new Promise((resolve) => {
+const getStorage = (key, defaultVal = undefined) => new Promise((resolve) => {
+    const useDefault = defaultVal !== undefined;
+
     chrome.storage.local.get(key, (value) => {
-        resolve(value[key]);
+        let val;
+        if (typeof key === 'string') {
+            val = value[key];
+            if (useDefault && val === undefined) val = defaultVal;
+        } else {
+            val = [];
+            const manyDefaults = Array.isArray(defaultVal);
+            for (let i = 0; i < key.length; i++) {
+                const k = key[i];
+                let v = value[k];
+                if (useDefault && v === undefined) {
+                    v = manyDefaults ? defaultVal[i] : defaultVal;
+                }
+                val.push(v);
+            }
+        }
+        resolve(val);
     });
 });
 
@@ -426,23 +444,7 @@ const filterStreams = async () => {
         }
     };
 
-    onPage = /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V/.test(window.location.href);
-
-    activateInterval = async () => {
-        let status = await getStorage('tnoStatus');
-        if (status === undefined) status = true;
-        console.log('[TNO] Extension enabled:', status);
-        if (status === false || interval != null) {
-            console.log(`[TNO] Couldn't start interval (status: ${status}, interval: ${interval})`);
-            return false;
-        }
-
-        selectEnglish();
-
-        console.log('[TNO] Starting interval');
-        interval = setInterval(deleteOthers, 1000 * intervalSeconds); // Interval gets ended when minViewers is reached
-        deleteOthers();
-
+    const addSettings = async () => {
         const $followBtn = $(await waitForElement('[data-test-selector="follow-game-button-component"]'));
         const $container = $followBtn.parent().parent();
         const $setEnglishBtn = $('<button>⚙️ Twitch NoPixel Only</button>');
@@ -453,18 +455,94 @@ const filterStreams = async () => {
         });
         $container.append($setEnglishBtn);
 
+        const [tnoStatus, tnoEnglish] = await getStorage(['tnoStatus', 'tnoEnglish'], [true, true]);
+
+        $setEnglishBtn.click(() => {
+            Swal.fire({
+                // icon: 'info',
+                // title: 'TNO Settings',
+                html: `
+                    <div class="settings-container">
+                        <div class="settings-title">TNO Settings</div>
+                        <div class="settings-options">
+                            <div class="settings-option">
+                                <span class="settings-name bold">Enabled:</span>
+                                <span class="settings-value">
+                                    <input id="setting-status" type="checkbox" class="toggle" ${tnoStatus ? 'checked' : ''}>
+                                </span>
+                            </div>
+                            <div class="settings-option">
+                                <span class="settings-name">Force "English" only (<em>recommended</em>):</span>
+                                <span class="settings-value">
+                                    <input id="setting-english" type="checkbox" class="toggle" ${tnoEnglish ? 'checked' : ''}>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                heightAuto: false,
+                width: 'auto',
+                // confirmButtonText: 'Close',
+                showConfirmButton: false,
+                didOpen: () => {
+                    const $settingStatus = $('#setting-status');
+                    const $settingEnglish = $('#setting-english');
+
+                    $settingStatus.change(function () {
+                        const newStatus = this.checked;
+                        setStorage('tnoStatus', newStatus);
+                        console.log('Set status to:', newStatus);
+                    });
+
+                    $settingEnglish.change(function () {
+                        const newEnglish = this.checked;
+                        setStorage('tnoEnglish', newEnglish);
+                        console.log('Set force-english to:', newEnglish);
+                    });
+                },
+            });
+        });
+    };
+
+    onPage = /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V/.test(window.location.href);
+
+    activateInterval = async () => {
+        if (interval != null) {
+            console.log("[TNO] Couldn't start interval (already running)");
+            return false;
+        }
+
+        addSettings();
+
+        const [tnoStatus, tnoEnglish] = await getStorage(['tnoStatus', 'tnoEnglish'], [true, true]);
+
+        if (tnoStatus === false) {
+            console.log("[TNO] Couldn't start interval (status set to disabled)");
+            return false;
+        }
+
+        if (tnoEnglish) {
+            selectEnglish();
+        }
+
+        console.log('[TNO] Starting interval');
+        interval = setInterval(deleteOthers, 1000 * intervalSeconds); // Interval gets ended when minViewers is reached
+        deleteOthers();
+
         return true;
     };
 
     stopInterval = () => {
-        if (interval != null) {
-            console.log('[TNO] Stopping interval');
-            clearInterval(interval);
-            interval = null;
-            return true;
+        if (interval == null) {
+            console.log("[TNO] Couldn't stop interval (already ended)");
+            return false;
         }
-        console.log("[TNO] Couldn't stop interval (already ended)");
-        return false;
+
+        console.log('[TNO] Stopping interval');
+        clearInterval(interval);
+        interval = null;
+
+        return true;
     };
 
     setTimeout(() => {

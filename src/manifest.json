@@ -28,8 +28,10 @@
     "content_scripts": [
         {
             "matches": ["https://www.twitch.tv/*"],
+            "css": ["css/twitch.css"],
             "js": [
                 "js/jquery-3.5.1.min.js",
+                "js/sweetalert2.all.min.js",
                 "js/foreground.js"
             ]
         }

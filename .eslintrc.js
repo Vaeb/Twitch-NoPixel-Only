@@ -8,6 +8,7 @@ module.exports = {
     },
     globals: {
         chrome: true,
+        Swal: true,
     },
     rules: {
         'arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
@@ -26,7 +27,7 @@ module.exports = {
         eqeqeq: 'off',
         'import/no-dynamic-require': 'off',
         indent: ['error', 4],
-        // "func-names": "off",
+        'func-names': 'off',
         'global-require': 'off',
         'import/extensions': 'off',
         'import/prefer-default-export': 'off',
