@@ -29,3 +29,7 @@ Firstly, this extension contains a big list of NP streamers (currently 356) who 
 
 ##### "What happens if it's a new NoPixel streamer, without character data?"
 They will always be included as long as they're playing on NoPixel (and indicate so in their title). If their title contains some indication of a faction, but no info is known about the character, they will be tagged generically based on that faction. E.g. "<< Vagos >>". If there is no faction indication, they will just be included without a specific tag.
+
+\---
+
+Tip: Keeping the "Force English only" setting enabled will improve performance when scrolling into the lower-viewcount streams.
