@@ -10,13 +10,21 @@ div.settings-container {
     text-align: left;
 }
 
-div.settings-title {
+div.settings-titles {
     margin-bottom: 13px;
     padding: 0;
     color: #ECE9E6;
     font-size: 1.9em;
     font-weight: 600;
+}
+
+span.settings-title {
     text-transform: none;
+}
+
+span.settings-reload {
+    float: right;
+    cursor: pointer;
 }
 
 div.settings-options {

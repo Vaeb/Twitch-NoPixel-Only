@@ -463,7 +463,10 @@ const filterStreams = async () => {
                 // title: 'TNO Settings',
                 html: `
                     <div class="settings-container">
-                        <div class="settings-title">TNO Settings</div>
+                        <div class="settings-titles">
+                            <span class="settings-title">TNO Settings</span>
+                            <span class="settings-reload">🗘</span>
+                        </div>
                         <div class="settings-options">
                             <div class="settings-option">
                                 <span class="settings-name bold">Enabled:</span>
@@ -485,8 +488,11 @@ const filterStreams = async () => {
                 // confirmButtonText: 'Close',
                 showConfirmButton: false,
                 didOpen: () => {
+                    const $settingsReload = $('.settings-reload');
                     const $settingStatus = $('#setting-status');
                     const $settingEnglish = $('#setting-english');
+
+                    $settingsReload.click(() => window.location.reload());
 
                     $settingStatus.change(function () {
                         const newStatus = this.checked;
