@@ -277,7 +277,7 @@
         ],
         "dasMEHDI": [
             { "name": "[Officer] Brian Knight", "faction": "Police", "nicknames": ["495"] },
-            { "name": "Nino Chavez", "faction": "Sahara", "leader": true },
+            { "name": "Nino Chavez", "faction": "Sahara" },
             { "name": "Ryan Kindle", "faction": "HOA" },
             { "name": "Reema", "nicknames": ["The \"Whorelord\""] }
         ],
