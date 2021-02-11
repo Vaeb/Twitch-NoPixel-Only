@@ -166,7 +166,8 @@
         ],
         "buddha": [
             { "name": "Lang Buddha", "faction": "Leanbois", "leader": true, "nicknames": ["Circle Andy"] },
-            { "name": "[Deputy] Kevin Kona", "faction": "Police" }
+            { "name": "[Deputy] Kevin Kona", "faction": "Police" },
+            { "name": "Esteban Julio Ricardo Montoya De La Rosa Ramirez" }
         ],
         "Burn": [
             { "name": "Johnny Silverhand" },
