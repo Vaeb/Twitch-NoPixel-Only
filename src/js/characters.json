@@ -422,7 +422,7 @@
             { "name": "[Deputy] Colt Shepherd", "faction": "Police" }
         ],
         "Hirona": [
-            { "name": "[Officer] Olivia Copper", "faction": "Police" },
+            { "name": "[Trooper] Olivia Copper", "faction": "Police" },
             { "name": "Emily Maw", "faction": "Harmony" },
             { "name": "Griselda \"Zelda\" Harth", "faction": "HOA" },
             { "name": "Olga Sazkaljovich", "faction": "Snake Gang", "nicknames": ["Olgaa", "Olgaaa", "Olgaaaa"] }
