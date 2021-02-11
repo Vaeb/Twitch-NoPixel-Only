@@ -428,9 +428,10 @@
             { "name": "Olga Sazkaljovich", "faction": "Snake Gang", "nicknames": ["Olgaa", "Olgaaa", "Olgaaaa"] }
         ],
         "hobbittrash": [
+            { "name": "[Chief Justice] Katya Zamalodchikova", "faction": "DoJ" },
             { "name": "[Deputy] Tracy Martell", "faction": "Police", "nicknames": ["Cop"] },
-            { "name": "Kayden Dell'Anno" },
-            { "name": "[Chief Justice] Katya Zamalodchikova", "faction": "DoJ" }
+            { "name": "Jane Obama" },
+            { "name": "Kayden Dell'Anno" }
         ],
         "HonathanTV": [
             { "name": "[Deputy] Honathan Yolo", "faction": "Police" }
@@ -715,6 +716,9 @@
         ],
         "MEKABEAR": [
             { "name": "Erin Cox" }
+        ],
+        "Mervin": [
+            { "name": "Mervin Potts" }
         ],
         "Mexi": [
             { "name": "[Deputy] Clarence Williams", "faction": "Police", "displayName": 1 }
@@ -1116,7 +1120,8 @@
             { "name": "Bobby Schmegal" }
         ],
         "theLGX": [
-            { "name": "Bryce Miller", "nicknames": ["BDawg"] }
+            { "name": "Bryce Miller", "nicknames": ["BDawg"] },
+            { "name": "Roland Nelson" }
         ],
         "Timmac": [
             { "name": "[Officer] T.J. Mack", "faction": "Police" },
