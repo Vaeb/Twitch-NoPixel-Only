@@ -476,6 +476,9 @@
         "ItsSammyP": [
             { "name": "Tyrone \"Big T\" Thompson", "faction": "SSB" }
         ],
+        "ItsSlikeR": [
+            { "name": "Abraham Mohammed" }
+        ],
         "Jack": [
             { "name": "Jack Cortair", "faction": "ESB" }
         ],
@@ -591,7 +594,8 @@
             { "name": "[Deputy] Lauren Forcer", "faction": "Police" },
             { "name": "Mia Mersion", "faction": "Mersions", "displayName": 0 },
             { "name": "Evita \"Mother\" Nimm", "faction": "Dark Web" },
-            { "name": "Ava Ridge", "faction": "Goths" }
+            { "name": "Ava Ridge", "faction": "Goths" },
+            { "name": "Marta Volkov" }
         ],
         "Knut": [
             { "name": "Bjorn Eiriksson" }
