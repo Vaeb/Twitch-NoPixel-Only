@@ -1254,7 +1254,6 @@
     "npFactionsRegex": {
         "leanbois": "leans*boi|\\blba?\\b",
         "lostmc": "losts*mc|thes*lost\\b",
-        "sahara": "\\bsahara\\b",
         "ckr": "cop[^|!]*\\brecord|\\bckr\\b",
         "changgang": "changs*gang|\\bcga?\\b",
         "vagos": "vagos|yellow",
@@ -1280,7 +1279,6 @@
     "useColorsDark": {
         "leanbois": "#e74c3c",
         "lostmc": "#ab5179",
-        "sahara": "#b71540",
         "changgang": "#686de0",
         "vagos": "#f1c40f",
         "gsf": "#006422",
@@ -1309,7 +1307,6 @@
     "useColorsLight": {
         "leanbois": "#c74c3c",
         "lostmc": "#ab5179",
-        "sahara": "#b71540",
         "changgang": "#686de0",
         "vagos": "#e3ba16",
         "gsf": "#006422",
