@@ -307,7 +307,7 @@ const filterStreams = async () => {
             const characters = npCharacters[channelName];
 
             let useOther = !(characters || isNpCheck);
-            if (!allowAll) useOther = useOther && isOtherCheck;
+            if (allowAll === false) useOther = useOther && isOtherCheck;
 
             // channelEl.parentElement.style.backgroundColor = '#0e0e10';
 
