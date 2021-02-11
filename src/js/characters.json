@@ -1316,11 +1316,11 @@
         "harmony": "#40739e",
         "quickfix": "#40739e",
         "tunershop": "#40739e",
-        "bbmc": "#ffeaa7",
-        "police": "#0abde3",
+        "bbmc": "#cfba57",
+        "police": "#0a0de3",
         "medical": "#badc58",
-        "otherfaction": "#32ff7e",
-        "independent": "#32ff7e",
+        "otherfaction": "#12cf7e",
+        "independent": "#12cf7e",
         "othernp": "#000000",
         "other": "#81acac"
     }
