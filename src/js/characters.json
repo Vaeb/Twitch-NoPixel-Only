@@ -464,8 +464,11 @@
             { "name": "Winston Bolt", "faction": "ESB" },
             { "name": "Dragon", "faction": "DDMC" }
         ],
+        "itmeJP": [
+            { "name": "Wilbur Higgins" }
+        ],
         "ItsJustJosh": [
-            { "name": "ItsJustJosh", "faction": "SSB" }
+            { "name": "Levi Dawson", "faction": "SSB" }
         ],
         "ItsLSG": [
             { "name": "[Officer] Jack Miller", "faction": "Police" }
