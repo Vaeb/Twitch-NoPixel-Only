@@ -319,7 +319,7 @@
             { "name": "John \"Geno\" Collins", "faction": "GSF" }
         ],
         "Dunrunnin12": [
-            { "name": "Thomas \"The Narrator\" Dwayne" }
+            { "name": "Thomas Dwayne", "nicknames": ["The Narrator"] }
         ],
         "Dyrus": [
             { "name": "Louis Hill", "displayName": 0 }
