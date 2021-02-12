@@ -319,7 +319,7 @@
             { "name": "Thomas \"The Narrator\" Dwayne" }
         ],
         "Dyrus": [
-            { "name": "Louis Hill" }
+            { "name": "Louis Hill", "displayName": 0 }
         ],
         "eebern": [
             { "name": "Huck Guthrie", "faction": "HOA" }
