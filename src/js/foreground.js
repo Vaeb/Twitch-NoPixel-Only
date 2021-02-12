@@ -457,8 +457,14 @@ const filterStreams = async () => {
 
             englishTag.click();
             console.log('selected english');
-            // setTimeout(() => window.location.reload(), 110);
             $(':focus').blur();
+
+            setTimeout(() => {
+                const allStreams = document.querySelectorAll('[data-a-target="preview-card-image-link"]');
+                if (allStreams.length === 0) { // Sometimes twitch bugs out when you set a tag
+                    window.location.reload();
+                }
+            }, 400);
         } else {
             console.log('has english tag');
         }
