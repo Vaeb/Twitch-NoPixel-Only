@@ -125,6 +125,9 @@
             { "name": "Claire Seducer", "faction": "Angels" },
             { "name": "[Officer] Tyme Reducer", "faction": "Police" }
         ],
+        "BananaDuck": [
+            { "name": "Billy Sprinkle", "displayName": 0 }
+        ],
         "barryscottlive": [
             { "name": "Barry Scott" }
         ],
@@ -1152,7 +1155,8 @@
         "travpiper": [
             { "name": "Carlos \"Cheddar\" Sanchez", "faction": "HOA" },
             { "name": "Warren Wallace" },
-            { "name": "Charlie Colcord" }
+            { "name": "Charlie Colcord" },
+            { "name": "Hazard" }
         ],
         "traycee": [
             { "name": "Lexi Law", "faction": "Angels" }
