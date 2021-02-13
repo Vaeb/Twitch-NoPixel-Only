@@ -319,7 +319,7 @@
             { "name": "John \"Geno\" Collins", "faction": "GSF" }
         ],
         "Dunrunnin12": [
-            { "name": "Thomas \"The Narrator\" Dwayne" }
+            { "name": "Thomas Dwayne", "nicknames": ["The Narrator"] }
         ],
         "Dyrus": [
             { "name": "Louis Hill", "displayName": 0 }
@@ -855,7 +855,7 @@
         "Pengwin": [
             { "name": "[Deputy] Jerry Perkins", "faction": "Police" },
             { "name": "Dustin \"Dark Shadow\" Manson" },
-            { "name": "Kenneth \"Ken-sama\" Foreman" }
+            { "name": "Kenneth \"Ken-sama\" Foreman", "faction": "Burger Shot" }
         ],
         "PENTA": [
             { "name": "Jordan Steele", "displayName": 0, "nicknames": ["\"Parking\" God", "Phoenix Messiah"] },
@@ -1171,7 +1171,8 @@
             { "name": "Jack Valentino", "faction": "Lunatix" }
         ],
         "UberHaxorNova": [
-            { "name": "Siz Fulker", "faction": "HOA", "leader": true }
+            { "name": "Siz Fulker", "faction": "HOA", "leader": true },
+            { "name": "Barry Briddle", "faction": "Burger Shot" }
         ],
         "uhSnow": [
             { "name": "[Trooper] Jackie Snow", "faction": "Police" },
@@ -1299,6 +1300,7 @@
         "doj": "#00a032",
         "russians": "#a35231",
         "angels": "#ff9ff3",
+        "burgershot": "#b71540",
         "snakegang": "#789500",
         "development": "#718093",
         "doc": "#0984e3",
@@ -1327,6 +1329,7 @@
         "doj": "#00a032",
         "russians": "#a35231",
         "angels": "#e192d7",
+        "burgershot": "#a71540",
         "snakegang": "#789500",
         "development": "#718093",
         "doc": "#1080d6",

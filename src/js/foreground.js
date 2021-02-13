@@ -5,7 +5,7 @@
 
 console.log('[TNO] Loading Twitch NoPixel Only...');
 
-const allowAll = false;
+const allowAll = true;
 
 const getStorage = (key, defaultVal = undefined) => new Promise((resolve) => {
     const useDefault = defaultVal !== undefined;
