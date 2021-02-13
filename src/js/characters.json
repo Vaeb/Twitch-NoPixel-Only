@@ -1270,7 +1270,7 @@
         "changgang": "chang\\s*gang|\\bcga?\\b",
         "vagos": "vagos|yellow",
         "gsf": "grove|\\bgsf\\b",
-        "ssb": "balla|\\bssb\\b",
+        "ssb": "balla|\\bssb\\b(?![\\s-]*wo?rld)",
         "esb": "\\besb\\b|east[\\s-]*side",
         "marabunta": "\\bmarabunta",
         "hoa": "\\bhoa\\b|hogs\\s*of\\s*anarchy|home[\\s-]*owners[\\s-]*association",
