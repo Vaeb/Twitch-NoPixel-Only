@@ -855,7 +855,7 @@
         "Pengwin": [
             { "name": "[Deputy] Jerry Perkins", "faction": "Police" },
             { "name": "Dustin \"Dark Shadow\" Manson" },
-            { "name": "Kenneth \"Ken-sama\" Foreman" }
+            { "name": "Kenneth \"Ken-sama\" Foreman", "faction": "Burger Shot" }
         ],
         "PENTA": [
             { "name": "Jordan Steele", "displayName": 0, "nicknames": ["\"Parking\" God", "Phoenix Messiah"] },
@@ -1171,7 +1171,8 @@
             { "name": "Jack Valentino", "faction": "Lunatix" }
         ],
         "UberHaxorNova": [
-            { "name": "Siz Fulker", "faction": "HOA", "leader": true }
+            { "name": "Siz Fulker", "faction": "HOA", "leader": true },
+            { "name": "Barry Briddle", "faction": "Burger Shot" }
         ],
         "uhSnow": [
             { "name": "[Trooper] Jackie Snow", "faction": "Police" },
