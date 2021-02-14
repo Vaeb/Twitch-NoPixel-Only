@@ -14,7 +14,8 @@
             { "name": "[Officer] Bexar McCree", "faction": "Police" }
         ],
         "52chains": [
-            { "name": "Fidel Guevara", "nicknames": ["Don", "Cabron"] }
+            { "name": "Fidel Guevara", "nicknames": ["Don", "Cabron"] },
+            { "name": "Carmine \"The Mouse\" Costello" }
         ],
         "AaronOnAir": [
             { "name": "[Officer] Dan Faily", "faction": "Police", "nicknames": ["585"] }
