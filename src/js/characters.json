@@ -340,7 +340,8 @@
             { "name": "Demi Black" }
         ],
         "EsfandTV": [
-            { "name": "Ali Farmand" }
+            { "name": "Ali Farmand" },
+            { "name": "Cletus Cornwood" }
         ],
         "explodicy": [
             { "name": "Ted Kindly" }
@@ -383,6 +384,9 @@
         ],
         "GameDemented": [
             { "name": "[Deputy] Peter Johnson", "faction": "Police" }
+        ],
+        "Garek": [
+            { "name": "Burt \"Gloryon\" Beans", "nicknames": ["Cleric"] }
         ],
         "GattisTV": [
             { "name": "Carlos Guzman", "faction": "Vagos" }
@@ -491,6 +495,9 @@
         ],
         "jakenbakeLIVE": [
             { "name": "Ryu Tenga" }
+        ],
+        "Javaaaa": [
+            { "name": "Lillia Claurel" }
         ],
         "Jayce": [
             { "name": "Lil Loco", "faction": "Vagos", "displayName": 0 },
@@ -1075,7 +1082,7 @@
             { "name": "Mitch \"Dumbass\" Bader" }
         ],
         "Surefour": [
-            { "name": "Kenny Hawk" }
+            { "name": "Kenny Hawk", "faction": "Police" }
         ],
         "SwizzMB": [
             { "name": "Miguel Almerion", "faction": "Snake Gang" }
