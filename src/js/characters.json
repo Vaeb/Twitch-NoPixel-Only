@@ -72,7 +72,7 @@
             { "name": "Alexander Campbell", "faction": "Angels", "nicknames": ["Alex"], "displayName": 3 }
         ],
         "AndyMilonakis": [
-            { "name": "Lil Erf", "faction": "Chang Gang", "affiliate": true, "displayName": 0 },
+            { "name": "Lil Erf", "displayName": 0 },
             { "name": "Carmen Amuso" }
         ],
         "AnimatedJF": [
@@ -832,6 +832,9 @@
             { "name": "Benjamin Crane" },
             { "name": "[Justice] Ray Montag", "faction": "DoJ" },
             { "name": "Jeffrey Bundy" }
+        ],
+        "Octopimp": [
+            { "name": "Chut McMillan", "nicknames": ["Chut The Magnificent", "Sorcerer Supreme"] }
         ],
         "OfficialTaco": [
             { "name": "Charles \"Taco\" Prince", "faction": "Chang Gang" }
