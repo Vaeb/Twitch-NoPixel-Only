@@ -1126,7 +1126,7 @@
             { "name": "Sully" }
         ],
         "TheBigMeech": [
-            { "name": "Pilbis Shonly" }
+            { "name": "Pilbis Shonly", "faction": "Burger Shot" }
         ],
         "TheDondi": [
             { "name": "Arthur Hammond", "nicknames": ["The \"Doctor\""] },
@@ -1301,7 +1301,7 @@
         "harmony": "\\bharmony\\b",
         "quickfix": "\\bquick[\\s-]*fix",
         "tunershop": "\\btuner[\\s-]*shop\\b",
-        "bbmc": "bondi\\b|bbmc",
+        "larpers": "\\blarp\\b|\\blarpers\\b",
         "police": "(?<!then\\b.*|!)(?:\\bcop\\b|chief of police|officer|deputy|(?<!private[\\s-]*)detective|sergeant|lieutenant|corporal|sheriff|trooper|cadet|\\b(?:ranger|dt|sgt|lt(?![^|!]*\\bjones\\b)|cpl|lspd|sasp|bcso|cid)\\b)",
         "medical": "(?<!then\\b.*|!)(?:doctor|\\b(?:dr|ems|emt)\\b)"
     },
@@ -1326,7 +1326,7 @@
         "harmony": "#40739e",
         "quickfix": "#40739e",
         "tunershop": "#40739e",
-        "bbmc": "#ffeaa7",
+        "larpers": "#ffeaa7",
         "police": "#0abde3",
         "medical": "#badc58",
         "otherfaction": "#32ff7e",
@@ -1355,7 +1355,7 @@
         "harmony": "#40739e",
         "quickfix": "#40739e",
         "tunershop": "#40739e",
-        "bbmc": "#cfba57",
+        "larpers": "#cfba57",
         "police": "#0a0de3",
         "medical": "#9adc58",
         "otherfaction": "#12af7e",
