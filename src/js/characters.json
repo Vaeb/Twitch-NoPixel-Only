@@ -10,7 +10,7 @@
             { "name": "Reid \"Reed\" Dankleaf", "faction": "Lost MC" }
         ],
         "80bsaget": [
-            { "name": "Tim Lee", "faction": "Koreans" },
+            { "name": "Tim Lee", "displayName": 0 },
             { "name": "[Officer] Bexar McCree", "faction": "Police" }
         ],
         "52chains": [
@@ -267,7 +267,7 @@
         ],
         "Curvyllama": [
             { "name": "[Deputy] Lorenzo L", "faction": "Police", "displayName": 1 },
-            { "name": "Freya Manning", "faction": "Koreans" }
+            { "name": "Freya Manning" }
         ],
         "cyr": [
             { "name": "Uchiha Jones", "faction": "Chang Gang" },
@@ -596,7 +596,7 @@
             { "name": "Catherine Scratch", "faction": "Lost MC", "nicknames": ["Cat"], "displayName": 3 }
         ],
         "Kimchi": [
-            { "name": "Sun Moon", "faction": "Koreans" }
+            { "name": "Sun Moon" }
         ],
         "Kinamazing": [
             { "name": "[Officer] Emma Dupont", "faction": "Police", "nicknames": ["Dupog"] }
@@ -1259,7 +1259,7 @@
             { "name": "[Deputy] Mike Bayo", "faction": "Police" }
         ],
         "XMOTHATRUCKAX": [
-            { "name": "Ronald \"Red\" Juggler", "faction": "Koreans" }
+            { "name": "Ronald \"Red\" Juggler" }
         ],
         "xReklez": [
             { "name": "Chico", "faction": "Vagos" },
