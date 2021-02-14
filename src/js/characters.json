@@ -379,6 +379,9 @@
             { "name": "Edward Nygma" },
             { "name": "Alexander Egorov" }
         ],
+        "Fyzicul": [
+            { "name": "[Shaman] Lando Stormborn", "faction": "LARPers", "nicknames": ["Shaman", "Mountain Kingdom"], "displayName": 0 }
+        ],
         "Gabz": [
             { "name": "Development \"Development: Gabz\"", "faction": "Development", "nicknames": ["Dev", "Developer", "3D"] }
         ],
@@ -386,7 +389,7 @@
             { "name": "[Deputy] Peter Johnson", "faction": "Police" }
         ],
         "Garek": [
-            { "name": "Burt \"Gloryon\" Beans", "nicknames": ["Cleric"] }
+            { "name": "[Cleric] Burt \"Gloryon\" Beans", "faction": "LARPers", "nicknames": ["Cleric"] }
         ],
         "GattisTV": [
             { "name": "Carlos Guzman", "faction": "Vagos" }
@@ -841,7 +844,7 @@
             { "name": "Jeffrey Bundy" }
         ],
         "Octopimp": [
-            { "name": "Chut McMillan", "nicknames": ["Chut The Magnificent", "Sorcerer Supreme"] }
+            { "name": "[Sorceror] Chut McMillan", "faction": "LARPers", "nicknames": ["Chut The Magnificent", "Sorcerer"] }
         ],
         "OfficialTaco": [
             { "name": "Charles \"Taco\" Prince", "faction": "Chang Gang" }
@@ -1002,7 +1005,7 @@
             { "name": "[Officer] John Mineo", "faction": "Police" }
         ],
         "Shrimp_": [
-            { "name": "Bradley Kickass", "displayName": 0 }
+            { "name": "Bradley Kickass", "faction": "Burger Shot", "displayName": 0 }
         ],
         "shroud": [
             { "name": "Richard Hard" }
@@ -1082,7 +1085,8 @@
             { "name": "Mitch \"Dumbass\" Bader" }
         ],
         "Surefour": [
-            { "name": "Kenny Hawk", "faction": "Police" }
+            { "name": "Kenny Hawk", "faction": "Police", "displayName": 0 },
+            { "name": "[Ranger] Clarence Trueshot", "faction": "LARPers", "nicknames": ["Ranger"], "displayName": 0 }
         ],
         "SwizzMB": [
             { "name": "Miguel Almerion", "faction": "Snake Gang" }
@@ -1208,6 +1212,9 @@
         ],
         "ValorWasTaken": [
             { "name": "Esteban Julio-Cruz-Perez-Rodriguez", "faction": "Marabunta" }
+        ],
+        "Vigors": [
+            { "name": "[Fighter] Yager Demonblood", "faction": "LARPers", "nicknames": ["Fighter"], "displayName": 0 }
         ],
         "Viviana": [
             { "name": "Griselda Ambrose", "nicknames": ["Granny"] },
