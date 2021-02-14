@@ -103,7 +103,8 @@
             { "name": "Cassie Cupcakes", "faction": "Angels" }
         ],
         "Asteroba": [
-            { "name": "[DA] Larry Hallow", "faction": "DoJ" }
+            { "name": "[DA] Larry Hallow", "faction": "DoJ" },
+            { "name": "Kermy Fulker" }
         ],
         "Aus24": [
             { "name": "Jordan Walker", "faction": "Harmony" },
@@ -144,7 +145,7 @@
             { "name": "Shevy Santanna", "faction": "Vagos" }
         ],
         "Blaustoise": [
-            { "name": "Mickey S", "nicknames": ["Downbad"] }
+            { "name": "Mickey S", "faction": "Chang Gang", "nicknames": ["Downbad"] }
         ],
         "bldrs": [
             { "name": "Kaleb \"Kleb\" Rush", "faction": "HOA" }
@@ -188,6 +189,9 @@
         ],
         "Carmen": [
             { "name": "Carmella Corset" }
+        ],
+        "Carter": [
+            { "name": "Spencer Smith", "nicknames": ["Mormon"] }
         ],
         "CathFawr": [
             { "name": "Summer Mersion", "faction": "QuickFix", "displayName": 0 },
@@ -344,8 +348,8 @@
             { "name": "Demi Black" }
         ],
         "EsfandTV": [
-            { "name": "Ali Farmand" },
-            { "name": "Cletus Cornwood" }
+            { "name": "Ali Farmand", "displayName": 0 },
+            { "name": "Cletus Cornwood", "displayName": 0 }
         ],
         "explodicy": [
             { "name": "Ted Kindly" }
@@ -618,6 +622,9 @@
             { "name": "Ava Ridge", "faction": "Goths" },
             { "name": "Marta Volkov" }
         ],
+        "Knotty": [
+            { "name": "Guy Jones", "displayName": 0 }
+        ],
         "Knut": [
             { "name": "Bjorn Eiriksson" }
         ],
@@ -686,6 +693,7 @@
             { "name": "[Dr.] Serge Cross", "faction": "Medical", "displayName": 2 }
         ],
         "LuckyxMoon": [
+            { "name": "[Judge] ? Devereaux", "faction": "DoJ" },
             { "name": "[Judge] Jessica Wesker", "faction": "DoJ" }
         ],
         "ludwig": [
