@@ -280,7 +280,7 @@
         ],
         "dasMEHDI": [
             { "name": "[Officer] Brian Knight", "faction": "Police", "nicknames": ["495"] },
-            { "name": "Nino Chavez", "faction": "Sahara" },
+            { "name": "Nino Chavez", "faction": "Leanbois" },
             { "name": "Ryan Kindle", "faction": "HOA" },
             { "name": "Reema", "nicknames": ["The \"Whorelord\""] }
         ],
@@ -762,7 +762,7 @@
             { "name": "Elijiah \"Middle E\" Parks", "faction": "SSB" }
         ],
         "moistcr1tikal": [
-            { "name": "Charles White" }
+            { "name": "Charles White", "displayName": 0 }
         ],
         "MOONMOON": [
             { "name": "Lenny Hawk", "displayName": 0 },
