@@ -765,7 +765,7 @@
             { "name": "Charles White", "displayName": 0 }
         ],
         "MOONMOON": [
-            { "name": "Lenny Hawk", "displayName": 0 },
+            { "name": "[Officer] Lenny Hawk", "faction": "Police", "displayName": 0 },
             { "name": "Yung Dab", "nicknames": ["The \"Gnome\""] }
         ],
         "MsBrit": [
