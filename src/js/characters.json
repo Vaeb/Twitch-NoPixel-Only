@@ -417,7 +417,8 @@
         "GTAWiseGuy": [
             { "name": "Eddie Marshall", "faction": "Tuner Shop" },
             { "name": "[Officer] Jim Underwood", "faction": "Police" },
-            { "name": "Development \"Development: GTAWiseGuy\"", "faction": "Development", "nicknames": ["Dev", "Developer", "Handling", "Fixes", "Fixing"] }
+            { "name": "Development \"Development: GTAWiseGuy\"", "faction": "Development", "nicknames": ["Dev", "Developer", "Handling", "Fixes", "Fixing"] },
+            { "name": "Igor Skovacic" }
         ],
         "HARMSwahy": [
             { "name": "Blaine Burke", "faction": "Angels" }
