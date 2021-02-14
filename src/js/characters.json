@@ -556,7 +556,7 @@
             { "name": "Reverend I.M. Voland", "faction": "Dark Web" }
         ],
         "JuggsRP": [
-            { "name": "Lenny Large", "faction": "Burger Shot" }
+            { "name": "Lenny Large", "faction": "Burger Shot", "displayName": 0 }
         ],
         "JukeBoxEM": [
             { "name": "Tony Foster" }
@@ -930,7 +930,7 @@
             { "name": "[Park Ranger] Conan Clarkson", "faction": "Police" }
         ],
         "Rasta": [
-            { "name": "Mary Livingston", "faction": "Prune Gang" },
+            { "name": "Mary Livingston", "faction": "Prune Gang", "displayName": 0 },
             { "name": "Dunn Robinson", "faction": "ESB" }
         ],
         "RatedEpicz": [
@@ -951,9 +951,6 @@
         ],
         "RevRoach": [
             { "name": "Happy D'Klown" }
-        ],
-        "RickMongoLIVE": [
-            { "name": "[ADA] Rick Mongo", "faction": "DoJ" }
         ],
         "rlly": [
             { "name": "Shelly Targaryen", "faction": "Burger Shot" },
