@@ -57,7 +57,7 @@
         ],
         "Airborne": [
             { "name": "[Judge] Dennis LaBarre", "faction": "DoJ" },
-            { "name": "Unity", "faction": "Animals", "nicknames": ["Cat"] }
+            { "name": "Unity", "nicknames": ["Cat"] }
         ],
         "akaMONKEY": [
             { "name": "Arturo Ortiz", "faction": "Vagos" },
@@ -246,6 +246,7 @@
             { "name": "Wilhelmina Copperpot", "displayName": 2 }
         ],
         "Crunchy": [
+            { "name": "[Dr.] Agnes Ranbough", "faction": "Medical" },
             { "name": "Grimoire \"Gremlin\" Hauttogs" }
         ],
         "CrystalMushroom": [
@@ -299,6 +300,9 @@
         "DigiiTsuna": [
             { "name": "[Dr.] Kai King", "faction": "Medical", "displayName": 2 }
         ],
+        "DKane": [
+            { "name": "Cletus McCoy" }
+        ],
         "DocWizard": [
             { "name": "[Judge] John Bailey", "faction": "DoJ" },
             { "name": "[Officer] TJ Walker", "faction": "Police" },
@@ -309,7 +313,7 @@
             { "name": "Luther Caine", "faction": "HOA" }
         ],
         "Doug": [
-            { "name": "Gazpacho Prince", "faction": "ESB", "nicknames": ["Pachi", "Spachi"] },
+            { "name": "Gazpacho Prince", "nicknames": ["Pachi", "Spachi"] },
             { "name": "William \"W\" Told", "nicknames": ["Lil Pump"] }
         ],
         "Dr_Knope": [
@@ -368,7 +372,7 @@
             { "name": "Sven Snusberg", "faction": "Leanbois" }
         ],
         "FortyOne": [
-            { "name": "Jose Martin Perez", "faction": "ESB", "nicknames": ["JMP"] },
+            { "name": "Jose Martin Perez", "nicknames": ["JMP"] },
             { "name": "[Deputy] John Archer", "faction": "Police" },
             { "name": "Lucas Ortiz", "displayName": 0 },
             { "name": "Don Russo", "displayName": 0 },
@@ -491,7 +495,7 @@
             { "name": "Abraham Mohammed" }
         ],
         "Jack": [
-            { "name": "Jack Cortair", "faction": "ESB" }
+            { "name": "Jack Cortair" }
         ],
         "jacobpibbtv": [
             { "name": "Jacob Pibb" }
@@ -551,7 +555,7 @@
             { "name": "Lenny Large", "faction": "Burger Shot" }
         ],
         "JukeBoxEM": [
-            { "name": "Tony Foster", "faction": "ESB" }
+            { "name": "Tony Foster" }
         ],
         "JustJamieHDG": [
             { "name": "Tommy Cruizer", "faction": "Tuner Shop" }
@@ -605,7 +609,7 @@
             { "name": "[Deputy] Claire Annette Reed", "faction": "Police" }
         ],
         "Kite61": [
-            { "name": "Rusty Johnson", "faction": "ESB" }
+            { "name": "Rusty Johnson" }
         ],
         "Kiwo": [
             { "name": "[Deputy] Lauren Forcer", "faction": "Police" },
@@ -644,7 +648,7 @@
             { "name": "[Officer] Lily Pond", "faction": "Police" }
         ],
         "LAGTVMaximusBlack": [
-            { "name": "Outto-Tune \"OTT\" Tyrone", "faction": "ESB", "displayName": "OTT" }
+            { "name": "Outto-Tune \"OTT\" Tyrone", "displayName": "OTT" }
         ],
         "LarryX7": [
             { "name": "Jose \"Cousin\" Luis Santana", "faction": "Vagos" }
@@ -901,7 +905,7 @@
         ],
         "Pssychotic": [
             { "name": "Jason Paul", "faction": "Lost MC", "nicknames": ["JP"] },
-            { "name": "Hades", "faction": "Animals", "nicknames": ["Dog"] }
+            { "name": "Hades", "nicknames": ["Dog"] }
         ],
         "qozmyox": [
             { "name": "Fernando \"Mario\" Reyes", "faction": "Snake Gang", "nicknames": ["\"Mario\" from the Barrio"] }
