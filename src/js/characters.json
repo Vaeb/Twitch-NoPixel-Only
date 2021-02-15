@@ -493,7 +493,7 @@
             { "name": "Levi Dawson", "faction": "SSB" }
         ],
         "ItsLeslie": [
-            { "name": "[Wizard] Leyla Nightingale", "faction": "LARPers", "nicknames": ["Embervale"] }
+            { "name": "[Wizard] Leyla Nightingale", "faction": "LARPers", "nicknames": ["Wizard", "Embervale"] }
         ],
         "ItsLSG": [
             { "name": "[Officer] Jack Miller", "faction": "Police" }
@@ -1016,6 +1016,9 @@
         "Shindur": [
             { "name": "[Deputy] Joey Keys", "faction": "Police" }
         ],
+        "shiny": [
+            { "name": "[Archdruid] Meowfurryon", "faction": "LARPers", "nicknames": ["Druid", "Archdruid", "Malfurryon"] }
+        ],
         "Shortyyguy": [
             { "name": "Eddie Delish", "faction": "Leanbois" }
         ],
@@ -1233,7 +1236,7 @@
             { "name": "Esteban Julio-Cruz-Perez-Rodriguez", "faction": "Marabunta" }
         ],
         "Vigors": [
-            { "name": "[Fighter] Yager Demonblood", "faction": "LARPers", "nicknames": ["Fighter"], "displayName": 0 }
+            { "name": "[Fighter] Rohlplae \"Yager Demonblood\" Escrinj", "faction": "LARPers", "nicknames": ["Fighter"], "displayName": 0 }
         ],
         "Viviana": [
             { "name": "Griselda Ambrose", "nicknames": ["Granny"] },
