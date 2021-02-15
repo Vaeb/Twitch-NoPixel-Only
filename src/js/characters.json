@@ -492,6 +492,9 @@
         "ItsJustJosh": [
             { "name": "Levi Dawson", "faction": "SSB" }
         ],
+        "ItsLeslie": [
+            { "name": "[Wizard] Leyla Nightingale", "faction": "LARPers", "nicknames": ["Embervale"] }
+        ],
         "ItsLSG": [
             { "name": "[Officer] Jack Miller", "faction": "Police" }
         ],
