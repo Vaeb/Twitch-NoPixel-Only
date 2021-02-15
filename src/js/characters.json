@@ -371,6 +371,9 @@
         "Farmhouse78": [
             { "name": "Jane Farmer" }
         ],
+        "FerretRP": [
+            { "name": "Alberto Weaselton", "faction": "Lost MC" }
+        ],
         "Five0AnthO": [
             { "name": "[Trooper] Tony Andrews", "faction": "Police", "highCommand": true }
         ],
@@ -1203,7 +1206,8 @@
             { "name": "Lexi Law", "faction": "Angels" }
         ],
         "TwistedBones": [
-            { "name": "Marcus Black", "faction": "GSF" }
+            { "name": "Marcus Black", "faction": "GSF" },
+            { "name": "Mark White" }
         ],
         "TwistedManifest": [
             { "name": "Jack Valentino", "faction": "Lunatix" }
