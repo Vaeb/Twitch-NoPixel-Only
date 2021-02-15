@@ -1242,7 +1242,7 @@
             { "name": "Esteban Julio-Cruz-Perez-Rodriguez", "faction": "Marabunta" }
         ],
         "Vigors": [
-            { "name": "[Fighter] Rohlplae \"Yager Demonblood\" Escrinj", "faction": "LARPers", "nicknames": ["Fighter"], "displayName": 0 }
+            { "name": "[Warlock] Rohlplae \"Yager Demonblood\" Escrinj", "faction": "LARPers", "nicknames": ["Warlock", "Fighter"], "displayName": 0 }
         ],
         "Viviana": [
             { "name": "Griselda Ambrose", "nicknames": ["Granny"] },
