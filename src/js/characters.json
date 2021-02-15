@@ -1332,7 +1332,7 @@
         "harmony": "\\bharmony\\b",
         "quickfix": "\\bquick[\\s-]*fix",
         "tunershop": "\\btuner[\\s-]*shop\\b",
-        "larpers": "\\blarp\\b|\\blarpers\\b",
+        "larpers": "\\blarp\\b|\\blarpers\\b|the\\s*guild",
         "police": "(?<!then\\b.*|!)(?:\\bcop\\b|chief of police|officer|deputy|sergeant|lieutenant|corporal|sheriff|trooper|cadet|\\b(?:ranger|dt|sgt|lt(?![^|!]*\\bjones\\b)|cpl|lspd|sasp|bcso|cid)\\b)",
         "medical": "(?<!then\\b.*|!)(?:doctor|\\b(?:dr|ems|emt)\\b)"
     },
