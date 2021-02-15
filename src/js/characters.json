@@ -1180,7 +1180,8 @@
             { "name": "[EMS] Bailey Jade", "faction": "Medical" }
         ],
         "TheDorken": [
-            { "name": "Valentina" }
+            { "name": "Valentina" },
+            { "name": "Nicholine Quinn" }
         ],
         "ToastRP": [
             { "name": "Paulie", "faction": "ESB" }
