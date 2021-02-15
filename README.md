@@ -28,7 +28,7 @@ Each channel's title will be compared against their character data to best ident
 Firstly, this extension contains a big list of NP streamers (currently 362) who are included by default. This list is updated frequently and fetched during runtime (list changes do not require updating the extension). If they're not in the list (new to NoPixel) then the stream title will be checked for terms such as "NoPixel", "NP". "No Pixel" etc. I've never had an issue with it missing a stream. A few other RP servers including TFRP and TRP are also still included. However, there is no individual tagging/customizing done for these servers; all of them are coloured pale-blue.
 
 ##### "What happens if it's a new NoPixel streamer, without character data?"
-They will always be included as long as they're playing on NoPixel (and indicate so in their title). If their title contains some indication of a faction, but no info is known about the character, they will be tagged generically based on that faction. E.g. "< Vagos >". If there is no faction indication, they will just be included without a specific tag.
+The stream will always be included as long as they are playing on NoPixel (and indicate so in their title). If their title contains some indication of a faction, but no info is known about the character, they will be tagged generically based on that faction. E.g. "< Vagos >". If there is no faction indication, they will just be included without a specific tag.
 
 \---
 
