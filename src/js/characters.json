@@ -450,7 +450,7 @@
         "hobbittrash": [
             { "name": "[Chief Justice] Katya Zamalodchikova", "faction": "DoJ" },
             { "name": "[Deputy] Tracy Martell", "faction": "Police", "nicknames": ["Cop"] },
-            { "name": "Jane Obama" },
+            { "name": "Jane Obama", "displayName": 0 },
             { "name": "Kayden Dell'Anno" }
         ],
         "HonathanTV": [
@@ -889,7 +889,7 @@
             { "name": "[Deputy] Randy Wrangler", "faction": "Police", "nicknames": ["Wranglin"] },
             { "name": "Ricky Robins", "faction": "Leanbois" },
             { "name": "Chase Clouter" },
-            { "name": "Jane Obama" }
+            { "name": "Jane Obama", "displayName": 0 }
         ],
         "PlasticLittle": [
             { "name": "Parson \"Frosty\" Brown", "faction": "Lost MC" }
