@@ -881,7 +881,8 @@
             { "name": "Ginzu Okada" }
         ],
         "OllyPop": [
-            { "name": "Ivy Poppins" }
+            { "name": "Ivy Poppins" },
+            { "name": "Evee Poppins" }
         ],
         "OwenSeven": [
             { "name": "[Officer] Owen Svensen", "faction": "Police" }
