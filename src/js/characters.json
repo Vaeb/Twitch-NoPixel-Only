@@ -655,7 +655,7 @@
         ],
         "kyliebitkin": [
             { "name": "[Officer] Brittany Angel", "faction": "Police" },
-            { "name": "Mary Mushkin", "faction": "QuickFix", "displayName": 0 }
+            { "name": "Mary Mushkin", "displayName": 0 }
         ],
         "Jackhuddo": [
             { "name": "Shane Powers", "faction": "BBMC" }
