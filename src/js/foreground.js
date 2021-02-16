@@ -276,8 +276,12 @@ const filterStreams = async () => {
 
     const npFactionsRegexEnt = Object.entries(npFactionsRegex);
 
+    let isDeleting = false;
+
     const deleteOthers = () => {
         if (onPage == false) return;
+        // if (onPage == false || isDeleting === true) return;
+        isDeleting = true;
 
         const elements = Array.from(document.getElementsByTagName('article')).filter(
             element => !element.classList.contains('npChecked')
@@ -295,7 +299,10 @@ const filterStreams = async () => {
             const titleEl = element.getElementsByClassName('tw-ellipsis tw-font-size-5')[0];
             const channelEl = element.querySelectorAll("a[data-a-target='preview-card-channel-link']")[0];
             const liveElDiv = element.getElementsByClassName('tw-channel-status-text-indicator')[0];
-            if (liveElDiv == null) return; // reruns
+            if (liveElDiv == null) {
+                isDeleting = false;
+                return; // reruns
+            }
             const liveEl = liveElDiv.children[0];
             const title = titleEl.innerText;
             const titleParsed = title.toLowerCase().replace(/\./g, ' '); // ??
@@ -402,6 +409,8 @@ const filterStreams = async () => {
                 }
             }
         });
+
+        isDeleting = false;
     };
 
     const waitForElement = async (selector, maxTime = Infinity) => {
