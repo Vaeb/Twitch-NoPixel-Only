@@ -1215,6 +1215,7 @@
         ],
         "UberHaxorNova": [
             { "name": "Siz Fulker", "faction": "HOA", "leader": true },
+            { "name": "Toh Biggles Fitzcharles", "displayName": 0 },
             { "name": "Barry Briddle", "faction": "Burger Shot" }
         ],
         "uhSnow": [
