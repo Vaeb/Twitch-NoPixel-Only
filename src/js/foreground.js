@@ -5,7 +5,7 @@
 
 console.log('[TNO] Loading Twitch NoPixel Only...');
 
-const allowAll = true;
+const allowAll = false;
 
 const getStorage = (key, defaultVal = undefined) => new Promise((resolve) => {
     const useDefault = defaultVal !== undefined;
@@ -402,7 +402,8 @@ const filterStreams = async () => {
                         for (let j = 0; j < images.length; j++) images[j].src = '';
                     } else if (keepDeleting) {
                         // element.outerHTML = '';
-                        element.parentNode.removeChild(element);
+                        // element.parentNode.removeChild(element);
+                        element.style.display = 'none';
                         console.log('[TNO] Deleted');
                     }
                     if (isFirstRemove) isFirstRemove = false;
@@ -467,13 +468,6 @@ const filterStreams = async () => {
             englishTag.click();
             console.log('selected english');
             $(':focus').blur();
-
-            setTimeout(() => {
-                const allStreams = document.querySelectorAll('[data-a-target="preview-card-image-link"]');
-                if (allStreams.length === 0) { // Sometimes twitch bugs out when you set a tag
-                    window.location.reload();
-                }
-            }, 400);
         } else {
             console.log('has english tag');
         }
