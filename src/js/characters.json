@@ -4,7 +4,7 @@
     "checkOther": true,
     "intervalSeconds": 0.7,
     "regNp": "no\\s*pixel|\\bn\\s*p\\b",
-    "regOther": "the\\s*family|\\btf(?:rp|\\b)|family\\s*rp|twitchrp|\\bt\\W*rp|\\bnon[\\s-]*stop|\\bns(?:rp|\\b)",
+    "regOther": "the\\s*family|\\btf\\s?rp|family\\s*rp|twitchrp|\\bt\\W*rp|\\bnon[\\s-]*stop|\\bns\\s?rp",
     "npCharacters": {
         "0Reed": [
             { "name": "Reid \"Reed\" Dankleaf", "faction": "Lost MC" }
