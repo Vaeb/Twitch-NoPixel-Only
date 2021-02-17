@@ -417,6 +417,9 @@
         "GeneralEmu": [
             { "name": "[Officer] Lance Malton", "faction": "Police" }
         ],
+        "ggqf": [
+            { "name": "[Paladin] Stagdancer", "faction": "LARPers", "nicknames": ["Gea"] }
+        ],
         "Greekgodx": [
             { "name": "\"Tay Tay\" Tyrone" }
         ],
