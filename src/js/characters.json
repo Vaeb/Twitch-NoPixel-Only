@@ -7,7 +7,7 @@
     "regOther": "the\\s*family|\\btf\\s?rp|family\\s*rp|twitchrp|\\bt\\W*rp|\\bnon[\\s-]*stop|\\bns\\s?rp",
     "npCharacters": {
         "0Reed": [
-            { "name": "Reid \"Reed\" Dankleaf", "faction": "Lost MC" }
+            { "name": "Reed Dankleaf", "faction": "Lost MC" }
         ],
         "80bsaget": [
             { "name": "Tim Lee", "displayName": 0 },
