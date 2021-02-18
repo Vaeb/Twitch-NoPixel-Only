@@ -5,7 +5,7 @@
 
 console.log('[TNO] Loading Twitch NoPixel Only...');
 
-const allowAll = false;
+const allowAll = true;
 
 const getStorage = (key, defaultVal = undefined) => new Promise((resolve) => {
     const useDefault = defaultVal !== undefined;
@@ -277,6 +277,8 @@ const filterStreams = async () => {
     const npFactionsRegexEnt = Object.entries(npFactionsRegex);
 
     let isDeleting = false;
+    const isDeveloper = typeof document.cookie === 'string' && document.cookie.includes('name=vaeben');
+    const allowAllNow = allowAll && isDeveloper; // Fail-safe incase extension accidentally gets published with allowAll enabled
 
     const deleteOthers = () => {
         if (onPage == false) return;
@@ -314,7 +316,7 @@ const filterStreams = async () => {
             const characters = npCharacters[channelName];
 
             let useOther = !(characters || isNpCheck);
-            if (allowAll === false) useOther = useOther && isOtherCheck;
+            if (allowAllNow === false) useOther = useOther && isOtherCheck; // if allowAllNow is true, all streams are shown for testing
 
             // channelEl.parentElement.style.backgroundColor = '#0e0e10';
 
