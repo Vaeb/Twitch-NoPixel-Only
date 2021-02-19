@@ -914,7 +914,7 @@
             { "name": "[Deputy] Randy Wrangler", "faction": "Police", "nicknames": ["Wranglin"] },
             { "name": "Ricky Robins", "faction": "Leanbois" },
             { "name": "Chase Clouter" },
-            { "name": "Mike Block" },
+            { "name": "Mike Block", "displayName": 0 },
             { "name": "Jane Obama", "displayName": 0 }
         ],
         "PlasticLittle": [
