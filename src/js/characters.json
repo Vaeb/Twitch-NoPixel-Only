@@ -1342,7 +1342,7 @@
         "esb": "\\besb\\b|east[\\s-]*side",
         "marabunta": "\\bmarabunta",
         "hoa": "\\bhoa\\b|hogs\\s*of\\s*anarchy|home[\\s-]*owners[\\s-]*association",
-        "doj": "\\bdoj\\b|department\\s*of\\s*justice|lawyer|attorney|judge|\\ba?\\.?d\\.?a\\b",
+        "doj": "\\bdoj\\b|department\\s*of\\s*justice|lawyer|attorney|judge\\b(?![\\s]*me)|\\ba?\\.?d\\.?a\\b",
         "angels": "\\bangels?\\b",
         "burgershot": "burger[\\s-]*shot",
         "snakegang": "\\b(?:snake|hydra|mario)\\s*gang\\b",
