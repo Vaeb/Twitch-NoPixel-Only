@@ -95,6 +95,9 @@
             { "name": "[Dispatch] Nancy Ree", "faction": "Police", "displayName": 1 },
             { "name": "Gioconda \"Gio\" Coppola" }
         ],
+        "Arcadum": [
+            { "name": "Svelt Tlevs", "nicknames": ["Wizard"] }
+        ],
         "Armeeof1": [
             { "name": "Milton Pointdexter" }
         ],
