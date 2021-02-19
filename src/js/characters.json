@@ -863,6 +863,9 @@
         "Nmplol": [
             { "name": "Buddy Black" }
         ],
+        "NoElusion": [
+            { "name": "Bobby Schmegal" }
+        ],
         "NotoriousNorman": [
             { "name": "Chips Ahoy" }
         ],
@@ -1185,9 +1188,6 @@
         "TheGeekEntry": [
             { "name": "Stacey Doyle" },
             { "name": "Jenn Bordeaux", "nicknames": ["Frenchie", "French"] }
-        ],
-        "TheGhostman": [
-            { "name": "Bobby Schmegal" }
         ],
         "theLGX": [
             { "name": "Bryce Miller", "nicknames": ["BDawg"] },
