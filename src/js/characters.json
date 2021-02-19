@@ -1033,6 +1033,9 @@
             { "name": "Arush Patel \"Speedy\" Santana", "faction": "Vagos", "leader": true, "nicknames": ["El Jefe"] },
             { "name": "[ADA] Sayeed White", "faction": "DoJ" }
         ],
+        "SgtApollo": [
+            { "name": "Salem Barghouthi" }
+        ],
         "shaggy_steve": [
             { "name": "[Deputy] Jimmy Gordon", "faction": "Police" }
         ],
