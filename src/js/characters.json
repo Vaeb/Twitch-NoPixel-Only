@@ -973,6 +973,7 @@
             { "name": "Mona Sanchez" }
         ],
         "RemiTheSiren": [
+            { "name": "[Dr.] Lily Harte", "faction": "Medical", "displayName": 2 },
             { "name": "Wednesday Mushkin", "faction": "HOA" }
         ],
         "reno_raines": [
