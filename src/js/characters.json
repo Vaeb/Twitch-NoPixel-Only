@@ -1240,7 +1240,7 @@
             { "name": "Mikey Mersion" }
         ],
         "Umadbrahlive": [
-            { "name": "Leonel Martinez", "faction": "Vagos", "displayName": 2 },
+            { "name": "Leonel Martinez", "faction": "Vagos", "nicknames": ["lion"], "displayName": 2 },
             { "name": "Sergio Lopez", "faction": "Marabunta", "leader": true },
             { "name": "Big E", "faction": "SSB", "leader": true, "nicknames": ["Big L"], "displayName": 0 }
         ],
