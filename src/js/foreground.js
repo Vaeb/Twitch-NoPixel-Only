@@ -176,7 +176,10 @@ const filterStreams = async () => {
     console.log('Fetched data!');
 
     for (const [streamer, characters] of Object.entries(npCharacters)) {
-        characters.push({ name: '<Permathon>', nicknames: ['Permathon'] });
+        if (characters.length > 0) {
+            characters.push({ name: '<Permathon>', nicknames: ['Permathon'] });
+        }
+
         // eslint-disable-next-line no-loop-func
         characters.forEach((char) => {
             const names = char.name.split(/\s+/);
@@ -352,7 +355,7 @@ const filterStreams = async () => {
                 let factionNames = [];
 
                 if (characters || isNpCheck) { // Is nopixel char
-                    if (characters) {
+                    if (characters && characters.length) {
                         let lowestPos = Infinity;
                         for (const char of characters) {
                             const matchPos = titleParsed.indexOfRegex(char.nameReg);
@@ -398,14 +401,14 @@ const filterStreams = async () => {
                     liveElDiv.style.backgroundColor = nowColorDark;
                     liveEl.style.color = useTextColor;
                     liveEl.innerText = `< ${fullFactionMap[factionNames[0]] || factionNames[0]} >`;
-                } else if (characters) {
+                } else if (characters && characters.length) {
                     const nowColor = useColors[characters[0].factionUse];
                     const nowColorDark = useColorsDark[characters[0].factionUse];
                     channelEl.style.color = nowColor;
                     liveElDiv.style.backgroundColor = nowColorDark;
                     liveEl.style.color = useTextColor;
                     liveEl.innerText = `? ${characters[0].displayName} ?`;
-                } else if (isNpCheck) {
+                } else if (isNpCheck || characters) {
                     liveEl.innerText = '';
                     channelEl.style.color = useColors.othernp;
                 } else {
