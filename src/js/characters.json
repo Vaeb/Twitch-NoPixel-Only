@@ -775,9 +775,7 @@
         "meeka_a": [
             { "name": "[EMS] William \"Middy\" Haze", "faction": "Medical" }
         ],
-        "MEKABEAR": [
-            { "name": "Erin Cox" }
-        ],
+        "MEKABEAR": [],
         "Mervin": [
             { "name": "Mervin Potts" }
         ],
@@ -787,7 +785,9 @@
         "Mick": [
             { "name": "Gladys Berry", "faction": "Prune Gang" }
         ],
-        "Middleditch": [],
+        "Middleditch": [
+            { "name": "Stanley Tuttles" }
+        ],
         "Miggitymaan": [
             { "name": "Jayce Wyatt" },
             { "name": "[Officer] Damien Alexander", "faction": "Police" }
