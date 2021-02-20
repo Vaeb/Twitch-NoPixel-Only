@@ -1085,6 +1085,9 @@
         "SirPink": [
             { "name": "Reginald \"Reggie\" Bigglesby", "faction": "Leanbois" }
         ],
+        "skippypoppin": [
+            { "name": "Kevin Whipaloo", "faction": "Burger Shot", "displayName": 0 }
+        ],
         "Slasher2099": [
             { "name": "[Officer] Darrel McCormik", "faction": "Police" },
             { "name": "[K9 Trooper] Fenton", "faction": "Police", "nicknames": ["Fentons"] }
