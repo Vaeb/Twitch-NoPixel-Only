@@ -57,7 +57,7 @@ let regNp;
 // const regOther = /the\s*family|\btf(?:rp|\b)|family\s*rp|twitchrp|\bt\W*rp\b|benefactor|\bob(?:rp|\b)|dondi|\bsvrp|subversion/i;
 let regOther;
 
-let npCharacters = [];
+let npCharacters = {};
 
 let npFactionsRegex = {};
 
@@ -234,6 +234,7 @@ const filterStreams = async () => {
                     }
                 });
             }
+
             const fullFaction = char.faction || 'Independent';
             char.faction = fullFaction.toLowerCase().replace(' ', '');
             if (!fullFactionMap[char.faction]) fullFactionMap[char.faction] = fullFaction;
@@ -250,12 +251,34 @@ const filterStreams = async () => {
                 }
             }
             char.nameReg = new RegExp(`\\b(?:${parsedNames.join('|')})\\b`);
+
             if (char.faction != null) {
                 char.factionUse = useColors[char.faction] !== undefined ? char.faction : 'otherfaction';
             } else {
                 char.factionUse = 'independent';
             }
+
+            if (char.other === 1) { // If primarily on other server
+                if (characters.assumeOther === undefined) {
+                    characters.assumeOther = 1; // Assume every character is primarily on other server
+                } else if (char.assumeOther === 0) {
+                    characters.assumeOther = 2; // Assume some characters are primarily on other server
+                }
+            } else if (char.other === 0) {
+                if (characters.assumeOther === undefined) {
+                    characters.assumeOther = 0; // Assume no characters are primarily on other server
+                } else if (characters.assumeOther === 1) {
+                    characters.assumeOther = 2; // Assume some characters are primarily on other server
+                }
+            } else if (char.other == undefined) {
+                char.other = 0;
+            }
         });
+
+        if (characters.assumeOther === undefined) {
+            characters.assumeOther = 0;
+        }
+
         const streamerLower = streamer.toLowerCase();
         if (streamer !== streamerLower) {
             npCharacters[streamerLower] = characters;
@@ -310,18 +333,18 @@ const filterStreams = async () => {
             const titleParsed = title.toLowerCase().replace(/\./g, ' '); // ??
             const channelName = channelEl.innerText.toLowerCase();
 
-            const isOtherCheck = checkOther && regOther.test(title);
+            const isOtherServer = regOther.test(title);
 
             const isNpCheck = regNp.test(title);
             const characters = npCharacters[channelName];
 
-            const useOther = allowAll // if allowAllNow is true, all streams are shown for testing
-                ? !characters && !isNpCheck
-                : isOtherCheck;
+            const useOther = allowAllNow // if allowAllNow is true, all streams are shown for testing
+                ? !isNpCheck && (!characters || (characters && characters.assumeOther))
+                : isOtherServer || (characters && characters.assumeOther && !isNpCheck);
 
             // channelEl.parentElement.style.backgroundColor = '#0e0e10';
 
-            if (useOther) {
+            if (checkOther && useOther) {
                 liveEl.innerText = '';
                 channelEl.style.color = useColors.other;
             } else {
@@ -407,7 +430,7 @@ const filterStreams = async () => {
                         // element.outerHTML = '';
                         // element.parentNode.removeChild(element);
                         element.style.display = 'none';
-                        console.log('[TNO] Deleted');
+                        // console.log('[TNO] Deleted');
                     }
                     if (isFirstRemove) isFirstRemove = false;
                 }
