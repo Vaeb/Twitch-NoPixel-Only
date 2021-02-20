@@ -1188,7 +1188,7 @@
             { "name": "Pilbis Shonly", "faction": "Burger Shot" }
         ],
         "TheChief1114": [
-            { "name": "Fingle Dan" }
+            { "name": "Fingle Dan", "displayName": 0 }
         ],
         "TheDondi": [
             { "name": "Arthur Hammond", "nicknames": ["The \"Doctor\""] },
