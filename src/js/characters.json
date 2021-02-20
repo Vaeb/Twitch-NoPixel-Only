@@ -775,7 +775,9 @@
         "meeka_a": [
             { "name": "[EMS] William \"Middy\" Haze", "faction": "Medical" }
         ],
-        "MEKABEAR": [],
+        "MEKABEAR": [
+            { "name": "Erin Cox" }
+        ],
         "Mervin": [
             { "name": "Mervin Potts" }
         ],
