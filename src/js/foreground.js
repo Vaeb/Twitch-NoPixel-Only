@@ -315,8 +315,9 @@ const filterStreams = async () => {
             const isNpCheck = regNp.test(title);
             const characters = npCharacters[channelName];
 
-            let useOther = !(characters || isNpCheck);
-            if (allowAllNow === false) useOther = useOther && isOtherCheck; // if allowAllNow is true, all streams are shown for testing
+            const useOther = allowAll // if allowAllNow is true, all streams are shown for testing
+                ? !characters && !isNpCheck
+                : isOtherCheck;
 
             // channelEl.parentElement.style.backgroundColor = '#0e0e10';
 
