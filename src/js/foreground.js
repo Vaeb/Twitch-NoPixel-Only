@@ -5,8 +5,6 @@
 
 console.log('[TNO] Loading Twitch NoPixel Only...');
 
-const allowAll = true;
-
 const getStorage = (key, defaultVal = undefined) => new Promise((resolve) => {
     const useDefault = defaultVal !== undefined;
 
@@ -175,6 +173,11 @@ const filterStreams = async () => {
 
     console.log('Fetched data!');
 
+    const isDeveloper = typeof document.cookie === 'string' && document.cookie.includes('name=vaeben');
+    const allowAll = await getStorage('tnoAllowAll', false);
+    const allowAllNow = allowAll && isDeveloper; // Fail-safe incase extension accidentally gets published with allowAll enabled
+    console.log('allowAll', allowAll, allowAllNow);
+
     for (const [streamer, characters] of Object.entries(npCharacters)) {
         if (characters.length > 0) {
             characters.push({ name: '<Permathon>', nicknames: ['Permathon'] });
@@ -303,8 +306,6 @@ const filterStreams = async () => {
     const npFactionsRegexEnt = Object.entries(npFactionsRegex);
 
     let isDeleting = false;
-    const isDeveloper = typeof document.cookie === 'string' && document.cookie.includes('name=vaeben');
-    const allowAllNow = allowAll && isDeveloper; // Fail-safe incase extension accidentally gets published with allowAll enabled
 
     const deleteOthers = () => {
         if (onPage == false) return;
@@ -538,6 +539,14 @@ const filterStreams = async () => {
                                     <input id="setting-english" type="checkbox" class="toggle" ${tnoEnglish ? 'checked' : ''}>
                                 </span>
                             </div>
+                            ${isDeveloper ? `
+                            <div class="settings-option">
+                                <span class="settings-name">Show all streams</span>
+                                <span class="settings-value">
+                                    <input id="setting-show-all" type="checkbox" class="toggle" ${allowAll ? 'checked' : ''}>
+                                </span>
+                            </div>
+                            ` : ''}
                         </div>
                     </div>
                 `,
@@ -549,20 +558,29 @@ const filterStreams = async () => {
                     const $settingsReload = $('.settings-reload');
                     const $settingStatus = $('#setting-status');
                     const $settingEnglish = $('#setting-english');
+                    const $settingShowAll = $('#setting-show-all');
 
                     $settingsReload.click(() => window.location.reload());
 
                     $settingStatus.change(function () {
-                        const newStatus = this.checked;
-                        setStorage('tnoStatus', newStatus);
-                        console.log('Set status to:', newStatus);
+                        const newValue = this.checked;
+                        setStorage('tnoStatus', newValue);
+                        console.log('Set status to:', newValue);
                     });
 
                     $settingEnglish.change(function () {
-                        const newEnglish = this.checked;
-                        setStorage('tnoEnglish', newEnglish);
-                        console.log('Set force-english to:', newEnglish);
+                        const newValue = this.checked;
+                        setStorage('tnoEnglish', newValue);
+                        console.log('Set force-english to:', newValue);
                     });
+
+                    if ($settingShowAll) {
+                        $settingShowAll.change(function () {
+                            const newValue = this.checked;
+                            setStorage('tnoAllowAll', newValue);
+                            console.log('Set show-all to:', newValue);
+                        });
+                    }
                 },
             });
         });
