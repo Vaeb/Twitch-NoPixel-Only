@@ -327,12 +327,14 @@ const filterStreams = async () => {
             element = element.parentElement.parentElement.parentElement.parentElement;
             const titleEl = element.getElementsByClassName('tw-ellipsis tw-font-size-5')[0];
             const channelEl = element.querySelectorAll("a[data-a-target='preview-card-channel-link']")[0];
-            const liveElDiv = element.getElementsByClassName('tw-channel-status-text-indicator')[0];
-            if (liveElDiv == null) {
-                isDeleting = false;
-                return; // reruns
+            let liveElDiv = element.getElementsByClassName('tw-channel-status-text-indicator')[0];
+            let liveEl;
+            if (liveElDiv != null) {
+                liveEl = liveElDiv.children[0];
+            } else {
+                liveElDiv = $('<div>')[0];
+                liveEl = $('<div>')[0];
             }
-            const liveEl = liveElDiv.children[0];
             const title = titleEl.innerText;
             const titleParsed = title.toLowerCase().replace(/\./g, ' '); // ??
             const channelName = channelEl.innerText.toLowerCase();
