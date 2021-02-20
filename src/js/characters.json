@@ -1314,7 +1314,7 @@
             { "name": "[EMS] Boba Stone", "faction": "Medical" }
         ],
         "willneff": [
-            { "name": "\"James Marco\" St. Marco" }
+            { "name": "\"James Marco\" St. Marco", "nicknames": ["marko", "marcoing", "markoing"] }
         ],
         "Wolfabelle": [
             { "name": "Bianca Walters" }
