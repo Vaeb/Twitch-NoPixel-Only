@@ -1026,7 +1026,7 @@
         ],
         "Saiiren": [
             { "name": "Ai \"Betch\" Musori", "nicknames": ["Bitch"], "faction": "Burger Shot", "displayName": 0 },
-            { "name": "~Podcast~", "nicknames": ["Podcast"], "faction": "OtherNP", "displayName": 0 }
+            { "name": "\"~Podcast~\"", "nicknames": ["Podcast"], "faction": "OtherNP" }
         ],
         "Sal_Rosenberg": [
             { "name": "Sal Rosenberg" }
