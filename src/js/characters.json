@@ -1358,7 +1358,7 @@
         "hoa": "\\bhoa\\b|hogs\\s*of\\s*anarchy|home[\\s-]*owners[\\s-]*association",
         "doj": "\\bdoj\\b|department\\s*of\\s*justice|lawyer|attorney|judge\\b(?![\\s]*me)|\\ba?\\.?d\\.?a\\b",
         "angels": "\\bangels?\\b",
-        "burgershot": "burger[\\s-]*shot",
+        "burgershot": "burger[\\s-]*shot|\\bburgers\\b",
         "snakegang": "\\b(?:snake|hydra|mario)\\s*gang\\b",
         "development": "\\bdevelop",
         "doc": "\\bdoc\\b|\\bcorrection",
