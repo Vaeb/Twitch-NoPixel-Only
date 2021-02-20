@@ -804,7 +804,7 @@
             { "name": "William \"Bill Ding\" Ding", "nicknames": ["Bill"] }
         ],
         "Ming": [
-            { "name": "Ming Jingtai" }
+            { "name": "Ming Jingtai", "other": 2 }
         ],
         "MinusFive": [
             { "name": "[Officer] Jason Bidwell", "faction": "Police" }
