@@ -1151,6 +1151,9 @@
             { "name": "[Officer] Darrel McCormik", "faction": "Police" },
             { "name": "[K9 Trooper] Fenton", "faction": "Police", "nicknames": ["Fentons"] }
         ],
+        "Smaczny": [
+            { "name": "Conrad Gross" }
+        ],
         "SmokySloth": [
             { "name": "Bovice Wilkinson" },
             { "name": "Tayvadius \"Chef\" Jamarcus Livingston III", "faction": "GSF" }
