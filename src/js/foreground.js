@@ -147,8 +147,7 @@ const filterStreams = async () => {
         headers: fetchHeaders,
     };
 
-    const commitLocation = 'master';
-    const myRequest = new Request(`https://raw.githubusercontent.com/Vaeb/Twitch-NoPixel-Only/${isDeveloper ? commitLocation : 'master'}/src/js/characters.json`);
+    const myRequest = new Request('https://raw.githubusercontent.com/Vaeb/Twitch-NoPixel-Only/master/src/js/characters.json');
 
     let fetchResult = await fetch(myRequest);
     fetchResult = await fetchResult.json();
