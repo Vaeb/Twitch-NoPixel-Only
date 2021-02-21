@@ -153,6 +153,9 @@
         "biggieferreira": [
             { "name": "Shevy Santanna", "faction": "Vagos" }
         ],
+        "BikeMan": [
+            { "name": "Chet Summerset" }
+        ],
         "Biotoxz_": [
             { "name": "[Barbarian] Bjorn", "faction": "LARPers" }
         ],
@@ -690,6 +693,9 @@
         "LadyHope": [
             { "name": "[Officer] Lily Pond", "faction": "Police" }
         ],
+        "LadyLynxx": [
+            { "name": "[EMS] Saphira Sinclair", "faction": "Medical" }
+        ],
         "LAGTVMaximusBlack": [
             { "name": "Outto-Tune \"OTT\" Tyrone", "displayName": "OTT" }
         ],
@@ -1102,7 +1108,7 @@
             { "name": "Ron Otterman" }
         ],
         "Simplyje2ns": [
-            { "name": "Jean Steele" }
+            { "name": "Jean Steele", "displayName": 0 }
         ],
         "sips_": [
             { "name": "Tito Higgins" }
@@ -1190,6 +1196,9 @@
         ],
         "TenguOP": [
             { "name": "Wally Veloce" }
+        ],
+        "TerribleJamie": [
+            { "name": "Lavante \"L\" Lamano", "faction": "GSF" }
         ],
         "Test": [
             { "name": "Test6" }
