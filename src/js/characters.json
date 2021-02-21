@@ -144,7 +144,7 @@
         ],
         "BennniStreams": [
             { "name": "Santiago Madrid", "nicknames": ["Santiaagoooooo"] },
-            { "name": "Antonio Reyes", "nicknames": ["Antonioooo"] },
+            { "name": "Antonio Reyes", "nicknames": ["/\\bAntonio/"] },
             { "name": "Pablo Madrid", "faction": "Vagos", "nicknames": ["Diablo"] }
         ],
         "BFLY": [
