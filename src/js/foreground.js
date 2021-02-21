@@ -42,7 +42,6 @@ const objectMap = (obj, fn) => Object.fromEntries(Object.entries(obj).map(([k, v
 
 let minViewers;
 let stopOnMin;
-let checkOther;
 let intervalSeconds;
 
 let keepDeleting = true;
@@ -157,7 +156,7 @@ const filterStreams = async () => {
         return;
     }
 
-    ({ minViewers, stopOnMin, checkOther, intervalSeconds, npCharacters, useColorsDark, useColorsLight } = fetchResult);
+    ({ minViewers, stopOnMin, intervalSeconds, npCharacters, useColorsDark, useColorsLight } = fetchResult);
     regNp = new RegExp(fetchResult.regNp, 'i');
     regOther = new RegExp(fetchResult.regOther, 'i');
     npFactionsRegex = objectMap(fetchResult.npFactionsRegex, regStr => new RegExp(regStr, 'i'));
@@ -174,9 +173,9 @@ const filterStreams = async () => {
 
     console.log('Fetched data!');
 
-    const allowAll = await getStorage('tnoAllowAll', false);
-    const allowAllNow = allowAll && isDeveloper; // Fail-safe incase extension accidentally gets published with allowAll enabled
-    console.log('allowAll', allowAll, allowAllNow);
+    let [tnoStatus, tnoEnglish, tnoOthers, tnoAllowAll] = await getStorage(['tnoStatus', 'tnoEnglish', 'tnoOthers', 'tnoAllowAll'], [true, true, true, false]);
+    const allowAllNow = tnoAllowAll && isDeveloper; // Fail-safe incase extension accidentally gets published with tnoAllowAll enabled
+    console.log('tnoAllowAll', tnoAllowAll, allowAllNow);
 
     for (const [streamer, characters] of Object.entries(npCharacters)) {
         if (characters.length > 0) {
@@ -357,7 +356,7 @@ const filterStreams = async () => {
 
             // channelEl.parentElement.style.backgroundColor = '#0e0e10';
 
-            if (checkOther && useOther) {
+            if (tnoOthers && useOther) {
                 liveEl.innerText = '';
                 channelEl.style.color = useColors.other;
             } else {
@@ -523,8 +522,6 @@ const filterStreams = async () => {
         });
         $container.append($setEnglishBtn);
 
-        const [tnoStatus, tnoEnglish] = await getStorage(['tnoStatus', 'tnoEnglish'], [true, true]);
-
         $setEnglishBtn.click(() => {
             Swal.fire({
                 // icon: 'info',
@@ -548,11 +545,17 @@ const filterStreams = async () => {
                                     <input id="setting-english" type="checkbox" class="toggle" ${tnoEnglish ? 'checked' : ''}>
                                 </span>
                             </div>
+                            <div class="settings-option">
+                                <span class="settings-name">Include other roleplay servers:</span>
+                                <span class="settings-value">
+                                    <input id="setting-others" type="checkbox" class="toggle" ${tnoOthers ? 'checked' : ''}>
+                                </span>
+                            </div>
                             ${isDeveloper ? `
                             <div class="settings-option">
                                 <span class="settings-name">Filter streams</span>
                                 <span class="settings-value">
-                                    <input id="setting-show-all" type="checkbox" class="toggle" ${!allowAll ? 'checked' : ''}>
+                                    <input id="setting-show-all" type="checkbox" class="toggle" ${!tnoAllowAll ? 'checked' : ''}>
                                 </span>
                             </div>
                             ` : ''}
@@ -567,6 +570,7 @@ const filterStreams = async () => {
                     const $settingsReload = $('.settings-reload');
                     const $settingStatus = $('#setting-status');
                     const $settingEnglish = $('#setting-english');
+                    const $settingOthers = $('#setting-others');
                     const $settingShowAll = $('#setting-show-all');
 
                     $settingsReload.click(() => window.location.reload());
@@ -574,19 +578,29 @@ const filterStreams = async () => {
                     $settingStatus.change(function () {
                         const newValue = this.checked;
                         setStorage('tnoStatus', newValue);
+                        tnoStatus = newValue;
                         console.log('Set status to:', newValue);
                     });
 
                     $settingEnglish.change(function () {
                         const newValue = this.checked;
                         setStorage('tnoEnglish', newValue);
+                        tnoEnglish = newValue;
                         console.log('Set force-english to:', newValue);
+                    });
+
+                    $settingOthers.change(function () {
+                        const newValue = this.checked;
+                        setStorage('tnoOthers', newValue);
+                        tnoOthers = newValue;
+                        console.log('Set include-others to:', newValue);
                     });
 
                     if ($settingShowAll) {
                         $settingShowAll.change(function () {
                             const newValue = !this.checked;
                             setStorage('tnoAllowAll', newValue);
+                            tnoAllowAll = newValue;
                             console.log('Set show-all to:', newValue);
                         });
                     }
@@ -603,14 +617,14 @@ const filterStreams = async () => {
             return false;
         }
 
-        addSettings();
-
-        const [tnoStatus, tnoEnglish] = await getStorage(['tnoStatus', 'tnoEnglish'], [true, true]);
+        ([tnoStatus, tnoEnglish, tnoOthers, tnoAllowAll] = await getStorage(['tnoStatus', 'tnoEnglish', 'tnoOthers', 'tnoAllowAll'], [true, true, true, false]));
 
         if (tnoStatus === false) {
             console.log("[TNO] Couldn't start interval (status set to disabled)");
             return false;
         }
+
+        addSettings();
 
         if (tnoEnglish) {
             selectEnglish();
