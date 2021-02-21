@@ -288,7 +288,7 @@
         ],
         "cyr": [
             { "name": "Uchiha Jones", "faction": "Chang Gang" },
-            { "name": "Joe Caine", "faction": "The Winery", "displayName": 0 }
+            { "name": "Joe Caine", "displayName": 0 }
         ],
         "Kiva": [
             { "name": "Andi Jones", "faction": "HOA", "nicknames": ["Ant"], "displayName": 3 }
@@ -664,7 +664,7 @@
         "koil": [
             { "name": "[Trooper] Kael Soze", "faction": "Police", "highCommand": true },
             { "name": "[Officer] Francis Francer", "faction": "Police", "displayName": 1 },
-            { "name": "Otto Delmar", "faction": "The Winery", "leader": true }
+            { "name": "Otto Delmar" }
         ],
         "Kongfue": [
             { "name": "Karl \"KJ\" Johnny", "faction": "Vagos" }
