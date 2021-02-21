@@ -186,6 +186,7 @@ const filterStreams = async () => {
         // eslint-disable-next-line no-loop-func
         characters.forEach((char) => {
             const names = char.name.split(/\s+/);
+            const nameRegAll = [];
             const parsedNames = [];
             const titles = [];
             const realNames = [];
@@ -232,11 +233,15 @@ const filterStreams = async () => {
                 if (realNames.length === 1) realNames.push(realNames[0]);
                 if (char.displayName !== 0) realNames.push(...char.nicknames.filter(nck => typeof nck === 'string'));
                 char.nicknames.forEach((nck) => {
-                    const nicknameKeywords = [...nck.matchAll(/"([^"]+)"/g)].map(result => result[1]);
-                    if (nicknameKeywords.length > 0) {
-                        parsedNames.push(...nicknameKeywords.map(keyword => RegExp.escape(keyword.toLowerCase())));
+                    if (nck[0] === '/' && nck[nck.length - 1] === '/') {
+                        nameRegAll.push(nck.substring(1, nck.length - 1));
                     } else {
-                        parsedNames.push(RegExp.escape(nck.toLowerCase()));
+                        const nicknameKeywords = [...nck.matchAll(/"([^"]+)"/g)].map(result => result[1]);
+                        if (nicknameKeywords.length > 0) {
+                            parsedNames.push(...nicknameKeywords.map(keyword => RegExp.escape(keyword.toLowerCase())));
+                        } else {
+                            parsedNames.push(RegExp.escape(nck.toLowerCase()));
+                        }
                     }
                 });
             }
@@ -256,7 +261,9 @@ const filterStreams = async () => {
                     char.displayName += (realNames[displayNum - 1] || realNames[0]);
                 }
             }
-            char.nameReg = new RegExp(`\\b(?:${parsedNames.join('|')})\\b`);
+
+            nameRegAll.push(`\\b(?:${parsedNames.join('|')})\\b`);
+            char.nameReg = new RegExp(nameRegAll.join('|'), nameRegAll.length > 1 ? 'i' : undefined);
 
             if (char.faction != null) {
                 char.factionUse = useColors[char.faction] !== undefined ? char.faction : 'otherfaction';
