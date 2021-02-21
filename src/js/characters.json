@@ -759,7 +759,8 @@
             { "name": "Liv Lassen" }
         ],
         "luminariarayne": [
-            { "name": "[Officer] Ekaterina Alekseyevna", "faction": "Police", "nicknames": ["Trina"], "displayName": 1 }
+            { "name": "Ekaterina Alekseyevna", "nicknames": ["Trina"], "displayName": 1 },
+            { "name": "Barbie Chan" }
         ],
         "Lyndi": [
             { "name": "Violet Van Housen", "faction": "Angels" },
