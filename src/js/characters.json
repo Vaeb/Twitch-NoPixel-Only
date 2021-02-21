@@ -686,7 +686,7 @@
             { "name": "Alabaster Slim", "faction": "Burger Shot", "nicknames": ["Pimp"], "displayName": 2 },
             { "name": "[Officer] Kyle Pred", "faction": "Police" },
             { "name": "Brett Biggledoinks" },
-            { "name": "Rory O'Banion" },
+            { "name": "Rory O'Banion", "displayName": 0 },
             { "name": "Wyatt Derp", "faction": "Lost MC" },
             { "name": "Pal Gore" }
         ],
