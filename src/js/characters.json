@@ -460,7 +460,7 @@
             { "name": "Harry Brown" }
         ],
         "HasanAbi": [
-            { "name": "Humberto Antonio Donato Pecorino", "nicknames": ["Don", "Ova here", "Ova' here", "Ovah here"], "displayName": 5, "faction": "Leanbois" }
+            { "name": "Humberto Antonio Donato Pecorino", "nicknames": ["Don", "/\\bOva[h']? here\\b/"], "displayName": 5, "faction": "Leanbois" }
         ],
         "Hedisaurus": [
             { "name": "[EMS] Hedi Saurus", "faction": "Medical" },
