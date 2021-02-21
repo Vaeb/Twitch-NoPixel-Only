@@ -175,7 +175,6 @@ const filterStreams = async () => {
 
     let [tnoStatus, tnoEnglish, tnoOthers, tnoAllowAll] = await getStorage(['tnoStatus', 'tnoEnglish', 'tnoOthers', 'tnoAllowAll'], [true, true, false, false]);
     const allowAllNow = tnoAllowAll && isDeveloper; // Fail-safe incase extension accidentally gets published with tnoAllowAll enabled
-    console.log('tnoAllowAll', tnoAllowAll, allowAllNow);
 
     for (const [streamer, characters] of Object.entries(npCharacters)) {
         if (characters.length > 0) {
@@ -442,7 +441,7 @@ const filterStreams = async () => {
                         // element.outerHTML = '';
                         // element.parentNode.removeChild(element);
                         element.style.display = 'none';
-                        // console.log('[TNO] Deleted');
+                        console.log('[TNO] Deleted');
                     }
                     if (isFirstRemove) isFirstRemove = false;
                 }
