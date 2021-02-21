@@ -951,6 +951,9 @@
         "OG_Tyger": [
             { "name": "[Officer] Peter Frost", "faction": "Police" }
         ],
+        "ogWiked": [
+            { "name": "Truth Flores" }
+        ],
         "OhMadOne": [
             { "name": "Ginzu Okada" }
         ],
