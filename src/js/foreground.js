@@ -345,8 +345,8 @@ const filterStreams = async () => {
             const characters = npCharacters[channelName];
 
             const useOther = allowAllNow // if allowAllNow is true, all streams are shown for testing
-                ? !isNpCheck && (!characters || (characters && characters.assumeOther))
-                : isOtherServer || (characters && characters.assumeOther && !isNpCheck);
+                ? isOtherServer || (!isNpCheck && (!characters || (characters && characters.assumeOther)))
+                : isOtherServer || (!isNpCheck && characters && characters.assumeOther);
 
             // channelEl.parentElement.style.backgroundColor = '#0e0e10';
 
