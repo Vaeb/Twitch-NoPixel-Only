@@ -802,7 +802,7 @@
         ],
         "MEKABEAR": [
             { "name": "Erin Cox" },
-            { "name": "Amber Gold" }
+            { "name": "Amber Gold", "displayName": 0 }
         ],
         "Mervin": [
             { "name": "Mervin Potts" }
