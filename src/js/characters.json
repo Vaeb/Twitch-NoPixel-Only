@@ -348,6 +348,9 @@
         "Dunrunnin12": [
             { "name": "Thomas Dwayne", "nicknames": ["The Narrator"] }
         ],
+        "durptastic": [
+            { "name": "Otis Goody", "faction": "Burger Shot" }
+        ],
         "Dyrus": [
             { "name": "Louis Hill", "displayName": 0 }
         ],
@@ -736,7 +739,7 @@
             { "name": "[Dr.] Serge Cross", "faction": "Medical", "displayName": 2 }
         ],
         "Lucky_RP": [
-            { "name": "Marlo Stanfield" }
+            { "name": "Marlo Stanfield", "faction": "GSF" }
         ],
         "LuckyxMoon": [
             { "name": "[Judge] ? Devereaux", "faction": "DoJ" },
@@ -1323,6 +1326,9 @@
             { "name": "[Judge] Wayne Ardson", "faction": "DoJ" },
             { "name": "Jack \"The Joker\" Knaves", "nicknames": ["The \"Joker\""] },
             { "name": "Bowser" }
+        ],
+        "WeCameAsBecca": [
+            { "name": "[Dr.] Kennedy Adams", "faction": "Medical" }
         ],
         "Wehtuns": [
             { "name": "Lawrence Splainer", "faction": "DoJ" }
