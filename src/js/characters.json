@@ -1390,6 +1390,9 @@
             { "name": "[Deputy] Ziggy Buggs", "faction": "Police", "displayName": 1 },
             { "name": "Norman Bones", "displayName": 0 }
         ],
+        "zirnrp": [
+            { "name": "Solomon Seerson" }
+        ],
         "Zoil": [
             { "name": "Skunkz Wallace" }
         ],
