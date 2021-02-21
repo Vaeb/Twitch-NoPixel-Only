@@ -210,7 +210,7 @@
         ],
         "CathFawr": [
             { "name": "Summer Mersion", "faction": "GSF", "displayName": 0 },
-            { "name": "Shannon O'Banion" },
+            { "name": "Shannon O'Banion", "displayName": 0 },
             { "name": "[Officer] Lydia Vale", "faction": "Police" }
         ],
         "Cathie": [
