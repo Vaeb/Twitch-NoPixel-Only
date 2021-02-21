@@ -793,7 +793,8 @@
         ],
         "Miggitymaan": [
             { "name": "Jayce Wyatt" },
-            { "name": "[Officer] Damien Alexander", "faction": "Police" }
+            { "name": "[Officer] Damien Alexander", "faction": "Police" },
+            { "name": "[Deputy] Kurt Leonard", "faction": "Police", "other": 1 }
         ],
         "MikeTheBard": [
             { "name": "Hubcap Jones", "displayName": 0 },
