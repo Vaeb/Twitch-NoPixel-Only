@@ -173,7 +173,7 @@ const filterStreams = async () => {
 
     console.log('Fetched data!');
 
-    let [tnoStatus, tnoEnglish, tnoOthers, tnoAllowAll] = await getStorage(['tnoStatus', 'tnoEnglish', 'tnoOthers', 'tnoAllowAll'], [true, true, true, false]);
+    let [tnoStatus, tnoEnglish, tnoOthers, tnoAllowAll] = await getStorage(['tnoStatus', 'tnoEnglish', 'tnoOthers', 'tnoAllowAll'], [true, true, false, false]);
     const allowAllNow = tnoAllowAll && isDeveloper; // Fail-safe incase extension accidentally gets published with tnoAllowAll enabled
     console.log('tnoAllowAll', tnoAllowAll, allowAllNow);
 
@@ -617,7 +617,7 @@ const filterStreams = async () => {
             return false;
         }
 
-        ([tnoStatus, tnoEnglish, tnoOthers, tnoAllowAll] = await getStorage(['tnoStatus', 'tnoEnglish', 'tnoOthers', 'tnoAllowAll'], [true, true, true, false]));
+        ([tnoStatus, tnoEnglish, tnoOthers, tnoAllowAll] = await getStorage(['tnoStatus', 'tnoEnglish', 'tnoOthers', 'tnoAllowAll'], [true, true, false, false]));
 
         if (tnoStatus === false) {
             console.log("[TNO] Couldn't start interval (status set to disabled)");
