@@ -318,7 +318,7 @@
             { "name": "[Dr.] Kai King", "faction": "Medical", "displayName": 2 }
         ],
         "DisbeArex": [
-            { "name": "Oki Doki", "displayName": 0 }
+            { "name": "Oki Doki", "faction": "Burger Shot", "displayName": 0 }
         ],
         "DKane": [
             { "name": "Cletus McCoy" }
