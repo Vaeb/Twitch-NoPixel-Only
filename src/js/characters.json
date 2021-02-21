@@ -1047,6 +1047,9 @@
             { "name": "Sherry Paie", "displayName": 0 },
             { "name": "Sherry Lee" }
         ],
+        "RudeNoodleNPC": [
+            { "name": "Tee Veeman", "faction": "Burger Shot" }
+        ],
         "s0upes": [
             { "name": "James \"Apples\" Apeller" },
             { "name": "Silas Grimmer" },
