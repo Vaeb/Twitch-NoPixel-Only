@@ -752,6 +752,9 @@
             { "name": "[Officer] Luka Kozlov", "faction": "Police" },
             { "name": "Gazza Maloo", "faction": "Lost MC" }
         ],
+        "Lullichiiqa": [
+            { "name": "Liv Lassen" }
+        ],
         "luminariarayne": [
             { "name": "[Officer] Ekaterina Alekseyevna", "faction": "Police", "nicknames": ["Trina"], "displayName": 1 }
         ],
