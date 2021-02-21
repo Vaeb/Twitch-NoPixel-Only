@@ -355,7 +355,7 @@ const filterStreams = async () => {
 
             // channelEl.parentElement.style.backgroundColor = '#0e0e10';
 
-            if (tnoOthers && useOther) {
+            if ((tnoOthers || characters) && useOther) {
                 liveEl.innerText = '';
                 channelEl.style.color = useColors.other;
             } else {
