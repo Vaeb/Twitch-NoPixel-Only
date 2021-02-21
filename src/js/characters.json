@@ -384,6 +384,9 @@
             { "name": "Huxley Johnson", "faction": "DoC" },
             { "name": "Paddy Patrickson", "faction": "Lost MC" }
         ],
+        "FalloftheSeason": [
+            { "name": "[EMS] Orianna \"Ori\" Frost", "faction": "Medical", "nicknames": ["Olive"] }
+        ],
         "Familybanter": [
             { "name": "[Dr.]  Jayce Petra", "faction": "Medical", "displayName": 0 },
             { "name": "Taran Raid", "faction": "Lost MC", "displayName": 0 }
