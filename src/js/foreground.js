@@ -543,9 +543,9 @@ const filterStreams = async () => {
                             </div>
                             ${isDeveloper ? `
                             <div class="settings-option">
-                                <span class="settings-name">Show all streams</span>
+                                <span class="settings-name">Filter streams</span>
                                 <span class="settings-value">
-                                    <input id="setting-show-all" type="checkbox" class="toggle" ${allowAll ? 'checked' : ''}>
+                                    <input id="setting-show-all" type="checkbox" class="toggle" ${!allowAll ? 'checked' : ''}>
                                 </span>
                             </div>
                             ` : ''}
@@ -578,7 +578,7 @@ const filterStreams = async () => {
 
                     if ($settingShowAll) {
                         $settingShowAll.change(function () {
-                            const newValue = this.checked;
+                            const newValue = !this.checked;
                             setStorage('tnoAllowAll', newValue);
                             console.log('Set show-all to:', newValue);
                         });
