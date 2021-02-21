@@ -726,6 +726,9 @@
         "LtSerge": [
             { "name": "[Dr.] Serge Cross", "faction": "Medical", "displayName": 2 }
         ],
+        "Lucky_RP": [
+            { "name": "Marlo Stanfield" }
+        ],
         "LuckyxMoon": [
             { "name": "[Judge] ? Devereaux", "faction": "DoJ" },
             { "name": "[Judge] Jessica Wesker", "faction": "DoJ" }
