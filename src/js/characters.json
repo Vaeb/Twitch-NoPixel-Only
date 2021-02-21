@@ -1095,7 +1095,7 @@
         ],
         "SayeedBlack": [
             { "name": "Arush Patel \"Speedy\" Santana", "faction": "Vagos", "leader": true, "nicknames": ["El Jefe"] },
-            { "name": "Sayeed White", "faction": "DoC" }
+            { "name": "Sayeed White", "faction": "DoC", "nicknames": ["Mr. White"], "displayName": 3 }
         ],
         "SgtApollo": [
             { "name": "Salem Barghouthi" }
