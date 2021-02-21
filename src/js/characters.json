@@ -832,12 +832,15 @@
         "MsBrit": [
             { "name": "[EMS] Tori Corleone", "faction": "Medical" }
         ],
+        "MsTeamKK": [
+            { "name": "Riley Carter" }
+        ],
         "MurderCrumpet": [
             { "name": "Cindy Lou" }
         ],
         "MurphyBraun": [
             { "name": "[Justice] Holden", "faction": "DoJ" },
-            { "name": "Murphy Braun" }
+            { "name": "Murphy Braun", "displayName": 0 }
         ],
         "Mythematic": [
             { "name": "Mike Rosoftsam", "faction": "Leanbois", "affiliate": true }
