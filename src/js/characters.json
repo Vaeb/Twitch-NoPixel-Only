@@ -792,7 +792,8 @@
             { "name": "[EMS] William \"Middy\" Haze", "faction": "Medical" }
         ],
         "MEKABEAR": [
-            { "name": "Erin Cox" }
+            { "name": "Erin Cox" },
+            { "name": "Amber Gold" }
         ],
         "Mervin": [
             { "name": "Mervin Potts" }
