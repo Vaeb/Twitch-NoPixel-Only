@@ -136,6 +136,7 @@ let stopInterval;
 
 const filterStreams = async () => {
     console.log('Fetching recent character data');
+    const isDeveloper = typeof document.cookie === 'string' && document.cookie.includes('name=vaeben');
 
     const fetchHeaders = new Headers();
     fetchHeaders.append('pragma', 'no-cache');
@@ -146,7 +147,8 @@ const filterStreams = async () => {
         headers: fetchHeaders,
     };
 
-    const myRequest = new Request('https://raw.githubusercontent.com/Vaeb/Twitch-NoPixel-Only/master/src/js/characters.json');
+    const commitLocation = 'master';
+    const myRequest = new Request(`https://raw.githubusercontent.com/Vaeb/Twitch-NoPixel-Only/${isDeveloper ? commitLocation : 'master'}/src/js/characters.json`);
 
     let fetchResult = await fetch(myRequest);
     fetchResult = await fetchResult.json();
@@ -173,7 +175,6 @@ const filterStreams = async () => {
 
     console.log('Fetched data!');
 
-    const isDeveloper = typeof document.cookie === 'string' && document.cookie.includes('name=vaeben');
     const allowAll = await getStorage('tnoAllowAll', false);
     const allowAllNow = allowAll && isDeveloper; // Fail-safe incase extension accidentally gets published with allowAll enabled
     console.log('allowAll', allowAll, allowAllNow);

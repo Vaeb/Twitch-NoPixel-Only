@@ -1305,7 +1305,7 @@
             { "name": "Bowser" }
         ],
         "Wehtuns": [
-            { "name": "[DA] Lawrence Splainer", "faction": "DoJ" }
+            { "name": "Lawrence Splainer", "faction": "DoJ" }
         ],
         "Whippy": [
             { "name": "[Officer] Crocodile Steve", "faction": "Police" },
