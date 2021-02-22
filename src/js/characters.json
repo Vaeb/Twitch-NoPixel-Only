@@ -297,9 +297,6 @@
             { "name": "Uchiha Jones", "faction": "Chang Gang" },
             { "name": "Joe Caine", "displayName": 0 }
         ],
-        "Kiva": [
-            { "name": "Andi Jones", "faction": "HOA", "nicknames": ["Ant"], "displayName": 3 }
-        ],
         "Darthbobo77": [
             { "name": "Rudi Rinsen", "faction": "Lost MC", "leader": true }
         ],
@@ -670,6 +667,9 @@
         ],
         "Kite61": [
             { "name": "Rusty Johnson" }
+        ],
+        "Kiva": [
+            { "name": "Andi Jones", "faction": "HOA", "nicknames": ["Ant"], "displayName": 3 }
         ],
         "Kiwo": [
             { "name": "[Deputy] Lauren Forcer", "faction": "Police" },
