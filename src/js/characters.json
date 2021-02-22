@@ -1181,7 +1181,8 @@
             { "name": "Tappy \"Cat\" Nippers", "nicknames": ["Cat"], "displayName": 0 }
         ],
         "Spaceboy": [
-            { "name": "Melbert \"Mel\" Rickenbacker", "faction": "Prune Gang" }
+            { "name": "Melbert \"Mel\" Rickenbacker", "faction": "Prune Gang" },
+            { "name": "Casey Boyd", "displayName": 0 }
         ],
         "Spekel": [
             { "name": "Sonya Summers", "nicknames": ["Black Betty"] },
