@@ -392,7 +392,8 @@
             { "name": "Paddy Patrickson", "faction": "Lost MC" }
         ],
         "FalloftheSeason": [
-            { "name": "[EMS] Orianna \"Ori\" Frost", "faction": "Medical", "nicknames": ["Olive"] }
+            { "name": "[EMS] Orianna \"Ori\" Frost", "faction": "Medical", "nicknames": ["Olive"] },
+            { "name": "Ophelia Quinn" }
         ],
         "Familybanter": [
             { "name": "[Dr.]  Jayce Petra", "faction": "Medical", "displayName": 0 },
