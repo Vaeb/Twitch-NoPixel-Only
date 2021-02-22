@@ -42,6 +42,9 @@
         "adnormaltv": [
             { "name": "Ivan Gorbahtjov" }
         ],
+        "Adzzstarr": [
+            { "name": "[Dr.] Valentine", "faction": "Medical" }
+        ],
         "AfriicanSnowball": [
             { "name": "[Chief Justice] Buck Stanton", "faction": "DoJ" },
             { "name": "Leland \"LJ\" Jones" }
@@ -400,6 +403,9 @@
         ],
         "Five0AnthO": [
             { "name": "[Trooper] Tony Andrews", "faction": "Police", "highCommand": true }
+        ],
+        "Forlorn79": [
+            { "name": "[EMS] Amoris Pax", "faction": "Medical" }
         ],
         "forsen": [
             { "name": "Sven Snusberg", "faction": "Leanbois" }
@@ -1025,6 +1031,9 @@
         ],
         "ray308win": [
             { "name": "[FIB Agent] Lyonel Winchester", "faction": "Police" }
+        ],
+        "Realzman": [
+            { "name": "[EMS] Connor", "faction": "Medical" }
         ],
         "ReinaRP": [
             { "name": "Mona Sanchez" }
