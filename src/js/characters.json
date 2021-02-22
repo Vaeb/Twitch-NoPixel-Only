@@ -1423,7 +1423,7 @@
             { "name": "[Officer] Mackenzie Hayes", "faction": "Police" }
         ],
         "Ziggy": [
-            { "name": "[Deputy] Ziggy Buggs", "faction": "Police", "displayName": 1 },
+            { "name": "[Park Ranger] Ziggy Buggs", "faction": "Police", "displayName": 1 },
             { "name": "Norman Bones", "displayName": 0 }
         ],
         "zirnrp": [
