@@ -43,7 +43,7 @@ module.exports = {
         'no-eval': 'off',
         'no-extend-native': 'off',
         // "no-irregular-whitespace": "off",
-        // "no-lonely-if": "off",
+        'no-lonely-if': 'off',
         'no-mixed-operators': 'off',
         // "no-multi-spaces": "off",
         'no-new': 'off',
