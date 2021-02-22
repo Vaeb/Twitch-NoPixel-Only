@@ -942,7 +942,7 @@
         "OccamsSabre": [
             { "name": "Benjamin Crane" },
             { "name": "[Justice] Ray Montag", "faction": "DoJ" },
-            { "name": "Jeffrey Bundy" }
+            { "name": "[Dispatch] Jeffrey Bundy", "faction": "Police" }
         ],
         "Octopimp": [
             { "name": "[Sorceror] Chut McMillan", "faction": "LARPers", "nicknames": ["Chut The Magnificent", "Sorcerer"] }
