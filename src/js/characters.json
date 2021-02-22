@@ -583,6 +583,9 @@
         "JoeSmitty123": [
             { "name": "[Officer] Michael Murphy", "faction": "Police" }
         ],
+        "jogiejoey": [
+            { "name": "Jessie Jugg" }
+        ],
         "Jonthebroski": [
             { "name": "Denzel Williams", "faction": "Leanbois", "nicknames": ["The \"Cleaner\""] },
             { "name": "Dio Ivanov", "faction": "Russians" },
@@ -1182,7 +1185,7 @@
         ],
         "Spaceboy": [
             { "name": "Melbert \"Mel\" Rickenbacker", "faction": "Prune Gang" },
-            { "name": "Casey Boyd", "displayName": 0 }
+            { "name": "Casey Boyd", "nicknames": ["Caseboy", "L8PD"], "displayName": 0 }
         ],
         "Spekel": [
             { "name": "Sonya Summers", "nicknames": ["Black Betty"] },
