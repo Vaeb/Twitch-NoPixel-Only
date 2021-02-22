@@ -1421,7 +1421,7 @@
             { "name": "Martin Julio-Perez-Cruz-Rodriguez", "faction": "Marabunta" }
         ],
         "Zaquelle": [
-            { "name": "[Officer] Mackenzie Hayes", "faction": "Police" }
+            { "name": "[Officer] Mackenzie Hayes", "faction": "Police", "other": 1 }
         ],
         "Ziggy": [
             { "name": "[Park Ranger] Ziggy Buggs", "faction": "Police", "displayName": 1 },
