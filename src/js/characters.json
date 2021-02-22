@@ -957,10 +957,6 @@
         "OfficialTaco": [
             { "name": "Charles \"Taco\" Prince", "faction": "Chang Gang" }
         ],
-        "OfficialWhitey": [
-            { "name": "[Officer] Alex Casterman", "faction": "Police" },
-            { "name": "Finlay" }
-        ],
         "OG_Tyger": [
             { "name": "[Officer] Peter Frost", "faction": "Police" }
         ],
@@ -1388,6 +1384,10 @@
         "Whiteboylemons": [
             { "name": "[Officer] Aaron Byson", "faction": "Police" },
             { "name": "[EMS] Boba Stone", "faction": "Medical" }
+        ],
+        "WhiteyRP": [
+            { "name": "[Officer] Alex Casterman", "faction": "Police" },
+            { "name": "Finlay" }
         ],
         "willneff": [
             { "name": "\"James Marco\" St. Marco", "nicknames": ["marko", "marcoing", "markoing"] }
