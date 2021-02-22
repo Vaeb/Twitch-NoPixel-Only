@@ -174,7 +174,7 @@ const filterStreams = async () => {
     console.log('Fetched data!');
 
     let [tnoStatus, tnoEnglish, tnoOthers, tnoAllowAll] = await getStorage(['tnoStatus', 'tnoEnglish', 'tnoOthers', 'tnoAllowAll'], [true, true, false, false]);
-    const allowAllNow = tnoAllowAll && isDeveloper; // Fail-safe incase extension accidentally gets published with tnoAllowAll enabled
+    const filterEnabled = !isDeveloper || !tnoAllowAll; // Fail-safe incase extension accidentally gets published with tnoAllowAll enabled
 
     for (const [streamer, characters] of Object.entries(npCharacters)) {
         if (characters.length > 0) {
@@ -344,25 +344,38 @@ const filterStreams = async () => {
             const titleParsed = title.toLowerCase().replace(/\./g, ' '); // ??
             const channelName = channelEl.innerText.toLowerCase();
 
-            const isOtherServer = regOther.test(title);
-
-            const isNpCheck = regNp.test(title);
+            const onOther = regOther.test(title);
+            const onNp = regNp.test(title);
             const characters = npCharacters[channelName];
+            const mainsOther = characters && characters.assumeOther;
+            const onMainOther = !onNp && mainsOther;
+            const npStreamer = onNp || characters;
 
-            const useOther = allowAllNow // if allowAllNow is true, all streams are shown for testing
-                ? isOtherServer || (!isNpCheck && (!characters || (characters && characters.assumeOther)))
-                : isOtherServer || (!isNpCheck && characters && characters.assumeOther);
+            let filterState = 0; // remove, mark-np, mark-other
+            if (filterEnabled) { // If filtering streams is enabled
+                if (tnoOthers && (onOther || onMainOther)) { // If is-including-others and streamer on another server
+                    filterState = 2;
+                } else if (!npStreamer || onMainOther) { // Remove if not an NP streamer or is-removing-others and streamer on their main server
+                    filterState = 0;
+                } else {
+                    filterState = 1;
+                }
+            } else {
+                if (!npStreamer || onMainOther || onOther) { // If not an NP streamer or streamer on another server
+                    filterState = 2;
+                } else {
+                    filterState = 1;
+                }
+            }
 
-            // channelEl.parentElement.style.backgroundColor = '#0e0e10';
-
-            if ((allowAllNow || tnoOthers || (characters && !characters.assumeOther)) && useOther) { // If no-filtering or include-others or characters-maining-np
+            if (filterState === 2) {
                 liveEl.innerText = '';
                 channelEl.style.color = useColors.other;
             } else {
-                let nowCharacter;
-                let factionNames = [];
+                if (filterState === 1) { // Is nopixel char
+                    let nowCharacter;
+                    let factionNames = [];
 
-                if (characters || isNpCheck) { // Is nopixel char
                     if (characters && characters.length) {
                         let lowestPos = Infinity;
                         for (const char of characters) {
@@ -390,36 +403,36 @@ const filterStreams = async () => {
                             factionNames = factionNames.map(f => f.name);
                         }
                     }
-                }
 
-                const useTextColor = '#000';
-                // const useTextColor = isDark ? '#000' : '#f7f7f8';
+                    const useTextColor = '#000';
+                    // const useTextColor = isDark ? '#000' : '#f7f7f8';
 
-                if (nowCharacter) {
-                    const nowColor = useColors[nowCharacter.factionUse];
-                    const nowColorDark = useColorsDark[nowCharacter.factionUse];
-                    channelEl.style.color = nowColor;
-                    liveElDiv.style.backgroundColor = nowColorDark;
-                    liveEl.style.color = useTextColor;
-                    liveEl.innerText = `${nowCharacter.leader ? '♛ ' : ''}${nowCharacter.displayName}`;
-                } else if (factionNames.length) {
-                    const nowColor = useColors[factionNames[0]] || useColors.independent;
-                    const nowColorDark = useColorsDark[factionNames[0]] || useColorsDark.independent;
-                    channelEl.style.color = nowColor;
-                    liveElDiv.style.backgroundColor = nowColorDark;
-                    liveEl.style.color = useTextColor;
-                    liveEl.innerText = `< ${fullFactionMap[factionNames[0]] || factionNames[0]} >`;
-                } else if (characters && characters.length) {
-                    const nowColor = useColors[characters[0].factionUse];
-                    const nowColorDark = useColorsDark[characters[0].factionUse];
-                    channelEl.style.color = nowColor;
-                    liveElDiv.style.backgroundColor = nowColorDark;
-                    liveEl.style.color = useTextColor;
-                    liveEl.innerText = `? ${characters[0].displayName} ?`;
-                } else if (isNpCheck || characters) {
-                    liveEl.innerText = '';
-                    channelEl.style.color = useColors.othernp;
-                } else {
+                    if (nowCharacter) {
+                        const nowColor = useColors[nowCharacter.factionUse];
+                        const nowColorDark = useColorsDark[nowCharacter.factionUse];
+                        channelEl.style.color = nowColor;
+                        liveElDiv.style.backgroundColor = nowColorDark;
+                        liveEl.style.color = useTextColor;
+                        liveEl.innerText = `${nowCharacter.leader ? '♛ ' : ''}${nowCharacter.displayName}`;
+                    } else if (factionNames.length) {
+                        const nowColor = useColors[factionNames[0]] || useColors.independent;
+                        const nowColorDark = useColorsDark[factionNames[0]] || useColorsDark.independent;
+                        channelEl.style.color = nowColor;
+                        liveElDiv.style.backgroundColor = nowColorDark;
+                        liveEl.style.color = useTextColor;
+                        liveEl.innerText = `< ${fullFactionMap[factionNames[0]] || factionNames[0]} >`;
+                    } else if (characters && characters.length) {
+                        const nowColor = useColors[characters[0].factionUse];
+                        const nowColorDark = useColorsDark[characters[0].factionUse];
+                        channelEl.style.color = nowColor;
+                        liveElDiv.style.backgroundColor = nowColorDark;
+                        liveEl.style.color = useTextColor;
+                        liveEl.innerText = `? ${characters[0].displayName} ?`;
+                    } else {
+                        liveEl.innerText = '';
+                        channelEl.style.color = useColors.othernp;
+                    }
+                } else if (filterState === 0) {
                     // const viewers = element.getElementsByClassName('tw-media-card-stat tw-c-background-overlay')[0].firstChild.innerText;
                     const viewers = element.getElementsByClassName('tw-media-card-stat')[0].firstChild.innerText;
                     let viewersNum = parseFloat(viewers);
