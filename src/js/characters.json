@@ -1177,7 +1177,8 @@
             { "name": "Ellie Dono", "faction": "Leanbois" }
         ],
         "sodapoppin": [
-            { "name": "Kevin Whipaloo", "faction": "Burger Shot", "displayName": 0 }
+            { "name": "Kevin Whipaloo", "faction": "Burger Shot", "displayName": 0 },
+            { "name": "Tappy Nippers", "nicknames": ["Cat"], "displayName": 0 }
         ],
         "Spaceboy": [
             { "name": "Melbert \"Mel\" Rickenbacker", "faction": "Prune Gang" }
