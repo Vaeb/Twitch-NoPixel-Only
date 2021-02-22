@@ -637,6 +637,9 @@
         "KatFires": [
             { "name": "Novah Walker", "faction": "Chang Gang" }
         ],
+        "KattValkyrie": [
+            { "name": "[EMS] Valkyrie Sunshot" }
+        ],
         "kClient": [
             { "name": "Daquan \"Peanut\" Dumas", "faction": "Arab Mafia" }
         ],
