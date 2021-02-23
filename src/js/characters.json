@@ -193,6 +193,9 @@
         "breakyx": [
             { "name": "Dris Peters", "faction": "SSB" }
         ],
+        "BRIT": [
+            { "name": "[EMS] Tori Corleone", "faction": "Medical" }
+        ],
         "buddha": [
             { "name": "Lang Buddha", "faction": "Leanbois", "leader": true, "nicknames": ["Circle Andy"] },
             { "name": "[Deputy] Kevin Kona", "faction": "Police" },
@@ -885,9 +888,6 @@
             { "name": "[Officer] Lenny Hawk", "faction": "Police", "displayName": 0 },
             { "name": "Bernice \"Shadowlord\" Caldershot", "faction": "LARPers" },
             { "name": "Yung Dab", "nicknames": ["The \"Gnome\""] }
-        ],
-        "MsBrit": [
-            { "name": "[EMS] Tori Corleone", "faction": "Medical" }
         ],
         "MsTeamKK": [
             { "name": "Riley Carter" }
