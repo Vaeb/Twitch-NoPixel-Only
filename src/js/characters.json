@@ -7,9 +7,9 @@
     "regOther": "the\\s*family|\\btf\\s?rp|family\\s*rp|twitchrp|\\bt\\W*rp|\\bnon[\\s-]*stop|\\bns\\s?rp",
     "regOthers": [
         { "name": "TheFamilyRP", "reg": "the\\s*family|\\btf\\s?rp|family\\s*rp" },
-        { "name": "TwitchRP Next", "reg": "twitchrp|\\bt\\W*rp" },
-        { "name": "NonstopRP", "reg": "\\bnon[\\s-]*stop|\\bns\\s?rp" },
-        { "reg": "\\bgtav?[\\s:-]*online|\\bsvrp\\b|subversion|ssb[\\s:-]*wrld" }
+        { "name": "Twitch RP", "reg": "twitchrp|\\bt\\W*rp" },
+        { "name": "Nonstop RP", "reg": "\\bnon[\\s-]*stop|\\bns\\s?rp" },
+        { "reg": "\\bgtav?[\\s:-]*online|\\bsvrp\\b|subversion|ssb[\\s:-]*wrld|grizlly\\s*rp" }
     ],
     "npCharacters": {
         "0Reed": [
