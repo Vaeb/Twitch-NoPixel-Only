@@ -51,8 +51,7 @@ let interval;
 let wasZero = false;
 
 let regNp;
-// const regOther = /the\s*family|\btf(?:rp|\b)|family\s*rp|twitchrp|\bt\W*rp\b|benefactor|\bob(?:rp|\b)|dondi|\bsvrp|subversion/i;
-let regOther;
+let regOthers;
 
 let npCharacters = {};
 
@@ -162,9 +161,11 @@ const filterStreams = async () => {
         return;
     }
 
-    ({ minViewers, stopOnMin, intervalSeconds, npCharacters, useColorsDark, useColorsLight } = fetchResult);
+    ({ minViewers, stopOnMin, intervalSeconds, regOthers, npCharacters, useColorsDark, useColorsLight } = fetchResult);
     regNp = new RegExp(fetchResult.regNp, 'i');
-    regOther = new RegExp(fetchResult.regOther, 'i');
+    regOthers.forEach((obj) => {
+        obj.reg = new RegExp(obj.reg, 'i');
+    });
     npFactionsRegex = objectMap(fetchResult.npFactionsRegex, regStr => new RegExp(regStr, 'i'));
 
     const bodyHexColor = getComputedStyle(document.body).getPropertyValue('--color-background-body');
@@ -323,6 +324,9 @@ const filterStreams = async () => {
         // if (onPage == false || isDeleting === true) return;
         isDeleting = true;
 
+        const useTextColor = '#000';
+        // const useTextColor = isDark ? '#000' : '#f7f7f8';
+
         const elements = Array.from(document.getElementsByTagName('article')).filter(
             element => !element.classList.contains('npChecked')
         );
@@ -346,12 +350,32 @@ const filterStreams = async () => {
                 liveElDiv = $('<div>')[0];
                 liveEl = $('<div>')[0];
             }
+            const channelName = channelEl.innerText.toLowerCase();
             const title = titleEl.innerText;
             const titleParsed = title.toLowerCase().replace(/\./g, ' '); // ??
-            const channelName = channelEl.innerText.toLowerCase();
 
-            const onOther = regOther.test(title);
-            const onNp = regNp.test(title);
+            let onOther = false;
+            let onOtherPos = -1;
+            let onOtherIncluded = false;
+            let serverName = '';
+            for (let i = 0; i < regOthers.length; i++) {
+                const regOther = regOthers[i];
+                onOtherPos = title.indexOfRegex(regOther.reg);
+                if (onOtherPos > -1) {
+                    onOther = true;
+                    serverName = regOther.name;
+                    if (regOther.include) onOtherIncluded = true;
+                    break;
+                }
+            }
+
+            let onNp = false;
+            const onNpPos = title.indexOfRegex(regNp);
+            if (onNpPos > -1 && (onOther === false || onNpPos < onOtherPos)) {
+                onNp = true;
+                onOther = false;
+                onOtherIncluded = false;
+            }
             const characters = npCharacters[channelName];
             const mainsOther = characters && characters.assumeOther;
             const onMainOther = !onNp && mainsOther;
@@ -359,24 +383,29 @@ const filterStreams = async () => {
 
             let filterState; // remove, mark-np, mark-other
             if (filterEnabled) { // If filtering streams is enabled
-                if ((tnoOthers && (onOther || onMainOther)) || (!tnoOthers && npStreamer && onOther)) { // If is-including-others and streamer on another server, or it's an NP streamer playing another server
+                if ((tnoOthers && (onOtherIncluded || onMainOther)) || (npStreamer && !mainsOther && onOther)) { // If is-including-others and streamer on another server, or it's an NP streamer playing another server
                     filterState = FSTATES.other;
                 } else if (npStreamer && !onMainOther && !onOther) { // If NoPixel streamer that isn't on another server
                     filterState = FSTATES.nopixel;
+                    serverName = 'NoPixel';
                 } else {
                     filterState = FSTATES.remove;
                 }
             } else {
                 if (npStreamer && !onMainOther && !onOther) { // If NoPixel streamer that isn't on another server
                     filterState = FSTATES.nopixel;
+                    serverName = 'NoPixel';
                 } else {
                     filterState = FSTATES.other;
                 }
             }
 
             if (filterState === FSTATES.other) { // Other included RP servers
-                liveEl.innerText = '';
                 channelEl.style.color = useColors.other;
+                liveElDiv.style.backgroundColor = useColorsDark.other;
+                liveEl.style.color = useTextColor;
+                liveEl.style.setProperty('text-transform', 'none', 'important');
+                liveEl.innerText = serverName.length > 0 ? `::${serverName}::` : '';
             } else if (filterState === FSTATES.nopixel) { // NoPixel stream
                 let nowCharacter;
                 let factionNames = [];
@@ -409,9 +438,6 @@ const filterStreams = async () => {
                     }
                 }
 
-                const useTextColor = '#000';
-                // const useTextColor = isDark ? '#000' : '#f7f7f8';
-
                 if (nowCharacter) {
                     const nowColor = useColors[nowCharacter.factionUse];
                     const nowColorDark = useColorsDark[nowCharacter.factionUse];
@@ -434,11 +460,16 @@ const filterStreams = async () => {
                     liveEl.style.color = useTextColor;
                     liveEl.innerText = `? ${characters[0].displayName} ?`;
                 } else {
-                    liveEl.innerText = '';
                     channelEl.style.color = useColors.othernp;
+                    liveElDiv.style.backgroundColor = useColorsDark.othernp;
+                    liveEl.style.color = useTextColor;
+                    liveEl.style.setProperty('text-transform', 'none', 'important');
+                    liveEl.innerText = `${serverName}`;
                 }
             } else if (filterState === FSTATES.remove) { // Remove stream
-                // const viewers = element.getElementsByClassName('tw-media-card-stat tw-c-background-overlay')[0].firstChild.innerText;
+                // liveEl.innerText = 'REMOVED';
+                // channelEl.style.color = '#ff0074';
+
                 const viewers = element.getElementsByClassName('tw-media-card-stat')[0].firstChild.innerText;
                 let viewersNum = parseFloat(viewers);
                 if (viewers.includes('K viewer')) viewersNum *= 1000;
