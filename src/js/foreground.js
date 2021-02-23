@@ -62,6 +62,12 @@ let useColors = {};
 let useColorsDark = {};
 let useColorsLight = {};
 
+const FSTATES = {
+    remove: 0,
+    nopixel: 1,
+    other: 2,
+};
+
 // #00A032 #cd843f #9b4d75 #b71540 #ff0074
 // fastlane: '#40739e',
 // mersions, koreans, ckr, aztecas
@@ -351,27 +357,27 @@ const filterStreams = async () => {
             const onMainOther = !onNp && mainsOther;
             const npStreamer = onNp || characters;
 
-            let filterState = 0; // remove, mark-np, mark-other
+            let filterState; // remove, mark-np, mark-other
             if (filterEnabled) { // If filtering streams is enabled
                 if (tnoOthers && (onOther || onMainOther)) { // If is-including-others and streamer on another server
-                    filterState = 2;
-                } else if (!npStreamer || onMainOther) { // Remove if not an NP streamer or is-removing-others and streamer on their main server
-                    filterState = 0;
+                    filterState = FSTATES.other;
+                } else if (npStreamer && !onMainOther) { // If NoPixel streamer that isn't on their main server instead
+                    filterState = FSTATES.nopixel;
                 } else {
-                    filterState = 1;
+                    filterState = FSTATES.remove;
                 }
             } else {
-                if (!npStreamer || onMainOther || onOther) { // If not an NP streamer or streamer on another server
-                    filterState = 2;
+                if (npStreamer && !onMainOther && !onOther) { // If not an NP streamer or streamer on another server
+                    filterState = FSTATES.nopixel;
                 } else {
-                    filterState = 1;
+                    filterState = FSTATES.other;
                 }
             }
 
-            if (filterState === 2) { // Other included RP servers
+            if (filterState === FSTATES.other) { // Other included RP servers
                 liveEl.innerText = '';
                 channelEl.style.color = useColors.other;
-            } else if (filterState === 1) { // NoPixel stream
+            } else if (filterState === FSTATES.nopixel) { // NoPixel stream
                 let nowCharacter;
                 let factionNames = [];
 
@@ -431,7 +437,7 @@ const filterStreams = async () => {
                     liveEl.innerText = '';
                     channelEl.style.color = useColors.othernp;
                 }
-            } else if (filterState === 0) { // Remove stream
+            } else if (filterState === FSTATES.remove) { // Remove stream
                 // const viewers = element.getElementsByClassName('tw-media-card-stat tw-c-background-overlay')[0].firstChild.innerText;
                 const viewers = element.getElementsByClassName('tw-media-card-stat')[0].firstChild.innerText;
                 let viewersNum = parseFloat(viewers);
