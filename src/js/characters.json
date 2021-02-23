@@ -6,10 +6,11 @@
     "regNp": "(?<!ssb wrld\\W+)(?:no\\s*pixel|\\bn\\s*p\\b)(?![\\s-]+inspired)",
     "regOther": "the\\s*family|\\btf\\s?rp|family\\s*rp|twitchrp|\\bt\\W*rp|\\bnon[\\s-]*stop|\\bns\\s?rp",
     "regOthers": [
-        { "name": "TheFamilyRP", "reg": "the\\s*family|\\btf\\s?rp|family\\s*rp" },
-        { "name": "Twitch RP", "reg": "twitchrp|\\bt\\W*rp" },
-        { "name": "Nonstop RP", "reg": "\\bnon[\\s-]*stop|\\bns\\s?rp" },
-        { "reg": "\\bgtav?[\\s:-]*online|\\bsvrp\\b|subversion|ssb[\\s:-]*wrld|grizlly\\s*rp" }
+        { "name": "TheFamilyRP", "reg": "the\\s*family|\\btf\\s?rp|family\\s*rp", "include": 1 },
+        { "name": "Twitch RP", "reg": "twitchrp|\\bt\\W*rp", "include": 1 },
+        { "name": "Nonstop RP", "reg": "\\bnon[\\s-]*stop|\\bns\\s?rp", "include": 1 },
+        { "name": "Grizlly", "reg": "grizlly\\s*rp", "include": 0 },
+        { "name": "", "reg": "\\bgtav?[\\s:-]*online|\\bsvrp\\b|subversion|ssb[\\s:-]*wrld|grizlly\\s*rp", "include": 0 }
     ],
     "npCharacters": {
         "0Reed": [
