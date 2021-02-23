@@ -362,6 +362,10 @@
         "durptastic": [
             { "name": "Otis Goody", "faction": "Burger Shot" }
         ],
+        "dwjft": [
+            { "name": "Dean Watson", "leader": true },
+            { "name": "Development \"Development: DW\"", "faction": "Development", "nicknames": ["tinkering"] }
+        ],
         "Dyrus": [
             { "name": "Louis Hill", "displayName": 0 }
         ],
