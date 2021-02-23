@@ -67,6 +67,12 @@ const FSTATES = {
     other: 2,
 };
 
+const displayNameDefault = {
+    police: 2,
+    doj: 2,
+    mersions: 0,
+};
+
 // #00A032 #cd843f #9b4d75 #b71540 #ff0074
 // fastlane: '#40739e',
 // mersions, koreans, ckr, aztecas
@@ -124,12 +130,6 @@ const FSTATES = {
 // };
 
 const fullFactionMap = {};
-
-const displayNameDefault = {
-    police: 2,
-    doj: 2,
-    mersions: 0,
-};
 
 RegExp.escape = function (string) {
     return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
@@ -387,14 +387,14 @@ const filterStreams = async () => {
                     filterState = FSTATES.other;
                 } else if (npStreamer && !onMainOther && !onOther) { // If NoPixel streamer that isn't on another server
                     filterState = FSTATES.nopixel;
-                    serverName = 'NoPixel';
+                    serverName = 'NP';
                 } else {
                     filterState = FSTATES.remove;
                 }
             } else {
                 if (npStreamer && !onMainOther && !onOther) { // If NoPixel streamer that isn't on another server
                     filterState = FSTATES.nopixel;
-                    serverName = 'NoPixel';
+                    serverName = 'NP';
                 } else {
                     filterState = FSTATES.other;
                 }
