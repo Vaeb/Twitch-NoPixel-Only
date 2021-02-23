@@ -367,7 +367,7 @@ const filterStreams = async () => {
                     filterState = FSTATES.remove;
                 }
             } else {
-                if (npStreamer && !onMainOther && !onOther) { // If not an NP streamer or streamer on another server
+                if (npStreamer && !onMainOther && !onOther) { // If NoPixel streamer that isn't on another server
                     filterState = FSTATES.nopixel;
                 } else {
                     filterState = FSTATES.other;
