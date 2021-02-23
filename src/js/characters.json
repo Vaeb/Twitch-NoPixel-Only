@@ -1028,6 +1028,9 @@
             { "name": "Jason Paul", "faction": "Lost MC", "nicknames": ["JP"] },
             { "name": "Hades", "nicknames": ["Dog"] }
         ],
+        "Purge9090": [
+            { "name": "Jack Frent", "faction": "DoC", "displayName": 0 }
+        ],
         "qozmyox": [
             { "name": "Fernando \"Mario\" Reyes", "nicknames": ["\"Mario\" from the Barrio"] }
         ],
