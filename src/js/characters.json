@@ -645,7 +645,8 @@
             { "name": "Arush", "faction": "GSF" }
         ],
         "KatFires": [
-            { "name": "Novah Walker", "faction": "Chang Gang" }
+            { "name": "Novah Walker", "faction": "Chang Gang" },
+            { "name": "Ensley Alton", "faction": "DoC", "nicknames": ["721"] }
         ],
         "KattValkyrie": [
             { "name": "[EMS] Valkyrie Sunshot" }
