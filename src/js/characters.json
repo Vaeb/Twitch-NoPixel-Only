@@ -9,8 +9,8 @@
         { "name": "TheFamilyRP", "reg": "the\\s*family|\\btf\\s?rp|family\\s*rp", "include": 1 },
         { "name": "TwitchRP", "reg": "twitchrp|\\bt\\W*rp", "include": 1 },
         { "name": "NonStopRP", "reg": "\\bnon[\\s-]*stop|\\bns\\s?rp", "include": 1 },
-        { "name": "BluebirdRP", "reg": "bluebird\\s*rp", "include": 1 },
-        { "name": "", "reg": "\\bgtav?[\\s:-]*online|\\bsvrp\\b|subversion|ssb[\\s:-]*wrld|grizzely\\s*rp", "include": 0 }
+        { "name": "SVRP", "reg": "\\bsvrp\\b|subversion", "include": 0 },
+        { "name": "", "reg": "\\bgtav?[\\s:-]*online|ssb[\\s:-]*wrld|grizzely\\s*rp", "include": 0 }
     ],
     "npCharacters": {
         "0Reed": [
