@@ -656,7 +656,8 @@
             { "name": "Ensley Alton", "faction": "DoC", "nicknames": ["721"] }
         ],
         "KattValkyrie": [
-            { "name": "[EMS] Valkyrie Sunshot", "faction": "Medical" }
+            { "name": "[EMS] Valkyrie Sunshot", "faction": "Medical" },
+            { "name": "Katt Vincent" }
         ],
         "kClient": [
             { "name": "Daquan \"Peanut\" Dumas", "faction": "Arab Mafia" }
