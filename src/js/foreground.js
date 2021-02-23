@@ -635,12 +635,12 @@ const filterStreams = async () => {
 
         ([tnoStatus, tnoEnglish, tnoOthers, tnoAllowAll] = await getStorage(['tnoStatus', 'tnoEnglish', 'tnoOthers', 'tnoAllowAll'], [true, true, false, false]));
 
+        addSettings(); // Settings should show even if status disabled
+
         if (tnoStatus === false) {
             console.log("[TNO] Couldn't start interval (status set to disabled)");
             return false;
         }
-
-        addSettings();
 
         if (tnoEnglish) {
             selectEnglish();
