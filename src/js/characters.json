@@ -1323,8 +1323,9 @@
             { "name": "Lexi Law", "faction": "Angels" }
         ],
         "TwistedBones": [
-            { "name": "Marcus Black", "faction": "GSF", "displayName": 0 },
-            { "name": "Mark White", "displayName": 0 }
+            { "name": "Mark White", "displayName": 0 },
+            { "name": "Hank Marston", "displayName": 0 },
+            { "name": "Marcus Black", "faction": "GSF", "displayName": 0 }
         ],
         "TwistedManifest": [
             { "name": "Jack Valentino", "faction": "Lunatix" }
