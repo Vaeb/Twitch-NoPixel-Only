@@ -368,96 +368,94 @@ const filterStreams = async () => {
                 }
             }
 
-            if (filterState === 2) {
+            if (filterState === 2) { // Other included RP servers
                 liveEl.innerText = '';
                 channelEl.style.color = useColors.other;
-            } else {
-                if (filterState === 1) { // Is nopixel char
-                    let nowCharacter;
-                    let factionNames = [];
+            } else if (filterState === 1) { // NoPixel stream
+                let nowCharacter;
+                let factionNames = [];
 
-                    if (characters && characters.length) {
-                        let lowestPos = Infinity;
-                        for (const char of characters) {
-                            const matchPos = titleParsed.indexOfRegex(char.nameReg);
-                            if (matchPos > -1 && matchPos < lowestPos) {
-                                lowestPos = matchPos;
-                                nowCharacter = char;
-                            }
+                if (characters && characters.length) {
+                    let lowestPos = Infinity;
+                    for (const char of characters) {
+                        const matchPos = titleParsed.indexOfRegex(char.nameReg);
+                        if (matchPos > -1 && matchPos < lowestPos) {
+                            lowestPos = matchPos;
+                            nowCharacter = char;
                         }
                     }
-
-                    if (nowCharacter === undefined) {
-                        for (const [faction, regex] of npFactionsRegexEnt) {
-                            const matchPos = title.indexOfRegex(regex);
-                            if (matchPos > -1) {
-                                const factionObj = { name: faction, index: matchPos, character: characters && characters.find(char => char.faction === faction) };
-                                factionObj.rank = factionObj.character ? 0 : 1;
-                                factionNames.push(factionObj);
-                            }
-                        }
-
-                        if (factionNames.length) {
-                            factionNames.sort((a, b) => a.rank - b.rank || a.index - b.index);
-                            if (factionNames[0].character) nowCharacter = factionNames[0].character;
-                            factionNames = factionNames.map(f => f.name);
-                        }
-                    }
-
-                    const useTextColor = '#000';
-                    // const useTextColor = isDark ? '#000' : '#f7f7f8';
-
-                    if (nowCharacter) {
-                        const nowColor = useColors[nowCharacter.factionUse];
-                        const nowColorDark = useColorsDark[nowCharacter.factionUse];
-                        channelEl.style.color = nowColor;
-                        liveElDiv.style.backgroundColor = nowColorDark;
-                        liveEl.style.color = useTextColor;
-                        liveEl.innerText = `${nowCharacter.leader ? '♛ ' : ''}${nowCharacter.displayName}`;
-                    } else if (factionNames.length) {
-                        const nowColor = useColors[factionNames[0]] || useColors.independent;
-                        const nowColorDark = useColorsDark[factionNames[0]] || useColorsDark.independent;
-                        channelEl.style.color = nowColor;
-                        liveElDiv.style.backgroundColor = nowColorDark;
-                        liveEl.style.color = useTextColor;
-                        liveEl.innerText = `< ${fullFactionMap[factionNames[0]] || factionNames[0]} >`;
-                    } else if (characters && characters.length) {
-                        const nowColor = useColors[characters[0].factionUse];
-                        const nowColorDark = useColorsDark[characters[0].factionUse];
-                        channelEl.style.color = nowColor;
-                        liveElDiv.style.backgroundColor = nowColorDark;
-                        liveEl.style.color = useTextColor;
-                        liveEl.innerText = `? ${characters[0].displayName} ?`;
-                    } else {
-                        liveEl.innerText = '';
-                        channelEl.style.color = useColors.othernp;
-                    }
-                } else if (filterState === 0) {
-                    // const viewers = element.getElementsByClassName('tw-media-card-stat tw-c-background-overlay')[0].firstChild.innerText;
-                    const viewers = element.getElementsByClassName('tw-media-card-stat')[0].firstChild.innerText;
-                    let viewersNum = parseFloat(viewers);
-                    if (viewers.includes('K viewer')) viewersNum *= 1000;
-                    if (viewersNum < minViewers) {
-                        if (isFirstRemove && keepDeleting) {
-                            keepDeleting = false;
-                            if (stopOnMin) {
-                                clearInterval(interval);
-                                interval = null;
-                                console.log('[TNO] Finished.');
-                            } else {
-                                console.log('[TNO] Clearing stream thumbnails with low viewers');
-                            }
-                        }
-                        const images = element.getElementsByClassName('tw-image');
-                        for (let j = 0; j < images.length; j++) images[j].src = '';
-                    } else if (keepDeleting) {
-                        // element.outerHTML = '';
-                        // element.parentNode.removeChild(element);
-                        element.style.display = 'none';
-                        console.log('[TNO] Deleted');
-                    }
-                    if (isFirstRemove) isFirstRemove = false;
                 }
+
+                if (nowCharacter === undefined) {
+                    for (const [faction, regex] of npFactionsRegexEnt) {
+                        const matchPos = title.indexOfRegex(regex);
+                        if (matchPos > -1) {
+                            const factionObj = { name: faction, index: matchPos, character: characters && characters.find(char => char.faction === faction) };
+                            factionObj.rank = factionObj.character ? 0 : 1;
+                            factionNames.push(factionObj);
+                        }
+                    }
+
+                    if (factionNames.length) {
+                        factionNames.sort((a, b) => a.rank - b.rank || a.index - b.index);
+                        if (factionNames[0].character) nowCharacter = factionNames[0].character;
+                        factionNames = factionNames.map(f => f.name);
+                    }
+                }
+
+                const useTextColor = '#000';
+                // const useTextColor = isDark ? '#000' : '#f7f7f8';
+
+                if (nowCharacter) {
+                    const nowColor = useColors[nowCharacter.factionUse];
+                    const nowColorDark = useColorsDark[nowCharacter.factionUse];
+                    channelEl.style.color = nowColor;
+                    liveElDiv.style.backgroundColor = nowColorDark;
+                    liveEl.style.color = useTextColor;
+                    liveEl.innerText = `${nowCharacter.leader ? '♛ ' : ''}${nowCharacter.displayName}`;
+                } else if (factionNames.length) {
+                    const nowColor = useColors[factionNames[0]] || useColors.independent;
+                    const nowColorDark = useColorsDark[factionNames[0]] || useColorsDark.independent;
+                    channelEl.style.color = nowColor;
+                    liveElDiv.style.backgroundColor = nowColorDark;
+                    liveEl.style.color = useTextColor;
+                    liveEl.innerText = `< ${fullFactionMap[factionNames[0]] || factionNames[0]} >`;
+                } else if (characters && characters.length) {
+                    const nowColor = useColors[characters[0].factionUse];
+                    const nowColorDark = useColorsDark[characters[0].factionUse];
+                    channelEl.style.color = nowColor;
+                    liveElDiv.style.backgroundColor = nowColorDark;
+                    liveEl.style.color = useTextColor;
+                    liveEl.innerText = `? ${characters[0].displayName} ?`;
+                } else {
+                    liveEl.innerText = '';
+                    channelEl.style.color = useColors.othernp;
+                }
+            } else if (filterState === 0) { // Remove stream
+                // const viewers = element.getElementsByClassName('tw-media-card-stat tw-c-background-overlay')[0].firstChild.innerText;
+                const viewers = element.getElementsByClassName('tw-media-card-stat')[0].firstChild.innerText;
+                let viewersNum = parseFloat(viewers);
+                if (viewers.includes('K viewer')) viewersNum *= 1000;
+                if (viewersNum < minViewers) {
+                    if (isFirstRemove && keepDeleting) {
+                        keepDeleting = false;
+                        if (stopOnMin) {
+                            clearInterval(interval);
+                            interval = null;
+                            console.log('[TNO] Finished.');
+                        } else {
+                            console.log('[TNO] Clearing stream thumbnails with low viewers');
+                        }
+                    }
+                    const images = element.getElementsByClassName('tw-image');
+                    for (let j = 0; j < images.length; j++) images[j].src = '';
+                } else if (keepDeleting) {
+                    // element.outerHTML = '';
+                    // element.parentNode.removeChild(element);
+                    element.style.display = 'none';
+                    console.log('[TNO] Deleted');
+                }
+                if (isFirstRemove) isFirstRemove = false;
             }
         });
 
