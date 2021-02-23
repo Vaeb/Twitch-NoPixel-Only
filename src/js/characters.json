@@ -1174,6 +1174,9 @@
         "skippypoppin": [
             { "name": "Kevin Whipaloo", "faction": "Burger Shot", "displayName": 0 }
         ],
+        "Skitx0": [
+            { "name": "Smino \"Hitta\" Brown", "faction": "GSF" }
+        ],
         "Slasher2099": [
             { "name": "[Officer] Darrel McCormik", "faction": "Police" },
             { "name": "[K9 Trooper] Fenton", "faction": "Police", "nicknames": ["Fentons"] }
