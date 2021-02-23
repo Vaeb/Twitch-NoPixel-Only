@@ -495,35 +495,68 @@ const filterStreams = async () => {
         return el;
     };
 
+    const identifyEnglish = () => { // Make sure it doesn't run until stream elements (and tags) are fully loaded
+        const streamElements = $('article:visible').toArray();
+        for (let i = 0; i < streamElements.length; i++) {
+            const streamEl = streamElements[i];
+            const channelName = streamEl.querySelector("a[data-a-target='preview-card-channel-link']").innerText.toLowerCase();
+            const streamTags = streamEl.querySelectorAll('button.tw-tag');
+            if (npCharacters[channelName] && streamTags.length === 1) { // Could also just check first tag?
+                return streamTags[0].innerText;
+            }
+        }
+        return 'English';
+    };
+
     // Automatically select English tag for GTAV
     const selectEnglish = async () => {
-        await waitForElement('.animated-tag--no-bounce, [data-a-target="form-tag-add-filter-suggested"]');
+        await waitForElement('div.animated-tag--no-bounce, button[data-a-target="form-tag-add-filter-suggested"]');
 
-        const hasEnglishTag = document.querySelector('button[data-a-target="form-tag-English"]') != null;
+        const englishWord = identifyEnglish();
+
+        const hasEnglishTag = document.querySelector(`button[data-a-target="form-tag-${englishWord}"]`) != null;
 
         if (!hasEnglishTag) {
             let englishTag;
 
+            let numAttempts = 0;
             while (englishTag == null) {
                 const inp = document.querySelector('#dropdown-search-input');
                 inp.select();
 
-                console.log('looking for english');
+                console.log(`looking for ${englishWord}`);
+
+                const tagSearchDropdown = $('div.tag-search__scrollable-area:visible')[0];
+                const isVis1 = tagSearchDropdown != null;
+                const isReady1 = isVis1 && tagSearchDropdown.querySelector('div.tw-loading-spinner') == null;
 
                 // eslint-disable-next-line no-await-in-loop
                 englishTag = await waitForElement(() => {
-                    const englishXPath = '//div[contains(concat(" ", normalize-space(@class), " "), " tw-pd-x-1 tw-pd-y-05 ") and text()="English"]';
+                    const englishXPath = `//div[contains(concat(" ", normalize-space(@class), " "), " tw-pd-x-1 tw-pd-y-05 ") and text()="${englishWord}"]`;
                     return document.evaluate(englishXPath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
                 }, 1000);
+
+                const isVis2 = $('div.tag-search__scrollable-area:visible')[0] != null;
+
+                if (englishTag == null && isReady1 && isVis2) {
+                    numAttempts++;
+                    console.log('tag-search appeared', numAttempts);
+                }
+
+                if (numAttempts >= 1) {
+                    console.log(`failed to find ${englishWord} option in tag-search`);
+                    break;
+                }
             }
 
-            // if (englishTag == null) return;
+            if (englishTag) {
+                englishTag.click();
+                console.log(`selected ${englishWord}`);
+            }
 
-            englishTag.click();
-            console.log('selected english');
             $(':focus').blur();
         } else {
-            console.log('has english tag');
+            console.log(`has ${englishWord} tag`);
         }
     };
 
