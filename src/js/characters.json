@@ -5,6 +5,12 @@
     "intervalSeconds": 0.7,
     "regNp": "(?<!ssb wrld\\W+)(?:no\\s*pixel|\\bn\\s*p\\b)(?![\\s-]+inspired)",
     "regOther": "the\\s*family|\\btf\\s?rp|family\\s*rp|twitchrp|\\bt\\W*rp|\\bnon[\\s-]*stop|\\bns\\s?rp",
+    "regOthers": [
+        { "name": "TheFamilyRP", "reg": "the\\s*family|\\btf\\s?rp|family\\s*rp" },
+        { "name": "TwitchRP Next", "reg": "twitchrp|\\bt\\W*rp" },
+        { "name": "NonstopRP", "reg": "\\bnon[\\s-]*stop|\\bns\\s?rp" },
+        { "reg": "\\bgtav?[\\s:-]*online|\\bsvrp\\b|subversion|ssb[\\s:-]*wrld" }
+    ],
     "npCharacters": {
         "0Reed": [
             { "name": "Reed Dankleaf", "faction": "Lost MC" }
