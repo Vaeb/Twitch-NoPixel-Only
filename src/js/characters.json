@@ -1045,6 +1045,9 @@
         "qurquru": [
             { "name": "[Officer] Vladimir Reznik", "faction": "Police" }
         ],
+        "Ragonath": [
+            { "name": "Maxwell Devitt", "displayName": 0 }
+        ],
         "RaidedAU": [
             { "name": "[Officer] Gage Draider", "faction": "Police" },
             { "name": "Development \"Development: Raided\"", "faction": "Development" }
