@@ -1065,7 +1065,8 @@
             { "name": "[FIB Agent] Lyonel Winchester", "faction": "Police" }
         ],
         "Realzman": [
-            { "name": "[EMS] Connor", "faction": "Medical" }
+            { "name": "[EMS] Connor", "faction": "Medical" },
+            { "name": "Malakai" }
         ],
         "ReinaRP": [
             { "name": "Mona Sanchez" }
