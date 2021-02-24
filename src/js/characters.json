@@ -194,7 +194,7 @@
             { "name": "Dris Peters", "faction": "SSB" }
         ],
         "BRIT": [
-            { "name": "[EMS] Tori Corleone", "faction": "Medical" }
+            { "name": "Tori Corleone", "nicknames": ["Bologna"] }
         ],
         "buddha": [
             { "name": "Lang Buddha", "faction": "Leanbois", "leader": true, "nicknames": ["Circle Andy"] },
@@ -1297,7 +1297,7 @@
             { "name": "Pilbis Shonly", "faction": "Burger Shot" }
         ],
         "TheChief1114": [
-            { "name": "Fingle Dan", "displayName": 0 }
+            { "name": "Fingle Dan", "displayName": 0, "other": -1 }
         ],
         "TheDondi": [
             { "name": "Arthur Hammond", "nicknames": ["The \"Doctor\""] },
