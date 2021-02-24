@@ -5,23 +5,22 @@
 
 console.log('[TNO] Loading Twitch NoPixel Only...');
 
-const getStorage = (key, defaultVal = undefined) => new Promise((resolve) => {
-    const useDefault = defaultVal !== undefined;
+const getStorage = (keys, defaultVal = undefined) => new Promise((resolve) => {
+    let useKeys = keys;
+    if (Array.isArray(keys)) useKeys = keys.map(data => (Array.isArray(data) ? data[0] : data));
 
-    chrome.storage.local.get(key, (value) => {
+    chrome.storage.local.get(useKeys, (values) => {
         let val;
-        if (typeof key === 'string') {
-            val = value[key];
-            if (useDefault && val === undefined) val = defaultVal;
+        if (typeof keys === 'string') {
+            val = values[keys];
+            if (val === undefined) val = defaultVal;
         } else {
             val = [];
-            const manyDefaults = Array.isArray(defaultVal);
-            for (let i = 0; i < key.length; i++) {
-                const k = key[i];
-                let v = value[k];
-                if (useDefault && v === undefined) {
-                    v = manyDefaults ? defaultVal[i] : defaultVal;
-                }
+            for (let i = 0; i < keys.length; i++) {
+                const k = useKeys[i];
+                const kDefault = Array.isArray(keys[i]) ? keys[i][1] : undefined;
+                let v = values[k];
+                if (v === undefined) v = kDefault;
                 val.push(v);
             }
         }
@@ -180,7 +179,13 @@ const filterStreams = async () => {
 
     console.log('Fetched data!');
 
-    let [tnoStatus, tnoEnglish, tnoOthers, tnoAllowAll] = await getStorage(['tnoStatus', 'tnoEnglish', 'tnoOthers', 'tnoAllowAll'], [true, true, false, false]);
+    let [tnoStatus, tnoEnglish, tnoOthers, tnoScrolling, tnoAllowAll] = await getStorage([
+        ['tnoStatus', true],
+        ['tnoEnglish', true],
+        ['tnoOthers', false],
+        ['tnoScrolling', false],
+        ['tnoAllowAll', false],
+    ]);
     const filterEnabled = !isDeveloper || !tnoAllowAll; // Fail-safe incase extension accidentally gets published with tnoAllowAll enabled
 
     for (const [streamer, characters] of Object.entries(npCharacters)) {
@@ -331,11 +336,19 @@ const filterStreams = async () => {
             element => !element.classList.contains('npChecked')
         );
 
+        const prevWasZero = wasZero;
+
         let isFirstRemove = true;
         if (elements.length > 0 || !wasZero) {
             console.log('[TNO] _There are so many elements:', elements.length);
             wasZero = elements.length === 0;
         }
+
+        // if (elements.length > 0 && prevWasZero) {
+        //     const $scrollDiv = $('div.root-scrollable.scrollable-area').find('> div.simplebar-scroll-content');
+        //     const bottomRem = ($scrollDiv[0].scrollHeight - $scrollDiv.height()) - $scrollDiv.scrollTop();
+        //     console.log('before-deletion bottomRem:', bottomRem);
+        // }
 
         elements.forEach((element) => {
             element.classList.add('npChecked');
@@ -496,6 +509,16 @@ const filterStreams = async () => {
             }
         });
 
+        if (tnoScrolling && elements.length > 0 && prevWasZero) {
+            const $scrollDiv = $('div.root-scrollable.scrollable-area').find('> div.simplebar-scroll-content');
+            const bottomRem = ($scrollDiv[0].scrollHeight - $scrollDiv.height()) - $scrollDiv.scrollTop();
+            // console.log('after-deletion bottomRem:', bottomRem);
+            if (bottomRem < 532) {
+                console.log('Auto adjusted scrolling');
+                $scrollDiv.scrollTop(Math.max($scrollDiv.scrollTop() - (540 - bottomRem), 0));
+            }
+        }
+
         isDeleting = false;
     };
 
@@ -626,6 +649,14 @@ const filterStreams = async () => {
                                 </span>
                             </div>
                             <div class="settings-option">
+                                <span class="settings-name tooltip">Scrolling adjustments:
+                                    <span class="tooltiptext">Reduces scrolling lag by making Twitch only fetch one batch of new streams after scrolling to the page bottom.</span>
+                                </span>
+                                <span class="settings-value">
+                                    <input id="setting-scrolling" type="checkbox" class="toggle" ${tnoScrolling ? 'checked' : ''}>
+                                </span>
+                            </div>
+                            <div class="settings-option">
                                 <span class="settings-name">Include other roleplay servers:</span>
                                 <span class="settings-value">
                                     <input id="setting-others" type="checkbox" class="toggle" ${tnoOthers ? 'checked' : ''}>
@@ -650,6 +681,7 @@ const filterStreams = async () => {
                     const $settingsReload = $('.settings-reload');
                     const $settingStatus = $('#setting-status');
                     const $settingEnglish = $('#setting-english');
+                    const $settingScrolling = $('#setting-scrolling');
                     const $settingOthers = $('#setting-others');
                     const $settingShowAll = $('#setting-show-all');
 
@@ -667,6 +699,13 @@ const filterStreams = async () => {
                         setStorage('tnoEnglish', newValue);
                         tnoEnglish = newValue;
                         console.log('Set force-english to:', newValue);
+                    });
+
+                    $settingScrolling.change(function () {
+                        const newValue = this.checked;
+                        setStorage('tnoScrolling', newValue);
+                        tnoScrolling = newValue;
+                        console.log('Set scrolling-adjustments to:', newValue);
                     });
 
                     $settingOthers.change(function () {
@@ -697,7 +736,13 @@ const filterStreams = async () => {
             return false;
         }
 
-        ([tnoStatus, tnoEnglish, tnoOthers, tnoAllowAll] = await getStorage(['tnoStatus', 'tnoEnglish', 'tnoOthers', 'tnoAllowAll'], [true, true, false, false]));
+        ([tnoStatus, tnoEnglish, tnoOthers, tnoScrolling, tnoAllowAll] = await getStorage([
+            ['tnoStatus', true],
+            ['tnoEnglish', true],
+            ['tnoOthers', false],
+            ['tnoScrolling', false],
+            ['tnoAllowAll', false],
+        ]));
 
         addSettings(); // Settings should show even if status disabled
 
