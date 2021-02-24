@@ -66,6 +66,13 @@ const FSTATES = {
     other: 2,
 };
 
+const ASTATES = {
+    assumeNpNoOther: -1,
+    assumeNp: 0,
+    assumeOther: 1,
+    someOther: 1.5,
+};
+
 const displayNameDefault = {
     police: 2,
     doj: 2,
@@ -193,6 +200,8 @@ const filterStreams = async () => {
             characters.push({ name: '<Permathon>', nicknames: ['Permathon'] });
         }
 
+        const foundOthers = {};
+
         // eslint-disable-next-line no-loop-func
         characters.forEach((char) => {
             const names = char.name.split(/\s+/);
@@ -281,25 +290,19 @@ const filterStreams = async () => {
                 char.factionUse = 'independent';
             }
 
-            if (char.other === 1) { // If primarily on other server
-                if (characters.assumeOther === undefined) {
-                    characters.assumeOther = 1; // Assume every character is primarily on other server
-                } else if (char.assumeOther === 0) {
-                    characters.assumeOther = 2; // Assume some characters are primarily on other server
-                }
-            } else if (char.other === 0) {
-                if (characters.assumeOther === undefined) {
-                    characters.assumeOther = 0; // Assume no characters are primarily on other server
-                } else if (characters.assumeOther === 1) {
-                    characters.assumeOther = 2; // Assume some characters are primarily on other server
-                }
-            } else if (char.other == undefined) {
-                char.other = 0;
-            }
+            foundOthers[char.other] = true;
         });
 
-        if (characters.assumeOther === undefined) {
-            characters.assumeOther = 0;
+        if (foundOthers[0] && foundOthers[1]) {
+            characters.assumeOther = ASTATES.someOther;
+        } else if (foundOthers[1]) {
+            characters.assumeOther = ASTATES.assumeOther;
+        } else if (foundOthers[-1]) {
+            characters.assumeOther = ASTATES.assumeNpNoOther;
+        } else if (foundOthers[0]) {
+            characters.assumeOther = ASTATES.assumeNp;
+        } else {
+            characters.assumeOther = ASTATES.assumeNp;
         }
 
         const streamerLower = streamer.toLowerCase();
@@ -390,13 +393,14 @@ const filterStreams = async () => {
                 onOtherIncluded = false;
             }
             const characters = npCharacters[channelName];
-            const mainsOther = characters && characters.assumeOther;
+            const mainsOther = characters && characters.assumeOther == ASTATES.assumeOther;
+            const keepNp = characters && characters.assumeOther == ASTATES.assumeNpNoOther;
             const onMainOther = !onNp && mainsOther;
             const npStreamer = onNp || characters;
 
             let filterState; // remove, mark-np, mark-other
             if (filterEnabled) { // If filtering streams is enabled
-                if ((tnoOthers && (onOtherIncluded || onMainOther)) || (npStreamer && !mainsOther && onOther)) { // If is-including-others and streamer on another server, or it's an NP streamer playing another server
+                if ((tnoOthers && (onOtherIncluded || onMainOther)) || (npStreamer && !mainsOther && !keepNp && onOther)) { // If is-including-others and streamer on another server, or it's an NP streamer playing another server
                     filterState = FSTATES.other;
                 } else if (npStreamer && !onMainOther && !onOther) { // If NoPixel streamer that isn't on another server
                     filterState = FSTATES.nopixel;
