@@ -626,7 +626,8 @@
             { "name": "Lenny Large", "faction": "Burger Shot", "displayName": 0 }
         ],
         "JukeBoxEM": [
-            { "name": "Tony Foster" }
+            { "name": "Tony Foster" },
+            { "name": "Shane Jones", "faction": "DoC" }
         ],
         "JustaMinx": [
             { "name": "Mercy Peggers" }
