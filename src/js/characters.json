@@ -904,6 +904,9 @@
             { "name": "Bernice \"Shadowlord\" Caldershot", "faction": "LARPers" },
             { "name": "Yung Dab", "nicknames": ["The \"Gnome\""] }
         ],
+        "MrMoonsHouse": [
+            { "name": "Freddy Price", "displayName": 0 }
+        ],
         "MsTeamKK": [
             { "name": "Riley Carter" }
         ],
@@ -1145,6 +1148,9 @@
         "SayeedBlack": [
             { "name": "Arush Patel \"Speedy\" Santana", "faction": "Vagos", "leader": true, "nicknames": ["El Jefe"] },
             { "name": "Sayeed White", "faction": "DoC", "nicknames": ["Mr. White"], "displayName": 3 }
+        ],
+        "Selvek": [
+            { "name": "Jeffrey Price", "displayName": 0 }
         ],
         "SgtApollo": [
             { "name": "Salem Barghouthi" }
