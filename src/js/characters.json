@@ -307,6 +307,9 @@
             { "name": "Uchiha Jones", "faction": "Chang Gang" },
             { "name": "Joe Caine", "displayName": 0 }
         ],
+        "DanGheesling": [
+            { "name": "Tanner Buttermaker", "displayName": 1 }
+        ],
         "Darthbobo77": [
             { "name": "Rudi Rinsen", "faction": "Lost MC", "leader": true }
         ],
