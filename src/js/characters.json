@@ -290,7 +290,7 @@
             { "name": "Four \"4T\" Tee", "displayName": 0 }
         ],
         "CurtisRyan": [
-            { "name": "Curtis Swoleroid", "faction": "Sahara", "nicknames": ["\"Demon\" of Lean Street", "Curt"] },
+            { "name": "Curtis Swoleroid", "faction": "Pegasus", "nicknames": ["\"Demon\" of Lean Street", "Curt"] },
             { "name": "[Officer] Stephen McClane", "faction": "Police" },
             { "name": "Cornelius \"Cornbread\" Scott", "faction": "GSF" }
         ],
@@ -481,7 +481,7 @@
             { "name": "Blaine Burke", "faction": "Angels" }
         ],
         "Harryo": [
-            { "name": "Harry Brown" }
+            { "name": "Harry Brown", "faction": "Pegasus" }
         ],
         "HasanAbi": [
             { "name": "Humberto Antonio Donato Pecorino", "nicknames": ["Don", "/\\bOva[h']? here\\b/"], "displayName": 5, "faction": "Leanbois" }
@@ -579,7 +579,7 @@
             { "name": "Robert \"Mr. Rodgers\" Rodgers" }
         ],
         "JdotField": [
-            { "name": "Miles Landon", "faction": "Sahara" },
+            { "name": "Miles Landon", "faction": "Pegasus" },
             { "name": "Drew Jackson", "faction": "GSF" }
         ],
         "Jellypeanut": [
@@ -589,7 +589,7 @@
             { "name": "Wayne Biggaz", "faction": "Chang Gang" }
         ],
         "JJLake": [
-            { "name": "Jay Jarvis", "faction": "Sahara" }
+            { "name": "Jay Jarvis" }
         ],
         "JoblessGarrett": [
             { "name": "Garrett Jobless", "faction": "Chang Gang" },
@@ -870,6 +870,7 @@
         ],
         "MiltonTPike1": [
             { "name": "Kiki Chanel" },
+            { "name": "Hazel Nutte" },
             { "name": "Merlin Edmondstoune" },
             { "name": "William \"Bill Ding\" Ding", "nicknames": ["Bill"] }
         ],
@@ -1251,7 +1252,7 @@
             { "name": "Miguel Almerion", "faction": "Snake Gang" }
         ],
         "Syraphic": [
-            { "name": "Elena Marilyn Vega", "faction": "Sahara" }
+            { "name": "Elena Marilyn Vega" }
         ],
         "t3r0": [
             { "name": "[Dr.] Andrew Ducksworth", "faction": "Medical", "displayName": 2 }
