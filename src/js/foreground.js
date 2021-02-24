@@ -400,7 +400,7 @@ const filterStreams = async () => {
 
             let filterState; // remove, mark-np, mark-other
             if (filterEnabled) { // If filtering streams is enabled
-                if ((tnoOthers && (onOtherIncluded || onMainOther)) || (npStreamer && !mainsOther && !keepNp && onOther)) { // If is-including-others and streamer on another server, or it's an NP streamer playing another server
+                if ((tnoOthers && (onOtherIncluded || onMainOther || (npStreamer && onOther))) || (npStreamer && !mainsOther && !keepNp && onOther)) { // If is-including-others and streamer on another server, or it's an NP streamer playing another server
                     filterState = FSTATES.other;
                 } else if (npStreamer && !onMainOther && !onOther) { // If NoPixel streamer that isn't on another server
                     filterState = FSTATES.nopixel;
