@@ -738,7 +738,8 @@
             { "name": "[Officer] Lily Pond", "faction": "Police" }
         ],
         "LadyLynxx": [
-            { "name": "[EMS] Saphira Sinclair", "faction": "Medical" }
+            { "name": "[EMS] Saphira Sinclair", "faction": "Medical" },
+            { "name": "Jaed Smith" }
         ],
         "LAGTVMaximusBlack": [
             { "name": "Outto-Tune \"OTT\" Tyrone", "displayName": "OTT" }
