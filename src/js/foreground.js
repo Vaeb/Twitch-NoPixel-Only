@@ -647,9 +647,9 @@ const filterStreams = async () => {
                                 </span>
                             </div>
                             <div class="settings-option">
-                                <span class="settings-name">Force "English" only (<em>recommended</em>):</span>
+                                <span class="settings-name">Include other roleplay servers:</span>
                                 <span class="settings-value">
-                                    <input id="setting-english" type="checkbox" class="toggle" ${tnoEnglish ? 'checked' : ''}>
+                                    <input id="setting-others" type="checkbox" class="toggle" ${tnoOthers ? 'checked' : ''}>
                                 </span>
                             </div>
                             <div class="settings-option">
@@ -661,9 +661,9 @@ const filterStreams = async () => {
                                 </span>
                             </div>
                             <div class="settings-option">
-                                <span class="settings-name">Include other roleplay servers:</span>
+                                <span class="settings-name">Force "English" only (<em>recommended</em>):</span>
                                 <span class="settings-value">
-                                    <input id="setting-others" type="checkbox" class="toggle" ${tnoOthers ? 'checked' : ''}>
+                                    <input id="setting-english" type="checkbox" class="toggle" ${tnoEnglish ? 'checked' : ''}>
                                 </span>
                             </div>
                             ${isDeveloper ? `
