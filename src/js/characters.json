@@ -1054,8 +1054,8 @@
             { "name": "[Park Ranger] Conan Clarkson", "faction": "Police" }
         ],
         "Rasta": [
-            { "name": "Mary Livingston", "faction": "Prune Gang", "displayName": 0 },
-            { "name": "Dunn Robinson", "faction": "ESB" }
+            { "name": "Dunn Robinson", "faction": "ESB", "other": -1 },
+            { "name": "Mary Livingston", "faction": "Prune Gang", "displayName": 0 }
         ],
         "RatedEpicz": [
             { "name": "Randy Bullet", "faction": "Chang Gang", "nicknames": ["Lazy-Eye Bullet"] },
