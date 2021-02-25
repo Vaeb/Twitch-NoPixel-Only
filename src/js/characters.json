@@ -1183,7 +1183,8 @@
             { "name": "[Officer] John Mineo", "faction": "Police" }
         ],
         "Shrimp_": [
-            { "name": "Bradley Kickass", "faction": "Burger Shot", "displayName": 0 }
+            { "name": "Bradley Kickass", "faction": "Burger Shot", "displayName": 0 },
+            { "name": "[Mr.] Watt Son", "displayName": 0 }
         ],
         "shroud": [
             { "name": "Richard Hard" }
