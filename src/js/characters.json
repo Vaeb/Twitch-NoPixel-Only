@@ -141,6 +141,7 @@
         ],
         "bananabrea": [
             { "name": "Claire Seducer", "faction": "Angels" },
+            { "name": "Becky Hopper", "displayName": 0 },
             { "name": "[Officer] Tyme Reducer", "faction": "Police" }
         ],
         "BananaDuck": [
@@ -504,6 +505,7 @@
         "Hirona": [
             { "name": "[Trooper] Olivia Copper", "faction": "Police" },
             { "name": "Emily Maw", "faction": "Harmony" },
+            { "name": "Debbie Hopper", "displayName": 0 },
             { "name": "Griselda \"Zelda\" Harth", "faction": "HOA" },
             { "name": "Olga Sazkaljovich", "faction": "Snake Gang", "nicknames": ["Olgaa", "Olgaaa", "Olgaaaa"] }
         ],
