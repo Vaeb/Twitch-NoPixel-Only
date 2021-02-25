@@ -496,6 +496,9 @@
             { "name": "[EMS] Hedi Saurus", "faction": "Medical", "other": -1 },
             { "name": "[Dispatch] Ramona Celeste", "faction": "Police", "displayName": 1 }
         ],
+        "HexagonistLIVE": [
+            { "name": "[Deputy] Vincent Glass", "faction": "Police", "displayName": 2 }
+        ],
         "HeyOrbz": [
             { "name": "[Officer] Casey Valentine", "faction": "Police" },
             { "name": "Richie Mersion", "faction": "Mersions", "displayName": 0 }
