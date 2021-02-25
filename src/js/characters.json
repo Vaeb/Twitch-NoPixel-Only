@@ -846,6 +846,9 @@
         "MatchaSmash": [
             { "name": "[EMS] Rowan Hunter", "faction": "Medical" }
         ],
+        "Mattie": [
+            { "name": "[Dr.] Mikhail Keehl", "faction": "DoC", "displayName": 2 }
+        ],
         "MattRP": [
             { "name": "[Officer] Jack Ripley", "faction": "Police" }
         ],
