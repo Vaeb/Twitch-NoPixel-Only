@@ -652,6 +652,9 @@
             { "name": "[Therapist] Thalia Hayes", "faction": "Medical" },
             { "name": "Lees Grey" }
         ],
+        "Kainalo": [
+            { "name": "Risto Suolamies" }
+        ],
         "KaoruHare": [
             { "name": "[Therapist] Kizzy Neveah", "faction": "Medical" }
         ],
