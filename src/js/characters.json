@@ -779,7 +779,7 @@
             { "name": "Avon Barksdale", "faction": "Leanbois", "leader": true }
         ],
         "Lisilsanya": [
-            { "name": "Lei Sanya", "faction": "Medical", "displayName": 2 }
+            { "name": "Lei Sanya", "faction": "Medical", "nicknames": ["Lasagna"], "displayName": 0 }
         ],
         "Lord_Kebun": [
             { "name": "Mr. K", "faction": "Chang Gang", "leader": true, "displayName": 0, "nicknames": ["The \"Dragon\"", "Chang"] }
