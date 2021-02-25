@@ -805,7 +805,7 @@
             { "name": "[Dr.] Serge Cross", "faction": "Medical", "displayName": 2 }
         ],
         "Lucky_RP": [
-            { "name": "Marlo Stanfield", "faction": "GSF" }
+            { "name": "Marlo Stanfield", "faction": "GSF", "nicknames": ["MRLO"] }
         ],
         "LuckyxMoon": [
             { "name": "[Judge] ? Devereaux", "faction": "DoJ" },
