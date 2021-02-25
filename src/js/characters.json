@@ -251,6 +251,7 @@
             { "name": "Flop Dugong" }
         ],
         "CinnamonToastKen": [
+            { "name": "Chuck Colton" },
             { "name": "Buck Colton", "faction": "Prune Gang", "nicknames": ["Book", "Bucky", "Cultan"] }
         ],
         "chairhandler": [
