@@ -77,7 +77,7 @@
             { "name": "Timoteo \"TT\" Bushnell", "faction": "Top Shottaz", "nicknames": ["Rasta"] }
         ],
         "aleks": [
-            { "name": "[Officer] Bobby Smith", "faction": "Police", "nicknames": ["Bob"], "displayName": 1 },
+            { "name": "[Chief of Police] Bobby Smith", "faction": "Police", "leader": 1, "nicknames": ["Bob", "Chief"], "displayName": 1 },
             { "name": "[FIB Agent] Heath Mercer", "faction": "Police" },
             { "name": "Vasily \"V\" Sazkaljovich" }
         ],
