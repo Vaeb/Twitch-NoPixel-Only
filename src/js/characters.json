@@ -1193,9 +1193,9 @@
         ],
         "SilentSentry": [
             { "name": "Michael Michaels Jr.", "nicknames": ["MMJR"], "displayName": 0 },
-            { "name": "Iroquois Plisken" },
-            { "name": "Ziggy Flint" },
-            { "name": "Ron Otterman" }
+            { "name": "Iroquois \"Snake\" Plisken", "displayName": 0 },
+            { "name": "Ziggy Flint", "displayName": 0 },
+            { "name": "Ron Otterman", "displayName": 0 }
         ],
         "Simplyje2ns": [
             { "name": "Jean Steele", "displayName": 0 }
