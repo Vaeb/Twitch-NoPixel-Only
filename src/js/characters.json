@@ -1421,6 +1421,7 @@
         ],
         "Wayward": [
             { "name": "[Judge] Wayne Ardson", "faction": "DoJ" },
+            { "name": "Angelo \"Leo Nardo\" Nardo", "nicknames": ["Leo"] },
             { "name": "Jack \"The Joker\" Knaves", "nicknames": ["The \"Joker\""] },
             { "name": "Bowser" }
         ],
