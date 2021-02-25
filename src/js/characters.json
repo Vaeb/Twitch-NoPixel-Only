@@ -1128,7 +1128,7 @@
         "Roxmiral": [
             { "name": "Ruby Morris" },
             { "name": "Nikki Drools", "faction": "DoC" },
-            { "name": "Sherry Paie", "displayName": 0 },
+            { "name": "Sherry Paie", "displayName": 1 },
             { "name": "Sherry Lee" }
         ],
         "RudeNoodleNPC": [
