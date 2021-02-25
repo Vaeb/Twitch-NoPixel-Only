@@ -65,7 +65,7 @@
             { "name": "Gordon Parks", "nicknames": ["DoorLord"] }
         ],
         "AidenNortha": [
-            { "name": "[Deputy] Kevin Keyte", "faction": "Police" }
+            { "name": "[Deputy] Kevin Keyte", "faction": "Police", "displayName": 1 }
         ],
         "Airborne": [
             { "name": "[Judge] Dennis LaBarre", "faction": "DoJ" },
