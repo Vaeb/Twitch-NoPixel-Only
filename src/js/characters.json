@@ -1219,7 +1219,7 @@
             { "name": "Reginald \"Reggie\" Bigglesby", "faction": "Burger Shot" }
         ],
         "skippypoppin": [
-            { "name": "Kevin Whipaloo", "faction": "Burger Shot", "displayName": 0 }
+            { "name": "Kevin Whipaloo", "faction": "Burger Shot", "leader": 1, "displayName": 0 }
         ],
         "Skitx0": [
             { "name": "Smino \"Hitta\" Brown", "faction": "GSF" }
@@ -1242,7 +1242,7 @@
             { "name": "Ellie Dono", "faction": "Leanbois" }
         ],
         "sodapoppin": [
-            { "name": "Kevin Whipaloo", "faction": "Burger Shot", "displayName": 0 },
+            { "name": "Kevin Whipaloo", "faction": "Burger Shot", "leader": 1, "displayName": 0 },
             { "name": "Tappy \"Cat\" Nippers", "nicknames": ["Cat"], "displayName": 0 }
         ],
         "Spaceboy": [
