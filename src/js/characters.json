@@ -53,7 +53,7 @@
             { "name": "[Dr.] Valentine", "faction": "Medical" }
         ],
         "AfriicanSnowball": [
-            { "name": "[Chief Justice] Buck Stanton", "faction": "DoJ" },
+            { "name": "[Justice] Buck Stanton", "faction": "DoJ" },
             { "name": "Leland \"LJ\" Jones" }
         ],
         "Afro": [
@@ -515,7 +515,7 @@
             { "name": "Olga Sazkaljovich", "faction": "Snake Gang", "nicknames": ["Olgaa", "Olgaaa", "Olgaaaa"] }
         ],
         "hobbittrash": [
-            { "name": "[Chief Justice] Katya Zamalodchikova", "faction": "DoJ" },
+            { "name": "[Justice] Katya Zamalodchikova", "faction": "DoJ" },
             { "name": "[Deputy] Tracy Martell", "faction": "Police", "nicknames": ["Cop"] },
             { "name": "Jane Obama", "displayName": 0 },
             { "name": "Kayden Dell'Anno" }
