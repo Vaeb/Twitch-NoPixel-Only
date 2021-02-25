@@ -573,6 +573,9 @@
         "ItsSammyP": [
             { "name": "Tyrone \"Big T\" Thompson", "faction": "SSB" }
         ],
+        "ItsSlikeR": [
+            { "name": "Abraham Mohammed", "other": 1 }
+        ],
         "JaboodyShow": [
             { "name": "Jerry Curl", "displayName": 0 }
         ],
