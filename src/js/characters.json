@@ -519,6 +519,9 @@
         "HonathanTV": [
             { "name": "[Deputy] Honathan Yolo", "faction": "Police" }
         ],
+        "Hossworth": [
+            { "name": "Chip Wheeler", "displayName": 0 }
+        ],
         "Hotted89": [
             { "name": "[Deputy] Matthew Espinoz", "faction": "Police", "nicknames": ["Airspinoz", "Air 1 Andy"] },
             { "name": "Joaquin \"JJ\" Jimenes", "faction": "Vagos" },
