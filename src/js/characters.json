@@ -1291,7 +1291,8 @@
             { "name": "[EMS] Sarah Ableton", "faction": "Medical" }
         ],
         "Tasara22": [
-            { "name": "Tuesday Phillips" }
+            { "name": "Tuesday Phillips" },
+            { "name": "Milena" }
         ],
         "Tehrani": [
             { "name": "Boris Ivanov", "faction": "Russians", "leader": true },
