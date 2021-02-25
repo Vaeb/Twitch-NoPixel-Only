@@ -493,7 +493,7 @@
             { "name": "Humberto Antonio Donato Pecorino", "nicknames": ["Don", "/\\bOva[h']? here\\b/"], "displayName": 5, "faction": "Leanbois" }
         ],
         "Hedisaurus": [
-            { "name": "[EMS] Hedi Saurus", "faction": "Medical" },
+            { "name": "[EMS] Hedi Saurus", "faction": "Medical", "other": -1 },
             { "name": "[Dispatch] Ramona Celeste", "faction": "Police", "displayName": 1 }
         ],
         "HeyOrbz": [
