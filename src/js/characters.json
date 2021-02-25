@@ -765,7 +765,7 @@
             { "name": "Jose \"Cousin\" Luis Santana", "faction": "Vagos" }
         ],
         "LaS_": [
-            { "name": "Jesse \"Baby Joker\" Morales", "faction": "ESB" }
+            { "name": "Jesse \"Baby Joker\" Morales", "faction": "ESB", "other": 1 }
         ],
         "LeWolfy": [
             { "name": "[Deputy] Dante Wolf", "faction": "Police" }
