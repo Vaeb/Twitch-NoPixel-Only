@@ -766,7 +766,7 @@
             { "name": "Jaed Smith" }
         ],
         "LAGTVMaximusBlack": [
-            { "name": "Outto-Tune \"OTT\" Tyrone", "displayName": "OTT" }
+            { "name": "Outto-Tune \"OTT\" Tyrone" }
         ],
         "Lairdo_": [
             { "name": "Henry King" }
@@ -1448,7 +1448,7 @@
             { "name": "[Dr.] Kennedy Adams", "faction": "Medical" }
         ],
         "Wehtuns": [
-            { "name": "Lawrence Splainer", "faction": "DoJ" }
+            { "name": "Lawrence Splainer", "displayName": 2 }
         ],
         "Whippy": [
             { "name": "[Officer] Crocodile Steve", "faction": "Police" },
