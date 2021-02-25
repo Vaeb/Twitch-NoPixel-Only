@@ -211,7 +211,8 @@
             { "name": "Deejay Bartello", "faction": "Snake Gang" }
         ],
         "bythybeard": [
-            { "name": "Wade Willson", "faction": "Lost MC" }
+            { "name": "Wade Willson", "faction": "Lost MC" },
+            { "name": "[Dispatch] Sexton Hardcastle", "faction": "Police", "displayName": 1 }
         ],
         "CallMeGrub": [
             { "name": "[Deputy] Isaac Richardson", "faction": "Police" }
