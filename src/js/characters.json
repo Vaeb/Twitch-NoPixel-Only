@@ -1403,6 +1403,9 @@
         "Trainwreckstv": [
             { "name": "Douglas \"Doug Buck\" Buck", "displayName": 0 }
         ],
+        "Traumz": [
+            { "name": "Edward Thatch", "nicknames": ["Captain Moosebeard"], "displayName": 3 }
+        ],
         "travpiper": [
             { "name": "Carlos \"Cheddar\" Sanchez", "faction": "HOA" },
             { "name": "Warren Wallace" },
