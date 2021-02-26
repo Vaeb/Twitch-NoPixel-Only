@@ -1291,6 +1291,10 @@
         "Sunni": [
             { "name": "Hilda Bulking", "faction": "Vagos" }
         ],
+        "SuperBunneh": [
+            { "name": "[EMS] Mila Smoak", "faction": "Medical" },
+            { "name": "Madison \"Maddy\" Fox", "faction": "GSF" }
+        ],
         "Sur_Lee": [
             { "name": "Mitch \"Dumbass\" Bader" }
         ],
