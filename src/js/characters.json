@@ -1125,6 +1125,9 @@
         "RevRoach": [
             { "name": "Happy D'Klown" }
         ],
+        "RickMongoLIVE": [
+            { "name": "[DA] Rick Mongo", "faction": "DoJ" }
+        ],
         "rlly": [
             { "name": "Shelly Targaryen", "faction": "Burger Shot" },
             { "name": "Kelly Smith", "faction": "Prune Gang" }
