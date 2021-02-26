@@ -575,6 +575,7 @@
             { "name": "[Officer] Jack Miller", "faction": "Police" }
         ],
         "ItsSammyP": [
+            { "name": "Mando Thompson", "displayName": 0 },
             { "name": "Tyrone \"Big T\" Thompson", "faction": "SSB" }
         ],
         "ItsSlikeR": [
