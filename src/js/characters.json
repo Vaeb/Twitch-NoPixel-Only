@@ -312,8 +312,8 @@
             { "name": "Freya Manning" }
         ],
         "cyr": [
-            { "name": "Uchiha Jones", "faction": "Chang Gang" },
-            { "name": "Joe Caine", "displayName": 0 }
+            { "name": "Joe Caine", "displayName": 0 },
+            { "name": "Uchiha Jones", "faction": "Chang Gang" }
         ],
         "DanGheesling": [
             { "name": "Tanner Buttermaker", "displayName": 1 }
