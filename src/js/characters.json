@@ -1277,6 +1277,7 @@
             { "name": "[Deputy] Sydney Bearmont", "faction": "Police", "displayName": 1 }
         ],
         "ster": [
+            { "name": "Guy Dance" },
             { "name": "Gerald Wagner", "displayName": 0 }
         ],
         "stitchybird": [
