@@ -207,7 +207,7 @@
         ],
         "Burn": [
             { "name": "Johnny Silverhand", "displayName": 0 },
-            { "name": "Asmon Bronze", "displayName": 0 },
+            { "name": "Asmon Bronze", "displayName": 0, "nicknames": ["AsmonBronze", "Transmog"] },
             { "name": "Norman \"Norm\" Yoder" },
             { "name": "Gordo Ramsay", "displayName": 0 }
         ],
