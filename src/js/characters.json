@@ -130,6 +130,9 @@
         "AustinCreed": [
             { "name": "Austin Creed", "displayName": 0 }
         ],
+        "Autumn": [
+            { "name": "Autumn Rhodes" }
+        ],
         "AvaGG": [
             { "name": "Karen Dahmer", "faction": "Chang Gang", "affiliate": true, "nicknames": ["Kawen"] }
         ],
