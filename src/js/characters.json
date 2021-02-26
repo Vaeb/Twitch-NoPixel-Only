@@ -1126,7 +1126,7 @@
             { "name": "Happy D'Klown" }
         ],
         "RickMongoLIVE": [
-            { "name": "[DA] Rick Mongo", "faction": "DoJ" }
+            { "name": "[DA] Rick Mongo", "faction": "DoJ", "other": -1 }
         ],
         "rlly": [
             { "name": "Shelly Targaryen", "faction": "Burger Shot" },
