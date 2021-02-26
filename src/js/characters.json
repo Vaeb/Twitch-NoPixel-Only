@@ -1270,6 +1270,9 @@
         "steamcharlie": [
             { "name": "[Deputy] Sydney Bearmont", "faction": "Police", "displayName": 1 }
         ],
+        "ster": [
+            { "name": "Gerald Wagner", "displayName": 0 }
+        ],
         "stitchybird": [
             { "name": "Daphne Tillamuck Valentino", "faction": "Lunatix" }
         ],
