@@ -789,7 +789,7 @@
         ],
         "LIRIK": [
             { "name": "Clayvon Barksdale", "faction": "Leanbois" },
-            { "name": "Bayvon Barksdale", "faction": "Police", "displayName": 0 },
+            { "name": "[Officer] Bayvon Barksdale", "faction": "Police", "displayName": 2 },
             { "name": "Avon Barksdale", "faction": "Leanbois", "leader": true }
         ],
         "Lisilsanya": [
