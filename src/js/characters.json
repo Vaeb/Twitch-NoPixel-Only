@@ -784,6 +784,9 @@
         "LeWolfy": [
             { "name": "[Deputy] Dante Wolf", "faction": "Police" }
         ],
+        "LINK_EZ": [
+            { "name": "Linkle Jones", "displayName": 1}
+        ],
         "LIRIK": [
             { "name": "Clayvon Barksdale", "faction": "Leanbois" },
             { "name": "Bayvon Barksdale", "faction": "Police", "displayName": 0 },
