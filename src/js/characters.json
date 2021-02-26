@@ -1207,10 +1207,10 @@
             { "name": "[Officer] Joel Garcia", "faction": "Police" }
         ],
         "SilentSentry": [
+            { "name": "Ron Otterman", "nicknames": ["🎬", "🎥"], "displayName": 0 },
             { "name": "Michael Michaels Jr.", "nicknames": ["MMJR"], "displayName": 0 },
             { "name": "Iroquois \"Snake\" Plisken", "displayName": 0 },
-            { "name": "Ziggy Flint", "displayName": 0 },
-            { "name": "Ron Otterman", "displayName": 0 }
+            { "name": "Ziggy Flint", "displayName": 0 }
         ],
         "Simplyje2ns": [
             { "name": "Jean Steele", "displayName": 0 }
