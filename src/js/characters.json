@@ -646,6 +646,9 @@
             { "name": "Nora Dupres" },
             { "name": "Zee Nanakaze Mathers" }
         ],
+        "Jubby": [
+            { "name": "Ricardo Perez", "displayName": 1 }
+        ],
         "Judd": [
             { "name": "[Chief Justice] Coyote Russell", "faction": "DoJ", "displayName": 1 },
             { "name": "Judd Lincoln" },
