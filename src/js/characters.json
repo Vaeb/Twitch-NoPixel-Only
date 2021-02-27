@@ -54,6 +54,7 @@
         ],
         "AfriicanSnowball": [
             { "name": "[Justice] Buck Stanton", "faction": "DoJ" },
+            { "name": "Dwayne Carter IV", "faction": "DoC", "displayName": 2 },
             { "name": "Leland \"LJ\" Jones" }
         ],
         "Afro": [
