@@ -169,7 +169,7 @@
             { "name": "Shevy Santanna", "faction": "Vagos" }
         ],
         "BikeMan": [
-            { "name": "Chet Summerset" }
+            { "name": "Chet Summerset", "other": -1, "assume": "assumeNpNoOther "}
         ],
         "Biotoxz_": [
             { "name": "[Barbarian] Bjorn", "faction": "LARPers" }
