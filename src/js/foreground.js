@@ -620,9 +620,13 @@ const filterStreams = async () => {
 
     const addSettings = async () => {
         const $followBtn = $(await waitForElement('[data-test-selector="follow-game-button-component"]'));
+
+        if (document.querySelector('.tno-settings-btn') != null) return; // Switching from clips/videos back to channels
+
         const $container = $followBtn.parent().parent();
         const $setEnglishBtn = $('<button>⚙️ Twitch NoPixel Only</button>');
         $setEnglishBtn.addClass($followBtn.attr('class'));
+        $setEnglishBtn.addClass('tno-settings-btn');
         $setEnglishBtn.css({
             margin: '0 0 0 10px',
             padding: '0 10px',
@@ -634,7 +638,7 @@ const filterStreams = async () => {
                 // icon: 'info',
                 // title: 'TNO Settings',
                 html: `
-                    <div class="settings-container">
+                    <div class="tno-settings-container">
                         <div class="settings-titles">
                             <span class="settings-title">TNO Settings</span>
                             <span class="settings-reload">🗘</span>
@@ -732,9 +736,10 @@ const filterStreams = async () => {
         });
     };
 
-    onPage = /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V/.test(window.location.href);
+    const twitchGtaUrl = /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V(?!\/videos|\/clips)/;
+    onPage = twitchGtaUrl.test(window.location.href);
 
-    activateInterval = async () => {
+    activateInterval = async () => { // Remember that this will run twice without reloading when switching from Clips/Videos back to channels
         if (interval != null) {
             console.log("[TNO] Couldn't start interval (already running)");
             return false;
