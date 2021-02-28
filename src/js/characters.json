@@ -175,7 +175,7 @@
             { "name": "[Barbarian] Bjorn", "faction": "LARPers" }
         ],
         "BJPofficial": [
-            { "name": "[Lawyer] Buford J. Preston" }
+            { "name": "Buford J. Preston", "faction": "Lawyers" }
         ],
         "Blaustoise": [
             { "name": "Mickey S", "faction": "Chang Gang", "nicknames": ["Downbad"] }
@@ -233,7 +233,7 @@
         ],
         "CathFawr": [
             { "name": "Summer Mersion", "faction": "GSF", "displayName": 0 },
-            { "name": "Shannon O'Banion", "displayName": 0 },
+            { "name": "Shannon O'Banion", "faction": "Lawyers", "displayName": 0 },
             { "name": "[Officer] Lydia Vale", "faction": "Police" }
         ],
         "Cathie": [
@@ -309,7 +309,7 @@
         "curvyelephant": [
             { "name": "[Deputy] Matt Rhodes", "faction": "Police" },
             { "name": "Ryan Parker", "faction": "Lost MC" },
-            { "name": "Kevin Shaw" }
+            { "name": "Kevin Shaw", "faction": "Lawyers" }
         ],
         "Curvyllama": [
             { "name": "[Deputy] Lorenzo L", "faction": "Police", "displayName": 1 },
@@ -673,7 +673,7 @@
         ],
         "Jyeahlisa": [
             { "name": "[Therapist] Thalia Hayes", "faction": "Medical" },
-            { "name": "Lees Grey" }
+            { "name": "Lees Grey", "faction": "Lawyers" }
         ],
         "Kainalo": [
             { "name": "Risto Suolamies" }
@@ -763,7 +763,7 @@
             { "name": "Alabaster Slim", "faction": "Burger Shot", "nicknames": ["Pimp"], "displayName": 2 },
             { "name": "[Officer] Kyle Pred", "faction": "Police" },
             { "name": "Brett Biggledoinks" },
-            { "name": "Rory O'Banion", "displayName": 0 },
+            { "name": "Rory O'Banion", "faction": "Lawyers", "displayName": 0 },
             { "name": "Wyatt Derp", "faction": "Lost MC" },
             { "name": "Pal Gore" }
         ],
@@ -866,7 +866,7 @@
         ],
         "mantistobagan": [
             { "name": "[Officer] Domenic Toretti", "faction": "Police" },
-            { "name": "Jerry Callow", "displayName": 1 },
+            { "name": "Jerry Callow", "faction": "Lawyers", "displayName": 1 },
             { "name": "Pepe Silvia" }
         ],
         "Markiplier": [
@@ -956,7 +956,7 @@
         ],
         "MurphyBraun": [
             { "name": "[Justice] Holden", "faction": "DoJ" },
-            { "name": "Murphy Braun", "displayName": 0 }
+            { "name": "Murphy Braun", "faction": "Lawyers", "displayName": 0 }
         ],
         "Mythematic": [
             { "name": "Mike Rosoftsam", "faction": "Leanbois", "affiliate": true }
@@ -1021,7 +1021,7 @@
             { "name": "[Deputy] Samuel Holtz", "faction": "Police" }
         ],
         "OccamsSabre": [
-            { "name": "Benjamin Crane" },
+            { "name": "Benjamin Crane", "faction": "Lawyers" },
             { "name": "[Justice] Ray Montag", "faction": "DoJ" },
             { "name": "[Dispatch] Jeffrey Bundy", "faction": "Police" }
         ],
@@ -1038,7 +1038,7 @@
             { "name": "Truth Flores" }
         ],
         "OhMadOne": [
-            { "name": "Ginzu Okada" }
+            { "name": "Ginzu Okada", "faction": "Lawyers" }
         ],
         "OllyPop": [
             { "name": "Ivy Poppins" },
@@ -1484,7 +1484,7 @@
             { "name": "[Dr.] Kennedy Adams", "faction": "Medical" }
         ],
         "Wehtuns": [
-            { "name": "Lawrence Splainer", "displayName": 2 }
+            { "name": "Lawrence Splainer", "faction": "Lawyers", "displayName": 2 }
         ],
         "Whippy": [
             { "name": "[Officer] Crocodile Steve", "faction": "Police" },
@@ -1534,7 +1534,7 @@
         ],
         "Ziggy": [
             { "name": "[Park Ranger] Ziggy Buggs", "faction": "Police", "displayName": 1 },
-            { "name": "Norman Bones", "displayName": 0 }
+            { "name": "Norman Bones", "faction": "Lawyers", "displayName": 0 }
         ],
         "zirnrp": [
             { "name": "Solomon Seerson" }
@@ -1556,7 +1556,8 @@
         "esb": "\\besb\\b|east[\\s-]*side",
         "marabunta": "\\bmarabunta",
         "hoa": "\\bhoa\\b|hogs\\s*of\\s*anarchy|home[\\s-]*owners[\\s-]*association",
-        "doj": "\\bdoj\\b|department\\s*of\\s*justice|lawyer|attorney|judge\\b(?![\\s]*me)|\\ba?\\.?d\\.?a\\b",
+        "doj": "\\bdoj\\b|department\\s*of\\s*justice|judge\\b(?![\\s]*me)|\\ba?\\.?d\\.?a\\b",
+        "lawyers": "lawyer|para[\\s-]*legal",
         "angels": "\\bangels?\\b",
         "burgershot": "burger[\\s-]*shot|\\bburgers\\b",
         "snakegang": "\\b(?:snake|hydra|mario)\\s*gang\\b",
@@ -1581,6 +1582,7 @@
         "marabunta": "#2250ff",
         "hoa": "#a6033a",
         "doj": "#00a032",
+        "lawyers": "#00a032",
         "russians": "#a35231",
         "angels": "#ff9ff3",
         "burgershot": "#dc9461",
@@ -1610,6 +1612,7 @@
         "marabunta": "#2250ff",
         "hoa": "#a6033a",
         "doj": "#00a032",
+        "lawyers": "#00a032",
         "russians": "#a35231",
         "angels": "#e192d7",
         "burgershot": "#c77c50",
