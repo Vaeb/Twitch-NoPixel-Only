@@ -1253,7 +1253,7 @@
             { "name": "Kevin Whipaloo", "faction": "Burger Shot", "leader": 1, "displayName": 0 }
         ],
         "Skitx0": [
-            { "name": "Smino \"Hitta\" Brown", "faction": "GSF" }
+            { "name": "Smino \"Hitta\" Brown", "faction": "GSF", "assume": "assumeNpNoOther" }
         ],
         "Slasher2099": [
             { "name": "[Officer] Darrel McCormik", "faction": "Police" },
