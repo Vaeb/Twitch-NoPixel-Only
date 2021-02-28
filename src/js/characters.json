@@ -631,7 +631,8 @@
             { "name": "[Officer] Michael Murphy", "faction": "Police" }
         ],
         "jogiejoey": [
-            { "name": "Jessie Jugg" }
+            { "name": "Jessie Jugg" },
+            { "name": "Eva Wall" }
         ],
         "Jonthebroski": [
             { "name": "Denzel Williams", "faction": "Leanbois", "nicknames": ["The \"Cleaner\""] },
