@@ -290,16 +290,16 @@ const filterStreams = async () => {
                 char.factionUse = 'independent';
             }
 
-            foundOthers[char.other] = true;
+            foundOthers[char.assume] = true;
         });
 
-        if (foundOthers[0] && foundOthers[1]) {
+        if (foundOthers.assumeNp && foundOthers.assumeOther) {
             characters.assumeOther = ASTATES.someOther;
-        } else if (foundOthers[1]) {
+        } else if (foundOthers.assumeOther) {
             characters.assumeOther = ASTATES.assumeOther;
-        } else if (foundOthers[-1]) {
+        } else if (foundOthers.assumeNpNoOther) {
             characters.assumeOther = ASTATES.assumeNpNoOther;
-        } else if (foundOthers[0]) {
+        } else if (foundOthers.assumeNp) {
             characters.assumeOther = ASTATES.assumeNp;
         } else {
             characters.assumeOther = ASTATES.assumeNp;
