@@ -652,7 +652,7 @@
             { "name": "Zee Nanakaze Mathers" }
         ],
         "Jubby": [
-            { "name": "Ricardo Perez", "displayName": 1 }
+            { "name": "Ricardo Perez", "faction": "Burger Shot", "displayName": 1 }
         ],
         "Judd": [
             { "name": "[Chief Justice] Coyote Russell", "faction": "DoJ", "displayName": 1 },
@@ -1330,7 +1330,8 @@
             { "name": "Miguel Almerion", "faction": "Snake Gang" }
         ],
         "Syraphic": [
-            { "name": "Elena Marilyn Vega" }
+            { "name": "Elena Marilyn Vega" },
+            { "name": "Emilia Salvatore" }
         ],
         "t3r0": [
             { "name": "[Dr.] Andrew Ducksworth", "faction": "Medical", "displayName": 2 }
