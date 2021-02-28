@@ -505,7 +505,7 @@
             { "name": "Humberto Antonio Donato Pecorino", "nicknames": ["Don", "/\\bOva[h']? here\\b/"], "displayName": 5, "faction": "Leanbois" }
         ],
         "Hedisaurus": [
-            { "name": "[EMS] Hedi Saurus", "faction": "Medical", "other": -1 },
+            { "name": "[EMS] Hedi Saurus", "faction": "Medical", "other": -1, "assume": "assumeNpNoOther" },
             { "name": "[Dispatch] Ramona Celeste", "faction": "Police", "displayName": 1 }
         ],
         "HexagonistLIVE": [
@@ -1111,7 +1111,7 @@
             { "name": "[Park Ranger] Conan Clarkson", "faction": "Police" }
         ],
         "Rasta": [
-            { "name": "Dunn Robinson", "faction": "ESB", "other": -1 },
+            { "name": "Dunn Robinson", "faction": "ESB", "other": -1, "assume": "assumeNpNoOther" },
             { "name": "Mary Livingston", "faction": "Prune Gang", "displayName": 0 }
         ],
         "RatedEpicz": [
@@ -1139,7 +1139,7 @@
             { "name": "Happy D'Klown" }
         ],
         "RickMongoLIVE": [
-            { "name": "[DA] Rick Mongo", "faction": "DoJ", "other": -1 }
+            { "name": "[DA] Rick Mongo", "faction": "DoJ", "other": -1, "assume": "assumeNpNoOther" }
         ],
         "rlly": [
             { "name": "Shelly Targaryen", "faction": "Burger Shot" },
@@ -1375,7 +1375,7 @@
             { "name": "Pilbis Shonly", "faction": "Burger Shot" }
         ],
         "TheChief1114": [
-            { "name": "Fingle Dan", "displayName": 0, "other": -1 }
+            { "name": "Fingle Dan", "displayName": 0, "other": -1, "assume": "assumeNpNoOther" }
         ],
         "TheDondi": [
             { "name": "Arthur Hammond", "nicknames": ["The \"Doctor\""] },
