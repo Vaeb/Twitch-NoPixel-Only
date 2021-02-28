@@ -586,7 +586,7 @@
             { "name": "Tyrone \"Big T\" Thompson", "faction": "SSB" }
         ],
         "ItsSlikeR": [
-            { "name": "Abraham Mohammed", "other": 1 }
+            { "name": "Abraham Mohammed", "other": 1, "assume": "assumeOther" }
         ],
         "JaboodyShow": [
             { "name": "Jerry Curl", "displayName": 0 }
@@ -791,7 +791,7 @@
             { "name": "Jose \"Cousin\" Luis Santana", "faction": "Vagos" }
         ],
         "LaS_": [
-            { "name": "Jesse \"Baby Joker\" Morales", "faction": "ESB", "other": 1 }
+            { "name": "Jesse \"Baby Joker\" Morales", "faction": "ESB", "other": 1, "assume": "assumeOther" }
         ],
         "LeWolfy": [
             { "name": "[Deputy] Dante Wolf", "faction": "Police" }
@@ -872,6 +872,9 @@
         "Markiplier": [
             { "name": "Stan Wheeler" }
         ],
+        "MasterMisuri": [
+            { "name": "Jesus Antonio Lopez Contreras", "faction": "HOA" }
+        ],
         "MatchaSmash": [
             { "name": "[EMS] Rowan Hunter", "faction": "Medical" }
         ],
@@ -907,7 +910,7 @@
         "Miggitymaan": [
             { "name": "Jayce Wyatt" },
             { "name": "[Officer] Damien Alexander", "faction": "Police" },
-            { "name": "[Deputy] Kurt Leonard", "faction": "Police", "other": 1 }
+            { "name": "[Deputy] Kurt Leonard", "faction": "Police", "other": 1, "assume": "assumeOther" }
         ],
         "MikeTheBard": [
             { "name": "Hubcap Jones", "displayName": 0 },
@@ -924,7 +927,7 @@
             { "name": "William \"Bill Ding\" Ding", "nicknames": ["Bill"] }
         ],
         "Ming": [
-            { "name": "Ming Jingtai", "other": 1 }
+            { "name": "Ming Jingtai", "other": 1, "assume": "assumeOther" }
         ],
         "MinusFive": [
             { "name": "[Officer] Jason Bidwell", "faction": "Police" }
@@ -1530,7 +1533,7 @@
             { "name": "Martin Julio-Perez-Cruz-Rodriguez", "faction": "Marabunta" }
         ],
         "Zaquelle": [
-            { "name": "[Officer] Mackenzie Hayes", "faction": "Police", "other": 1 }
+            { "name": "[Officer] Mackenzie Hayes", "faction": "Police", "other": 1, "assume": "assumeOther" }
         ],
         "Ziggy": [
             { "name": "[Park Ranger] Ziggy Buggs", "faction": "Police", "displayName": 1 },
