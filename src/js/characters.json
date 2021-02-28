@@ -1301,7 +1301,8 @@
             { "name": "Gerald Wagner", "displayName": 0 }
         ],
         "stitchybird": [
-            { "name": "Daphne Tillamuck Valentino", "faction": "Lunatix" }
+            { "name": "Daphne Tillamuck Valentino", "faction": "Lunatix" },
+            { "name": "Abigail \"Abi\" Sharp" }
         ],
         "Stoner_Minded": [
             { "name": "[Officer] Frank Williams", "faction": "Police", "displayName": 1 }
