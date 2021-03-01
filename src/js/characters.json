@@ -484,7 +484,8 @@
             { "name": "August Vakarian" }
         ],
         "Greekgodx": [
-            { "name": "\"Tay Tay\" Tyrone", "nicknames": ["TayTay"] }
+            { "name": "\"Tay Tay\" Tyrone", "nicknames": ["TayTay"] },
+            { "name": "Tea Tea", "faction": "Police", "displayName": 0 }
         ],
         "GreenishMonkey": [
             { "name": "Bobby Brown", "faction": "Chang Gang" }
