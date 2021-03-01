@@ -602,7 +602,8 @@
             { "name": "Ryu Tenga" }
         ],
         "Javaaaa": [
-            { "name": "Lillia Claurel" }
+            { "name": "Lillia Claurel" },
+            { "name": "Joseph Yorinobu" }
         ],
         "Jayce": [
             { "name": "Lil Loco", "faction": "Vagos", "displayName": 0 },
