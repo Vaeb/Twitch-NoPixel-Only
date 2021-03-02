@@ -1566,7 +1566,7 @@
         "leanbois": "lean\\s*boi|\\blba?\\b",
         "lostmc": "lost\\s*mc|the\\s*lost\\b",
         "changgang": "chang\\s*gang|\\bcga?\\b",
-        "vagos": "vagos|yellow",
+        "vagos": "vagos|yellow[\\s-]*gang",
         "gsf": "grove|\\bgsf\\b",
         "ssb": "balla|\\bssb\\b(?![\\s-]+(?:wo?rld|later))",
         "esb": "\\besb\\b|east[\\s-]*side",
