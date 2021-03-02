@@ -1508,6 +1508,9 @@
             { "name": "[Officer] Alex Casterman", "faction": "Police" },
             { "name": "Finlay" }
         ],
+        "WillerZ": [
+            { "name": "Will Earnz", "displayName": 0 }
+        ],
         "willneff": [
             { "name": "\"James Marco\" St. Marco", "nicknames": ["marko", "marcoing", "markoing"] }
         ],
