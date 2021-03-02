@@ -197,7 +197,7 @@ const filterStreams = async () => {
 
     for (const [streamer, characters] of Object.entries(npCharacters)) {
         if (characters.length > 0) {
-            characters.push({ name: '<Permathon>', nicknames: ['Permathon'] });
+            characters.push({ name: '<Permathon>', nicknames: ['Permathon', 'Perma?thon'] });
         }
 
         const foundOthers = {};
