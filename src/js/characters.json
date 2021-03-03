@@ -34,6 +34,9 @@
             { "name": "Big Bertha", "displayName": 0 },
             { "name": "Ivy Wood" }
         ],
+        "abbyduren": [
+            { "name": "Khrystal Vibez" }
+        ],
         "AbdulHD": [
             { "name": "Abdul AlRahim" },
             { "name": "Fahad AlArabi", "faction": "DoC" },
