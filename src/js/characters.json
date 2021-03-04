@@ -538,7 +538,7 @@
             { "name": "Olga Sazkaljovich", "faction": "Snake Gang", "nicknames": ["Olgaa", "Olgaaa", "Olgaaaa"] }
         ],
         "hobbittrash": [
-            { "name": "[Justice] Katya Zamalodchikova", "faction": "DoJ" },
+            { "name": "[Justice] Katya Zamalodchikova", "faction": "DoJ", "displayName": 1 },
             { "name": "[Deputy] Tracy Martell", "faction": "Police", "nicknames": ["Cop"] },
             { "name": "Jane Obama", "displayName": 0 },
             { "name": "Kayden Dell'Anno" }
