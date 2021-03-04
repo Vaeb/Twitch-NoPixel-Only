@@ -701,6 +701,9 @@
             { "name": "[Deputy] Mina Price", "faction": "Police" },
             { "name": "[EMS] Khloe Brooks", "faction": "Medical" }
         ],
+        "Karma": [
+            { "name": "Bobby Johnson", "displayName": 0 }
+        ],
         "karnt1": [
             { "name": "Arush", "faction": "GSF" }
         ],
