@@ -48,7 +48,8 @@
             { "name": "Jolene Mushkin", "nicknames": ["Little Red"] }
         ],
         "adeptthebest": [
-            { "name": "Hannah Hiltop" }
+            { "name": "Hannah Hiltop" },
+            { "name": "Mari Posa", "displayName": 0 }
         ],
         "adnormaltv": [
             { "name": "Ivan Gorbahtjov" }
@@ -169,6 +170,9 @@
         ],
         "BCBeastly": [
             { "name": "Herbert The Pervert" }
+        ],
+        "BeardedGuysGaming": [
+            { "name": "Jose Pincha" }
         ],
         "BennniStreams": [
             { "name": "Santiago Madrid", "nicknames": ["/\\bSantiago/"] },
@@ -851,7 +855,7 @@
             { "name": "[Dr.] Serge Cross", "faction": "Medical", "displayName": 2 }
         ],
         "Lucky_RP": [
-            { "name": "Marlo Stanfield", "faction": "GSF", "nicknames": ["MRLO"] }
+            { "name": "Marlo Stanfield", "faction": "GSF", "nicknames": ["/ma?rlo/"] }
         ],
         "LuckyxMoon": [
             { "name": "[Judge] ? Devereaux", "faction": "DoJ" },
