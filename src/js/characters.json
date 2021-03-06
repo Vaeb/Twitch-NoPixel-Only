@@ -655,7 +655,8 @@
         ],
         "jogiejoey": [
             { "name": "Jessie Jugg" },
-            { "name": "Eva Wall" }
+            { "name": "Eva Wall" },
+            { "name": "Maggie Kayden", "faction": "Lawyers" }
         ],
         "Jonthebroski": [
             { "name": "Denzel Williams", "faction": "Leanbois", "nicknames": ["The \"Cleaner\""] },
