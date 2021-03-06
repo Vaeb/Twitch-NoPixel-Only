@@ -1352,6 +1352,9 @@
         "SwizzMB": [
             { "name": "Miguel Almerion", "faction": "Snake Gang" }
         ],
+        "Sykkuno": [
+            { "name": "Yuno Sykk", "displayName": 1 }
+        ],
         "Syraphic": [
             { "name": "Elena Marilyn Vega" },
             { "name": "Emilia Salvatore" }
