@@ -312,6 +312,9 @@
             { "name": "Sadie Thistle" },
             { "name": "Wilhelmina Copperpot", "displayName": 2 }
         ],
+        "crimsonswordsman": [
+            { "name": "Raphael Kristof", "faction": "HOA" }
+        ],
         "Crunchy": [
             { "name": "[Dr.] Agnes Ranbough", "faction": "Medical" },
             { "name": "Grimoire \"Gremlin\" Hauttogs" }
