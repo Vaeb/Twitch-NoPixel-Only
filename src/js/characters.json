@@ -310,6 +310,7 @@
         ],
         "CrayonPonyfish": [
             { "name": "Sadie Thistle" },
+            { "name": "Wynona Fontaine", "faction": "DoC", "displayName": 2 },
             { "name": "Wilhelmina Copperpot", "displayName": 2 }
         ],
         "crimsonswordsman": [
