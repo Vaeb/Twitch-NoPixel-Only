@@ -130,7 +130,7 @@
             { "name": "Cassie Cupcakes", "faction": "Angels" }
         ],
         "Asteroba": [
-            { "name": "[DA] Larry Hallow", "faction": "DoJ" },
+            { "name": "[D.A.] Larry Hallow", "faction": "DoJ" },
             { "name": "Kermy Fulker", "faction": "HOA" }
         ],
         "Aus24": [
@@ -1176,7 +1176,7 @@
             { "name": "Happy D'Klown" }
         ],
         "RickMongoLIVE": [
-            { "name": "[DA] Rick Mongo", "faction": "DoJ", "other": -1, "assume": "assumeNpNoOther" }
+            { "name": "[D.A.] Rick Mongo", "faction": "DoJ", "other": -1, "assume": "assumeNpNoOther" }
         ],
         "rlly": [
             { "name": "Shelly Targaryen", "faction": "Burger Shot" },
@@ -1217,7 +1217,7 @@
         ],
         "Sareff": [
             { "name": "Violet Noreguarde", "faction": "Vagos" },
-            { "name": "[DA] Paige Green", "faction": "DoJ" },
+            { "name": "[D.A.] Paige Green", "faction": "DoJ" },
             { "name": "Chasity Dawes" }
         ],
         "SAVx": [
