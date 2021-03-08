@@ -508,6 +508,9 @@
         "goldelena": [
             { "name": "August Vakarian" }
         ],
+        "GoldGlove": [
+            { "name": "Marvin King" }
+        ],
         "Greekgodx": [
             { "name": "\"Tay Tay\" Tyrone", "nicknames": ["TayTay"] },
             { "name": "Tea Tea", "faction": "Police", "displayName": 0 }
