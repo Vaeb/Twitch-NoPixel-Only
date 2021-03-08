@@ -786,7 +786,7 @@
             { "name": "[Trooper] Kael Soze", "faction": "Police", "highCommand": true, "nicknames": ["are illegal"] },
             { "name": "[Officer] Francis Francer", "faction": "Police", "displayName": 1 },
             { "name": "Development \"Development: Koil\"", "faction": "Development", "nicknames": ["Code"] },
-            { "name": "Saint Jospeh", "nicknames": ["Jesus", "Joseph", "XUJIA"], "displayName": 0 },
+            { "name": "Saint Jospeh", "nicknames": ["Jesus", "Joseph", "XUJIA", "EMC"], "displayName": 0 },
             { "name": "Otto Delmar" }
         ],
         "Kongfue": [
