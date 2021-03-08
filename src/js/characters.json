@@ -511,6 +511,9 @@
         "GoldGlove": [
             { "name": "Marvin King" }
         ],
+        "GrandPOObear": [
+            { "name": "Mick Flair", "displayName": 0 }
+        ],
         "Greekgodx": [
             { "name": "\"Tay Tay\" Tyrone", "nicknames": ["TayTay"] },
             { "name": "Tea Tea", "faction": "Police", "displayName": 0 }
