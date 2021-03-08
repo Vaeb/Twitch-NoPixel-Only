@@ -1292,6 +1292,9 @@
         "SirPink": [
             { "name": "Reginald \"Reggie\" Bigglesby", "faction": "Burger Shot" }
         ],
+        "SkipGently": [
+            { "name": "John Riggs" }
+        ],
         "skippypoppin": [
             { "name": "Kevin Whipaloo", "faction": "Burger Shot", "leader": 1, "displayName": 0 }
         ],
