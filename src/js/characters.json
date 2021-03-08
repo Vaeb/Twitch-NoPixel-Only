@@ -446,6 +446,9 @@
             { "name": "Huxley Johnson", "faction": "DoC" },
             { "name": "Paddy Patrickson", "faction": "Lost MC" }
         ],
+        "FalconryGal": [
+            { "name": "Jenna Tuttle", "displayName": 2 }
+        ],
         "FalloftheSeason": [
             { "name": "[EMS] Orianna \"Ori\" Frost", "faction": "Medical", "nicknames": ["Olive"] },
             { "name": "Ophelia Quinn" }
