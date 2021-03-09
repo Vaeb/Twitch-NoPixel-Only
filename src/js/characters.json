@@ -460,6 +460,9 @@
         "Farmhouse78": [
             { "name": "Jane Farmer" }
         ],
+        "FeliciaDay": [
+            { "name": "Cherryclarie Dinwittie", "nicknames": ["CherryClaire"], "displayName": 3 }
+        ],
         "FerretRP": [
             { "name": "Alberto Weaselton", "faction": "Lost MC" }
         ],
