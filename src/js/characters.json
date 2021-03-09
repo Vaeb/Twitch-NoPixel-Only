@@ -893,6 +893,9 @@
             { "name": "Ekaterina Alekseyevna", "nicknames": ["Trina"], "displayName": 1 },
             { "name": "Barbie Chan" }
         ],
+        "LunaOni": [
+            { "name": "[Officer] Claire Everly", "faction": "Police" }
+        ],
         "Lyndi": [
             { "name": "Violet Van Housen", "faction": "Angels" },
             { "name": "Willow Wolfhart", "faction": "DoC" }
