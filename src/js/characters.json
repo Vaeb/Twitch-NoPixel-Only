@@ -1046,6 +1046,7 @@
         ],
         "Nikez": [
             { "name": "Development \"Development: Nikez\"", "faction": "Development" },
+            { "name": "Nick Simone", "displayName": 0 },
             { "name": "[Officer] Cody Sharp", "faction": "Police" }
         ],
         "NikkisARiot": [
