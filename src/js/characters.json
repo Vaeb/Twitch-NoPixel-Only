@@ -473,7 +473,8 @@
             { "name": "[EMS] Amoris Pax", "faction": "Medical" }
         ],
         "forsen": [
-            { "name": "Sven Snusberg", "faction": "Leanbois" }
+            { "name": "Sven Snusberg", "faction": "Leanbois" },
+            { "name": "Mason Foorhees" }
         ],
         "FortyOne": [
             { "name": "Jose Martin Perez", "nicknames": ["JMP"] },
