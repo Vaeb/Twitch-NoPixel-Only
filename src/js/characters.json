@@ -343,6 +343,7 @@
         ],
         "cyr": [
             { "name": "Joe Caine", "displayName": 0 },
+            { "name": "Fred Hurst", "nicknames": ["/Lim.\\s?Bizkif/"] },
             { "name": "Uchiha Jones", "faction": "Chang Gang" }
         ],
         "DanGheesling": [
