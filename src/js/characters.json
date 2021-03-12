@@ -785,7 +785,7 @@
             { "name": "[Deputy] Lauren Forcer", "faction": "Police" },
             { "name": "Mia Mersion", "faction": "Mersions", "displayName": 0 },
             { "name": "Evita \"Mother\" Nimm", "faction": "Dark Web" },
-            { "name": "Ava Ridge", "faction": "Goths" },
+            { "name": "Ava Ridge", "faction": "Goths", "nicknames": ["Silence", "/darkness/"] },
             { "name": "Marta Volkov" }
         ],
         "Knotty": [
@@ -1021,6 +1021,7 @@
         ],
         "Nakkida": [
             { "name": "[Deputy] Tessa Lamb", "faction": "Police", "displayName": 1 },
+            { "name": "Taylor \"Onyx\" White", "faction": "Police" },
             { "name": "Rachel Parker" }
         ],
         "Natettvrp": [
