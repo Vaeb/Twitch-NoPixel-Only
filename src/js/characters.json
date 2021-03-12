@@ -630,7 +630,8 @@
             { "name": "Abraham Mohammed", "other": 1, "assume": "assumeOther" }
         ],
         "JaboodyShow": [
-            { "name": "Jerry Curl", "displayName": 0 }
+            { "name": "Jerry Curl", "displayName": 0 },
+            { "name": "Vincent" }
         ],
         "Jack": [
             { "name": "Jack Cortair" }
@@ -1337,6 +1338,7 @@
         ],
         "Spaceboy": [
             { "name": "Melbert \"Mel\" Rickenbacker", "faction": "Prune Gang" },
+            { "name": "Pat" },
             { "name": "Casey Boyd", "nicknames": ["Caseboy", "L8PD"], "displayName": 0 }
         ],
         "Spekel": [
