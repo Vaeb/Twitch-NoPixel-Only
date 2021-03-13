@@ -1014,6 +1014,7 @@
         ],
         "MurphyBraun": [
             { "name": "[Justice] Holden", "faction": "DoJ" },
+            { "name": "Marvin Peanut", "nicknames": ["Marv"] },
             { "name": "Murphy Braun", "faction": "Lawyers", "displayName": 0 }
         ],
         "Mythematic": [
