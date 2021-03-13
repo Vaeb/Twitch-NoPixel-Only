@@ -850,7 +850,7 @@
         ],
         "LIRIK": [
             { "name": "Clayvon Barksdale", "faction": "Leanbois" },
-            { "name": "[Officer] Bayvon Barksdale", "faction": "Police", "displayName": 2 },
+            { "name": "[Officer] Bayvon Barksdale", "faction": "Police", "nicknames": ["555"], "displayName": 2 },
             { "name": "Abe Vaughn", "displayName": 0 },
             { "name": "Avon Barksdale", "faction": "Leanbois", "leader": true }
         ],
