@@ -1307,6 +1307,9 @@
         "SirPink": [
             { "name": "Reginald \"Reggie\" Bigglesby", "faction": "Burger Shot" }
         ],
+        "Skannerz_": [
+            { "name": "Wayne Kerr" }
+        ],
         "SkipGently": [
             { "name": "John Riggs" }
         ],
@@ -1347,6 +1350,7 @@
         ],
         "Spekel": [
             { "name": "Sonya Summers", "nicknames": ["Black Betty"] },
+            { "name": "Chloe Lesterol" },
             { "name": "[Officer] Scarlett Winters", "faction": "Police" }
         ],
         "spicybackpain": [
