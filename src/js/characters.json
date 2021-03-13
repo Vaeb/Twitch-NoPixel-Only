@@ -779,7 +779,8 @@
             { "name": "Rusty Johnson" }
         ],
         "Kiva": [
-            { "name": "Andi Jones", "faction": "HOA", "nicknames": ["Ant"], "displayName": 3 }
+            { "name": "Andi Jones", "faction": "HOA", "nicknames": ["Ant"], "displayName": 3 },
+            { "name": "Navi Gates" }
         ],
         "Kiwo": [
             { "name": "[Deputy] Lauren Forcer", "faction": "Police" },
