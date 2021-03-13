@@ -1469,7 +1469,7 @@
             { "name": "Cardell \"CJ\" Jones", "faction": "SSB" }
         ],
         "TinySpark": [
-            { "name": "[Deputy] Daisy Dukakis", "faction": "Police", "displayName": 0 }
+            { "name": "[Deputy] Daisy Dukakis", "faction": "Police" }
         ],
         "TinyStunt": [
             { "name": "[EMS] Bailey Jade", "faction": "Medical" }
