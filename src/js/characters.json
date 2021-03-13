@@ -857,7 +857,7 @@
             { "name": "[EMS] Lei Sanya", "faction": "Medical", "nicknames": ["Lasagna"], "displayName": 0 }
         ],
         "Lord_Kebun": [
-            { "name": "Mr. K", "faction": "Chang Gang", "leader": true, "displayName": 0, "nicknames": ["The \"Dragon\"", "Chang"] }
+            { "name": "Mr. K", "faction": "Chang Gang", "leader": true, "displayName": 0, "nicknames": ["Chang", "The \"Dragon\""] }
         ],
         "LordJasta": [
             { "name": "Chris McGrawl" }
@@ -904,7 +904,7 @@
             { "name": "Willow Wolfhart", "faction": "DoC" }
         ],
         "Lysium": [
-            { "name": "Benji Ramos", "faction": "Vagos" },
+            { "name": "Benji Ramos", "faction": "Vagos", "nicknames": ["B"] },
             { "name": "Dean Duncan", "faction": "DoC" }
         ],
         "Macaiyla": [
