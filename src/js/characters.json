@@ -1447,6 +1447,9 @@
         "the_halfhand": [
             { "name": "Jack \"Sully\" Sullivan" }
         ],
+        "TheAaronShaq": [
+            { "name": "? \"Glue Guy\" ?", "faction": "Burger Shot" }
+        ],
         "TheBigMeech": [
             { "name": "Pilbis Shonly", "faction": "Burger Shot" }
         ],
