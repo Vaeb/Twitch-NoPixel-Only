@@ -190,7 +190,7 @@
             { "name": "Chet Summerset", "other": -1, "assume": "assumeNpNoOther"}
         ],
         "Biotoxz_": [
-            { "name": "[Barbarian] Bjorn", "faction": "LARPers" }
+            { "name": "[Barbarian /] Bjorn", "faction": "LARPers" }
         ],
         "BJPofficial": [
             { "name": "Buford J. Preston", "faction": "Lawyers" }
@@ -490,7 +490,7 @@
             { "name": "Alexander Egorov" }
         ],
         "Fyzicul": [
-            { "name": "[Shaman] Keith \"Lando\" Wanderlust", "faction": "LARPers", "nicknames": ["Stormborn", "Shaman", "Mountain Kingdom"], "displayName": 0 }
+            { "name": "[Shaman /] Keith \"Lando\" Wanderlust", "faction": "LARPers", "nicknames": ["Stormborn", "Shaman", "Mountain Kingdom"], "displayName": 0 }
         ],
         "Gabz": [
             { "name": "Development \"Development: Gabz\"", "faction": "Development", "nicknames": ["3D"] }
@@ -499,7 +499,7 @@
             { "name": "[Deputy] Peter Johnson", "faction": "Police" }
         ],
         "Garek": [
-            { "name": "[Cleric] Burt \"Gloryon\" Beans", "faction": "LARPers", "nicknames": ["Cleric"] }
+            { "name": "[Cleric /] Burt \"Gloryon\" Beans", "faction": "LARPers", "nicknames": ["Cleric"] }
         ],
         "GattisTV": [
             { "name": "Carlos Guzman", "faction": "Vagos" }
@@ -511,7 +511,7 @@
             { "name": "[Officer] Lance Malton", "faction": "Police" }
         ],
         "ggqf": [
-            { "name": "[Paladin] Stagdancer", "faction": "LARPers", "nicknames": ["Gea"] }
+            { "name": "[Paladin /] Stagdancer", "faction": "LARPers", "nicknames": ["Gea"] }
         ],
         "goldelena": [
             { "name": "August Vakarian" }
@@ -617,7 +617,7 @@
             { "name": "Levi Dawson", "faction": "SSB" }
         ],
         "ItsLeslie": [
-            { "name": "[Wizard] KyrinChan \"Leyla\" WeuhBou", "faction": "LARPers", "nicknames": ["Nightingale", "Wizard", "Embervale"] }
+            { "name": "[Wizard /] KyrinChan \"Leyla\" WeuhBou", "faction": "LARPers", "nicknames": ["Nightingale", "Wizard", "Embervale"] }
         ],
         "ItsLSG": [
             { "name": "[Officer] Jack Miller", "faction": "Police" }
@@ -1001,7 +1001,7 @@
         ],
         "MOONMOON": [
             { "name": "[Officer] Lenny Hawk", "faction": "Police", "displayName": 0 },
-            { "name": "Bernice \"Shadowlord\" Caldershot", "faction": "LARPers" },
+            { "name": "[Shadowlord /] Bernice Caldershot", "faction": "LARPers" },
             { "name": "Yung Dab", "nicknames": ["The \"Gnome\""] }
         ],
         "MrMoonsHouse": [
@@ -1088,7 +1088,7 @@
             { "name": "[Dispatch] Jeffrey Bundy", "faction": "Police" }
         ],
         "Octopimp": [
-            { "name": "[Sorceror] Chut McMillan", "faction": "LARPers", "nicknames": ["Chut The Magnificent", "Sorcerer"] }
+            { "name": "[Sorceror /] Chut McMillan", "faction": "LARPers", "nicknames": ["Chut The Magnificent", "Sorcerer"] }
         ],
         "OfficialTaco": [
             { "name": "Charles \"Taco\" Prince", "faction": "Chang Gang" }
@@ -1270,7 +1270,7 @@
             { "name": "[Deputy] Joey Keys", "faction": "Police" }
         ],
         "shiny": [
-            { "name": "[Archdruid] Clyde \"Meowfurryon\" Eastside", "faction": "LARPers", "nicknames": ["Druid", "Archdruid", "Malfurryon"] }
+            { "name": "[Archdruid /] Clyde \"Meowfurryon\" Eastside", "faction": "LARPers", "nicknames": ["Druid", "Archdruid", "Malfurryon"] }
         ],
         "Shortyyguy": [
             { "name": "Eddie Delish", "faction": "Leanbois" }
@@ -1394,7 +1394,7 @@
         ],
         "Surefour": [
             { "name": "[Officer] Kenny Hawk", "faction": "Police", "displayName": 0 },
-            { "name": "[Ranger] Clarence Trueshot", "faction": "LARPers", "nicknames": ["Ranger"], "displayName": 0 }
+            { "name": "[Ranger /] Clarence Trueshot", "faction": "LARPers", "nicknames": ["Ranger"], "displayName": 0 }
         ],
         "SwizzMB": [
             { "name": "Miguel Almerion", "faction": "Snake Gang" }
@@ -1544,7 +1544,7 @@
             { "name": "Esteban Julio-Cruz-Perez-Rodriguez", "faction": "Marabunta" }
         ],
         "Vigors": [
-            { "name": "[Warlock] Kayn \"Yager Demonblood\" Larp", "faction": "LARPers", "nicknames": ["Warlock", "Fighter", "Yager", "Demonblood"], "displayName": 0 }
+            { "name": "[Warlock /] Kayn \"Yager Demonblood\" Larp", "faction": "LARPers", "nicknames": ["Warlock", "Fighter", "Yager", "Demonblood"], "displayName": 0 }
         ],
         "Viviana": [
             { "name": "Griselda Ambrose", "nicknames": ["Granny"] },
