@@ -208,7 +208,7 @@
             { "name": "[ADA] Lachlan Pike", "faction": "DoJ" }
         ],
         "Bomaah": [
-            { "name": "Viper Rodriguez", "faction": "ESB" }
+            { "name": "Viper Rodriguez", "faction": "ESB", "assume": "assumeOther" }
         ],
         "BoschMerchant": [
             { "name": "Anto Murphy", "faction": "Chang Gang" }
