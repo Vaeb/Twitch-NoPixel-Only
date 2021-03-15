@@ -131,7 +131,9 @@
         ],
         "Asteroba": [
             { "name": "[D.A.] Larry Hallow", "faction": "DoJ" },
-            { "name": "Kermy Fulker", "faction": "HOA" }
+            { "name": "[Officer] Aaron Byson", "faction": "Police" },
+            { "name": "Kermy Fulker", "faction": "HOA" },
+            { "name": "[EMS] Boba Stone", "faction": "Medical" }
         ],
         "Aus24": [
             { "name": "Jordan Walker", "faction": "Harmony" },
@@ -1572,10 +1574,6 @@
             { "name": "[Officer] Crocodile Steve", "faction": "Police" },
             { "name": "Irwin Dundee", "faction": "BBMC", "displayName": 2 },
             { "name": "James Tinklebottom" }
-        ],
-        "Whiteboylemons": [
-            { "name": "[Officer] Aaron Byson", "faction": "Police" },
-            { "name": "[EMS] Boba Stone", "faction": "Medical" }
         ],
         "WhiteyRP": [
             { "name": "[Officer] Alex Casterman", "faction": "Police" },
