@@ -123,7 +123,7 @@
         ],
         "Ashi": [
             { "name": "Fiona Stewart", "faction": "HOA", "nicknames": ["Fi-ho-na"] },
-            { "name": "Annie May" }
+            { "name": "Annie May", "displayName": 0 }
         ],
         "ashlynn": [
             { "name": "[Officer] Brenda Pancake", "faction": "Police", "displayName": 1, "nicknames": ["Pancakes"] },
