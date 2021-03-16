@@ -1472,7 +1472,8 @@
             { "name": "? \"Glue Guy\" ?", "faction": "Burger Shot" }
         ],
         "TheBigMeech": [
-            { "name": "Pilbis Shonly", "faction": "Burger Shot" }
+            { "name": "Pilbis Shonly", "faction": "Burger Shot" },
+            { "name": "Tyler Kwando", "displayName": 0 }
         ],
         "TheChief1114": [
             { "name": "Fingle Dan", "displayName": 0, "other": -1, "assume": "assumeNpNoOther" }
