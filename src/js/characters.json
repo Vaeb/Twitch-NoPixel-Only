@@ -297,6 +297,9 @@
             { "name": "Madam Ming", "displayName": 0 },
             { "name": "[Dr.] Ethan Maw", "faction": "Medical", "displayName": 2 }
         ],
+        "CoconutB": [
+            { "name": "? ?" }
+        ],
         "ConfusedDevil": [
             { "name": "[Deputy] Travis Tribble", "faction": "Police" }
         ],
@@ -1179,6 +1182,9 @@
         "RatedEpicz": [
             { "name": "Randy Bullet", "faction": "Chang Gang", "nicknames": ["Lazy-Eye Bullet"] },
             { "name": "[Trooper] AJ Hunter", "faction": "Police" }
+        ],
+        "Ray__C": [
+            { "name": "Raymond Romanov" }
         ],
         "ray308win": [
             { "name": "[FIB Agent] Lyonel Winchester", "faction": "Police" }
