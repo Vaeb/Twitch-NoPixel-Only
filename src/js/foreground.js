@@ -736,6 +736,18 @@ const filterStreams = async () => {
         });
     };
 
+    const setupFilter = async () => {
+        const $sortByLabel = $(await waitForElement('label[for="browse-header-filter-by"]'));
+        const $sortByDiv = $sortByLabel.parent().parent();
+        const $filterDiv = $sortByDiv.clone();
+
+        $filterDiv.insertBefore($sortByDiv);
+        $filterDiv.css({ marginRight: '15px' });
+
+        const [$labelDiv, $dropdownDiv] = $filterDiv.children().toArray().map(el => $(el));
+        $labelDiv.find('label').text('Filter NP streams:');
+    };
+
     const twitchGtaUrl = /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V(?!\/videos|\/clips)/;
     onPage = twitchGtaUrl.test(window.location.href);
 
@@ -763,6 +775,8 @@ const filterStreams = async () => {
         if (tnoEnglish) {
             selectEnglish();
         }
+
+        setupFilter();
 
         console.log('[TNO] Starting interval');
         interval = setInterval(deleteOthers, 1000 * intervalSeconds); // Interval gets ended when minViewers is reached
