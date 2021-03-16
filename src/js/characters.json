@@ -432,6 +432,7 @@
             { "name": "[Deputy] John Dorian", "faction": "Police" }
         ],
         "Evee": [
+            { "name": "[Judge] Antigone Weston", "faction": "DoJ" },
             { "name": "[Judge] Whitney Crawford", "faction": "DoJ" },
             { "name": "Adrienne West" },
             { "name": "Bree Matthews" },
