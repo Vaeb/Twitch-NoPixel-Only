@@ -233,6 +233,7 @@
             { "name": "Johnny Silverhand", "displayName": 0 },
             { "name": "Asmon Bronze", "displayName": 0, "nicknames": ["AsmonBronze", "Transmog"] },
             { "name": "Norman \"Norm\" Yoder" },
+            { "name": "Sasuke Johnson" },
             { "name": "Brocky Potage", "displayName": 1 },
             { "name": "Gordo Ramsay", "displayName": 0 }
         ],
@@ -1610,7 +1611,8 @@
             { "name": "Will Earnz", "displayName": 0 }
         ],
         "willneff": [
-            { "name": "\"James Marco\" St. Marco", "nicknames": ["marko", "marcoing", "markoing"] }
+            { "name": "\"James Marco\" St. Marco", "nicknames": ["marko", "marcoing", "markoing"] },
+            { "name": "? \"Don's Mother\" ?", "nicknames": ["Mama", "Donna"] }
         ],
         "Wolfabelle": [
             { "name": "Bianca Walters" }
