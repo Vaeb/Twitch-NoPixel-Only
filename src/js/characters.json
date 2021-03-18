@@ -1601,7 +1601,7 @@
             { "name": "Lawrence Splainer", "faction": "Lawyers", "displayName": 2 }
         ],
         "Whippy": [
-            { "name": "[Officer] Crocodile Steve", "faction": "Police" },
+            { "name": "[Officer] Crocodile Steve", "faction": "Police", "nicknames": ["Cop"] },
             { "name": "Irwin Dundee", "faction": "BBMC", "displayName": 2 },
             { "name": "James Tinklebottom" }
         ],
