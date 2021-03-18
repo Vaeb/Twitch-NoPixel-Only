@@ -411,7 +411,8 @@
             { "name": "John \"Geno\" Collins", "faction": "GSF" }
         ],
         "Dunrunnin12": [
-            { "name": "Thomas Dwayne", "nicknames": ["The Narrator"], "displayName": 0 }
+            { "name": "Thomas Dwayne", "nicknames": ["The Narrator"], "displayName": 0 },
+            { "name": "Nay \"Delamain\" Rater" }
         ],
         "durptastic": [
             { "name": "Otis Goody", "faction": "Burger Shot" }
