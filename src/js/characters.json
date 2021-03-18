@@ -680,7 +680,7 @@
             { "name": "Rai \"Juuls\" Cumberwoood" }
         ],
         "jimmytulip": [
-            { "name": "Wayne Biggaz", "faction": "Chang Gang", "nicknames": ["/\bwe+y+n/"] }
+            { "name": "Wayne Biggaz", "faction": "Chang Gang", "nicknames": ["/\\bwe+y+n/"] }
         ],
         "JJLake": [
             { "name": "Jay Jarvis", "faction": "Pegasus" }
@@ -1201,7 +1201,7 @@
             { "name": "[Trooper] AJ Hunter", "faction": "Police" }
         ],
         "Ray__C": [
-            { "name": "Raymond Romanov", "faction": "Pegasus", "nicknames": ["Ray", "/\brussia/"] }
+            { "name": "Raymond Romanov", "faction": "Pegasus", "nicknames": ["Ray", "/\\brussia/"] }
         ],
         "ray308win": [
             { "name": "[FIB Agent] Lyonel Winchester", "faction": "Police" }
