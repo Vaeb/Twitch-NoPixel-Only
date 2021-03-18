@@ -1230,7 +1230,7 @@
             { "name": "Nikita Reznikov", "faction": "Pegasus" }
         ],
         "rlly": [
-            { "name": "Shelly Targaryen", "faction": "Burger Shot" },
+            { "name": "Shelly Targaryen", "faction": "Burger Shot", "nicknames": ["Shelleh"] },
             { "name": "Kelly Smith", "faction": "Prune Gang" }
         ],
         "RobotNinjaPants": [
