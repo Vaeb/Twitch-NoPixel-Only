@@ -760,7 +760,7 @@
         ],
         "KatFires": [
             { "name": "Novah Walker", "faction": "Chang Gang" },
-            { "name": "Ensley Alton", "faction": "DoC", "nicknames": ["721"] }
+            { "name": "[Officer] Ensley Alton", "faction": "Police", "nicknames": ["521"], "displayName": 1 }
         ],
         "KattValkyrie": [
             { "name": "[EMS] Valkyrie Sunshot", "faction": "Medical" },
