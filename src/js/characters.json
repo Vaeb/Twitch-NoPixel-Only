@@ -540,7 +540,8 @@
             { "name": "Tea Tea", "faction": "Police", "displayName": 0 }
         ],
         "GreenishMonkey": [
-            { "name": "Bobby Brown", "faction": "Chang Gang" }
+            { "name": "Bobby Brown", "faction": "Chang Gang" },
+            { "name": "James Brown", "faction": "Police", "displayName": 0 }
         ],
         "GTAWiseGuy": [
             { "name": "Eddie Marshall", "faction": "Tuner Shop" },
