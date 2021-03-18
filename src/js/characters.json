@@ -680,7 +680,7 @@
             { "name": "Rai \"Juuls\" Cumberwoood" }
         ],
         "jimmytulip": [
-            { "name": "Wayne Biggaz", "faction": "Chang Gang" }
+            { "name": "Wayne Biggaz", "faction": "Chang Gang", "nicknames": ["/\bwe+y+n/"] }
         ],
         "JJLake": [
             { "name": "Jay Jarvis", "faction": "Pegasus" }
