@@ -81,7 +81,7 @@
         "akaMONKEY": [
             { "name": "Arturo Ortiz", "faction": "Vagos" },
             { "name": "CamRon \"Peanut\" Giles", "faction": "SSB" },
-            { "name": "Timoteo \"TT\" Bushnell", "faction": "Top Shottaz", "nicknames": ["Rasta"] }
+            { "name": "Timoteo \"TT\" Bushnell", "nicknames": ["Rasta"] }
         ],
         "aleks": [
             { "name": "[Chief of Police] Bobby Smith", "faction": "Police", "leader": 1, "nicknames": ["Bob", "Chief"], "displayName": 1 },
@@ -155,7 +155,7 @@
             { "name": "Karen Dahmer", "faction": "Chang Gang", "affiliate": true, "nicknames": ["Kawen"] }
         ],
         "aXed_U": [
-            { "name": "Hans Snitzel", "faction": "Prune Gang" }
+            { "name": "Hans Snitzel" }
         ],
         "Baki961": [
             { "name": "Yoshimoto Nakanishi" }
@@ -292,7 +292,7 @@
         ],
         "CinnamonToastKen": [
             { "name": "Chuck Colton" },
-            { "name": "Buck Colton", "faction": "Prune Gang", "nicknames": ["Book", "Bucky", "Cultan"] }
+            { "name": "Buck Colton", "nicknames": ["Book", "Bucky", "Cultan"] }
         ],
         "chairhandler": [
             { "name": "Carl Crimes" }
@@ -983,7 +983,7 @@
             { "name": "[Deputy] Clarence Williams", "faction": "Police", "displayName": 1 }
         ],
         "Mick": [
-            { "name": "Gladys Berry", "faction": "Prune Gang" }
+            { "name": "Gladys Berry" }
         ],
         "Middleditch": [
             { "name": "Stanley Tuttles" }
@@ -1070,7 +1070,7 @@
             { "name": "Dawn Hearte", "faction": "Medical" }
         ],
         "NewFaceSuper": [
-            { "name": "Davey Doherty", "faction": "Prune Gang" }
+            { "name": "Davey Doherty" }
         ],
         "Nidas": [
             { "name": "Leslie Ling", "displayName": 0, "nicknames": ["Lingberg"] }
@@ -1197,7 +1197,7 @@
         ],
         "Rasta": [
             { "name": "Dunn Robinson", "other": -1, "assume": "assumeNpNoOther" },
-            { "name": "Mary Livingston", "faction": "Prune Gang", "displayName": 0 }
+            { "name": "Mary Livingston", "displayName": 0 }
         ],
         "RatedEpicz": [
             { "name": "Randy Bullet", "faction": "Chang Gang", "nicknames": ["Lazy-Eye Bullet"] },
@@ -1234,7 +1234,7 @@
         ],
         "rlly": [
             { "name": "Shelly Targaryen", "faction": "Burger Shot", "nicknames": ["Shelleh"] },
-            { "name": "Kelly Smith", "faction": "Prune Gang" }
+            { "name": "Kelly Smith" }
         ],
         "RobotNinjaPants": [
             { "name": "[ADA] Jacob Slate", "faction": "DoJ" }
@@ -1377,7 +1377,7 @@
             { "name": "Harry Phartz" }
         ],
         "Spaceboy": [
-            { "name": "Melbert \"Mel\" Rickenbacker", "faction": "Prune Gang" },
+            { "name": "Melbert \"Mel\" Rickenbacker" },
             { "name": "Pat" },
             { "name": "Casey Boyd", "nicknames": ["Caseboy", "L8PD"], "displayName": 0 }
         ],
