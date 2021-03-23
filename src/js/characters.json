@@ -893,7 +893,7 @@
         ],
         "Lovinurstyle": [
             { "name": "Rose Edwards" },
-            { "name": "Leah Strong", "faction": "Fastlane" }
+            { "name": "Leah Strong" }
         ],
         "Lt_Raven": [
             { "name": "[Officer] Vladimir Raven", "faction": "Police", "highCommand": true }
