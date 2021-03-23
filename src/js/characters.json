@@ -630,7 +630,7 @@
         ],
         "ironmonkeytv": [
             { "name": "Winston Bolt", "faction": "Pegasus" },
-            { "name": "Dragon", "faction": "DDMC" }
+            { "name": "Dragon" }
         ],
         "itmeJP": [
             { "name": "Wilbur Higgins" }
@@ -770,7 +770,7 @@
             { "name": "Katt Vincent" }
         ],
         "kClient": [
-            { "name": "Daquan \"Peanut\" Dumas", "faction": "Arab Mafia" }
+            { "name": "Daquan \"Peanut\" Dumas" }
         ],
         "Keeno": [
             { "name": "Kyle Brovloski" }
@@ -811,7 +811,7 @@
             { "name": "[Deputy] Lauren Forcer", "faction": "Police" },
             { "name": "Mia Mersion", "faction": "Pegasus" },
             { "name": "Evita \"Mother\" Nimm", "faction": "Dark Web" },
-            { "name": "Ava Ridge", "faction": "Goths", "nicknames": ["Silence", "/darkness/"] },
+            { "name": "Ava Ridge", "nicknames": ["Silence", "/darkness/"] },
             { "name": "Marta Volkov" }
         ],
         "Knotty": [
@@ -846,7 +846,7 @@
             { "name": "Mary Mushkin", "displayName": 0 }
         ],
         "Jackhuddo": [
-            { "name": "Shane Powers", "faction": "BBMC" }
+            { "name": "Shane Powers" }
         ],
         "LadyHope": [
             { "name": "[Officer] Lily Pond", "faction": "Police" }
@@ -1605,7 +1605,7 @@
         ],
         "Whippy": [
             { "name": "[Officer] Crocodile \"Croc\" Steve", "faction": "Police", "nicknames": ["Cop"] },
-            { "name": "Irwin Dundee", "faction": "BBMC", "displayName": 2 },
+            { "name": "Irwin Dundee", "displayName": 2 },
             { "name": "James Tinklebottom" }
         ],
         "WhiteyRP": [
