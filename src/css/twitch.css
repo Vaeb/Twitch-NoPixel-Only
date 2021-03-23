@@ -99,6 +99,9 @@ input[type='checkbox']:focus {
 .tooltip {
     position: relative;
     display: inline-block;
+}
+
+span.tooltip {
     border-bottom: 1px dotted white;
 }
 
@@ -117,15 +120,29 @@ input[type='checkbox']:focus {
     margin-left: -60px;
 }
 
+.tooltip .tooltiptext2 {
+    white-space: nowrap;
+    width: fit-content;
+    padding-left: 10px;
+    padding-right: 10px;
+    bottom: 120%;
+    margin-left: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 500;
+    background: none;
+    color: rgba(255, 255, 255, 0.9);
+}
+
 .tooltip .tooltiptext::after {
     content: '';
     position: absolute;
     top: 100%;
     left: 50%;
     margin-left: -5px;
-    border-width: 5px;
+    border-width: 4px;
     border-style: solid;
-    border-color: black transparent transparent transparent;
+    border-color: white transparent transparent transparent;
 }
 
 .tooltip:hover .tooltiptext {

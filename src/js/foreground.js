@@ -345,6 +345,9 @@ const filterStreams = async () => {
         });
     };
 
+    let minLoadedViewers;
+    let minLoadedText;
+
     const deleteOthers = () => {
         if (onPage == false) return;
         // if (onPage == false || isDeleting === true) return;
@@ -353,7 +356,9 @@ const filterStreams = async () => {
         const useTextColor = '#000';
         // const useTextColor = isDark ? '#000' : '#f7f7f8';
 
-        const elements = Array.from(document.getElementsByTagName('article')).filter(element => !element.classList.contains('npChecked'));
+        const allElements = Array.from(document.getElementsByTagName('article'));
+        const elements = allElements.filter(element => !element.classList.contains('npChecked'));
+        const streamCount = document.getElementById('streamCount');
 
         const prevWasZero = wasZero;
 
@@ -375,6 +380,16 @@ const filterStreams = async () => {
             const titleEl = element.getElementsByClassName('tw-ellipsis tw-font-size-5')[0];
             const channelEl = element.querySelectorAll("a[data-a-target='preview-card-channel-link']")[0];
             let liveElDiv = element.getElementsByClassName('tw-channel-status-text-indicator')[0];
+            const viewers = element.getElementsByClassName('tw-media-card-stat')[0].firstChild.innerText;
+
+            let viewersNum = parseFloat(viewers);
+            if (viewers.includes('K viewer')) viewersNum *= 1000;
+
+            if (minLoadedViewers == null || viewersNum < minLoadedViewers) {
+                minLoadedViewers = viewersNum;
+                minLoadedText = viewers;
+            }
+
             let liveEl;
             if (liveElDiv != null) {
                 liveEl = liveElDiv.children[0];
@@ -382,6 +397,7 @@ const filterStreams = async () => {
                 liveElDiv = $('<div>')[0];
                 liveEl = $('<div>')[0];
             }
+
             const channelName = channelEl.innerText.toLowerCase();
             const title = titleEl.innerText;
             const titleParsed = title.toLowerCase().replace(/\./g, ' '); // ??
@@ -547,9 +563,6 @@ const filterStreams = async () => {
                 // liveEl.innerText = 'REMOVED';
                 // channelEl.style.color = '#ff0074';
 
-                const viewers = element.getElementsByClassName('tw-media-card-stat')[0].firstChild.innerText;
-                let viewersNum = parseFloat(viewers);
-                if (viewers.includes('K viewer')) viewersNum *= 1000;
                 if (viewersNum < minViewers) {
                     if (isFirstRemove && keepDeleting) {
                         keepDeleting = false;
@@ -572,6 +585,8 @@ const filterStreams = async () => {
                 if (isFirstRemove) isFirstRemove = false;
             }
         });
+
+        if (minLoadedText != null && streamCount) streamCount.textContent = `Smallest stream fetched: ${minLoadedText}`;
 
         if (tnoScrolling && elements.length > 0 && prevWasZero) {
             const $scrollDiv = $('div.root-scrollable.scrollable-area').find('> div.simplebar-scroll-content');
@@ -1076,7 +1091,10 @@ const filterStreams = async () => {
                 <div class="selectWrapper">
                     <div class="selectCustom js-selectCustom" aria-hidden="true">
                         <div class="selectCustom-row">
-                            <label class="selectCustom-label">Filter streams</label>
+                            <label class="selectCustom-label tooltip">
+                                Filter streams
+                                <span id="streamCount" class="tooltiptext tooltiptext2">...</span>
+                            </label>
                             <div class="selectCustom-trigger"></div>
                         </div>
                         <div class="selectCustom-options">
