@@ -701,7 +701,7 @@
             { "name": "Lawyer / Maggie Kayden", "faction": "DoJ" }
         ],
         "Jonthebroski": [
-            { "name": "Denzel Williams", "faction": "Cleanbois", "nicknames": ["The \"Cleaner\""] },
+            { "name": "Denzel Williams", "faction": "Pegasus", "nicknames": ["The \"Cleaner\""] },
             { "name": "Dio Ivanov", "faction": "Russians" },
             { "name": "[Officer] Johnny Divine", "faction": "Police", "displayName": 0 }
         ],
