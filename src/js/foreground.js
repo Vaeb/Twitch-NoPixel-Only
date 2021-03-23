@@ -657,7 +657,7 @@ const filterStreams = async () => {
                     <div class="tno-settings-container">
                         <div class="settings-titles">
                             <span class="settings-title">TNO Settings</span>
-                            <span class="settings-reload">🗘</span>
+                            <span class="settings-reload">&#x27f3;</span>
                         </div>
                         <div class="settings-options">
                             <div class="settings-option">

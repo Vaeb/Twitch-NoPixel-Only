@@ -25,6 +25,9 @@ span.settings-title {
 span.settings-reload {
     float: right;
     cursor: pointer;
+    font-size: 20px;
+    width: 27px;
+    text-align: center;
 }
 
 div.settings-options {
