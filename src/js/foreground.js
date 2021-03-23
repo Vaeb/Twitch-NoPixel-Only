@@ -79,7 +79,7 @@ const displayNameDefault = {
     mersions: 0,
 };
 
-// #00A032 #cd843f #9b4d75 #b71540 #ff0074 #2250ff
+// #00A032 #cd843f #9b4d75 #b71540 #ff0074 #2250ff #8854d0
 // fastlane: '#40739e',
 // mersions, koreans, ckr, aztecas
 
@@ -910,26 +910,57 @@ const filterStreams = async () => {
             .toArray()
             .map(el => $(el));
 
-        const optionSorting = Object.assign({}, ...[
-            'Police',
-            'Cleanbois',
-            'Chang Gang',
-            'Pegasus',
-            'HOA',
-            'Medical',
-            'DoC',
-            'DoJ',
-        ].map((option, index) => ({ [option]: index + 1 })));
+        const excludeFactions = ['othernp', 'mechanic', 'harmony', 'quickfix', 'tunershop', 'marabunta', 'mersions'];
 
-        console.log('qq', optionSorting);
+        const optionSorting = Object.assign(
+            {},
+            ...[
+                'cleanbois',
+                'changgang',
+                'police',
+                'doj',
+                'medical',
+                'larpers',
+                'pegasus',
+                'hoa',
+                'vagos',
+                'ssb',
+                'gsf',
+                'lostmc',
+                'angels',
+                'snakegang',
+                'russians',
+            ].map((option, index) => ({ [option]: index + 1 })),
+            ...[
+                'burgershot',
+                'doc',
+                'development',
+            ].map((option, index) => ({ [option]: 1000 + index + 1 }))
+        );
+
+        optionSorting.independent = 3555;
+
+        const optionRename = {
+            hoa: 'Home Owners Association',
+            doc: 'Department of Corrections',
+            doj: 'Lawyers & Judges',
+            ssb: 'Ballas',
+            gsf: 'Grove Street Families',
+            angels: 'The Angels',
+            lunatix: 'Lunatix MC',
+        };
 
         const options = [
-            'NoPixel',
-            'All (No Filtering)',
-            ...Object.values(fullFactionMap)
-                .filter(option => ['OtherNP'].includes(option) === false)
-                .sort((a, b) => (optionSorting[a] || Infinity) - (optionSorting[b] || Infinity)),
+            ['allnopixel', 'All NoPixel'],
+            ['allstreams', 'All Streams (No Filtering)'],
+            ...Object.entries(fullFactionMap)
+                .filter(option => excludeFactions.includes(option[0]) === false)
+                .sort((a, b) => (optionSorting[a[0]] || (useColors[a[0]] && 1000) || 2000) - (optionSorting[b[0]] || (useColors[b[0]] && 1000) || 2000))
+                .map(option => [option[0], optionRename[option[0]] || option[1]]),
         ];
+
+        useColors.allnopixel = '#FFF';
+        useColors.allstreams = '#FFF';
 
         // $labelDiv.find('label').text('Filter streams');
         $labelDiv.remove();
@@ -939,10 +970,10 @@ const filterStreams = async () => {
                     <div class="selectCustom js-selectCustom" aria-hidden="true">
                         <div class="selectCustom-row">
                             <label class="selectCustom-label">Filter streams</label>
-                            <div class="selectCustom-trigger">NoPixel</div>
+                            <div class="selectCustom-trigger">${options[0][1]}</div>
                         </div>
                         <div class="selectCustom-options">
-                            ${options.map(option => `<div class="selectCustom-option" data-value="${option}">${option}</div>`).join('')}
+                            ${options.map(option => `<div style="color: ${useColors[option[0]] || useColors.independent}" class="selectCustom-option" data-value="${option[0]}">${option[1]}</div>`).join('')}
                         </div>
                     </div>
                 </div>
