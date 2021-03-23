@@ -487,36 +487,45 @@ const filterStreams = async () => {
                     }
                 }
 
+                const hasNowCharacter = nowCharacter;
+                const hasFactions = factionNames.length;
+                const hasCharacters = characters && characters.length;
+
                 let allowStream = ['allnopixel', 'alltwitch'].includes(filterStreamFaction);
                 if (allowStream === false) {
-                    // console.log('doing NP filtering for:', filterStreamFaction);
-                    let nowFaction;
-                    if (nowCharacter) {
-                        nowFaction = nowCharacter.factionUse;
-                    } else if (factionNames.length) {
-                        nowFaction = useColors[factionNames[0]] ? factionNames[0] : 'independent';
+                    if (filterStreamFaction === 'othernp') { // use conditions below
+                        allowStream = !hasNowCharacter && !hasFactions && !hasCharacters;
+                    } else {
+                        let nowFaction;
+                        if (hasNowCharacter) { // use condition below
+                            nowFaction = nowCharacter.factionUse;
+                        } else if (hasFactions) {
+                            nowFaction = useColors[factionNames[0]] ? factionNames[0] : 'independent';
+                        } else if (hasCharacters) {
+                            nowFaction = characters[0].factionUse;
+                        }
+                        allowStream = nowFaction === filterStreamFaction;
                     }
-                    allowStream = nowFaction === filterStreamFaction;
                 }
 
                 if (allowStream === false) {
                     filterState = FSTATES.remove;
                 } else {
-                    if (nowCharacter) {
+                    if (hasNowCharacter) {
                         const nowColor = useColors[nowCharacter.factionUse];
                         const nowColorDark = useColorsDark[nowCharacter.factionUse];
                         channelEl.style.color = nowColor;
                         liveElDiv.style.backgroundColor = nowColorDark;
                         liveEl.style.color = useTextColor;
                         liveEl.innerText = `${nowCharacter.leader ? '♛ ' : ''}${nowCharacter.displayName}`;
-                    } else if (factionNames.length) {
+                    } else if (hasFactions) {
                         const nowColor = useColors[factionNames[0]] || useColors.independent;
                         const nowColorDark = useColorsDark[factionNames[0]] || useColorsDark.independent;
                         channelEl.style.color = nowColor;
                         liveElDiv.style.backgroundColor = nowColorDark;
                         liveEl.style.color = useTextColor;
                         liveEl.innerText = `< ${fullFactionMap[factionNames[0]] || factionNames[0]} >`;
-                    } else if (characters && characters.length) {
+                    } else if (hasCharacters) {
                         const nowColor = useColors[characters[0].factionUse];
                         const nowColorDark = useColorsDark[characters[0].factionUse];
                         channelEl.style.color = nowColor;
@@ -1006,7 +1015,7 @@ const filterStreams = async () => {
             .toArray()
             .map(el => $(el));
 
-        const excludeFactions = ['othernp', 'mechanic', 'harmony', 'quickfix', 'tunershop', 'marabunta', 'mersions'];
+        const excludeFactions = ['mechanic', 'harmony', 'quickfix', 'tunershop', 'marabunta', 'mersions'];
 
         const optionSorting = Object.assign(
             {},
@@ -1031,6 +1040,7 @@ const filterStreams = async () => {
                 'burgershot',
                 'doc',
                 'development',
+                'othernp',
             ].map((option, index) => ({ [option]: 1000 + index + 1 }))
         );
 
@@ -1044,6 +1054,7 @@ const filterStreams = async () => {
             gsf: 'Grove Street Families',
             angels: 'The Angels',
             lunatix: 'Lunatix MC',
+            othernp: 'Unknown',
         };
 
         const options = [
