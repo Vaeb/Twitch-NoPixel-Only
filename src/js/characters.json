@@ -181,7 +181,7 @@
             { "name": "Jose Pincha" }
         ],
         "BennniStreams": [
-            { "name": "Santiago Madrid", "nicknames": ["/\\bSantiago/"] },
+            { "name": "Santiago Madrid", "faction": "Vagos", "nicknames": ["/\\bSantiago/"] },
             { "name": "Antonio Reyes", "nicknames": ["/\\bAntonio/"] },
             { "name": "Pablo Madrid", "faction": "Vagos", "nicknames": ["Diablo"] }
         ],
@@ -1671,7 +1671,7 @@
         "cleanbois": "lean\\s*boi|\\blba?\\b",
         "lostmc": "lost\\s*mc|the\\s*lost\\b",
         "changgang": "chang\\s*gang|\\bcga?\\b",
-        "vagos": "vagos|yellow[\\s-]*gang",
+        "vagos": "vagos|yellow[\\s-]*gang|\\besv\\b",
         "gsf": "grove|\\bgsf\\b",
         "ssb": "balla|\\bssb\\b(?![\\s-]+(?:wo?rld|later))|\\besb\\b",
         "marabunta": "\\bmarabunta",
