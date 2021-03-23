@@ -48,6 +48,7 @@ let onPage = false;
 let interval;
 
 let wasZero = false;
+let filterStreamFaction = 'allnopixel';
 
 let regNp;
 let regOthers;
@@ -336,6 +337,14 @@ const filterStreams = async () => {
 
     let isDeleting = false;
 
+    const resetFiltering = () => {
+        const elements = Array.from(document.getElementsByTagName('article')).filter(element => element.classList.contains('npChecked'));
+        console.log('resetting for', elements.length, 'elements');
+        elements.forEach((element) => {
+            element.classList.remove('npChecked');
+        });
+    };
+
     const deleteOthers = () => {
         if (onPage == false) return;
         // if (onPage == false || isDeleting === true) return;
@@ -405,8 +414,10 @@ const filterStreams = async () => {
             const onMainOther = !onNp && mainsOther;
             const npStreamer = onNp || characters;
 
+            const nowFilterEnabled = filterEnabled && filterStreamFaction !== 'alltwitch';
+
             let filterState; // remove, mark-np, mark-other
-            if (filterEnabled) {
+            if (nowFilterEnabled) {
                 // If filtering streams is enabled
                 if ((tnoOthers && (onOtherIncluded || onMainOther || (npStreamer && onOther))) || (npStreamer && !mainsOther && !keepNp && onOther)) {
                     // If is-including-others and streamer on another server, or it's an NP streamer playing another server
@@ -430,6 +441,10 @@ const filterStreams = async () => {
 
             if (filterState === FSTATES.other) {
                 // Other included RP servers
+                if (element.style.display === 'none') {
+                    element.style.display = null;
+                }
+
                 channelEl.style.color = useColors.other;
                 liveElDiv.style.backgroundColor = useColorsDark.other;
                 liveEl.style.color = useTextColor;
@@ -437,6 +452,10 @@ const filterStreams = async () => {
                 liveEl.innerText = serverName.length > 0 ? `::${serverName}::` : '';
             } else if (filterState === FSTATES.nopixel) {
                 // NoPixel stream
+                if (element.style.display === 'none') {
+                    element.style.display = null;
+                }
+
                 let nowCharacter;
                 let factionNames = [];
 
@@ -468,35 +487,53 @@ const filterStreams = async () => {
                     }
                 }
 
-                if (nowCharacter) {
-                    const nowColor = useColors[nowCharacter.factionUse];
-                    const nowColorDark = useColorsDark[nowCharacter.factionUse];
-                    channelEl.style.color = nowColor;
-                    liveElDiv.style.backgroundColor = nowColorDark;
-                    liveEl.style.color = useTextColor;
-                    liveEl.innerText = `${nowCharacter.leader ? '♛ ' : ''}${nowCharacter.displayName}`;
-                } else if (factionNames.length) {
-                    const nowColor = useColors[factionNames[0]] || useColors.independent;
-                    const nowColorDark = useColorsDark[factionNames[0]] || useColorsDark.independent;
-                    channelEl.style.color = nowColor;
-                    liveElDiv.style.backgroundColor = nowColorDark;
-                    liveEl.style.color = useTextColor;
-                    liveEl.innerText = `< ${fullFactionMap[factionNames[0]] || factionNames[0]} >`;
-                } else if (characters && characters.length) {
-                    const nowColor = useColors[characters[0].factionUse];
-                    const nowColorDark = useColorsDark[characters[0].factionUse];
-                    channelEl.style.color = nowColor;
-                    liveElDiv.style.backgroundColor = nowColorDark;
-                    liveEl.style.color = useTextColor;
-                    liveEl.innerText = `? ${characters[0].displayName} ?`;
-                } else {
-                    channelEl.style.color = useColors.othernp;
-                    liveElDiv.style.backgroundColor = useColorsDark.othernp;
-                    liveEl.style.color = useTextColor;
-                    liveEl.style.setProperty('text-transform', 'none', 'important');
-                    liveEl.innerText = `${serverName}`;
+                let allowStream = ['allnopixel', 'alltwitch'].includes(filterStreamFaction);
+                if (allowStream === false) {
+                    // console.log('doing NP filtering for:', filterStreamFaction);
+                    let nowFaction;
+                    if (nowCharacter) {
+                        nowFaction = nowCharacter.factionUse;
+                    } else if (factionNames.length) {
+                        nowFaction = useColors[factionNames[0]] ? factionNames[0] : 'independent';
+                    }
+                    allowStream = nowFaction === filterStreamFaction;
                 }
-            } else if (filterState === FSTATES.remove) {
+
+                if (allowStream === false) {
+                    filterState = FSTATES.remove;
+                } else {
+                    if (nowCharacter) {
+                        const nowColor = useColors[nowCharacter.factionUse];
+                        const nowColorDark = useColorsDark[nowCharacter.factionUse];
+                        channelEl.style.color = nowColor;
+                        liveElDiv.style.backgroundColor = nowColorDark;
+                        liveEl.style.color = useTextColor;
+                        liveEl.innerText = `${nowCharacter.leader ? '♛ ' : ''}${nowCharacter.displayName}`;
+                    } else if (factionNames.length) {
+                        const nowColor = useColors[factionNames[0]] || useColors.independent;
+                        const nowColorDark = useColorsDark[factionNames[0]] || useColorsDark.independent;
+                        channelEl.style.color = nowColor;
+                        liveElDiv.style.backgroundColor = nowColorDark;
+                        liveEl.style.color = useTextColor;
+                        liveEl.innerText = `< ${fullFactionMap[factionNames[0]] || factionNames[0]} >`;
+                    } else if (characters && characters.length) {
+                        const nowColor = useColors[characters[0].factionUse];
+                        const nowColorDark = useColorsDark[characters[0].factionUse];
+                        channelEl.style.color = nowColor;
+                        liveElDiv.style.backgroundColor = nowColorDark;
+                        liveEl.style.color = useTextColor;
+                        liveEl.innerText = `? ${characters[0].displayName} ?`;
+                    } else {
+                        channelEl.style.color = useColors.othernp;
+                        liveElDiv.style.backgroundColor = useColorsDark.othernp;
+                        liveEl.style.color = useTextColor;
+                        liveEl.style.setProperty('text-transform', 'none', 'important');
+                        liveEl.innerText = `${serverName}`;
+                    }
+                }
+            }
+
+            if (filterState === FSTATES.remove) {
                 // Remove stream
                 // liveEl.innerText = 'REMOVED';
                 // channelEl.style.color = '#ff0074';
@@ -538,6 +575,14 @@ const filterStreams = async () => {
         }
 
         isDeleting = false;
+    };
+
+    const startDeleting = () => {
+        if (interval != null) {
+            clearInterval(interval);
+        }
+        interval = setInterval(deleteOthers, 1000 * intervalSeconds); // Interval gets ended when minViewers is reached
+        deleteOthers();
     };
 
     const waitForElement = async (selector, maxTime = Infinity) => {
@@ -756,22 +801,40 @@ const filterStreams = async () => {
         });
     };
 
-    const activateSelect = () => {
+    const activateSelect = (selectFirst = false) => {
         const elSelectCustom = document.getElementsByClassName('js-selectCustom')[0];
         // const elSelectCustomBox = elSelectCustom.children[0];
         const elSelectCustomBox = elSelectCustom.getElementsByClassName('selectCustom-trigger')[0];
         const elSelectCustomOpts = elSelectCustom.children[1];
+        const elSelectCustomInput = elSelectCustomOpts.children[0];
         const customOptsList = Array.from(elSelectCustomOpts.children);
         const optionsCount = customOptsList.length;
         const defaultLabel = elSelectCustomBox.getAttribute('data-value');
 
-        let optionChecked = '';
-        let optionHoveredIndex = -1;
+        let optionChecked = null;
+        let optionHoveredIndex = 0;
         let closeSelectCustom;
 
         const updateCustomSelectHovered = (newIndex) => {
             const prevOption = elSelectCustomOpts.children[optionHoveredIndex];
-            const option = elSelectCustomOpts.children[newIndex];
+            let option = elSelectCustomOpts.children[newIndex];
+
+            const direction = newIndex - optionHoveredIndex;
+            if (option.style.display === 'none' && direction !== 0) {
+                let newIndex2 = newIndex;
+                let option2 = option;
+                while (newIndex2 > 1 && newIndex2 < optionsCount - 1) {
+                    newIndex2 += direction;
+                    option2 = elSelectCustomOpts.children[newIndex2];
+                    if (option2.style.display !== 'none') {
+                        newIndex = newIndex2;
+                        option = option2;
+                        break;
+                    }
+                }
+            }
+
+            if (option.style.display === 'none') return;
 
             if (prevOption) {
                 prevOption.classList.remove('isHover');
@@ -790,7 +853,7 @@ const filterStreams = async () => {
             }
         };
 
-        const updateCustomSelectChecked = (value, text) => {
+        const updateCustomSelectChecked = (value, text, isInit = false) => {
             const prevValue = optionChecked;
 
             const elPrevOption = elSelectCustomOpts.querySelector(`[data-value="${prevValue}"`);
@@ -805,25 +868,31 @@ const filterStreams = async () => {
             }
 
             elSelectCustomBox.textContent = text;
+            elSelectCustomBox.style.color = elOption.style.color;
             optionChecked = value;
+
+            if (isInit) return;
+
+            filterStreamFaction = value;
+            resetFiltering();
+            startDeleting();
         };
 
         const supportKeyboardNavigation = (e) => {
             // press down -> go next
             if (e.keyCode === 40 && optionHoveredIndex < optionsCount - 1) {
-                const index = optionHoveredIndex;
                 e.preventDefault(); // prevent page scrolling
                 updateCustomSelectHovered(optionHoveredIndex + 1);
             }
 
             // press up -> go previous
-            if (e.keyCode === 38 && optionHoveredIndex > 0) {
+            if (e.keyCode === 38 && optionHoveredIndex > 1) {
                 e.preventDefault(); // prevent page scrolling
                 updateCustomSelectHovered(optionHoveredIndex - 1);
             }
 
             // press Enter or space -> select the option
-            if (e.keyCode === 13 || e.keyCode === 32) {
+            if (e.keyCode === 13) { // space: 32
                 e.preventDefault();
 
                 const option = elSelectCustomOpts.children[optionHoveredIndex];
@@ -855,6 +924,8 @@ const filterStreams = async () => {
             // Add related event listeners
             document.addEventListener('click', watchClickOutside);
             document.addEventListener('keydown', supportKeyboardNavigation);
+
+            elSelectCustomInput.focus();
         };
 
         closeSelectCustom = () => {
@@ -862,7 +933,7 @@ const filterStreams = async () => {
 
             elSelectCustom.setAttribute('aria-hidden', true);
 
-            updateCustomSelectHovered(-1);
+            updateCustomSelectHovered(0);
 
             // Remove related event listeners
             document.removeEventListener('click', watchClickOutside);
@@ -882,6 +953,8 @@ const filterStreams = async () => {
 
         // Update selectCustom value when an option is clicked or hovered
         customOptsList.forEach((elOption, index) => {
+            if (index === 0) return;
+
             elOption.addEventListener('click', (e) => {
                 const value = e.target.getAttribute('data-value');
 
@@ -895,6 +968,27 @@ const filterStreams = async () => {
 
             // TODO: Toggle these event listeners based on selectCustom visibility
         });
+
+        const inputHandler = (e) => {
+            const searchTextLower = e.target.value.toLowerCase();
+            customOptsList.forEach((elOption, index) => {
+                if (index === 0) return;
+                if (elOption.textContent.toLowerCase().includes(searchTextLower)) {
+                    elOption.style.display = null;
+                } else {
+                    elOption.style.display = 'none';
+                }
+            });
+        };
+
+        elSelectCustomInput.addEventListener('input', inputHandler);
+
+        if (selectFirst) {
+            const initOption = elSelectCustomOpts.children[1];
+            const initOptionValue = initOption.getAttribute('data-value');
+            const initOptionText = initOption.textContent;
+            updateCustomSelectChecked(initOptionValue, initOptionText, true);
+        }
     };
 
     const setupFilter = async () => {
@@ -951,8 +1045,8 @@ const filterStreams = async () => {
         };
 
         const options = [
-            ['allnopixel', 'All NoPixel'],
-            ['allstreams', 'All Streams (No Filtering)'],
+            ['allnopixel', tnoOthers ? 'All RP (Default)' : 'All NoPixel (Default)'],
+            ['alltwitch', 'All Twitch (No Filtering)'],
             ...Object.entries(fullFactionMap)
                 .filter(option => excludeFactions.includes(option[0]) === false)
                 .sort((a, b) => (optionSorting[a[0]] || (useColors[a[0]] && 1000) || 2000) - (optionSorting[b[0]] || (useColors[b[0]] && 1000) || 2000))
@@ -960,7 +1054,7 @@ const filterStreams = async () => {
         ];
 
         useColors.allnopixel = '#FFF';
-        useColors.allstreams = '#FFF';
+        useColors.alltwitch = '#FFF';
 
         // $labelDiv.find('label').text('Filter streams');
         $labelDiv.remove();
@@ -970,9 +1064,10 @@ const filterStreams = async () => {
                     <div class="selectCustom js-selectCustom" aria-hidden="true">
                         <div class="selectCustom-row">
                             <label class="selectCustom-label">Filter streams</label>
-                            <div class="selectCustom-trigger">${options[0][1]}</div>
+                            <div class="selectCustom-trigger"></div>
                         </div>
                         <div class="selectCustom-options">
+                            <input class="selectCustom-input" placeholder="Search..."></input>
                             ${options.map(option => `<div style="color: ${useColors[option[0]] || useColors.independent}" class="selectCustom-option" data-value="${option[0]}">${option[1]}</div>`).join('')}
                         </div>
                     </div>
@@ -980,7 +1075,7 @@ const filterStreams = async () => {
             </div>
         `);
 
-        activateSelect();
+        activateSelect(true);
     };
 
     const twitchGtaUrl = /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V(?!\/videos|\/clips)/;
@@ -1008,6 +1103,8 @@ const filterStreams = async () => {
             return false;
         }
 
+        filterStreamFaction = 'allnopixel';
+
         if (tnoEnglish) {
             selectEnglish();
         }
@@ -1015,8 +1112,7 @@ const filterStreams = async () => {
         setupFilter();
 
         console.log('[TNO] Starting interval');
-        interval = setInterval(deleteOthers, 1000 * intervalSeconds); // Interval gets ended when minViewers is reached
-        deleteOthers();
+        startDeleting();
 
         return true;
     };

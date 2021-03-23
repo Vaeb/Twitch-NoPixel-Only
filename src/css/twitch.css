@@ -233,6 +233,7 @@ input[type='checkbox']:focus {
     display: block;
 }
 
+.selectCustom-input,
 .selectCustom-option {
     position: relative;
     padding: 0.8rem;
@@ -260,6 +261,17 @@ input[type='checkbox']:focus {
     content: '✓';
     position: absolute;
     left: 0.8rem;
+}
+
+.selectCustom-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, .8);
+}
+
+.selectCustom-input:focus {
+    outline: none;
 }
 
 .select {
