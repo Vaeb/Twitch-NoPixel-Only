@@ -131,7 +131,7 @@ span.tooltip {
     transform: translateX(-50%);
     font-weight: 500;
     background: none;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .tooltip .tooltiptext::after {
@@ -142,7 +142,7 @@ span.tooltip {
     margin-left: -5px;
     border-width: 4px;
     border-style: solid;
-    border-color: white transparent transparent transparent;
+    border-color: rgba(255, 255, 255, 0.8) transparent transparent transparent;
 }
 
 .tooltip:hover .tooltiptext {
