@@ -213,7 +213,7 @@
             { "name": "[ADA] Lachlan Pike", "faction": "DoJ" }
         ],
         "Bomaah": [
-            { "name": "Viper Rodriguez", "faction": "ESB", "assume": "assumeOther" }
+            { "name": "Viper Rodriguez", "assume": "assumeOther" }
         ],
         "BoschMerchant": [
             { "name": "Anto Murphy", "faction": "Chang Gang" }
@@ -606,7 +606,7 @@
             { "name": "Ash Huddy Hudson", "faction": "Lunatix" }
         ],
         "HutchMF": [
-            { "name": "Drew \"Dead Eye Drew\"", "faction": "ESB", "nicknames": ["DeadEye"] },
+            { "name": "Drew \"Dead Eye Drew\"", "nicknames": ["DeadEye"] },
             { "name": "Hutch Hendrickson" }
         ],
         "IAmSoul_RP": [
@@ -865,7 +865,7 @@
             { "name": "Jose \"Cousin\" Luis Santana", "faction": "Vagos" }
         ],
         "LaS_": [
-            { "name": "Jesse \"Baby Joker\" Morales", "faction": "ESB", "other": 1, "assume": "assumeOther" }
+            { "name": "Jesse \"Baby Joker\" Morales", "other": 1, "assume": "assumeOther" }
         ],
         "LeWolfy": [
             { "name": "[Deputy] Dante Wolf", "faction": "Police" }
@@ -1196,7 +1196,7 @@
             { "name": "[Park Ranger] Conan Clarkson", "faction": "Police" }
         ],
         "Rasta": [
-            { "name": "Dunn Robinson", "faction": "ESB", "other": -1, "assume": "assumeNpNoOther" },
+            { "name": "Dunn Robinson", "other": -1, "assume": "assumeNpNoOther" },
             { "name": "Mary Livingston", "faction": "Prune Gang", "displayName": 0 }
         ],
         "RatedEpicz": [
@@ -1523,7 +1523,7 @@
             { "name": "Nicholine Quinn" }
         ],
         "ToastRP": [
-            { "name": "Paulie", "faction": "ESB" }
+            { "name": "Paulie" }
         ],
         "Tobiii": [
             { "name": "Development \"Development: Tobiii\"", "faction": "Development" }
@@ -1672,8 +1672,7 @@
         "changgang": "chang\\s*gang|\\bcga?\\b",
         "vagos": "vagos|yellow[\\s-]*gang",
         "gsf": "grove|\\bgsf\\b",
-        "ssb": "balla|\\bssb\\b(?![\\s-]+(?:wo?rld|later))",
-        "esb": "\\besb\\b|east[\\s-]*side",
+        "ssb": "balla|\\bssb\\b(?![\\s-]+(?:wo?rld|later))|\\besb\\b",
         "marabunta": "\\bmarabunta",
         "hoa": "\\bhoa\\b|hogs\\s*of\\s*anarchy|home[\\s-]*owners[\\s-]*association",
         "doj": "\\bdoj\\b|department\\s*of\\s*justice|judge\\b(?![\\s]*me)|\\ba?\\.?d\\.?a\\b",
@@ -1698,7 +1697,6 @@
         "vagos": "#f1c40f",
         "gsf": "#006422",
         "ssb": "#9b59b6",
-        "esb": "#8854d0",
         "pegasus": "#A87C2D",
         "hoa": "#a6033a",
         "doj": "#00a032",
