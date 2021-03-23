@@ -853,6 +853,18 @@ const filterStreams = async () => {
             }
         };
 
+        const inputHandler = (searchText = '') => {
+            const searchTextLower = searchText.toLowerCase();
+            customOptsList.forEach((elOption, index) => {
+                if (index === 0) return;
+                if (elOption.textContent.toLowerCase().includes(searchTextLower)) {
+                    elOption.style.display = null;
+                } else {
+                    elOption.style.display = 'none';
+                }
+            });
+        };
+
         const updateCustomSelectChecked = (value, text, isInit = false) => {
             const prevValue = optionChecked;
 
@@ -874,6 +886,8 @@ const filterStreams = async () => {
             if (isInit) return;
 
             filterStreamFaction = value;
+            elSelectCustomInput.value = '';
+            inputHandler();
             resetFiltering();
             startDeleting();
         };
@@ -969,19 +983,7 @@ const filterStreams = async () => {
             // TODO: Toggle these event listeners based on selectCustom visibility
         });
 
-        const inputHandler = (e) => {
-            const searchTextLower = e.target.value.toLowerCase();
-            customOptsList.forEach((elOption, index) => {
-                if (index === 0) return;
-                if (elOption.textContent.toLowerCase().includes(searchTextLower)) {
-                    elOption.style.display = null;
-                } else {
-                    elOption.style.display = 'none';
-                }
-            });
-        };
-
-        elSelectCustomInput.addEventListener('input', inputHandler);
+        elSelectCustomInput.addEventListener('input', e => inputHandler(e.target.value));
 
         if (selectFirst) {
             const initOption = elSelectCustomOpts.children[1];
