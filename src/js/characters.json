@@ -105,7 +105,7 @@
             { "name": "Sequoia Springs" }
         ],
         "AnthonyZ": [
-            { "name": "Tony Corleone", "faction": "Leanbois" },
+            { "name": "Tony Corleone", "faction": "Cleanbois" },
             { "name": "[Officer] Anthony Copleone", "faction": "Police" }
         ],
         "Apitoxin11": [
@@ -228,7 +228,7 @@
             { "name": "Tori Corleone", "nicknames": ["Bologna"] }
         ],
         "buddha": [
-            { "name": "Lang Buddha", "faction": "Leanbois", "leader": true, "nicknames": ["Circle Andy"] },
+            { "name": "Lang Buddha", "faction": "Cleanbois", "leader": true, "nicknames": ["Circle Andy"] },
             { "name": "[Deputy] Kevin Kona", "faction": "Police" },
             { "name": "Esteban Julio Ricardo Montoya De La Rosa Ramirez" }
         ],
@@ -369,7 +369,7 @@
         ],
         "dasMEHDI": [
             { "name": "[Officer] Brian Knight", "faction": "Police", "nicknames": ["495"] },
-            { "name": "Nino Chavez", "faction": "Leanbois" },
+            { "name": "Nino Chavez", "faction": "Cleanbois" },
             { "name": "Ryan Kindle", "faction": "HOA" },
             { "name": "Reema", "nicknames": ["The \"Whorelord\""] }
         ],
@@ -491,7 +491,7 @@
             { "name": "[EMS] Amoris Pax", "faction": "Medical" }
         ],
         "forsen": [
-            { "name": "Sven Snusberg", "faction": "Leanbois" },
+            { "name": "Sven Snusberg", "faction": "Cleanbois" },
             { "name": "Mason Foorhees" }
         ],
         "FortyOne": [
@@ -561,7 +561,7 @@
             { "name": "Harry Brown", "faction": "Pegasus" }
         ],
         "HasanAbi": [
-            { "name": "Humberto Antonio Donato Pecorino", "nicknames": ["Don", "Donnie", "/\\bOva[h']? here\\b/"], "displayName": 5, "faction": "Leanbois" }
+            { "name": "Humberto Antonio Donato Pecorino", "nicknames": ["Don", "Donnie", "/\\bOva[h']? here\\b/"], "displayName": 5, "faction": "Cleanbois" }
         ],
         "Hedisaurus": [
             { "name": "[EMS] Hedi Saurus", "faction": "Medical", "other": -1, "assume": "assumeNpNoOther" },
@@ -701,7 +701,7 @@
             { "name": "Maggie Kayden", "faction": "Lawyers" }
         ],
         "Jonthebroski": [
-            { "name": "Denzel Williams", "faction": "Leanbois", "nicknames": ["The \"Cleaner\""] },
+            { "name": "Denzel Williams", "faction": "Cleanbois", "nicknames": ["The \"Cleaner\""] },
             { "name": "Dio Ivanov", "faction": "Russians" },
             { "name": "[Officer] Johnny Divine", "faction": "Police", "displayName": 0 }
         ],
@@ -874,10 +874,10 @@
             { "name": "Linkle Jones", "displayName": 1}
         ],
         "LIRIK": [
-            { "name": "Clayvon Barksdale", "faction": "Leanbois" },
+            { "name": "Clayvon Barksdale", "faction": "Cleanbois" },
             { "name": "[Officer] Bayvon Barksdale", "faction": "Police", "nicknames": ["555"], "displayName": 2 },
             { "name": "Abe Vaughn", "displayName": 0 },
-            { "name": "Avon Barksdale", "faction": "Leanbois", "leader": true }
+            { "name": "Avon Barksdale", "faction": "Cleanbois", "leader": true }
         ],
         "Lisilsanya": [
             { "name": "[EMS] Lei Sanya", "faction": "Medical", "nicknames": ["Lasagna"], "displayName": 0 }
@@ -1044,7 +1044,7 @@
             { "name": "Murphy Braun", "faction": "Lawyers", "displayName": 0 }
         ],
         "Mythematic": [
-            { "name": "Mike Rosoftsam", "faction": "Leanbois", "affiliate": true }
+            { "name": "Mike Rosoftsam", "faction": "Cleanbois", "affiliate": true }
         ],
         "Nakkida": [
             { "name": "[Deputy] Tessa Lamb", "faction": "Police", "displayName": 1 },
@@ -1142,7 +1142,7 @@
         "PENTA": [
             { "name": "Jordan Steele", "displayName": 0, "nicknames": ["\"Parking\" God", "Phoenix Messiah"] },
             { "name": "[Deputy] Randy Wrangler", "faction": "Police", "nicknames": ["Wranglin"] },
-            { "name": "Ricky Robins", "faction": "Leanbois" },
+            { "name": "Ricky Robins", "faction": "Cleanbois" },
             { "name": "Chase Clouter" },
             { "name": "Mike Block", "displayName": 0 },
             { "name": "Jane Obama", "displayName": 0 }
@@ -1304,7 +1304,7 @@
             { "name": "[Archdruid /] Clyde \"Meowfurryon\" Eastside", "faction": "LARPers", "nicknames": ["Druid", "Archdruid", "Malfurryon"] }
         ],
         "Shortyyguy": [
-            { "name": "Eddie Delish", "faction": "Leanbois" }
+            { "name": "Eddie Delish", "faction": "Cleanbois" }
         ],
         "Shotz": [
             { "name": "Vinny Pistone", "faction": "Chang Gang" },
@@ -1367,7 +1367,7 @@
             { "name": "[Deputy] Richard Dark", "faction": "Police" }
         ],
         "SodaKite": [
-            { "name": "Ellie Dono", "faction": "Leanbois" }
+            { "name": "Ellie Dono", "faction": "Cleanbois" }
         ],
         "sodapoppin": [
             { "name": "Kevin Whipaloo", "faction": "Burger Shot", "leader": 1, "displayName": 0 },
@@ -1390,7 +1390,7 @@
             { "name": "Kray-Tor Skullfondler", "faction": "HOA" }
         ],
         "Ssaab": [
-            { "name": "Al Saab", "faction": "Leanbois", "displayName": 2 },
+            { "name": "Al Saab", "faction": "Cleanbois", "displayName": 2 },
             { "name": "[Officer] Sam Baas", "faction": "Police", "displayName": 2 }
         ],
         "steamcharlie": [
@@ -1566,7 +1566,7 @@
             { "name": "Big E", "faction": "SSB", "leader": true, "nicknames": ["Big L"], "displayName": 0 }
         ],
         "Vader": [
-            { "name": "Eugene Zuckerberg", "faction": "Leanbois", "nicknames": ["Old Man"] },
+            { "name": "Eugene Zuckerberg", "faction": "Cleanbois", "nicknames": ["Old Man"] },
             { "name": "Tuong Ru Kim" }
         ],
         "VADIKUS007": [
@@ -1667,7 +1667,7 @@
         ]
     },
     "npFactionsRegex": {
-        "leanbois": "lean\\s*boi|\\blba?\\b",
+        "cleanbois": "lean\\s*boi|\\blba?\\b",
         "lostmc": "lost\\s*mc|the\\s*lost\\b",
         "changgang": "chang\\s*gang|\\bcga?\\b",
         "vagos": "vagos|yellow[\\s-]*gang",
@@ -1692,7 +1692,7 @@
         "medical": "(?<!then\\b.*|!)(?:doctor|\\b(?:dr|ems|emt)\\b)"
     },
     "useColorsDark": {
-        "leanbois": "#e74c3c",
+        "cleanbois": "#e74c3c",
         "lostmc": "#ab5179",
         "changgang": "#686de0",
         "vagos": "#f1c40f",
@@ -1722,7 +1722,7 @@
         "other": "#81ecec"
     },
     "useColorsLight": {
-        "leanbois": "#c74c3c",
+        "cleanbois": "#c74c3c",
         "lostmc": "#ab5179",
         "changgang": "#686de0",
         "vagos": "#e3ba16",

@@ -1,9 +1,9 @@
 div.swal2-popup.swal2-modal {
-    background: linear-gradient(180deg, #2D2F39 0%, #1F2027 100%);
+    background: linear-gradient(180deg, #2d2f39 0%, #1f2027 100%);
 }
 
 div.swal2-content {
-    color: #ECE9E6;
+    color: #ece9e6;
 }
 
 div.tno-settings-container {
@@ -13,7 +13,7 @@ div.tno-settings-container {
 div.settings-titles {
     margin-bottom: 13px;
     padding: 0;
-    color: #ECE9E6;
+    color: #ece9e6;
     font-size: 1.9em;
     font-weight: 600;
 }
@@ -34,7 +34,6 @@ div.settings-options {
 div.settings-option {
     margin-bottom: 10px;
     /* display: flex; */
-    
 }
 
 .bold {
@@ -42,7 +41,6 @@ div.settings-option {
 }
 
 span.settings-name {
-    
 }
 
 span.settings-value {
@@ -52,15 +50,15 @@ span.settings-value {
     margin-left: 13px;
 }
 
-input[type=checkbox] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  -webkit-tap-highlight-color: transparent;
-  cursor: pointer;
+input[type='checkbox'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
 }
-input[type=checkbox]:focus {
-  outline: 0;
+input[type='checkbox']:focus {
+    outline: 0;
 }
 
 .toggle {
@@ -71,11 +69,11 @@ input[type=checkbox]:focus {
     position: relative;
     margin: 0;
     border: 2px solid #474755;
-    background: linear-gradient(180deg, #2D2F39 0%, #1F2027 100%);
+    background: linear-gradient(180deg, #2d2f39 0%, #1f2027 100%);
     transition: all 0.2s ease;
 }
 .toggle:after {
-    content: "";
+    content: '';
     position: absolute;
     top: 2px;
     left: 2px;
@@ -88,7 +86,7 @@ input[type=checkbox]:focus {
 }
 
 .toggle:checked {
-    border-color: #654FEC;
+    border-color: #654fec;
 }
 
 .toggle:checked:after {
@@ -117,7 +115,7 @@ input[type=checkbox]:focus {
 }
 
 .tooltip .tooltiptext::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 100%;
     left: 50%;
@@ -129,4 +127,148 @@ input[type=checkbox]:focus {
 
 .tooltip:hover .tooltiptext {
     visibility: visible;
+}
+
+.selectCustom {
+    position: relative;
+    /* width: 22rem; */
+    height: 30px;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 22rem;
+}
+
+@media (hover: hover) {
+    .selectCustom {
+        /* display: block; */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        /* overflow: hidden; */
+        white-space: nowrap;
+    }
+}
+
+.selectCustom-row {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.selectCustom-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-right: 10px;
+    line-height: 29px;
+}
+
+/* Add the focus states too, They matter, always! */
+.selectCustom.isActive .selectCustom-trigger {
+    outline: none;
+    /* box-shadow: white 0 0 0 0.2rem, #ff821f 0 0 0 0.4rem; */
+}
+
+.selectWrapper {
+    position: relative;
+}
+
+.selectCustom-trigger {
+    font-size: 13px;
+    font-weight: 600;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 0px solid #6f6f6f;
+    border-radius: 0.4rem;
+}
+
+.selectCustom-trigger {
+    position: relative;
+    width: fit-content;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 0.8rem 0.8rem;
+    padding-left: 10px;
+    padding-right: 24px;
+    cursor: pointer;
+    line-height: 100%;
+}
+
+.selectCustom-trigger::after {
+    content: '▾';
+    top: 0;
+    right: 0.8rem;
+    position: absolute;
+    height: calc(100% - 3px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.selectCustom-trigger:hover {
+    border-color: #8c00ff;
+}
+
+.selectCustom-options {
+    position: absolute;
+    top: 38px;
+    left: 0;
+    width: 22rem;
+    border: 0px solid #6f6f6f;
+    border-radius: 0.6rem;
+    background-color: rgb(24, 24, 27);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4),0 0px 4px rgba(0,0,0,0.4);
+    z-index: 1;
+    padding: 0.8rem 0;
+    display: none;
+    overflow-y: auto;
+    max-height: 377px;
+}
+
+.selectCustom.isActive .selectCustom-options {
+    display: block;
+}
+
+.selectCustom-option {
+    position: relative;
+    padding: 0.8rem;
+    padding-left: 2.5rem;
+    color: white;
+}
+
+.selectCustom-option.isHover,
+.selectCustom-option:hover {
+    background-color: #865bd7;
+    color: white;
+    cursor: pointer;
+}
+
+.selectCustom-option:not(:last-of-type)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: 0px solid #d3d3d3;
+}
+
+.selectCustom-option.isActive::before {
+    content: '✓';
+    position: absolute;
+    left: 0.8rem;
+}
+
+.select {
+    position: relative;
+    background: #f8f3ef;
+    box-sizing: border-box;
+    color: #343434;
+    line-height: 1.5;
+    font-size: 13px;
+    background: none;
+}
+
+.select * {
+    box-sizing: inherit;
 }

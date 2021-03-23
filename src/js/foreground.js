@@ -1,7 +1,7 @@
 /*
  * Twitch NoPixel Only
  * Created by Vaeb
-*/
+ */
 
 console.log('[TNO] Loading Twitch NoPixel Only...');
 
@@ -167,7 +167,9 @@ const filterStreams = async () => {
         return;
     }
 
-    ({ minViewers, stopOnMin, intervalSeconds, regOthers, npCharacters, useColorsDark, useColorsLight } = fetchResult);
+    ({
+        minViewers, stopOnMin, intervalSeconds, regOthers, npCharacters, useColorsDark, useColorsLight,
+    } = fetchResult);
     regNp = new RegExp(fetchResult.regNp, 'i');
     regOthers.forEach((obj) => {
         obj.reg = new RegExp(obj.reg, 'i');
@@ -222,7 +224,8 @@ const filterStreams = async () => {
                         pushName = pushName.replace(/[\[\]"]/g, '');
                         if (type1) {
                             titles.push(pushName);
-                        } else { // had square
+                        } else {
+                            // had square
                             knownName = pushName; // had quotes
                         }
                         currentName = null;
@@ -277,7 +280,7 @@ const filterStreams = async () => {
                 } else if (displayNum === 0) {
                     char.displayName += realNames.join(' ');
                 } else {
-                    char.displayName += (realNames[displayNum - 1] || realNames[0]);
+                    char.displayName += realNames[displayNum - 1] || realNames[0];
                 }
             }
 
@@ -312,7 +315,13 @@ const filterStreams = async () => {
         }
     }
 
-    const factions = [...new Set(Object.values(npCharacters).map(characters => characters.map(char => char.faction)).flat(1))];
+    const factions = [
+        ...new Set(
+            Object.values(npCharacters)
+                .map(characters => characters.map(char => char.faction))
+                .flat(1)
+        ),
+    ];
 
     factions.forEach((faction) => {
         if (!npFactionsRegex[faction] && !['doc'].includes(faction)) {
@@ -335,9 +344,7 @@ const filterStreams = async () => {
         const useTextColor = '#000';
         // const useTextColor = isDark ? '#000' : '#f7f7f8';
 
-        const elements = Array.from(document.getElementsByTagName('article')).filter(
-            element => !element.classList.contains('npChecked')
-        );
+        const elements = Array.from(document.getElementsByTagName('article')).filter(element => !element.classList.contains('npChecked'));
 
         const prevWasZero = wasZero;
 
@@ -399,17 +406,21 @@ const filterStreams = async () => {
             const npStreamer = onNp || characters;
 
             let filterState; // remove, mark-np, mark-other
-            if (filterEnabled) { // If filtering streams is enabled
-                if ((tnoOthers && (onOtherIncluded || onMainOther || (npStreamer && onOther))) || (npStreamer && !mainsOther && !keepNp && onOther)) { // If is-including-others and streamer on another server, or it's an NP streamer playing another server
+            if (filterEnabled) {
+                // If filtering streams is enabled
+                if ((tnoOthers && (onOtherIncluded || onMainOther || (npStreamer && onOther))) || (npStreamer && !mainsOther && !keepNp && onOther)) {
+                    // If is-including-others and streamer on another server, or it's an NP streamer playing another server
                     filterState = FSTATES.other;
-                } else if (npStreamer && !onMainOther && !onOther) { // If NoPixel streamer that isn't on another server
+                } else if (npStreamer && !onMainOther && !onOther) {
+                    // If NoPixel streamer that isn't on another server
                     filterState = FSTATES.nopixel;
                     serverName = 'NP';
                 } else {
                     filterState = FSTATES.remove;
                 }
             } else {
-                if (npStreamer && !onMainOther && !onOther) { // If NoPixel streamer that isn't on another server
+                if (npStreamer && !onMainOther && !onOther) {
+                    // If NoPixel streamer that isn't on another server
                     filterState = FSTATES.nopixel;
                     serverName = 'NP';
                 } else {
@@ -417,13 +428,15 @@ const filterStreams = async () => {
                 }
             }
 
-            if (filterState === FSTATES.other) { // Other included RP servers
+            if (filterState === FSTATES.other) {
+                // Other included RP servers
                 channelEl.style.color = useColors.other;
                 liveElDiv.style.backgroundColor = useColorsDark.other;
                 liveEl.style.color = useTextColor;
                 liveEl.style.setProperty('text-transform', 'none', 'important');
                 liveEl.innerText = serverName.length > 0 ? `::${serverName}::` : '';
-            } else if (filterState === FSTATES.nopixel) { // NoPixel stream
+            } else if (filterState === FSTATES.nopixel) {
+                // NoPixel stream
                 let nowCharacter;
                 let factionNames = [];
 
@@ -483,7 +496,8 @@ const filterStreams = async () => {
                     liveEl.style.setProperty('text-transform', 'none', 'important');
                     liveEl.innerText = `${serverName}`;
                 }
-            } else if (filterState === FSTATES.remove) { // Remove stream
+            } else if (filterState === FSTATES.remove) {
+                // Remove stream
                 // liveEl.innerText = 'REMOVED';
                 // channelEl.style.color = '#ff0074';
 
@@ -515,7 +529,7 @@ const filterStreams = async () => {
 
         if (tnoScrolling && elements.length > 0 && prevWasZero) {
             const $scrollDiv = $('div.root-scrollable.scrollable-area').find('> div.simplebar-scroll-content');
-            const bottomRem = ($scrollDiv[0].scrollHeight - $scrollDiv.height()) - $scrollDiv.scrollTop();
+            const bottomRem = $scrollDiv[0].scrollHeight - $scrollDiv.height() - $scrollDiv.scrollTop();
             // console.log('after-deletion bottomRem:', bottomRem);
             if (bottomRem < 532) {
                 console.log('Auto adjusted scrolling');
@@ -544,7 +558,7 @@ const filterStreams = async () => {
                 timer = requestAnimationFrame(resolve);
             });
 
-            if ((+new Date() - initStamp) >= maxTime) {
+            if (+new Date() - initStamp >= maxTime) {
                 console.log('waitForElement timed out after', maxTime, 'ms');
                 break;
             }
@@ -553,13 +567,15 @@ const filterStreams = async () => {
         return el;
     };
 
-    const identifyEnglish = () => { // Make sure it doesn't run until stream elements (and tags) are fully loaded
+    const identifyEnglish = () => {
+        // Make sure it doesn't run until stream elements (and tags) are fully loaded
         const streamElements = $('article:visible').toArray();
         for (let i = 0; i < streamElements.length; i++) {
             const streamEl = streamElements[i];
             const channelName = streamEl.querySelector("a[data-a-target='preview-card-channel-link']").innerText.toLowerCase();
             const streamTags = streamEl.querySelectorAll('button.tw-tag');
-            if (npCharacters[channelName] && streamTags.length === 1) { // Could also just check first tag?
+            if (npCharacters[channelName] && streamTags.length === 1) {
+                // Could also just check first tag?
                 return streamTags[0].innerText;
             }
         }
@@ -670,14 +686,18 @@ const filterStreams = async () => {
                                     <input id="setting-english" type="checkbox" class="toggle" ${tnoEnglish ? 'checked' : ''}>
                                 </span>
                             </div>
-                            ${isDeveloper ? `
+                            ${
+    isDeveloper
+        ? `
                             <div class="settings-option">
                                 <span class="settings-name">Filter streams</span>
                                 <span class="settings-value">
                                     <input id="setting-show-all" type="checkbox" class="toggle" ${!tnoAllowAll ? 'checked' : ''}>
                                 </span>
                             </div>
-                            ` : ''}
+                            `
+        : ''
+}
                         </div>
                     </div>
                 `,
@@ -736,6 +756,147 @@ const filterStreams = async () => {
         });
     };
 
+    const activateSelect = () => {
+        const elSelectCustom = document.getElementsByClassName('js-selectCustom')[0];
+        // const elSelectCustomBox = elSelectCustom.children[0];
+        const elSelectCustomBox = elSelectCustom.getElementsByClassName('selectCustom-trigger')[0];
+        const elSelectCustomOpts = elSelectCustom.children[1];
+        const customOptsList = Array.from(elSelectCustomOpts.children);
+        const optionsCount = customOptsList.length;
+        const defaultLabel = elSelectCustomBox.getAttribute('data-value');
+
+        let optionChecked = '';
+        let optionHoveredIndex = -1;
+        let closeSelectCustom;
+
+        const updateCustomSelectHovered = (newIndex) => {
+            const prevOption = elSelectCustomOpts.children[optionHoveredIndex];
+            const option = elSelectCustomOpts.children[newIndex];
+
+            if (prevOption) {
+                prevOption.classList.remove('isHover');
+            }
+            if (option) {
+                option.classList.add('isHover');
+            }
+
+            optionHoveredIndex = newIndex;
+        };
+
+        const watchClickOutside = (e) => {
+            const didClickedOutside = !elSelectCustom.contains(e.target);
+            if (didClickedOutside) {
+                closeSelectCustom();
+            }
+        };
+
+        const updateCustomSelectChecked = (value, text) => {
+            const prevValue = optionChecked;
+
+            const elPrevOption = elSelectCustomOpts.querySelector(`[data-value="${prevValue}"`);
+            const elOption = elSelectCustomOpts.querySelector(`[data-value="${value}"`);
+
+            if (elPrevOption) {
+                elPrevOption.classList.remove('isActive');
+            }
+
+            if (elOption) {
+                elOption.classList.add('isActive');
+            }
+
+            elSelectCustomBox.textContent = text;
+            optionChecked = value;
+        };
+
+        const supportKeyboardNavigation = (e) => {
+            // press down -> go next
+            if (e.keyCode === 40 && optionHoveredIndex < optionsCount - 1) {
+                const index = optionHoveredIndex;
+                e.preventDefault(); // prevent page scrolling
+                updateCustomSelectHovered(optionHoveredIndex + 1);
+            }
+
+            // press up -> go previous
+            if (e.keyCode === 38 && optionHoveredIndex > 0) {
+                e.preventDefault(); // prevent page scrolling
+                updateCustomSelectHovered(optionHoveredIndex - 1);
+            }
+
+            // press Enter or space -> select the option
+            if (e.keyCode === 13 || e.keyCode === 32) {
+                e.preventDefault();
+
+                const option = elSelectCustomOpts.children[optionHoveredIndex];
+                const value = option && option.getAttribute('data-value');
+
+                if (value) {
+                    updateCustomSelectChecked(value, option.textContent);
+                }
+                closeSelectCustom();
+            }
+
+            // press ESC -> close selectCustom
+            if (e.keyCode === 27) {
+                closeSelectCustom();
+            }
+        };
+
+        const openSelectCustom = () => {
+            elSelectCustom.classList.add('isActive');
+            // Remove aria-hidden in case this was opened by a user
+            // who uses AT (e.g. Screen Reader) and a mouse at the same time.
+            elSelectCustom.setAttribute('aria-hidden', false);
+
+            if (optionChecked) {
+                const optionCheckedIndex = customOptsList.findIndex(el => el.getAttribute('data-value') === optionChecked);
+                updateCustomSelectHovered(optionCheckedIndex);
+            }
+
+            // Add related event listeners
+            document.addEventListener('click', watchClickOutside);
+            document.addEventListener('keydown', supportKeyboardNavigation);
+        };
+
+        closeSelectCustom = () => {
+            elSelectCustom.classList.remove('isActive');
+
+            elSelectCustom.setAttribute('aria-hidden', true);
+
+            updateCustomSelectHovered(-1);
+
+            // Remove related event listeners
+            document.removeEventListener('click', watchClickOutside);
+            document.removeEventListener('keydown', supportKeyboardNavigation);
+        };
+
+        // Toggle custom select visibility when clicking the box
+        elSelectCustomBox.addEventListener('click', (e) => {
+            const isClosed = !elSelectCustom.classList.contains('isActive');
+
+            if (isClosed) {
+                openSelectCustom();
+            } else {
+                closeSelectCustom();
+            }
+        });
+
+        // Update selectCustom value when an option is clicked or hovered
+        customOptsList.forEach((elOption, index) => {
+            elOption.addEventListener('click', (e) => {
+                const value = e.target.getAttribute('data-value');
+
+                updateCustomSelectChecked(value, e.target.textContent);
+                closeSelectCustom();
+            });
+
+            elOption.addEventListener('mouseenter', (e) => {
+                updateCustomSelectHovered(index);
+            });
+
+            // TODO: Toggle these event listeners based on selectCustom visibility
+        });
+    };
+
     const setupFilter = async () => {
         const $sortByLabel = $(await waitForElement('label[for="browse-header-filter-by"]'));
         const $sortByDiv = $sortByLabel.parent().parent();
@@ -744,26 +905,70 @@ const filterStreams = async () => {
         $filterDiv.insertBefore($sortByDiv);
         $filterDiv.css({ marginRight: '15px' });
 
-        const [$labelDiv, $dropdownDiv] = $filterDiv.children().toArray().map(el => $(el));
-        $labelDiv.find('label').text('Filter NP streams:');
+        const [$labelDiv, $dropdownDiv] = $filterDiv
+            .children()
+            .toArray()
+            .map(el => $(el));
+
+        const optionSorting = Object.assign({}, ...[
+            'Police',
+            'Cleanbois',
+            'Chang Gang',
+            'Pegasus',
+            'HOA',
+            'Medical',
+            'DoC',
+            'DoJ',
+        ].map((option, index) => ({ [option]: index + 1 })));
+
+        console.log('qq', optionSorting);
+
+        const options = [
+            'NoPixel',
+            'All (No Filtering)',
+            ...Object.values(fullFactionMap)
+                .filter(option => ['OtherNP'].includes(option) === false)
+                .sort((a, b) => (optionSorting[a] || Infinity) - (optionSorting[b] || Infinity)),
+        ];
+
+        // $labelDiv.find('label').text('Filter streams');
+        $labelDiv.remove();
+        $dropdownDiv.html(`
+            <div class="select">
+                <div class="selectWrapper">
+                    <div class="selectCustom js-selectCustom" aria-hidden="true">
+                        <div class="selectCustom-row">
+                            <label class="selectCustom-label">Filter streams</label>
+                            <div class="selectCustom-trigger">NoPixel</div>
+                        </div>
+                        <div class="selectCustom-options">
+                            ${options.map(option => `<div class="selectCustom-option" data-value="${option}">${option}</div>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `);
+
+        activateSelect();
     };
 
     const twitchGtaUrl = /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V(?!\/videos|\/clips)/;
     onPage = twitchGtaUrl.test(window.location.href);
 
-    activateInterval = async () => { // Remember that this will run twice without reloading when switching from Clips/Videos back to channels
+    activateInterval = async () => {
+        // Remember that this will run twice without reloading when switching from Clips/Videos back to channels
         if (interval != null) {
             console.log("[TNO] Couldn't start interval (already running)");
             return false;
         }
 
-        ([tnoStatus, tnoEnglish, tnoOthers, tnoScrolling, tnoAllowAll] = await getStorage([
+        [tnoStatus, tnoEnglish, tnoOthers, tnoScrolling, tnoAllowAll] = await getStorage([
             ['tnoStatus', true],
             ['tnoEnglish', true],
             ['tnoOthers', false],
             ['tnoScrolling', false],
             ['tnoAllowAll', false],
-        ]));
+        ]);
 
         addSettings(); // Settings should show even if status disabled
 
