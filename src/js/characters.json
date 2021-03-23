@@ -1367,7 +1367,8 @@
             { "name": "[Deputy] Richard Dark", "faction": "Police" }
         ],
         "SodaKite": [
-            { "name": "Ellie Dono", "faction": "Cleanbois" }
+            { "name": "Ellie Dono", "faction": "Cleanbois" },
+            { "name": "Chell Phish", "displayName": 0 }
         ],
         "sodapoppin": [
             { "name": "Kevin Whipaloo", "faction": "Burger Shot", "leader": 1, "displayName": 0 },
