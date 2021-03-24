@@ -1408,6 +1408,9 @@
         "Stoner_Minded": [
             { "name": "[Officer] Frank Williams", "faction": "Police", "displayName": 1 }
         ],
+        "Striking_Fast": [
+            { "name": "Gerard \"Dewey\" Hawthorne", "nicknames": ["Dewie"] }
+        ],
         "SullyRP": [
             { "name": "Jack \"Sully\" Sullivan" }
         ],
