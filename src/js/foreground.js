@@ -586,7 +586,7 @@ const filterStreams = async () => {
             }
         });
 
-        if (minLoadedText != null && streamCount) streamCount.textContent = `Smallest stream fetched: ${minLoadedText}`;
+        if (minLoadedText != null && streamCount) streamCount.textContent = `Smallest stream on page: ${minLoadedText}`;
 
         if (tnoScrolling && elements.length > 0 && prevWasZero) {
             const $scrollDiv = $('div.root-scrollable.scrollable-area').find('> div.simplebar-scroll-content');
