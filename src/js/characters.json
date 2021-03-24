@@ -270,7 +270,7 @@
         "Cathie": [
             { "name": "[Deputy] Anita Cox", "faction": "Police" },
             { "name": "Ninacska Mihkala", "faction": "Russians", "nicknames": ["Nina"], "displayName": 3 },
-            { "name": "Kaelyn \"Kae\" East" }
+            { "name": "Kaelyn \"Kae\" East", "faction": "SSB" }
         ],
         "CaussiePreacher": [
             { "name": "[EMS] Jack Preacher", "faction": "Medical" }
@@ -645,7 +645,7 @@
             { "name": "[Officer] Jack Miller", "faction": "Police" }
         ],
         "ItsSammyP": [
-            { "name": "Mando Thompson", "faction": "SSB", "displayName": 0 },
+            { "name": "Mando Thompson", "faction": "SSB" },
             { "name": "Tyrone \"Big T\" Thompson", "faction": "SSB" }
         ],
         "ItsSlikeR": [
@@ -1508,6 +1508,7 @@
         ],
         "Timmy2": [
             { "name": "Chino G", "faction": "Vagos" },
+            { "name": "Orlando Jones", "faction": "SSB", "nicknames": ["OJ"] },
             { "name": "Cardell \"CJ\" Jones", "faction": "SSB" }
         ],
         "Tinker": [
