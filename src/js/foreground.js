@@ -336,6 +336,8 @@ const filterStreams = async () => {
     const npFactionsRegexEnt = Object.entries(npFactionsRegex);
 
     let isDeleting = false;
+    let minLoadedViewers = null;
+    let minLoadedText = null;
 
     const resetFiltering = () => {
         const elements = Array.from(document.getElementsByTagName('article')).filter(element => element.classList.contains('npChecked'));
@@ -345,9 +347,6 @@ const filterStreams = async () => {
         });
     };
 
-    let minLoadedViewers;
-    let minLoadedText;
-
     const deleteOthers = () => {
         if (onPage == false) return;
         // if (onPage == false || isDeleting === true) return;
@@ -355,6 +354,7 @@ const filterStreams = async () => {
 
         const useTextColor = '#000';
         // const useTextColor = isDark ? '#000' : '#f7f7f8';
+        const useMinViewers = ['allnopixel', 'alltwitch'].includes(filterStreamFaction) ? minViewers : 3;
 
         const allElements = Array.from(document.getElementsByTagName('article'));
         const elements = allElements.filter(element => !element.classList.contains('npChecked'));
@@ -380,10 +380,11 @@ const filterStreams = async () => {
             const titleEl = element.getElementsByClassName('tw-ellipsis tw-font-size-5')[0];
             const channelEl = element.querySelectorAll("a[data-a-target='preview-card-channel-link']")[0];
             let liveElDiv = element.getElementsByClassName('tw-channel-status-text-indicator')[0];
-            const viewers = element.getElementsByClassName('tw-media-card-stat')[0].firstChild.innerText;
+            const viewers = element.getElementsByClassName('tw-media-card-stat')[0].textContent;
 
             let viewersNum = parseFloat(viewers);
             if (viewers.includes('K viewer')) viewersNum *= 1000;
+            if (Number.isNaN(viewersNum)) viewersNum = minLoadedViewers != null ? minLoadedViewers : useMinViewers;
 
             if (minLoadedViewers == null || viewersNum < minLoadedViewers) {
                 minLoadedViewers = viewersNum;
@@ -398,8 +399,8 @@ const filterStreams = async () => {
                 liveEl = $('<div>')[0];
             }
 
-            const channelName = channelEl.innerText.toLowerCase();
-            const title = titleEl.innerText;
+            const channelName = channelEl.textContent.toLowerCase();
+            const title = titleEl.textContent;
             const titleParsed = title.toLowerCase().replace(/\./g, ' '); // ??
 
             let onOther = false;
@@ -461,15 +462,23 @@ const filterStreams = async () => {
                     element.style.display = null;
                 }
 
+                if (element.style.visibility === 'hidden') {
+                    element.style.visibility = null;
+                }
+
                 channelEl.style.color = useColors.other;
                 liveElDiv.style.backgroundColor = useColorsDark.other;
                 liveEl.style.color = useTextColor;
                 liveEl.style.setProperty('text-transform', 'none', 'important');
-                liveEl.innerText = serverName.length > 0 ? `::${serverName}::` : '';
+                liveEl.textContent = serverName.length > 0 ? `::${serverName}::` : '';
             } else if (filterState === FSTATES.nopixel) {
                 // NoPixel stream
                 if (element.style.display === 'none') {
                     element.style.display = null;
+                }
+
+                if (element.style.visibility === 'hidden') {
+                    element.style.visibility = null;
                 }
 
                 let nowCharacter;
@@ -533,37 +542,37 @@ const filterStreams = async () => {
                         channelEl.style.color = nowColor;
                         liveElDiv.style.backgroundColor = nowColorDark;
                         liveEl.style.color = useTextColor;
-                        liveEl.innerText = `${nowCharacter.leader ? '♛ ' : ''}${nowCharacter.displayName}`;
+                        liveEl.textContent = `${nowCharacter.leader ? '♛ ' : ''}${nowCharacter.displayName}`;
                     } else if (hasFactions) {
                         const nowColor = useColors[factionNames[0]] || useColors.independent;
                         const nowColorDark = useColorsDark[factionNames[0]] || useColorsDark.independent;
                         channelEl.style.color = nowColor;
                         liveElDiv.style.backgroundColor = nowColorDark;
                         liveEl.style.color = useTextColor;
-                        liveEl.innerText = `< ${fullFactionMap[factionNames[0]] || factionNames[0]} >`;
+                        liveEl.textContent = `< ${fullFactionMap[factionNames[0]] || factionNames[0]} >`;
                     } else if (hasCharacters) {
                         const nowColor = useColors[characters[0].factionUse];
                         const nowColorDark = useColorsDark[characters[0].factionUse];
                         channelEl.style.color = nowColor;
                         liveElDiv.style.backgroundColor = nowColorDark;
                         liveEl.style.color = useTextColor;
-                        liveEl.innerText = `? ${characters[0].displayName} ?`;
+                        liveEl.textContent = `? ${characters[0].displayName} ?`;
                     } else {
                         channelEl.style.color = useColors.othernp;
                         liveElDiv.style.backgroundColor = useColorsDark.othernp;
                         liveEl.style.color = useTextColor;
                         liveEl.style.setProperty('text-transform', 'none', 'important');
-                        liveEl.innerText = `${serverName}`;
+                        liveEl.textContent = `${serverName}`;
                     }
                 }
             }
 
             if (filterState === FSTATES.remove) {
                 // Remove stream
-                // liveEl.innerText = 'REMOVED';
+                // liveEl.textContent = 'REMOVED';
                 // channelEl.style.color = '#ff0074';
 
-                if (viewersNum < minViewers) {
+                if (viewersNum < useMinViewers) {
                     if (isFirstRemove && keepDeleting) {
                         keepDeleting = false;
                         if (stopOnMin) {
@@ -574,8 +583,9 @@ const filterStreams = async () => {
                             console.log('[TNO] Clearing stream thumbnails with low viewers');
                         }
                     }
-                    const images = element.getElementsByClassName('tw-image');
-                    for (let j = 0; j < images.length; j++) images[j].src = '';
+                    element.style.visibility = 'hidden';
+                    // const images = element.getElementsByClassName('tw-image');
+                    // for (let j = 0; j < images.length; j++) images[j].src = '';
                 } else if (keepDeleting) {
                     // element.outerHTML = '';
                     // element.parentNode.removeChild(element);
@@ -605,6 +615,8 @@ const filterStreams = async () => {
         if (interval != null) {
             clearInterval(interval);
         }
+        minLoadedViewers = null;
+        minLoadedText = null;
         interval = setInterval(deleteOthers, 1000 * intervalSeconds); // Interval gets ended when minViewers is reached
         deleteOthers();
     };
@@ -641,11 +653,11 @@ const filterStreams = async () => {
         const streamElements = $('article:visible').toArray();
         for (let i = 0; i < streamElements.length; i++) {
             const streamEl = streamElements[i];
-            const channelName = streamEl.querySelector("a[data-a-target='preview-card-channel-link']").innerText.toLowerCase();
+            const channelName = streamEl.querySelector("a[data-a-target='preview-card-channel-link']").textContent.toLowerCase();
             const streamTags = streamEl.querySelectorAll('button.tw-tag');
             if (npCharacters[channelName] && streamTags.length === 1) {
                 // Could also just check first tag?
-                return streamTags[0].innerText;
+                return streamTags[0].textContent;
             }
         }
         return 'English';
