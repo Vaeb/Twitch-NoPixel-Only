@@ -1507,8 +1507,8 @@
             { "name": "Gomer Colton", "nicknames": ["Gomey"] }
         ],
         "Timmy2": [
-            { "name": "Chino G", "faction": "Vagos" },
             { "name": "Orlando Jones", "faction": "SSB", "nicknames": ["OJ"] },
+            { "name": "Chino G", "faction": "Vagos" },
             { "name": "Cardell \"CJ\" Jones", "faction": "SSB" }
         ],
         "Tinker": [
