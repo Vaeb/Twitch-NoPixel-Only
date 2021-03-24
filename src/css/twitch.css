@@ -181,6 +181,7 @@ span.tooltip {
     color: #fff;
     margin-right: 10px;
     line-height: 29px;
+    top: 1px;
 }
 
 /* Add the focus states too, They matter, always! */
