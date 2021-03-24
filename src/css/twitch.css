@@ -152,7 +152,7 @@ span.tooltip {
 .selectCustom {
     position: relative;
     /* width: 22rem; */
-    height: 30px;
+    /* height: 30px; */
     top: 0;
     left: 0;
     display: none;
@@ -197,14 +197,14 @@ span.tooltip {
     font-size: 13px;
     font-weight: 600;
     background-color: rgba(255, 255, 255, 0.2);
-    border: 0px solid #6f6f6f;
+    /* border: 0px solid #6f6f6f; */
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background-clip: padding-box;
+    transition: box-shadow 0.1s ease-in, border 0.1s ease-in, background-color 0.1s ease-in;
     border-radius: 0.4rem;
-}
-
-.selectCustom-trigger {
     position: relative;
     width: fit-content;
-    height: 100%;
+    height: 30px;
     background-color: rgba(255, 255, 255, 0.2);
     color: #fff;
     padding: 0.8rem 0.8rem;
@@ -227,7 +227,8 @@ span.tooltip {
 }
 
 .selectCustom-trigger:hover {
-    border-color: #8c00ff;
+    border-color: rgba(255, 255, 255, 0.3);
+    text-decoration: none;
 }
 
 .selectCustom-options {
@@ -238,7 +239,7 @@ span.tooltip {
     border: 0px solid #6f6f6f;
     border-radius: 0.6rem;
     background-color: rgb(24, 24, 27);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.4),0 0px 4px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 0px 4px rgba(0, 0, 0, 0.4);
     z-index: 1;
     padding: 0.8rem 0;
     display: none;
@@ -284,7 +285,7 @@ span.tooltip {
     width: 100%;
     background: transparent;
     border: none;
-    color: rgba(255, 255, 255, .8);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .selectCustom-input:focus {
