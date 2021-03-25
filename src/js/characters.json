@@ -31,6 +31,9 @@
         "abbay": [
             { "name": "Olivia Harvey" }
         ],
+        "abbbz": [
+            { "name": "Sanjay Patel", "faction": "Burger Shot" }
+        ],
         "abby": [
             { "name": "Big Bertha", "displayName": 0 },
             { "name": "Irma Gawd", "displayName": 0 },
