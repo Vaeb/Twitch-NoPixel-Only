@@ -852,7 +852,8 @@
             { "name": "Shane Powers" }
         ],
         "LadyHope": [
-            { "name": "[Officer] Lily Pond", "faction": "Police" }
+            { "name": "[Officer] Lily Pond", "faction": "Police" },
+            { "name": "Isabella \"Izzy\" Carrington", "faction": "Harmony" }
         ],
         "LadyLynxx": [
             { "name": "[EMS] Saphira Sinclair", "faction": "Medical" },
