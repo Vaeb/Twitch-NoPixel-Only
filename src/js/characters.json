@@ -1102,7 +1102,7 @@
             { "name": "[Officer] Ben Casanova", "faction": "Police" }
         ],
         "NymN": [
-            { "name": "Frank Fritugo", "faction": "Burger Shot", "displayName": 0 }
+            { "name": "Frank Fritugo", "displayName": 0 }
         ],
         "o_Oakleyz_o": [
             { "name": "[Deputy] Samuel Holtz", "faction": "Police" }
