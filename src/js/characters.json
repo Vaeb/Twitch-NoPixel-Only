@@ -1415,7 +1415,8 @@
             { "name": "Jack \"Sully\" Sullivan" }
         ],
         "summit1g": [
-            { "name": "Charles \"Chawa\" Johnson", "faction": "Chang Gang" }
+            { "name": "Charles \"Chawa\" Johnson", "faction": "Chang Gang" },
+            { "name": "John Charleston", "faction": "Police" }
         ],
         "Sunni": [
             { "name": "Hilda Bulking", "faction": "Vagos" }
