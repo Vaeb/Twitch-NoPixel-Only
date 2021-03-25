@@ -425,6 +425,7 @@
         ],
         "dwjft": [
             { "name": "Dean Watson", "leader": true },
+            { "name": "[Officer] Derby West Bromwich", "faction": "Police", "displayName": 3 },
             { "name": "[Development /] DW", "faction": "Development", "nicknames": ["tinkering"] }
         ],
         "Dyrus": [
