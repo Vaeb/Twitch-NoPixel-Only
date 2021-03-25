@@ -383,7 +383,7 @@
             { "name": "Keith \"Bulldog\" Dooger", "faction": "Lost MC" }
         ],
         "Denis3D": [
-            { "name": "Development \"Development: Denis3D\"", "faction": "Development", "nicknames": ["3D"] }
+            { "name": "[Development /] Denis3D", "faction": "Development", "nicknames": ["3D"] }
         ],
         "dibitybopty": [
             { "name": "[Officer] Gus Gorman", "faction": "Police" }
@@ -425,7 +425,7 @@
         ],
         "dwjft": [
             { "name": "Dean Watson", "leader": true },
-            { "name": "Development \"Development: DW\"", "faction": "Development", "nicknames": ["tinkering"] }
+            { "name": "[Development /] DW", "faction": "Development", "nicknames": ["tinkering"] }
         ],
         "Dyrus": [
             { "name": "Louis Hill", "displayName": 0 }
@@ -513,7 +513,7 @@
             { "name": "[Shaman /] Keith \"Lando\" Wanderlust", "faction": "LARPers", "nicknames": ["Stormborn", "Shaman", "Mountain Kingdom"], "displayName": 0 }
         ],
         "Gabz": [
-            { "name": "Development \"Development: Gabz\"", "faction": "Development", "nicknames": ["3D"] }
+            { "name": "[Development /] Gabz", "faction": "Development", "nicknames": ["3D"] }
         ],
         "GameDemented": [
             { "name": "[Deputy] Peter Johnson", "faction": "Police" }
@@ -553,7 +553,7 @@
         "GTAWiseGuy": [
             { "name": "Eddie Marshall", "faction": "Tuner Shop" },
             { "name": "[Officer] Jim Underwood", "faction": "Police" },
-            { "name": "Development \"Development: GTAWiseGuy\"", "faction": "Development", "nicknames": ["Handling", "Fixes", "Fixing"] },
+            { "name": "[Development /] GTAWiseGuy", "faction": "Development", "nicknames": ["Handling", "Fixes", "Fixing"] },
             { "name": "Igor Skovacic" },
             { "name": "Maury Mersion", "faction": "Mersions" }
         ],
@@ -829,7 +829,7 @@
         "koil": [
             { "name": "[Trooper] Kael Soze", "faction": "Police", "highCommand": true, "nicknames": ["are illegal"] },
             { "name": "[Officer] Francis Francer", "faction": "Police", "displayName": 1 },
-            { "name": "Development \"Development: Koil\"", "faction": "Development", "nicknames": ["Code"] },
+            { "name": "[Development /] Koil", "faction": "Development", "nicknames": ["Code"] },
             { "name": "Saint Jospeh", "nicknames": ["Jesus", "Joseph", "XUJIA", "EMC"], "displayName": 0 },
             { "name": "Otto Delmar" }
         ],
@@ -1083,7 +1083,7 @@
             { "name": "Leslie Ling", "displayName": 0, "nicknames": ["Lingberg"] }
         ],
         "Nikez": [
-            { "name": "Development \"Development: Nikez\"", "faction": "Development" },
+            { "name": "[Development /] Nikez", "faction": "Development" },
             { "name": "Nick Simone", "displayName": 0 },
             { "name": "[Officer] Cody Sharp", "faction": "Police" }
         ],
@@ -1196,7 +1196,7 @@
         ],
         "Raided": [
             { "name": "[Officer] Gage Draider", "faction": "Police" },
-            { "name": "Development \"Development: Raided\"", "faction": "Development" }
+            { "name": "[Development /] Raided", "faction": "Development" }
         ],
         "Ramee": [
             { "name": "Ramee El-Rahman", "faction": "Chang Gang", "nicknames": ["The \"Warlord\"", "The \"Vulture\"", "SBS Patient-0"] },
@@ -1539,7 +1539,7 @@
             { "name": "Paulie" }
         ],
         "Tobiii": [
-            { "name": "Development \"Development: Tobiii\"", "faction": "Development" }
+            { "name": "[Development /] Tobiii", "faction": "Development" }
         ],
         "Trainwreckstv": [
             { "name": "Douglas \"Doug Buck\" Buck", "displayName": 0 }
