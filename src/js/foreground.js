@@ -466,11 +466,16 @@ const filterStreams = async () => {
                     element.style.visibility = null;
                 }
 
-                channelEl.style.color = useColors.other;
-                liveElDiv.style.backgroundColor = useColorsDark.other;
-                liveEl.style.color = useTextColor;
-                liveEl.style.setProperty('text-transform', 'none', 'important');
-                liveEl.textContent = serverName.length > 0 ? `::${serverName}::` : '';
+                const allowStream = ['allnopixel', 'alltwitch'].includes(filterStreamFaction);
+                if (allowStream === false) {
+                    filterState = FSTATES.remove;
+                } else {
+                    channelEl.style.color = useColors.other;
+                    liveElDiv.style.backgroundColor = useColorsDark.other;
+                    liveEl.style.color = useTextColor;
+                    liveEl.style.setProperty('text-transform', 'none', 'important');
+                    liveEl.textContent = serverName.length > 0 ? `::${serverName}::` : '';
+                }
             } else if (filterState === FSTATES.nopixel) {
                 // NoPixel stream
                 if (element.style.display === 'none') {
