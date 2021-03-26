@@ -768,6 +768,9 @@
         "karnt1": [
             { "name": "Arush", "faction": "GSF" }
         ],
+        "Kate": [
+            { "name": "Nancy Drew" }
+        ],
         "KatFires": [
             { "name": "Novah Walker", "faction": "Chang Gang" },
             { "name": "[Officer] Ensley Alton", "faction": "Police", "nicknames": ["521"], "displayName": 1 }
