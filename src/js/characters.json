@@ -684,6 +684,7 @@
         ],
         "JdotField": [
             { "name": "Miles Landon", "faction": "Pegasus" },
+            { "name": "Jake LaMotta", "displayName": 0 },
             { "name": "Drew Jackson", "faction": "GSF" }
         ],
         "Jellypeanut": [
