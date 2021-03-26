@@ -488,6 +488,9 @@
         "FerretRP": [
             { "name": "Alberto Weaselton", "faction": "Lost MC" }
         ],
+        "Fiendota": [
+            { "name": "Jonathan \"Magnum\" Humes", "nicknames": ["\\bP\\.?\\s*I\\b"] }
+        ],
         "Five0AnthO": [
             { "name": "[Trooper] Tony Andrews", "faction": "Police", "highCommand": true }
         ],
