@@ -371,8 +371,8 @@
             { "name": "Rudi Rinsen", "faction": "Lost MC", "leader": true }
         ],
         "dasMEHDI": [
-            { "name": "[Officer] Brian Knight", "faction": "Police", "nicknames": ["495"] },
             { "name": "Nino Chavez", "faction": "Cleanbois" },
+            { "name": "[Officer] Brian Knight", "faction": "Police", "nicknames": ["495"] },
             { "name": "Ryan Kindle", "faction": "HOA" },
             { "name": "Reema", "nicknames": ["The \"Whorelord\""] }
         ],
