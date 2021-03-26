@@ -538,7 +538,7 @@
             { "name": "August Vakarian" }
         ],
         "GoldGlove": [
-            { "name": "Marvin King" }
+            { "name": "Marvin King", "nicknames": ["Marv"], "displayName": 3 }
         ],
         "GrandPOObear": [
             { "name": "Mick Flair", "displayName": 0 }
