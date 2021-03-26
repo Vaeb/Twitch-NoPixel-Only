@@ -1662,8 +1662,8 @@
             { "name": "Ronald \"Red\" Juggler" }
         ],
         "xReklez": [
-            { "name": "Chico", "faction": "Vagos" },
-            { "name": "AJ", "faction": "SSB" }
+            { "name": "AJ", "faction": "SSB" },
+            { "name": "Chico", "faction": "Vagos" }
         ],
         "YoinksOG": [
             { "name": "Doug Canada" }
