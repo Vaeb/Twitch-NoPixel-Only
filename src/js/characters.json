@@ -1623,8 +1623,8 @@
             { "name": "Lawyer / Lawrence Splainer", "faction": "DoJ", "displayName": 2 }
         ],
         "Whippy": [
-            { "name": "[Officer] Crocodile \"Croc\" Steve", "faction": "Police", "nicknames": ["Cop"] },
             { "name": "Irwin Dundee", "displayName": 2 },
+            { "name": "[Officer] Crocodile \"Croc\" Steve", "faction": "Police", "nicknames": ["Cop"] },
             { "name": "James Tinklebottom" }
         ],
         "WhiteyRP": [
