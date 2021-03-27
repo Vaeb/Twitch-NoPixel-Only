@@ -514,7 +514,7 @@
             { "name": "Alexander Egorov" }
         ],
         "fuslie": [
-            { "name": "April Fooze", "displayName": 0 }
+            { "name": "April Fooze", "nicknames": ["first time"], "displayName": 0 }
         ],
         "Fyzicul": [
             { "name": "[Shaman /] Keith \"Lando\" Wanderlust", "faction": "LARPers", "nicknames": ["Stormborn", "Shaman", "Mountain Kingdom"], "displayName": 0 }
