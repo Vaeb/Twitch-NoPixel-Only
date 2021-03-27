@@ -1579,7 +1579,7 @@
         "UberHaxorNova": [
             { "name": "Siz Fulker", "faction": "HOA", "leader": true, "nicknames": ["uhnSuffer"] },
             { "name": "Toh Biggles Fitzcharles", "displayName": 0, "nicknames": ["Yaes"] },
-            { "name": "Barry Briddle", "faction": "Burger Shot" }
+            { "name": "[Deputy] Barry Briddle", "faction": "Police" }
         ],
         "uhSnow": [
             { "name": "[Trooper] Jackie Snow", "faction": "Police" },
