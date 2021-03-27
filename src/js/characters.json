@@ -195,7 +195,7 @@
             { "name": "Shevy Santanna", "faction": "Vagos" }
         ],
         "BikeMan": [
-            { "name": "Chet Summerset", "other": -1, "assume": "assumeNpNoOther"}
+            { "name": "Chet Summerset", "assume": "assumeNpNoOther"}
         ],
         "Biotoxz_": [
             { "name": "[Barbarian /] Bjorn", "faction": "LARPers" }
@@ -574,7 +574,7 @@
             { "name": "Humberto Antonio Donato Pecorino", "nicknames": ["Don", "Donnie", "/\\bOva[h']? here\\b/"], "displayName": 5, "faction": "Cleanbois" }
         ],
         "Hedisaurus": [
-            { "name": "[EMS] Hedi Saurus", "faction": "Medical", "other": -1, "assume": "assumeNpNoOther" },
+            { "name": "[EMS] Hedi Saurus", "faction": "Medical", "assume": "assumeNpNoOther" },
             { "name": "[Dispatch] Ramona Celeste", "faction": "Police", "displayName": 1 }
         ],
         "HexagonistLIVE": [
@@ -659,7 +659,7 @@
             { "name": "Tyrone \"Big T\" Thompson", "faction": "SSB" }
         ],
         "ItsSlikeR": [
-            { "name": "Abraham Mohammed", "other": 1, "assume": "assumeOther" }
+            { "name": "Abraham Mohammed", "assume": "assumeOther" }
         ],
         "JaboodyShow": [
             { "name": "Jerry Curl", "displayName": 0 },
@@ -884,7 +884,7 @@
             { "name": "Jose \"Cousin\" Luis Santana", "faction": "Vagos" }
         ],
         "LaS_": [
-            { "name": "Jesse \"Baby Joker\" Morales", "other": 1, "assume": "assumeOther" }
+            { "name": "Jesse \"Baby Joker\" Morales", "assume": "assumeOther" }
         ],
         "LeWolfy": [
             { "name": "[Deputy] Dante Wolf", "faction": "Police" }
@@ -1010,7 +1010,7 @@
         "Miggitymaan": [
             { "name": "Jayce Wyatt" },
             { "name": "[Officer] Damien Alexander", "faction": "Police" },
-            { "name": "[Deputy] Kurt Leonard", "faction": "Police", "other": 1, "assume": "assumeOther" }
+            { "name": "[Deputy] Kurt Leonard", "faction": "Police", "assume": "assumeOther" }
         ],
         "MikeTheBard": [
             { "name": "Hubcap Jones", "displayName": 0 },
@@ -1027,7 +1027,7 @@
             { "name": "William \"Bill Ding\" Ding", "nicknames": ["Bill"] }
         ],
         "Ming": [
-            { "name": "Ming Jingtai", "other": 1, "assume": "assumeOther" }
+            { "name": "Ming Jingtai", "assume": "assumeOther" }
         ],
         "MinusFive": [
             { "name": "[Officer] Jason Bidwell", "faction": "Police" }
@@ -1215,7 +1215,7 @@
             { "name": "[Park Ranger] Conan Clarkson", "faction": "Police" }
         ],
         "Rasta": [
-            { "name": "Dunn Robinson", "other": -1, "assume": "assumeNpNoOther" },
+            { "name": "Dunn Robinson", "assume": "assumeNpNoOther" },
             { "name": "Mary Livingston", "displayName": 0 }
         ],
         "RatedEpicz": [
@@ -1246,7 +1246,7 @@
             { "name": "Happy D'Klown" }
         ],
         "RickMongoLIVE": [
-            { "name": "[D.A.] Rick Mongo", "faction": "DoJ", "other": -1, "assume": "assumeNpNoOther" }
+            { "name": "[D.A.] Rick Mongo", "faction": "DoJ", "assume": "assumeNpNoOther" }
         ],
         "RiZRP": [
             { "name": "Nikita Reznikov", "faction": "Pegasus" }
@@ -1510,7 +1510,7 @@
             { "name": "Tyler Kwando", "displayName": 0 }
         ],
         "TheChief1114": [
-            { "name": "Fingle Dan", "displayName": 0, "other": -1, "assume": "assumeNpNoOther" }
+            { "name": "Fingle Dan", "displayName": 0, "assume": "assumeNpNoOther" }
         ],
         "TheDondi": [
             { "name": "Arthur Hammond", "nicknames": ["The \"Doctor\""] },
