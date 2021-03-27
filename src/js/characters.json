@@ -1140,6 +1140,7 @@
             { "name": "[Sorceror /] Chut McMillan", "faction": "LARPers", "nicknames": ["Chut The Magnificent", "Sorcerer"] }
         ],
         "Odablock": [
+            { "name": "Lil Baldy", "displayName": 0 },
             { "name": "Big O", "displayName": 0 }
         ],
         "OfficialTaco": [
