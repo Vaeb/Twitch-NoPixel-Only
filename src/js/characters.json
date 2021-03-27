@@ -1137,6 +1137,9 @@
         "Octopimp": [
             { "name": "[Sorceror /] Chut McMillan", "faction": "LARPers", "nicknames": ["Chut The Magnificent", "Sorcerer"] }
         ],
+        "Odablock": [
+            { "name": "Big O", "displayName": 0 }
+        ],
         "OfficialTaco": [
             { "name": "Charles \"Taco\" Prince", "faction": "Chang Gang" }
         ],
