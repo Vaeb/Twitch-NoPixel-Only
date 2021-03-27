@@ -1044,7 +1044,7 @@
             { "name": "Charles White", "displayName": 0 }
         ],
         "MOONMOON": [
-            { "name": "[Officer] Lenny Hawk", "faction": "Police", "displayName": 0 },
+            { "name": "[Officer] Lenny Hawk", "faction": "Police", "displayName": 0, "assume": "assumeNp" },
             { "name": "[Shadowlord /] Bernice Caldershot", "faction": "LARPers" },
             { "name": "Yung Dab", "nicknames": ["The \"Gnome\""] }
         ],
@@ -1675,7 +1675,7 @@
             { "name": "Martin Julio-Perez-Cruz-Rodriguez", "faction": "Marabunta" }
         ],
         "Zaquelle": [
-            { "name": "[Officer] Mackenzie Hayes", "faction": "Police", "other": 1, "assume": "assumeOther" }
+            { "name": "[Officer] Mackenzie Hayes", "faction": "Police", "assume": "assumeNp" }
         ],
         "Ziggy": [
             { "name": "[Park Ranger] Ziggy Buggs", "faction": "Police", "displayName": 1 },
