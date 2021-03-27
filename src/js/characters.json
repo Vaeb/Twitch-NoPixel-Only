@@ -513,6 +513,9 @@
             { "name": "Edward Nygma" },
             { "name": "Alexander Egorov" }
         ],
+        "fuslie": [
+            { "name": "April Fooze", "displayName": 0 }
+        ],
         "Fyzicul": [
             { "name": "[Shaman /] Keith \"Lando\" Wanderlust", "faction": "LARPers", "nicknames": ["Stormborn", "Shaman", "Mountain Kingdom"], "displayName": 0 }
         ],
