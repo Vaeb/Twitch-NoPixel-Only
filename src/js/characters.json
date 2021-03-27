@@ -10,7 +10,7 @@
         { "name": "TwitchRP", "reg": "twitchrp|\\bt\\W*rp", "include": 1 },
         { "name": "NonStopRP", "reg": "\\bnon[\\s-]*stop|\\bns\\s?rp", "include": 1 },
         { "name": "SVRP", "reg": "\\bsvrp\\b|subversion", "include": 0 },
-        { "name": "SSB WRLD", "reg": "ssb[\\s:-]*(?:wo?rld|rp)|ssb\\s+(?:later|after)", "include": 0 },
+        { "name": "SSB WRLD", "reg": "\\bssb\\b|ssb[\\s:-]*(?:wo?rld|rp)|ssb\\s+(?:later|after)", "include": 0 },
         { "name": "FrenzyRP", "reg": "\\bfrenzy\\s*rp", "include": 0 },
         { "name": "", "reg": "\\bgta[\\s:-]*v?[\\s:-]*online|story[\\s-]*mode|\\bgta[\\s:-]*v?[\\s-]+story|grizzely\\s*rp|\\boc\\s*rp\\b|\\bybn\\b", "include": 0 }
     ],
