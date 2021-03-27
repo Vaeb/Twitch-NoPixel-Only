@@ -385,6 +385,9 @@
         "Denis3D": [
             { "name": "[Development /] Denis3D", "faction": "Development", "nicknames": ["3D"] }
         ],
+        "devolore": [
+            { "name": "[Officer] Cash Kennedy", "faction": "Police" }
+        ],
         "dibitybopty": [
             { "name": "[Officer] Gus Gorman", "faction": "Police" }
         ],
