@@ -907,7 +907,8 @@
             { "name": "[EMS] Lei Sanya", "faction": "Medical", "nicknames": ["Lasagna"], "displayName": 0 }
         ],
         "Lord_Kebun": [
-            { "name": "Mr. K", "faction": "Chang Gang", "leader": true, "displayName": 0, "nicknames": ["Chang", "The \"Dragon\""] }
+            { "name": "Mr. K", "faction": "Chang Gang", "leader": true, "displayName": 0, "nicknames": ["Chang", "The \"Dragon\""] },
+            { "name": "[Deputy] Richard Richardson", "faction": "Police" }
         ],
         "LordJasta": [
             { "name": "Chris McGrawl" }
@@ -1509,7 +1510,8 @@
             { "name": "Slappy McGaffey" }
         ],
         "the_halfhand": [
-            { "name": "Jack \"Sully\" Sullivan" }
+            { "name": "Jack \"Sully\" Sullivan" },
+            { "name": "[Officer] Oscar Fitzpatrick", "faction": "Police", "nicknames": ["Fitz", "Patrick"] }
         ],
         "TheAaronShaq": [
             { "name": "? \"Glue Guy\" ?", "faction": "Burger Shot" }
