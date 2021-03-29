@@ -55,7 +55,7 @@
         ],
         "adeptthebest": [
             { "name": "Hannah Hiltop" },
-            { "name": "Mari Posa", "displayName": 0 }
+            { "name": "Mari Posa", "faction": "Vagos", "displayName": 0 }
         ],
         "adnormaltv": [
             { "name": "Ivan Gorbahtjov" }
@@ -485,7 +485,8 @@
             { "name": "Taran Raid", "faction": "Lost MC", "displayName": 0 }
         ],
         "Farmhouse78": [
-            { "name": "Jane Farmer" }
+            { "name": "Jane Farmer" },
+            { "name": "Steven Hayes", "displayName": 0 }
         ],
         "FeliciaDay": [
             { "name": "Cherryclarie Dinwittie", "nicknames": ["CherryClaire"], "displayName": 3 }
