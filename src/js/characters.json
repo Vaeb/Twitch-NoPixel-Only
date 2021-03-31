@@ -1422,7 +1422,7 @@
             { "name": "Kray-Tor Skullfondler", "faction": "HOA" }
         ],
         "Ssaab": [
-            { "name": "Al Saab", "faction": "Cleanbois", "displayName": 2 },
+            { "name": "Al Saab", "faction": "HOA", "displayName": 2 },
             { "name": "[Officer] Sam Baas", "faction": "Police", "displayName": 2 }
         ],
         "steamcharlie": [
