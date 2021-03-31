@@ -354,7 +354,8 @@ const filterStreams = async () => {
 
         const useTextColor = '#000';
         // const useTextColor = isDark ? '#000' : '#f7f7f8';
-        const useMinViewers = ['allnopixel', 'alltwitch'].includes(filterStreamFaction) ? minViewers : 3;
+        const isMetaFaction = ['allnopixel', 'alltwitch'].includes(filterStreamFaction);
+        const useMinViewers = isMetaFaction ? minViewers : 3;
 
         const allElements = Array.from(document.getElementsByTagName('article'));
         const elements = allElements.filter(element => !element.classList.contains('npChecked'));
@@ -466,7 +467,7 @@ const filterStreams = async () => {
                     element.style.visibility = null;
                 }
 
-                const allowStream = ['allnopixel', 'alltwitch'].includes(filterStreamFaction);
+                const allowStream = isMetaFaction;
                 if (allowStream === false) {
                     filterState = FSTATES.remove;
                 } else {
@@ -521,7 +522,7 @@ const filterStreams = async () => {
                 const hasFactions = factionNames.length;
                 const hasCharacters = characters && characters.length;
 
-                let allowStream = ['allnopixel', 'alltwitch'].includes(filterStreamFaction);
+                let allowStream = isMetaFaction;
                 if (allowStream === false) {
                     if (filterStreamFaction === 'othernp') { // use conditions below
                         allowStream = !hasNowCharacter && !hasFactions && !hasCharacters;
@@ -602,6 +603,12 @@ const filterStreams = async () => {
         });
 
         if (minLoadedText != null && streamCount) streamCount.textContent = `Smallest stream on page: ${minLoadedText}`;
+
+        if (!isMetaFaction) { // visibility: visible;
+            streamCount.style.visibility = 'visible';
+        } else {
+            streamCount.style.visibility = null;
+        }
 
         if (tnoScrolling && elements.length > 0 && prevWasZero) {
             const $scrollDiv = $('div.root-scrollable.scrollable-area').find('> div.simplebar-scroll-content');
