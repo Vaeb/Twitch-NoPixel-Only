@@ -602,12 +602,14 @@ const filterStreams = async () => {
             }
         });
 
-        if (minLoadedText != null && streamCount) streamCount.textContent = `Smallest stream on page: ${minLoadedText}`;
+        if (streamCount) {
+            if (minLoadedText != null) streamCount.textContent = `Smallest stream on page: ${minLoadedText}`;
 
-        if (!isMetaFaction) { // visibility: visible;
-            streamCount.style.visibility = 'visible';
-        } else {
-            streamCount.style.visibility = null;
+            if (!isMetaFaction) { // visibility: visible;
+                streamCount.style.visibility = 'visible';
+            } else {
+                streamCount.style.visibility = null;
+            }
         }
 
         if (tnoScrolling && elements.length > 0 && prevWasZero) {
