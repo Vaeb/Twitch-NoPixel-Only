@@ -885,7 +885,7 @@
             { "name": "Jaed Smith" }
         ],
         "LAGTVMaximusBlack": [
-            { "name": "Outto-Tune \"OTT\" Tyrone" }
+            { "name": "Outto-Tune \"OTT\" Tyrone", "faction": "SSB", "nicknames": ["/\\bO\\S?TT/"] }
         ],
         "Lairdo_": [
             { "name": "Henry King" }
