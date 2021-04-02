@@ -134,8 +134,8 @@
             { "name": "Annie May", "displayName": 0 }
         ],
         "ashlynn": [
-            { "name": "[Officer] Brenda Pancake", "faction": "Police", "displayName": 1, "nicknames": ["Pancakes"] },
-            { "name": "Cassie Cupcakes", "faction": "Angels" }
+            { "name": "Cassie Cupcakes", "faction": "Angels" },
+            { "name": "[Officer] Brenda Pancake", "faction": "Police", "displayName": 1, "nicknames": ["Pancakes"] }
         ],
         "Asteroba": [
             { "name": "[D.A.] Larry Hallow", "faction": "DoJ" },
