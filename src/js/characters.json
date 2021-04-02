@@ -468,6 +468,9 @@
         "explodicy": [
             { "name": "Ted Kindly" }
         ],
+        "extralivia": [
+            { "name": "Jess ?", "faction": "SSB" }
+        ],
         "Fairlight_Excalibur": [
             { "name": "Raja Bahadur", "faction": "QuickFix", "leader": true },
             { "name": "[Officer] Alexander \"Fox\" Fawkes", "faction": "Police" }
