@@ -1577,6 +1577,7 @@
         ],
         "travpiper": [
             { "name": "Carlos \"Cheddar\" Sanchez", "faction": "HOA" },
+            { "name": "[Deputy] Willy Gunner", "faction": "Police" },
             { "name": "Warren Wallace" },
             { "name": "Charlie Colcord" },
             { "name": "Hazard" }
