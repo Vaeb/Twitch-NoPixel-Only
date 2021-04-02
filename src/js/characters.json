@@ -283,6 +283,9 @@
         "Chalupa_Pants": [
             { "name": "Julio Thomas", "faction": "HOA" }
         ],
+        "Chap": [
+            { "name": "Bryan Chapman", "displayName": 0 }
+        ],
         "charlieblossom": [
             { "name": "Georgina \"Windsong\" Williams" }
         ],
