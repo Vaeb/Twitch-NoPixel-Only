@@ -865,7 +865,8 @@
             { "name": "Natalia Omar" }
         ],
         "Kyle": [
-            { "name": "Alabaster Slim", "faction": "Burger Shot", "nicknames": ["Pimp"], "displayName": 2 },
+            { "name": "Alabaster Slim", "nicknames": ["Pimp"], "displayName": 2 },
+            { "name": "Hampton Brandon", "nicknames": ["TTD", "Ten Toes Down"] },
             { "name": "[Officer] Kyle Pred", "faction": "Police" },
             { "name": "Brett Biggledoinks" },
             { "name": "Lawyer / Rory O'Banion", "faction": "DoJ", "displayName": 0 },
