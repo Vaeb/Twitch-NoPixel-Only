@@ -1373,6 +1373,9 @@
             { "name": "Iroquois \"Snake\" Plisken", "displayName": 0 },
             { "name": "Ziggy Flint", "nicknames": ["/🌿/"], "displayName": 0 }
         ],
+        "SimpleD88": [
+            { "name": "[A.D.A.] Blake Specter", "faction": "DoJ" }
+        ],
         "Simplyje2ns": [
             { "name": "Jean Steele", "displayName": 0 }
         ],
