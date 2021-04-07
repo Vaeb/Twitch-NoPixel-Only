@@ -1516,6 +1516,9 @@
         "TFNeraZe": [
             { "name": "[Deputy] Michael Dunning", "faction": "Police" }
         ],
+        "Tfue": [
+            { "name": "Tucker Johnson" }
+        ],
         "thaCOOP": [
             { "name": "[Officer] Luke Holliday", "faction": "Police" },
             { "name": "[Judge] Coop Holliday", "faction": "DoJ", "displayName": 1 },
