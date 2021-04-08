@@ -261,6 +261,9 @@
         "CallMeGrub": [
             { "name": "[Deputy] Isaac Richardson", "faction": "Police" }
         ],
+        "CallMeKevin": [
+            { "name": "Grognak The Destroyer" }
+        ],
         "capsure": [
             { "name": "Dimitri Nekola", "faction": "Pegasus" }
         ],
