@@ -425,6 +425,9 @@
             { "name": "Gazpacho Prince", "nicknames": ["Pachi", "Spachi"] },
             { "name": "William \"W\" Told", "nicknames": ["Lil Pump"] }
         ],
+        "DougisRaw": [
+            { "name": "Jason Sharpe", "displayName": 0 }
+        ],
         "Dr_Knope": [
             { "name": "Patrit \"Mete\" Metemahaan", "faction": "HOA" }
         ],
