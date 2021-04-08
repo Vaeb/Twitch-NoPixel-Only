@@ -232,6 +232,9 @@
         "BRIT": [
             { "name": "Tori Corleone", "nicknames": ["Bologna"] }
         ],
+        "Brofain": [
+            { "name": "Kodak Bodega" }
+        ],
         "buddha": [
             { "name": "Lang Buddha", "faction": "Cleanbois", "leader": true, "nicknames": ["Circle Andy"] },
             { "name": "[Deputy] Kevin Kona", "faction": "Police" },
