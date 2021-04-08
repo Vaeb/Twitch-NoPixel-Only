@@ -1489,6 +1489,9 @@
             { "name": "[Officer] Kenny Hawk", "faction": "Police", "displayName": 0 },
             { "name": "[Ranger /] Clarence Trueshot", "faction": "LARPers", "nicknames": ["Ranger"], "displayName": 0 }
         ],
+        "Svennoss": [
+            { "name": "Barry Svensson" }
+        ],
         "SwizzMB": [
             { "name": "Miguel Almerion", "faction": "Snake Gang" }
         ],
