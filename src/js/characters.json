@@ -1490,7 +1490,7 @@
             { "name": "[Ranger /] Clarence Trueshot", "faction": "LARPers", "nicknames": ["Ranger"], "displayName": 0 }
         ],
         "Svennoss": [
-            { "name": "Barry Svensson" }
+            { "name": "Barry Svensson", "faction": "Pegasus" }
         ],
         "SwizzMB": [
             { "name": "Miguel Almerion", "faction": "Snake Gang" }
