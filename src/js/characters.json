@@ -891,7 +891,7 @@
             { "name": "Mary Mushkin", "displayName": 0 }
         ],
         "Jackhuddo": [
-            { "name": "Shane Powers" }
+            { "name": "Shane Powers", "nicknames": ["ShaneO", "ShanO"] }
         ],
         "LadyHope": [
             { "name": "[Officer] Lily Pond", "faction": "Police" },
