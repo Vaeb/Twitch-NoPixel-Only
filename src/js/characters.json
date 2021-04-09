@@ -786,6 +786,9 @@
             { "name": "[Therapist] Thalia Hayes", "faction": "Medical" },
             { "name": "[Lawyer /] Lees Grey", "faction": "DoJ" }
         ],
+        "Kaceytron": [
+            { "name": "Bobbi Jo", "displayName": 0 }
+        ],
         "Kainalo": [
             { "name": "Risto Suolamies" }
         ],
