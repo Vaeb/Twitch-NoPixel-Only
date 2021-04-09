@@ -875,7 +875,7 @@
             { "name": "[Officer] Francis Francer", "faction": "Police", "displayName": 1 },
             { "name": "[Development /] Koil", "faction": "Development", "nicknames": ["Code"] },
             { "name": "Saint Jospeh", "nicknames": ["Jesus", "Joseph", "XUJIA", "EMC"], "displayName": 0 },
-            { "name": "Ray Ray", "faction": "150" },
+            { "name": "Ray Ray", "faction": "150", "displayName": 0 },
             { "name": "Otto Delmar" }
         ],
         "Kongfue": [
