@@ -1086,6 +1086,7 @@
         "MOONMOON": [
             { "name": "[Officer] Lenny Hawk", "faction": "Police", "displayName": 0, "assume": "assumeNp" },
             { "name": "[Shadowlord /] Bernice Caldershot", "faction": "LARPers" },
+            { "name": "Ro Block", "faction": "150", "displayName": 0 },
             { "name": "Yung Dab", "nicknames": ["The \"Gnome\""] }
         ],
         "MrMoonsHouse": [
