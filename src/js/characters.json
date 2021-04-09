@@ -1543,7 +1543,7 @@
             { "name": "[Deputy] Michael Dunning", "faction": "Police" }
         ],
         "Tfue": [
-            { "name": "Tucker Johnson" }
+            { "name": "Tucker Johnson", "faction": "Chang Gang" }
         ],
         "thaCOOP": [
             { "name": "[Officer] Luke Holliday", "faction": "Police" },
