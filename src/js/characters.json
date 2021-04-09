@@ -356,7 +356,7 @@
             { "name": "Four \"4T\" Tee", "displayName": 0 }
         ],
         "CurtisRyan": [
-            { "name": "Curtis Swoleroid", "faction": "Pegasus", "nicknames": ["\"Demon\" of Lean Street", "Curt"] },
+            { "name": "Curtis Swoleroid", "nicknames": ["\"Demon\" of Lean Street", "Curt"] },
             { "name": "[Officer] Stephen McClane", "faction": "Police" },
             { "name": "Cornelius \"Cornbread\" Scott", "faction": "GSF" }
         ],
