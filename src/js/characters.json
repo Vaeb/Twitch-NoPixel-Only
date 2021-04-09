@@ -250,7 +250,7 @@
             { "name": "Gordo Ramsay", "displayName": 0 }
         ],
         "ButterRoyaleTV": [
-            { "name": "Deejay Bartello", "faction": "Snake Gang" }
+            { "name": "Deejay Bartello" }
         ],
         "Buzterwow": [
             { "name": "? \"Brother Mehof\" ?" }
@@ -455,7 +455,7 @@
             { "name": "Huck Guthrie", "faction": "HOA" }
         ],
         "either": [
-            { "name": "Jaden Christopher", "faction": "Snake Gang" }
+            { "name": "Jaden Christopher" }
         ],
         "Elochai": [
             { "name": "Tao Chen" }
@@ -826,7 +826,7 @@
             { "name": "Kyle Brovloski" }
         ],
         "Kemony": [
-            { "name": "Susie Carmichael", "faction": "Snake Gang" }
+            { "name": "Susie Carmichael" }
         ],
         "KezieEve": [
             { "name": "Ghost Storm", "faction": "GSF" }
@@ -1160,7 +1160,7 @@
             { "name": "Chips Ahoy" }
         ],
         "Nottics": [
-            { "name": "Raul Rodriguez", "faction": "Snake Gang", "nicknames": ["Rauuulllll"] }
+            { "name": "Raul Rodriguez", "nicknames": ["Rauuulllll"] }
         ],
         "NovalokHD": [
             { "name": "[Officer] Ben Casanova", "faction": "Police" }
@@ -1392,7 +1392,7 @@
             { "name": "Anton Belov", "faction": "Russians" }
         ],
         "Silent": [
-            { "name": "Juan Carlos \"Flippy\" Hernandez", "faction": "Snake Gang", "leader": true, "nicknames": ["FLIPPPPY", "FLIPPPY", "FLIPPPPPY"] },
+            { "name": "Juan Carlos \"Flippy\" Hernandez", "leader": true, "nicknames": ["FLIPPPPY", "FLIPPPY", "FLIPPPPPY"] },
             { "name": "[Officer] Joel Garcia", "faction": "Police" }
         ],
         "SilentSentry": [
@@ -1510,7 +1510,7 @@
             { "name": "Barry Svensson", "faction": "Pegasus" }
         ],
         "SwizzMB": [
-            { "name": "Miguel Almerion", "faction": "Snake Gang" }
+            { "name": "Miguel Almerion" }
         ],
         "Sykkuno": [
             { "name": "Yuno Sykk", "displayName": 1 }
@@ -1767,7 +1767,6 @@
         "doj": "\\bdoj\\b|department\\s*of\\s*justice|judge\\b(?![\\s]*me)|\\ba?\\.?d\\.?a\\b|lawyer|para[\\s-]*legal",
         "angels": "\\bangels?\\b",
         "burgershot": "burger[\\s-]*shot|\\bburgers\\b",
-        "snakegang": "\\b(?:snake|hydra|mario)\\s*gang\\b",
         "development": "\\bdevelop|\\bdev\\b",
         "doc": "\\bdoc\\b|\\bcorrection",
         "mechanic": "\\bmechanic\\b",
@@ -1791,7 +1790,6 @@
         "150": "#a35231",
         "angels": "#ff9ff3",
         "burgershot": "#E99062",
-        "snakegang": "#789500",
         "development": "#718093",
         "doc": "#0984e3",
         "mechanic": "#40739e",
@@ -1820,7 +1818,6 @@
         "150": "#a35231",
         "angels": "#e192d7",
         "burgershot": "#c77c50",
-        "snakegang": "#789500",
         "development": "#718093",
         "doc": "#1080d6",
         "mechanic": "#40739e",
