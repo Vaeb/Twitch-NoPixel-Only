@@ -1061,7 +1061,7 @@
         ],
         "MiltonTPike1": [
             { "name": "Kiki Chanel" },
-            { "name": "Dob Darker", "nicknames": ["Dice is Right", "Right Dice"] },
+            { "name": "Dob Darker", "nicknames": ["Dice is Right", "Right Dice"], "displayName": 0 },
             { "name": "Giovanni Atello", "displayName": 1 },
             { "name": "Hazel Nutte" },
             { "name": "Merlin Edmondstoune" },
