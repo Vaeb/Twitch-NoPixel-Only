@@ -591,7 +591,7 @@
         ],
         "GTAWiseGuy": [
             { "name": "Eddie Marshall", "faction": "Tuner Shop" },
-            { "name": "[Officer] Jim Underwood", "faction": "Police" },
+            { "name": "[Officer] Jim Underwood", "faction": "Police", "nicknames": ["437"] },
             { "name": "[Development /] GTAWiseGuy", "faction": "Development", "nicknames": ["Handling", "Fixes", "Fixing"] },
             { "name": "Igor Skovacic" },
             { "name": "RayRay" },
