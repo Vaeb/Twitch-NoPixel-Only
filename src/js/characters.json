@@ -397,6 +397,9 @@
         "DavidB_NP": [
             { "name": "Vladimir \"Vlad\" Ivanov", "faction": "Russians" }
         ],
+        "Deansocool": [
+            { "name": "Dean Quincy", "assume": "assumeOther" }
+        ],
         "Denior13": [
             { "name": "Keith \"Bulldog\" Dooger", "faction": "Lost MC" }
         ],
