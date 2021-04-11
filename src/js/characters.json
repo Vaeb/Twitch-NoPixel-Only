@@ -110,6 +110,9 @@
         "AnneMunition": [
             { "name": "Sequoia Springs" }
         ],
+        "Anomaly": [
+            { "name": "Larry Papidopoulos", "nicknames": ["Papi"] }
+        ],
         "AnthonyZ": [
             { "name": "Tony Corleone", "faction": "Cleanbois" },
             { "name": "[Officer] Anthony Copleone", "faction": "Police" }
