@@ -1101,7 +1101,8 @@
             { "name": "Freddy Price", "displayName": 0 }
         ],
         "MrMouton": [
-            { "name": "Chuck Mouton", "displayName": 0 }
+            { "name": "Chuck Mouton", "displayName": 0 },
+            { "name": "Han Pandler" }
         ],
         "MsTeamKK": [
             { "name": "Riley Carter" }
