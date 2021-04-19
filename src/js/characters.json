@@ -1340,7 +1340,7 @@
         ],
         "s0upes": [
             { "name": "James \"Apples\" Apeller" },
-            { "name": "Silas Grimmer" },
+            { "name": "[Officer] Silas Grimmer", "faction": "Police" },
             { "name": "Ryder S. Block", "faction": "150", "displayName": 0 },
             { "name": "Ezekiel \"Zero\" Rogaine" }
         ],
