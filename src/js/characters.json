@@ -901,7 +901,7 @@
         "Kyle": [
             { "name": "Alabaster Slim", "nicknames": ["Pimp"], "displayName": 2 },
             { "name": "Hampton Brandon", "nicknames": ["TTD", "Ten Toes Down"] },
-            { "name": "[Officer] Kyle Pred", "faction": "Police" },
+            { "name": "[Sheriff] Kyle Pred", "faction": "Police" },
             { "name": "Brett Biggledoinks" },
             { "name": "[Lawyer /] Rory O'Banion", "faction": "DoJ", "displayName": 0 },
             { "name": "Wyatt Derp", "faction": "Lost MC" },
