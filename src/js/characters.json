@@ -718,7 +718,7 @@
             { "name": "Joseph Yorinobu" }
         ],
         "JayAitch5": [
-            { "name": "Lil Cap" }
+            { "name": "Lil Cap", "displayName": 0 }
         ],
         "Jayce": [
             { "name": "Lil Loco", "faction": "Vagos", "displayName": 0 },
