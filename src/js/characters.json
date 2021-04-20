@@ -144,7 +144,7 @@
         ],
         "Asteroba": [
             { "name": "[D.A.] Larry Hallow", "faction": "DoJ" },
-            { "name": "[Officer] Aaron Byson", "faction": "Police" },
+            { "name": "[Deputy] Aaron Byson", "faction": "Police" },
             { "name": "Kermy Fulker", "faction": "HOA" },
             { "name": "[EMS] Boba Stone", "faction": "Medical" }
         ],
@@ -911,7 +911,7 @@
             { "name": "Pal Gore" }
         ],
         "kyliebitkin": [
-            { "name": "[Officer] Brittany Angel", "faction": "Police" },
+            { "name": "[Deputy] Brittany Angel", "faction": "Police" },
             { "name": "Mary Mushkin", "displayName": 0 }
         ],
         "Jackhuddo": [
@@ -1099,7 +1099,7 @@
             { "name": "Charles White", "displayName": 0 }
         ],
         "MOONMOON": [
-            { "name": "[Officer] Lenny Hawk", "faction": "Police", "displayName": 0, "assume": "assumeNp" },
+            { "name": "[Deputy] Lenny Hawk", "faction": "Police", "displayName": 0, "assume": "assumeNp" },
             { "name": "[Shadowlord /] Bernice Caldershot", "faction": "LARPers" },
             { "name": "Ro Block", "faction": "150", "displayName": 0 },
             { "name": "Yung Dab", "nicknames": ["The \"Gnome\""] }
@@ -1481,7 +1481,7 @@
         ],
         "Ssaab": [
             { "name": "Al Saab", "faction": "HOA", "displayName": 2 },
-            { "name": "[Officer] Sam Baas", "faction": "Police", "displayName": 2 }
+            { "name": "[Deputy] Sam Baas", "faction": "Police", "displayName": 2 }
         ],
         "steamcharlie": [
             { "name": "[Deputy] Sydney Bearmont", "faction": "Police", "displayName": 1 }
@@ -1603,7 +1603,7 @@
             { "name": "Roland Nelson" }
         ],
         "Timmac": [
-            { "name": "[Officer] T.J. Mack", "faction": "Police" },
+            { "name": "[Deputy] T.J. Mack", "faction": "Police" },
             { "name": "Gomer Colton", "nicknames": ["Gomey"] }
         ],
         "Timmy2": [
