@@ -47,8 +47,9 @@
         ],
         "AbdulHD": [
             { "name": "Abdul AlRahim" },
-            { "name": "Fahad AlArabi", "faction": "DoC" },
-            { "name": "[Judge] Ali Habibi", "faction": "DoJ" }
+            { "name": "[Judge] Ali Habibi", "faction": "DoJ" },
+            { "name": "Mustafa Habibi" },
+            { "name": "Fahad AlArabi", "faction": "DoC" }
         ],
         "Acaibear": [
             { "name": "[Officer] Emily Reinhart", "faction": "Police" },
