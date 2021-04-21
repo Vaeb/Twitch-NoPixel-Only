@@ -57,7 +57,7 @@
         "adeptthebest": [
             { "name": "Hannah Hiltop" },
             { "name": "[Officer] Selena Mendoza", "faction": "Police" },
-            { "name": "Mari Posa", "faction": "Vagos", "displayName": 0 }
+            { "name": "Mari Posa", "displayName": 0 }
         ],
         "adnormaltv": [
             { "name": "Ivan Gorbahtjov" }
