@@ -1396,6 +1396,7 @@
         ],
         "Shotz": [
             { "name": "Vinny Pistone", "faction": "Chang Gang" },
+            { "name": "Mr J", "faction": "Chang Gang", "displayName": 0 },
             { "name": "[Officer] John Mineo", "faction": "Police" }
         ],
         "Shrimp_": [
