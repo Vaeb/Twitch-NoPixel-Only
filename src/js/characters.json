@@ -484,8 +484,8 @@
             { "name": "Anna Swallows", "displayName": 0 }
         ],
         "EsfandTV": [
-            { "name": "Ali Farmand", "displayName": 0 },
-            { "name": "[Deputy] Cletus Cornwood", "faction": "Police" }
+            { "name": "[Deputy] Cletus Cornwood", "faction": "Police" },
+            { "name": "Ali Farmand", "displayName": 0 }
         ],
         "explodicy": [
             { "name": "Ted Kindly" }
