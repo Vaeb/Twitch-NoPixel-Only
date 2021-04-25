@@ -654,8 +654,9 @@
             { "name": "Ash Huddy Hudson", "faction": "Lunatix" }
         ],
         "HutchMF": [
+            { "name": "Hutch Hutcherson" },
             { "name": "Drew \"Dead Eye Drew\"", "nicknames": ["DeadEye"] },
-            { "name": "Jaryd Peak" },
+            { "name": "[Deputy] Jaryd Peak", "faction": "Police" },
             { "name": "Hutch Hendrickson" }
         ],
         "IAmSoul_RP": [
