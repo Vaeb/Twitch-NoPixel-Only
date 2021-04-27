@@ -1617,6 +1617,7 @@
             { "name": "Cardell \"CJ\" Jones", "faction": "SSB" }
         ],
         "Tinker": [
+            { "name": "[Deputy] Theodore Tinker", "faction": "Police" },
             { "name": "Sean Tinker", "faction": "Pegasus", "displayName": 0 }
         ],
         "TinySpark": [
