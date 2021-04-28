@@ -1052,7 +1052,7 @@
         "MEKABEAR": [
             { "name": "Erin Cox" },
             { "name": "Ari Tistu", "displayName": 0 },
-            { "name": "Amber Gold", "displayName": 0 }
+            { "name": "[Deputy] Amber Gold", "faction": "Police", "displayName": 0 }
         ],
         "Mervin": [
             { "name": "Mervin Potts" }
