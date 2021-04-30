@@ -1530,6 +1530,9 @@
             { "name": "[Officer] Kenny Hawk", "faction": "Police", "displayName": 0 },
             { "name": "[Ranger /] Clarence Trueshot", "faction": "LARPers", "nicknames": ["Ranger"], "displayName": 0 }
         ],
+        "Suspect": [
+            { "name": "Marcos Da Silva" }
+        ],
         "Svennoss": [
             { "name": "Barry Svensson", "faction": "Pegasus" }
         ],
