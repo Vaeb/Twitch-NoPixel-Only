@@ -1770,6 +1770,9 @@
         "Zaquelle": [
             { "name": "[Officer] Mackenzie Hayes", "faction": "Police", "assume": "assumeNp" }
         ],
+        "Zerkaa": [
+            { "name": "Tommy Tate", "displayName": 0 }
+        ],
         "Ziggy": [
             { "name": "[Park Ranger] Ziggy Buggs", "faction": "Police", "displayName": 1 },
             { "name": "[Lawyer /] Norman Bones", "faction": "DoJ", "displayName": 0 }
