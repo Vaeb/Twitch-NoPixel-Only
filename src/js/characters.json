@@ -1782,7 +1782,6 @@
         ]
     },
     "npFactionsRegex": {
-        "cleanbois": "lean\\s*boi|\\blba?\\b",
         "lostmc": "lost\\s*mc|the\\s*lost\\b",
         "changgang": "chang\\s*gang|\\bcga?\\b",
         "vagos": "vagos|yellow[\\s-]*gang|\\besv\\b",
