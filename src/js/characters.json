@@ -1477,7 +1477,7 @@
         "Spaceboy": [
             { "name": "Melbert \"Mel\" Rickenbacker" },
             { "name": "Adrian Block", "faction": "150", "displayName": 0 },
-            { "name": "Pat" },
+            { "name": "[Deputy] Pat Downing", "faction": "Police" },
             { "name": "Casey Boyd", "nicknames": ["Caseboy", "L8PD"], "displayName": 0 }
         ],
         "Spekel": [
