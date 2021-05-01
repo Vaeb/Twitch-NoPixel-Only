@@ -1054,6 +1054,9 @@
             { "name": "Ari Tistu", "displayName": 0 },
             { "name": "[Deputy] Amber Gold", "faction": "Police", "displayName": 0 }
         ],
+        "MeMayoi": [
+            { "name": "Yoi Tsukita" }
+        ],
         "Mervin": [
             { "name": "Mervin Potts" }
         ],
