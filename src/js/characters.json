@@ -273,7 +273,7 @@
             { "name": "[Deputy] Isaac Richardson", "faction": "Police" }
         ],
         "CallMeKevin": [
-            { "name": "Grognak The Destroyer" }
+            { "name": "Grognak The Destroyer", "assume": "assumeOther" }
         ],
         "capsure": [
             { "name": "Dimitri Nekola", "faction": "Pegasus" }
