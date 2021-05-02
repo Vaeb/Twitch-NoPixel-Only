@@ -863,7 +863,7 @@
             { "name": "Cooch Cassidy", "faction": "Lost MC" }
         ],
         "KinkyHobo_": [
-            { "name": "[Lawyer /] Gill Schultz", "faction": "DoJ" }
+            { "name": "[Lawyer /] Gill Schultz", "faction": "DoJ", "displayName": 1 }
         ],
         "Kitboga": [
             { "name": "Edna Moose" },
