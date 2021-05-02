@@ -51,6 +51,9 @@
             { "name": "Mustafa Habibi" },
             { "name": "Fahad AlArabi", "faction": "DoC" }
         ],
+        "Abou_": [
+            { "name": "Modi Janta", "faction": "NBC" }
+        ],
         "Acaibear": [
             { "name": "[Officer] Emily Reinhart", "faction": "Police" },
             { "name": "Jolene Mushkin", "nicknames": ["Little Red"] }
@@ -360,7 +363,7 @@
             { "name": "Regina Bunny" }
         ],
         "Crystalst": [
-            { "name": "Four \"4T\" Tee", "displayName": 0 }
+            { "name": "Four \"4T\" Tee", "faction": "150", "displayName": 0 }
         ],
         "CurtisRyan": [
             { "name": "Curtis Swoleroid", "nicknames": ["\"Demon\" of Lean Street", "Curt"] },
@@ -545,6 +548,9 @@
             { "name": "Jacob \"Funny Man\" Storm" },
             { "name": "Arious \"Breezy\" Campbell" }
         ],
+        "FourMilli": [
+            { "name": "Brad Bett", "faction": "NBC" }
+        ],
         "frogbound": [
             { "name": "Edward Nygma" },
             { "name": "Alexander Egorov" }
@@ -707,7 +713,7 @@
             { "name": "Vincent" }
         ],
         "Jack": [
-            { "name": "Jack Cortair" }
+            { "name": "Jack Cortair", "faction": "NBC" }
         ],
         "jacobpibbtv": [
             { "name": "Jacob Pibb" }
@@ -836,7 +842,7 @@
             { "name": "Katt Vincent" }
         ],
         "kClient": [
-            { "name": "Daquan \"Peanut\" Dumas" }
+            { "name": "Daquan \"Peanut\" Dumas", "faction": "NBC" }
         ],
         "Keeno": [
             { "name": "Kyle Brovloski" }
@@ -884,7 +890,7 @@
             { "name": "Marta Volkov" }
         ],
         "Knotty": [
-            { "name": "Guy Jones", "displayName": 0 }
+            { "name": "Guy Jones", "faction":"NBC", "displayName": 0 }
         ],
         "Knut": [
             { "name": "Bjorn Eiriksson" }
@@ -1603,7 +1609,7 @@
             { "name": "Tyler Kwando", "displayName": 0 }
         ],
         "TheChief1114": [
-            { "name": "Fingle Dan", "displayName": 0, "assume": "assumeNpNoOther" }
+            { "name": "Fingle Dan", "faction":"150", "displayName": 0, "assume": "assumeNpNoOther" }
         ],
         "TheDondi": [
             { "name": "Arthur Hammond", "nicknames": ["The \"Doctor\""] },
@@ -1800,6 +1806,7 @@
         "hoa": "\\bhoa\\b|hogs\\s*of\\s*anarchy|home[\\s-]*owners[\\s-]*association",
         "doj": "\\bdoj\\b|department\\s*of\\s*justice|judge\\b(?![\\s]*me)|\\ba?\\.?d\\.?a\\b|lawyer|para[\\s-]*legal",
         "angels": "\\bangels?\\b",
+        "nbc": "\\bnbc\\b",
         "burgershot": "burger[\\s-]*shot|\\bburgers\\b",
         "development": "\\bdevelop|\\bdev\\b",
         "doc": "\\bdoc\\b|\\bcorrection",
@@ -1823,6 +1830,7 @@
         "doj": "#00a032",
         "150": "#a35231",
         "angels": "#ff9ff3",
+        "nbc": "#789500",
         "burgershot": "#E99062",
         "development": "#718093",
         "doc": "#0984e3",
@@ -1851,6 +1859,7 @@
         "doj": "#00a032",
         "150": "#a35231",
         "angels": "#e192d7",
+        "nbc": "#789500",
         "burgershot": "#c77c50",
         "development": "#718093",
         "doc": "#1080d6",
