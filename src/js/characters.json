@@ -1198,7 +1198,7 @@
             { "name": "[Lawyer /] Benjamin Crane", "faction": "DoJ" },
             { "name": "[Justice] Ray Montag", "faction": "DoJ" },
             { "name": "Busta Block", "faction": "150", "displayName": 0 },
-            { "name": "[Dispatch] Jeffrey Bundy", "faction": "Police" }
+            { "name": "[Deputy] Jeffrey Bundy", "faction": "Police" }
         ],
         "Octopimp": [
             { "name": "[Sorceror /] Chut McMillan", "faction": "LARPers", "nicknames": ["Chut The Magnificent", "Sorcerer"] }
