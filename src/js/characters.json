@@ -952,6 +952,9 @@
         "LeWolfy": [
             { "name": "[Deputy] Dante Wolf", "faction": "Police" }
         ],
+        "lilypichu": [
+            { "name": "Tulip Peach" }
+        ],
         "LINK_EZ": [
             { "name": "Linkle Jones", "displayName": 1}
         ],
