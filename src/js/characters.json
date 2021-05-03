@@ -29,7 +29,7 @@
         ],
         "AaronOnAir": [
             { "name": "[Officer] Dan Faily", "faction": "Police", "nicknames": ["485"] },
-            { "name": "Sal T. Block", "faction": "150", "displayName": 0 }
+            { "name": "Sal T. Block", "faction": "ASRR", "displayName": 0 }
         ],
         "abbay": [
             { "name": "Olivia Harvey" }
@@ -286,7 +286,7 @@
         ],
         "CathFawr": [
             { "name": "Summer Mersion", "faction": "GSF", "displayName": 0 },
-            { "name": "Natya Block", "faction": "150", "displayName": 0 },
+            { "name": "Natya Block", "faction": "ASRR", "displayName": 0 },
             { "name": "[Lawyer /] Shannon O'Banion", "faction": "DoJ", "displayName": 0 },
             { "name": "[Officer] Lydia Vale", "faction": "Police" }
         ],
@@ -363,7 +363,7 @@
             { "name": "Regina Bunny" }
         ],
         "Crystalst": [
-            { "name": "Four \"4T\" Tee", "faction": "150", "displayName": 0 }
+            { "name": "Four \"4T\" Tee", "faction": "ASRR", "displayName": 0 }
         ],
         "CurtisRyan": [
             { "name": "Curtis Swoleroid", "nicknames": ["\"Demon\" of Lean Street", "Curt"] },
@@ -531,7 +531,7 @@
         ],
         "Five0AnthO": [
             { "name": "[Trooper] Tony Andrews", "faction": "Police", "highCommand": true },
-            { "name": "Rhode Block", "faction": "150", "displayName": 0 }
+            { "name": "Rhode Block", "faction": "ASRR", "displayName": 0 }
         ],
         "Forlorn79": [
             { "name": "[EMS] Amoris Pax", "faction": "Medical" }
@@ -634,7 +634,7 @@
             { "name": "[Trooper] Olivia Copper", "faction": "Police" },
             { "name": "Emily Maw", "faction": "Harmony" },
             { "name": "Jenny Hawk", "displayName": 0 },
-            { "name": "Onya Block", "faction": "150", "displayName": 0 },
+            { "name": "Onya Block", "faction": "ASRR", "displayName": 0 },
             { "name": "Debbie Hopper", "displayName": 0 },
             { "name": "Griselda \"Zelda\" Harth", "faction": "HOA" },
             { "name": "Olga Sazkaljovich", "faction": "Pegasus", "nicknames": ["Olgaa", "Olgaaa", "Olgaaaa"] }
@@ -643,7 +643,7 @@
             { "name": "[Justice] Katya Zamalodchikova", "faction": "DoJ", "displayName": 1 },
             { "name": "[Deputy] Tracy Martell", "faction": "Police", "nicknames": ["Cop"] },
             { "name": "Jane Obama", "displayName": 0 },
-            { "name": "Rounda Block", "faction": "150", "displayName": 0 },
+            { "name": "Rounda Block", "faction": "ASRR", "displayName": 0 },
             { "name": "Kayden Dell'Anno" }
         ],
         "HonathanTV": [
@@ -768,7 +768,7 @@
         "Jonthebroski": [
             { "name": "Denzel Williams", "faction": "Cleanbois", "nicknames": ["The \"Cleaner\""] },
             { "name": "Dio Ivanov", "faction": "Russians" },
-            { "name": "Holden D. Block", "faction": "150", "displayName": 0 },
+            { "name": "Holden D. Block", "faction": "ASRR", "displayName": 0 },
             { "name": "[Officer] Johnny Divine", "faction": "Police", "displayName": 0 }
         ],
         "JoshOG": [
@@ -900,7 +900,7 @@
             { "name": "[Officer] Francis Francer", "faction": "Police", "displayName": 1 },
             { "name": "[Development /] Koil", "faction": "Development", "nicknames": ["Code"] },
             { "name": "Saint Jospeh", "nicknames": ["Jesus", "Joseph", "XUJIA", "EMC"], "displayName": 0 },
-            { "name": "Ray Ray", "faction": "150", "displayName": 0 },
+            { "name": "Ray Ray", "faction": "ASRR", "displayName": 0 },
             { "name": "Otto Delmar" }
         ],
         "Kongfue": [
@@ -1030,7 +1030,7 @@
         ],
         "mantistobagan": [
             { "name": "[Officer] Domenic Toretti", "faction": "Police" },
-            { "name": "Ike Block", "faction": "150", "displayName": 0 },
+            { "name": "Ike Block", "faction": "ASRR", "displayName": 0 },
             { "name": "[Lawyer /] Jerry Callow", "faction": "DoJ", "displayName": 1 },
             { "name": "Pepe Silvia" }
         ],
@@ -1115,7 +1115,7 @@
         "MOONMOON": [
             { "name": "[Deputy] Lenny Hawk", "faction": "Police", "displayName": 0, "assume": "assumeNp" },
             { "name": "[Shadowlord /] Bernice Caldershot", "faction": "LARPers" },
-            { "name": "Ro Block", "faction": "150", "displayName": 0 },
+            { "name": "Ro Block", "faction": "ASRR", "displayName": 0 },
             { "name": "Yung Dab", "nicknames": ["The \"Gnome\""] }
         ],
         "MrMoonsHouse": [
@@ -1203,7 +1203,7 @@
         "OccamsSabre": [
             { "name": "[Lawyer /] Benjamin Crane", "faction": "DoJ" },
             { "name": "[Justice] Ray Montag", "faction": "DoJ" },
-            { "name": "Busta Block", "faction": "150", "displayName": 0 },
+            { "name": "Busta Block", "faction": "ASRR", "displayName": 0 },
             { "name": "[Deputy] Jeffrey Bundy", "faction": "Police" }
         ],
         "Octopimp": [
@@ -1242,7 +1242,7 @@
             { "name": "[Deputy] Randy Wrangler", "faction": "Police", "nicknames": ["Wranglin"] },
             { "name": "Ricky Robins", "faction": "Cleanbois" },
             { "name": "Chase Clouter" },
-            { "name": "Mike Block", "faction": "150", "displayName": 0 },
+            { "name": "Mike Block", "faction": "ASRR", "displayName": 0 },
             { "name": "Jane Obama", "displayName": 0 }
         ],
         "PlasticLittle": [
@@ -1355,7 +1355,7 @@
         "s0upes": [
             { "name": "James \"Apples\" Apeller" },
             { "name": "[Officer] Silas Grimmer", "faction": "Police" },
-            { "name": "Ryder S. Block", "faction": "150", "displayName": 0 },
+            { "name": "Ryder S. Block", "faction": "ASRR", "displayName": 0 },
             { "name": "Ezekiel \"Zero\" Rogaine" }
         ],
         "Saiiren": [
@@ -1485,7 +1485,7 @@
         ],
         "Spaceboy": [
             { "name": "Melbert \"Mel\" Rickenbacker" },
-            { "name": "Adrian Block", "faction": "150", "displayName": 0 },
+            { "name": "Adrian Block", "faction": "ASRR", "displayName": 0 },
             { "name": "[Deputy] Pat Downing", "faction": "Police" },
             { "name": "Casey Boyd", "nicknames": ["Caseboy", "L8PD"], "displayName": 0 }
         ],
@@ -1609,7 +1609,7 @@
             { "name": "Tyler Kwando", "displayName": 0 }
         ],
         "TheChief1114": [
-            { "name": "Fingle Dan", "faction":"150", "displayName": 0, "assume": "assumeNpNoOther" }
+            { "name": "Fingle Dan", "faction":"ASRR", "displayName": 0, "assume": "assumeNpNoOther" }
         ],
         "TheDondi": [
             { "name": "Arthur Hammond", "nicknames": ["The \"Doctor\""] },
@@ -1693,7 +1693,7 @@
         ],
         "Vader": [
             { "name": "Eugene Zuckerberg", "faction": "Cleanbois", "nicknames": ["Old Man"] },
-            { "name": "Nacho Block", "faction": "150", "displayName": 0 },
+            { "name": "Nacho Block", "faction": "ASRR", "displayName": 0 },
             { "name": "Tuong Ru Kim" }
         ],
         "VADIKUS007": [
@@ -1828,7 +1828,7 @@
         "pegasus": "#A87C2D",
         "hoa": "#a6033a",
         "doj": "#00a032",
-        "150": "#a35231",
+        "ASRR": "#a35231",
         "angels": "#ff9ff3",
         "nbc": "#789500",
         "burgershot": "#E99062",
@@ -1857,7 +1857,7 @@
         "pegasus": "#A87C2D",
         "hoa": "#a6033a",
         "doj": "#00a032",
-        "150": "#a35231",
+        "ASRR": "#a35231",
         "angels": "#e192d7",
         "nbc": "#789500",
         "burgershot": "#c77c50",
