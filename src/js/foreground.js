@@ -1090,7 +1090,7 @@ const filterStreams = async () => {
 
         const optionRename = {
             hoa: 'Home Owners Association',
-            150: '150 Gang',
+            asrr: 'Alta Street Ruff Rydaz',
             doc: 'Department of Corrections',
             doj: 'Lawyers & Judges',
             ssb: 'Ballas',
