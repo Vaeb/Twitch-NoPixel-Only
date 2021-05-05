@@ -187,7 +187,7 @@
             { "name": "Barry Scott" }
         ],
         "BazzaGazza": [
-            { "name": "Barry Benson", "displayName": 0 }
+            { "name": "Barry Benson", "faction": "BBMC", "displayName": 0 }
         ],
         "BCBeastly": [
             { "name": "Herbert The Pervert" }
@@ -650,7 +650,7 @@
             { "name": "[Deputy] Honathan Yolo", "faction": "Police" }
         ],
         "Hossworth": [
-            { "name": "Chip Wheeler", "displayName": 0 }
+            { "name": "Chip Wheeler", "faction": "BBMC", "displayName": 0 }
         ],
         "Hotted89": [
             { "name": "[Deputy] Matthew Espinoz", "faction": "Police", "nicknames": ["Airspinoz", "Air 1 Andy"] },
@@ -1132,7 +1132,7 @@
             { "name": "Han Pandler" }
         ],
         "MsTeamKK": [
-            { "name": "Riley Carter" }
+            { "name": "Riley Carter", "faction": "BBMC" }
         ],
         "MurderCrumpet": [
             { "name": "Cindy Lou" }
@@ -1241,6 +1241,9 @@
         "OwenSeven": [
             { "name": "[Officer] Owen Svensen", "faction": "Police" }
         ],
+        "PapaChip": [
+            { "name": "Channing \"Chain\" Turner", "faction": "BBMC" }
+        ],
         "Pengwin": [
             { "name": "[Deputy] Jerry Perkins", "faction": "Police" },
             { "name": "Dustin \"Dark Shadow\" Manson" },
@@ -1253,6 +1256,9 @@
             { "name": "Chase Clouter" },
             { "name": "Mike Block", "faction": "ASRR", "displayName": 0 },
             { "name": "Jane Obama", "displayName": 0 }
+        ],
+        "Pez_Br0": [
+            { "name": "Pez Speedwagon", "faction": "BBMC" }
         ],
         "PlasticLittle": [
             { "name": "Parson \"Frosty\" Brown", "faction": "Lost MC" }
@@ -1740,7 +1746,7 @@
             { "name": "[Lawyer /] Lawrence Splainer", "faction": "DoJ", "displayName": 2 }
         ],
         "Whippy": [
-            { "name": "Irwin Dundee", "displayName": 2 },
+            { "name": "Irwin Dundee", "faction": "BBMC", "displayName": 2 },
             { "name": "[Officer] Crocodile \"Croc\" Steve", "faction": "Police", "nicknames": ["Cop"] },
             { "name": "James Tinklebottom" }
         ],
@@ -1840,6 +1846,7 @@
         "asrr": "#a35231",
         "angels": "#ff9ff3",
         "nbc": "#789500",
+        "bbmc": "#2250ff",
         "burgershot": "#E99062",
         "development": "#718093",
         "doc": "#0984e3",
@@ -1869,6 +1876,7 @@
         "asrr": "#a35231",
         "angels": "#e192d7",
         "nbc": "#789500",
+        "bbmc": "#2250ff",
         "burgershot": "#c77c50",
         "development": "#718093",
         "doc": "#1080d6",

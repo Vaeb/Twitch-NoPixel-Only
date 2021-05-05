@@ -81,7 +81,7 @@ const displayNameDefault = {
     mersions: 0,
 };
 
-// #00A032 #cd843f #b71540 #ff0074 #2250ff #8854d0 #789500
+// #00A032 #cd843f #b71540 #ff0074 #8854d0
 // fastlane: '#40739e',
 // mersions, koreans, ckr, aztecas
 
