@@ -137,7 +137,7 @@
             { "name": "Milton Pointdexter" }
         ],
         "Ash_on_LoL": [
-            { "name": "Ash Ketchup" }
+            { "name": "Ash Ketchup", "faction": "Burger Shot" }
         ],
         "Ashi": [
             { "name": "Fiona Stewart", "faction": "HOA", "nicknames": ["Fi-ho-na"] },
