@@ -255,6 +255,7 @@
             { "name": "Asmon Bronze", "displayName": 0, "nicknames": ["AsmonBronze", "Transmog"] },
             { "name": "Norman \"Norm\" Yoder" },
             { "name": "Sasuke Johnson" },
+            { "name": "Chi \"Chi-ku\" Ku" },
             { "name": "Plankton ?" },
             { "name": "Bruce \"The Dank Knight\" Strayne" },
             { "name": "Brocky Potage", "displayName": 1 },
@@ -1189,7 +1190,8 @@
         "Nmplol": [
             { "name": "Buddy Black" }
         ],
-        "NoElusion": [
+        "NoElusionz": [
+            { "name": "Bobby Schmiguel", "nicknames": ["Bobby Beats"] },
             { "name": "Bobby Schmegal" }
         ],
         "noKingu": [
