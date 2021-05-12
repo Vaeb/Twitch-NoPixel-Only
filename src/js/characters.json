@@ -286,6 +286,9 @@
         "Carter": [
             { "name": "Spencer Smith", "nicknames": ["Mormon"] }
         ],
+        "casek_": [
+            { "name": "Cesar Conchas", "faction": "Vagos", "displayName": 0 }
+        ],
         "CathFawr": [
             { "name": "Summer Mersion", "faction": "GSF", "displayName": 0 },
             { "name": "Natya Block", "faction": "ASRR", "displayName": 0 },
@@ -577,7 +580,7 @@
             { "name": "[Cleric /] Burt \"Gloryon\" Beans", "faction": "LARPers", "nicknames": ["Cleric"] }
         ],
         "GattisTV": [
-            { "name": "Carlos Guzman", "faction": "Vagos" }
+            { "name": "Carlos Guzman", "faction": "Vagos", "displayName": 0 }
         ],
         "Gavbin_": [
             { "name": "[Judge] Gavin Holliday", "faction": "DoJ" }
@@ -983,6 +986,9 @@
         "Loserfruit": [
             { "name": "[EMS] Lizzie Bien", "faction": "Medical" }
         ],
+        "loveANG3L": [
+            { "name": "Kendra Davis", "faction": "Vagos" }
+        ],
         "Lovinurstyle": [
             { "name": "Rose Edwards" },
             { "name": "Leah Strong" }
@@ -1036,6 +1042,9 @@
         ],
         "Maggna": [
             { "name": "[EMS] Mari Jones", "faction": "Medical", "nicknames": ["MJ"], "displayName": 3 }
+        ],
+        "malikouthere": [
+            { "name": "Tito Conchas", "faction": "Vagos" }
         ],
         "mantistobagan": [
             { "name": "[Officer] Domenic Toretti", "faction": "Police" },
@@ -1151,6 +1160,9 @@
             { "name": "Marvin Peanut", "nicknames": ["Marv"] },
             { "name": "[Lawyer /] Murphy Braun", "faction": "DoJ", "displayName": 0 }
         ],
+        "Myladyballs": [
+            { "name": "Veronica Garcia", "faction": "Vagos" }
+        ],
         "Mythematic": [
             { "name": "Mike Rosoftsam", "faction": "Cleanbois", "affiliate": true }
         ],
@@ -1160,7 +1172,7 @@
             { "name": "Rachel Parker" }
         ],
         "Natettvrp": [
-            { "name": "Carlitos Loco", "faction": "Vagos" }
+            { "name": "Carlos \"Carlitos\" Loco", "faction": "Vagos" }
         ],
         "Natsumiii": [
             { "name": "Natalie Sumi" }
@@ -1491,6 +1503,9 @@
         "Smaczny": [
             { "name": "Conrad Gross" }
         ],
+        "smo_och": [
+            { "name": "Mike Smoore", "faction": "Vagos", "displayName": 0 }
+        ],
         "SmokySloth": [
             { "name": "Bovice Wilkinson" },
             { "name": "Tayvadius \"Chef\" Jamarcus Livingston III", "faction": "GSF" }
@@ -1777,6 +1792,9 @@
         "WuPingNOTEggRoll": [
             { "name": "Wu \"Egg Roll\" Ping" }
         ],
+        "wvngie": [
+            { "name": "Le Wang", "faction": "Vagos", "displayName": 0 }
+        ],
         "xQcOW": [
             { "name": "Pierre \"PP\" Paul", "faction": "Police", "displayName": 0 },
             { "name": "Jean \"X\" Paul", "nicknames": ["Ghost Rider", "Rider"], "displayName": 0 },
@@ -1791,7 +1809,7 @@
         ],
         "xReklez": [
             { "name": "AJ", "faction": "SSB" },
-            { "name": "Chico", "faction": "Vagos" }
+            { "name": "Chico Guzman", "faction": "Vagos" }
         ],
         "YoinksOG": [
             { "name": "Doug Canada" }
@@ -1801,6 +1819,9 @@
         ],
         "Zaquelle": [
             { "name": "[Officer] Mackenzie Hayes", "faction": "Police", "assume": "assumeNp" }
+        ],
+        "ZayTyree": [
+            { "name": "Renato Ortiz", "faction": "Vagos", "displayName": 0 }
         ],
         "Zerkaa": [
             { "name": "Tommy Tate", "displayName": 0 }
