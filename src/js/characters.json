@@ -1208,7 +1208,8 @@
             { "name": "Chips Ahoy" }
         ],
         "Nottics": [
-            { "name": "Raul Rodriguez", "nicknames": ["Rauuulllll"] }
+            { "name": "Raymundo Ortiz", "faction": "Vagos", "nicknames": ["/\\br+ay/"] },
+            { "name": "Raul Rodriguez", "nicknames": ["/\\br+au+l/"] }
         ],
         "NovalokHD": [
             { "name": "[Officer] Ben Casanova", "faction": "Police" }
