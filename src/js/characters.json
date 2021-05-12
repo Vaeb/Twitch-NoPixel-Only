@@ -438,6 +438,10 @@
             { "name": "[Deputy] Rocko Colombo", "faction": "Police" },
             { "name": "Luther Caine", "faction": "HOA" }
         ],
+        "Dorken": [
+            { "name": "Valentina" },
+            { "name": "Nicholine Quinn" }
+        ],
         "Doug": [
             { "name": "Gazpacho Prince", "nicknames": ["Pachi", "Spachi"] },
             { "name": "William \"W\" Told", "nicknames": ["Lil Pump"] }
@@ -1663,10 +1667,6 @@
         ],
         "TinyStunt": [
             { "name": "[EMS] Bailey Jade", "faction": "Medical" }
-        ],
-        "TheDorken": [
-            { "name": "Valentina" },
-            { "name": "Nicholine Quinn" }
         ],
         "ToastRP": [
             { "name": "Paulie" }
