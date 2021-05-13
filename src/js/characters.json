@@ -1279,8 +1279,8 @@
             { "name": "Kenneth \"Ken-sama\" Foreman", "faction": "Burger Shot" }
         ],
         "PENTA": [
-            { "name": "Jordan Steele", "displayName": 0, "nicknames": ["\"Parking\" God", "Phoenix Messiah"] },
             { "name": "[Deputy] Randy Wrangler", "faction": "Police", "nicknames": ["Wranglin"] },
+            { "name": "Jordan Steele", "displayName": 0, "nicknames": ["\"Parking\" God", "Phoenix Messiah"] },
             { "name": "Ricky Robins", "faction": "Cleanbois" },
             { "name": "Chase Clouter" },
             { "name": "Mike Block", "faction": "ASRR", "displayName": 0 },
