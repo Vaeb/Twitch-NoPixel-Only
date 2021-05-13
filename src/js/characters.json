@@ -530,7 +530,7 @@
         ],
         "Farmhouse78": [
             { "name": "Jane Farmer" },
-            { "name": "Steven Hayes", "displayName": 0 }
+            { "name": "Steven Hayes", "faction": "Burger Shot", "displayName": 0 }
         ],
         "FeliciaDay": [
             { "name": "Cherryclarie Dinwittie", "nicknames": ["CherryClaire"], "displayName": 3 }
