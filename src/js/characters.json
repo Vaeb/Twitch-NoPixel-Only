@@ -153,6 +153,9 @@
             { "name": "Kermy Fulker", "faction": "HOA" },
             { "name": "[EMS] Boba Stone", "faction": "Medical" }
         ],
+        "AuriEllis": [
+            { "name": "Ursula Leichenberg", "faction": "News" }
+        ],
         "Aus24": [
             { "name": "Jordan Walker", "faction": "Harmony" },
             { "name": "[Officer] Jack Davenport", "faction": "Police" }
@@ -1470,7 +1473,7 @@
             { "name": "[Officer] Joel Garcia", "faction": "Police" }
         ],
         "SilentSentry": [
-            { "name": "Ron Otterman", "nicknames": ["/🎥/"], "displayName": 0 },
+            { "name": "Ron Otterman", "faction": "News", "nicknames": ["/🎥/"], "displayName": 0 },
             { "name": "Michael Michaels Jr.", "nicknames": ["MMJR"], "displayName": 0 },
             { "name": "Iroquois \"Snake\" Plisken", "displayName": 0 },
             { "name": "Ziggy Flint", "nicknames": ["/🌿/"], "displayName": 0 }
