@@ -1856,7 +1856,7 @@
         "marabunta": "\\bmarabunta",
         "hoa": "\\bhoa\\b|hogs\\s*of\\s*anarchy|home[\\s-]*owners[\\s-]*association",
         "doj": "\\bdoj\\b|department\\s*of\\s*justice|judge\\b(?![\\s]*me)|\\ba?\\.?d\\.?a\\b|lawyer|para[\\s-]*legal",
-        "asrr": "\\balta[\\s-]*street|\\bblock(?:\\b|[\\s-]*party)",
+        "asrr": "\\balta[\\s-]*street|\\bblock(?:\\b|[\\s-]*party|[\\s-]*athon)",
         "angels": "\\bangels?\\b",
         "nbc": "\\bnbc\\b",
         "burgershot": "burger[\\s-]*shot|\\bburgers\\b",
