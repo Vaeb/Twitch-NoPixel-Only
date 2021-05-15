@@ -1152,6 +1152,9 @@
             { "name": "Ro Block", "faction": "ASRR", "displayName": 0 },
             { "name": "Yung Dab", "nicknames": ["The \"Gnome\""] }
         ],
+        "mrborealislive": [
+            { "name": "Rudolph ?", "faction": "Burger Shot" }
+        ],
         "MrMoonsHouse": [
             { "name": "Freddy Price", "displayName": 0 }
         ],
