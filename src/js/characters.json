@@ -85,6 +85,9 @@
         "AidenNortha": [
             { "name": "[Deputy] Kevin Keyte", "faction": "Police", "displayName": 1 }
         ],
+        "aintitadam": [
+            { "name": "Scruffy Doodle", "faction": "Burger Shot" }
+        ],
         "Airborne": [
             { "name": "[Judge] Dennis LaBarre", "faction": "DoJ" },
             { "name": "Unity", "nicknames": ["Cat"] }
@@ -625,6 +628,9 @@
             { "name": "Igor Skovacic" },
             { "name": "RayRay" },
             { "name": "Maury Mersion", "faction": "Mersions" }
+        ],
+        "GutturalSteve": [
+            { "name": "Tomathy Steampipe", "faction": "Burger Shot" }
         ],
         "HARMSwahy": [
             { "name": "Blaine Burke", "faction": "Angels" }
