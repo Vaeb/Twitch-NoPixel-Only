@@ -105,6 +105,9 @@
         "Alisha": [
             { "name": "Alisha Wuornos" }
         ],
+        "AlyPlayNinja": [
+            { "name": "[Officer] Amelia Frost", "faction": "Police" }
+        ],
         "AndyMilonakis": [
             { "name": "Lil Erf", "displayName": 0 },
             { "name": "Carmen Amuso" }
@@ -1761,6 +1764,9 @@
         ],
         "VTechas": [
             { "name": "Daryl Dixon", "faction": "HOA" }
+        ],
+        "w00ter": [
+            { "name": "[Officer] Peter Rogers", "faction": "Police" }
         ],
         "Wayward": [
             { "name": "[Judge] Wayne Ardson", "faction": "DoJ" },
