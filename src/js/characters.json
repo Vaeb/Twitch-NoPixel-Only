@@ -419,7 +419,7 @@
             { "name": "Vladimir \"Vlad\" Ivanov", "faction": "Russians" }
         ],
         "Deansocool": [
-            { "name": "Dean Quincy", "assume": "assumeOther" }
+            { "name": "Dean Quincy", "displayName": 0, "assume": "assumeOther" }
         ],
         "Denior13": [
             { "name": "Keith \"Bulldog\" Dooger", "faction": "Lost MC" }
