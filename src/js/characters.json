@@ -1613,6 +1613,9 @@
         "Sykkuno": [
             { "name": "Yuno Sykk", "displayName": 1 }
         ],
+        "SynthHunter": [
+            { "name": "Hunter \"Wingman\" Skye", "faction": "ASRR" }
+        ],
         "Syraphic": [
             { "name": "Elena Marilyn Vega" },
             { "name": "Emilia Salvatore" }
