@@ -1777,7 +1777,7 @@
             { "name": "Daryl Dixon", "faction": "HOA" }
         ],
         "w00ter": [
-            { "name": "[Officer] Peter Rogers", "faction": "Police" }
+            { "name": "[Deputy] Peter Rogers", "faction": "Police" }
         ],
         "Wayward": [
             { "name": "[Judge] Wayne Ardson", "faction": "DoJ" },
