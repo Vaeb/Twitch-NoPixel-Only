@@ -1306,8 +1306,8 @@
             { "name": "[Deputy] Randy Wrangler", "faction": "Police", "nicknames": ["Wranglin"] },
             { "name": "Jordan Steele", "displayName": 0, "nicknames": ["\"Parking\" God", "Phoenix Messiah"] },
             { "name": "Ricky Robins", "faction": "Cleanbois" },
+            { "name": "Mike Block", "faction": "ASRR", "leader": true, "displayName": 0 },
             { "name": "Chase Clouter" },
-            { "name": "Mike Block", "faction": "ASRR", "displayName": 0 },
             { "name": "Jane Obama", "displayName": 0 }
         ],
         "Pez_Br0": [
