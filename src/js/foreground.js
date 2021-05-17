@@ -379,8 +379,8 @@ const filterStreams = async () => {
         elements.forEach((element) => {
             element.classList.add('npChecked');
             element = element.parentElement.parentElement.parentElement.parentElement;
-            const titleEl = element.getElementsByClassName('tw-ellipsis tw-font-size-5')[0];
-            const channelEl = element.querySelectorAll("a[data-a-target='preview-card-channel-link']")[0];
+            const titleEl = element.querySelector('h3');
+            const channelEl = element.querySelector("a[data-a-target='preview-card-channel-link']");
             let liveElDiv = element.getElementsByClassName('tw-channel-status-text-indicator')[0];
             const viewers = element.getElementsByClassName('tw-media-card-stat')[0].textContent;
 
@@ -697,13 +697,16 @@ const filterStreams = async () => {
                 console.log(`looking for ${englishWord}`);
 
                 const tagSearchDropdown = $('div.tag-search__scrollable-area:visible')[0];
+                // const searchResults = $('div[aria-label="Search Results"]:visible')[0];
                 const isVis1 = tagSearchDropdown != null;
                 const isReady1 = isVis1 && tagSearchDropdown.querySelector('div.tw-loading-spinner') == null;
 
                 // eslint-disable-next-line no-await-in-loop
                 englishTag = await waitForElement(() => {
-                    const englishXPath = `//div[contains(concat(" ", normalize-space(@class), " "), " tw-pd-x-1 tw-pd-y-05 ") and text()="${englishWord}"]`;
-                    return document.evaluate(englishXPath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                    const tagSearchDropdownNow = document.querySelector('div.tag-search__scrollable-area');
+                    if (!tagSearchDropdownNow) return null;
+                    const englishXPath = `descendant::div[text()="${englishWord}"] | descendant::p[text()="${englishWord}"]`;
+                    return document.evaluate(englishXPath, tagSearchDropdownNow, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
                 }, 1000);
 
                 const isVis2 = $('div.tag-search__scrollable-area:visible')[0] != null;
