@@ -228,7 +228,8 @@
             { "name": "Mickey S", "faction": "Chang Gang", "nicknames": ["Downbad"] }
         ],
         "bldrs": [
-            { "name": "Kaleb \"Kleb\" Rush", "faction": "HOA" }
+            { "name": "Kaleb \"Kleb\" Rush", "faction": "HOA" },
+            { "name": "[Officer] Ryan Wright", "faction": "Police" }
         ],
         "bLuE622": [
             { "name": "Boe Jangles", "faction": "Chang Gang", "affiliate": true }
@@ -283,7 +284,7 @@
         ],
         "bythybeard": [
             { "name": "Wade Willson", "faction": "Lost MC" },
-            { "name": "[Dispatch] Sexton Hardcastle", "faction": "Police", "displayName": 1 }
+            { "name": "[Officer] Sexton Hardcastle", "faction": "Police", "displayName": 1 }
         ],
         "CallMeGrub": [
             { "name": "[Deputy] Isaac Richardson", "faction": "Police" }
@@ -318,7 +319,8 @@
             { "name": "[EMS] Jack Preacher", "faction": "Medical" }
         ],
         "Chalupa_Pants": [
-            { "name": "Julio Thomas", "faction": "HOA" }
+            { "name": "Julio Thomas", "faction": "HOA" },
+            { "name": "[Deputy] Marco Holiday", "faction": "Police" }
         ],
         "Chap": [
             { "name": "Bryan Chapman", "displayName": 0 }
@@ -603,7 +605,8 @@
             { "name": "[Officer] Lance Malton", "faction": "Police" }
         ],
         "ggqf": [
-            { "name": "[Paladin /] Stagdancer", "faction": "LARPers", "nicknames": ["Gea"] }
+            { "name": "[Paladin /] Stagdancer", "faction": "LARPers", "nicknames": ["Gea"] },
+            { "name": "[Officer] Bennett Calhoun", "faction": "Police" }
         ],
         "goldelena": [
             { "name": "August Vakarian" }
@@ -1057,6 +1060,9 @@
         "Madmoiselle": [
             { "name": "[Therapist] Pixie Plum", "faction": "Medical" }
         ],
+        "Madoreline": [
+            { "name": "[Officer] Elizabeth Reed", "faction": "Police" }
+        ],
         "Maggna": [
             { "name": "[EMS] Mari Jones", "faction": "Medical", "nicknames": ["MJ"], "displayName": 3 }
         ],
@@ -1453,7 +1459,8 @@
             { "name": "Penny Farthing" }
         ],
         "Selvek": [
-            { "name": "Jeffrey Price", "displayName": 0 }
+            { "name": "Jeffrey Price", "displayName": 0 },
+            { "name": "[Officer] Jack Sawyer", "faction": "Police" }
         ],
         "SgtApollo": [
             { "name": "Salem Barghouthi" }
@@ -1725,7 +1732,7 @@
         ],
         "travpiper": [
             { "name": "Carlos \"Cheddar\" Sanchez", "faction": "HOA" },
-            { "name": "[Deputy] Willy Gunner", "faction": "Police" },
+            { "name": "[Deputy] William Gunner", "faction": "Police", "nicknames": ["Willy"] },
             { "name": "Warren Wallace" },
             { "name": "Charlie Colcord" },
             { "name": "Hazard" }
@@ -1758,6 +1765,7 @@
         "Vader": [
             { "name": "Eugene Zuckerberg", "faction": "Cleanbois", "nicknames": ["Old Man"] },
             { "name": "Nacho Block", "faction": "ASRR", "displayName": 0 },
+            { "name": "[Deputy] Rob Banks", "faction": "Police" },
             { "name": "Tuong Ru Kim" }
         ],
         "VADIKUS007": [
