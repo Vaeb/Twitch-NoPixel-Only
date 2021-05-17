@@ -1152,7 +1152,7 @@
             { "name": "[EMS] Janus Lee", "faction": "Medical" }
         ],
         "Moboking": [
-            { "name": "[Deputy] Ellis Pinzon", "faction": "Police", "nicknames": ["Ronaldo"] },
+            { "name": "[Park Ranger] Ellis Pinzon", "faction": "Police", "nicknames": ["Ronaldo"] },
             { "name": "Aleksander Bogorov", "faction": "Angels", "nicknames": ["Aleks"], "displayName": 3 },
             { "name": "Elijiah \"Middle E\" Parks", "faction": "SSB" }
         ],
@@ -1193,7 +1193,7 @@
             { "name": "Mike Rosoftsam", "faction": "Cleanbois", "affiliate": true }
         ],
         "Nakkida": [
-            { "name": "[Deputy] Tessa Lamb", "faction": "Police", "displayName": 1 },
+            { "name": "[Park Ranger] Tessa Lamb", "faction": "Police", "displayName": 1 },
             { "name": "Taylor \"Onyx\" White", "faction": "Police" },
             { "name": "Rachel Parker" }
         ],
