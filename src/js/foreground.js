@@ -77,7 +77,7 @@ const ASTATES = {
 const displayNameDefault = {
     police: 2,
     doj: 2,
-    150: 0,
+    asrr: 0,
     mersions: 0,
 };
 
