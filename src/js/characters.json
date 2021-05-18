@@ -162,6 +162,9 @@
         "AuriEllis": [
             { "name": "Ursula Leichenberg", "faction": "News" }
         ],
+        "aurvinR": [
+            { "name": "[ADA] John Doe", "faction": "DoJ" }
+        ],
         "Aus24": [
             { "name": "Jordan Walker", "faction": "Harmony" },
             { "name": "[Officer] Jack Davenport", "faction": "Police" }
