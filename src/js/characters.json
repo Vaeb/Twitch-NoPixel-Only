@@ -353,6 +353,9 @@
         "Chaseman7GG": [
             { "name": "Miguel Guerrero", "faction": "Vagos" }
         ],
+        "ChelbM": [
+            { "name": "Alan Kyles", "faction": "NBC", "displayName": 0 }
+        ],
         "ClassyPax": [
             { "name": "Madam Ming", "displayName": 0 },
             { "name": "[Dr.] Ethan Maw", "faction": "Medical", "displayName": 2 }
