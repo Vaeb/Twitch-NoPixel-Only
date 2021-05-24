@@ -149,7 +149,7 @@
             { "name": "Ash Ketchup", "faction": "Burger Shot" }
         ],
         "Ashi": [
-            { "name": "Fiona Stewart", "faction": "HOA", "nicknames": ["Fi-ho-na"] },
+            { "name": "Fiona Stewart", "nicknames": ["Fi-ho-na"] },
             { "name": "Annie May", "displayName": 0 }
         ],
         "ashlynn": [
