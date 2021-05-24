@@ -679,7 +679,7 @@
         ],
         "hobbittrash": [
             { "name": "[Justice] Katya Zamalodchikova", "faction": "DoJ", "displayName": 1 },
-            { "name": "[Deputy] Tracy Martell", "faction": "Police", "nicknames": ["Cop"] },
+            { "name": "[Officer] Tracy Martell", "faction": "Police", "nicknames": ["Cop"] },
             { "name": "Jane Obama", "displayName": 0 },
             { "name": "Rounda Block", "faction": "ASRR", "displayName": 0 },
             { "name": "Kayden Dell'Anno" }
