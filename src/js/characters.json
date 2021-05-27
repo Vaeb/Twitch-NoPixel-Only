@@ -1490,6 +1490,7 @@
             { "name": "[Deputy] Joey Keys", "faction": "Police" }
         ],
         "shiny": [
+            { "name": "Pebbles ?", "nicknames": ["Dog"] },
             { "name": "[Archdruid /] Clyde \"Meowfurryon\" Eastside", "faction": "LARPers", "nicknames": ["Druid", "Archdruid", "Malfurryon"] }
         ],
         "Shortyyguy": [
@@ -1590,7 +1591,7 @@
         ],
         "Ssaab": [
             { "name": "Al Saab", "faction": "HOA", "displayName": 2 },
-            { "name": "[Deputy] Sam Baas", "faction": "Police", "displayName": 2 }
+            { "name": "[Deputy] Sam Baas", "faction": "Police", "nicknames": ["Samir", "Baasem"], "displayName": 2 }
         ],
         "steamcharlie": [
             { "name": "[Deputy] Sydney Bearmont", "faction": "Police", "displayName": 1 }
