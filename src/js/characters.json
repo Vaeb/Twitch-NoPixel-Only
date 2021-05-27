@@ -196,8 +196,8 @@
             { "name": "[Officer] Tyme Reducer", "faction": "Police" }
         ],
         "BananaDuck": [
-            { "name": "Billy Sprinkle", "displayName": 0 }
-            { "name": "Jimmy Limbs" }
+            { "name": "Billy Sprinkle", "displayName": 0 },
+            { "name": "Jimmy Limbs", "displayName": 0 }
         ],
         "barryscottlive": [
             { "name": "Barry Scott" }
