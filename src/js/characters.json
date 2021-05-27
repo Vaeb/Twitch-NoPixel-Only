@@ -422,6 +422,9 @@
         "DanGheesling": [
             { "name": "Tanner Buttermaker", "displayName": 1 }
         ],
+        "DanHawk1ns": [
+            { "name": "Benny Gomez", "faction": "Burger Shot" }
+        ],
         "Darthbobo77": [
             { "name": "Rudi Rinsen", "faction": "Lost MC", "leader": true }
         ],
