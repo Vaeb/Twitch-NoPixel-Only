@@ -937,6 +937,9 @@
             { "name": "Ava Ridge", "nicknames": ["Silence", "/darkness/"] },
             { "name": "Marta Volkov" }
         ],
+        "KL33Si": [
+            { "name": "[Dr.] Emily Ducksworth", "faction": "Medical", "displayName": 0 }
+        ],
         "Knotty": [
             { "name": "Guy Jones", "faction":"NBC", "displayName": 0 }
         ],
