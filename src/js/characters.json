@@ -724,6 +724,9 @@
         "INFLUXPictures": [
             { "name": "Tony Venucci", "displayName": 0 }
         ],
+        "inix": [
+            { "name": "Mortimer Scottsfold", "nicknames": ["Yung Fierro"], "displayName": 3 }
+        ],
         "Intelleqt": [
             { "name": "Donovan \"DK\" King", "faction": "GSF" }
         ],
