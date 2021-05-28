@@ -1574,7 +1574,7 @@
             { "name": "Mike Smoore", "faction": "Vagos", "displayName": 0 }
         ],
         "SmokySloth": [
-            { "name": "Bovice Wilkinson" },
+            { "name": "Bovice Wilkinson", "faction": "Prison" },
             { "name": "Tayvadius \"Chef\" Jamarcus Livingston III", "faction": "GSF" }
         ],
         "sock22": [
