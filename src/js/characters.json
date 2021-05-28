@@ -571,6 +571,9 @@
             { "name": "[Trooper] Tony Andrews", "faction": "Police", "highCommand": true, "leader": true },
             { "name": "Rhode Block", "faction": "ASRR", "displayName": 0 }
         ],
+        "FloMcNasty_TV": [
+            { "name": "Richard Chiclets", "faction": "Burger Shot", "displayName": 0 }
+        ],
         "Forlorn79": [
             { "name": "[EMS] Amoris Pax", "faction": "Medical" }
         ],
