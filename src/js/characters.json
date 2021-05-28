@@ -1283,6 +1283,9 @@
         "Ntviiper": [
             { "name": "Kian Mercer", "faction": "HOA" }
         ],
+        "nxsiah": [
+            { "name": "Zelaya Fernando", "faction": "Prison", "nicknames": ["Z", "Laya"] }
+        ],
         "NymN": [
             { "name": "Frank Fritugo" }
         ],
