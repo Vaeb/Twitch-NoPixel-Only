@@ -1404,7 +1404,7 @@
             { "name": "[Trooper] AJ Hunter", "faction": "Police" }
         ],
         "Ray__C": [
-            { "name": "Raymond \"Ray\" Romanov", "faction": "Pegasus", "nicknames": ["Ray", "/\\brussia/"] }
+            { "name": "Raymond \"Ray\" Romanov", "faction": "Cleanbois", "nicknames": ["Ray", "/\\brussia/"] }
         ],
         "ray308win": [
             { "name": "[FIB Agent] Lyonel Winchester", "faction": "Police" }
@@ -1663,7 +1663,7 @@
             { "name": "Miguel Almerion" }
         ],
         "Sykkuno": [
-            { "name": "Yuno Sykk", "displayName": 1 }
+            { "name": "Yuno Sykk", "faction": "Cleanbois", "displayName": 1 }
         ],
         "SynthHunter": [
             { "name": "Hunter \"Wingman\" Skye", "faction": "ASRR" }
