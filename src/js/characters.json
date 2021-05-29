@@ -1174,7 +1174,7 @@
             { "name": "Ming Jingtai", "assume": "assumeOther" }
         ],
         "miniminter": [
-            { "name": "Peter Shufflebottom", "assume": "assumeOther" }
+            { "name": "Peter Shufflebottom" }
         ],
         "MinusFive": [
             { "name": "[Officer] Jason Bidwell", "faction": "Police" }
