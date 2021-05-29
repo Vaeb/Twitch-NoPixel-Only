@@ -469,7 +469,7 @@
             { "name": "Preston Landor" }
         ],
         "Dogbert": [
-            { "name": "[Deputy] Rocko Colombo", "faction": "Police" },
+            { "name": "[Deputy] Rocko Colombo", "faction": "Police", "nicknames": ["/\\bcol.mb./"] },
             { "name": "Luther Caine", "faction": "HOA" }
         ],
         "Dorken": [
