@@ -395,7 +395,8 @@
             { "name": "Regina Bunny" }
         ],
         "Crystalst": [
-            { "name": "Four \"4T\" Tee", "faction": "ASRR", "displayName": 0 }
+            { "name": "Four \"4T\" Tee", "faction": "ASRR", "displayName": 0 },
+            { "name": "Amie Rush"}
         ],
         "CurtisRyan": [
             { "name": "Curtis Swoleroid", "nicknames": ["\"Demon\" of Lean Street", "Curt"] },
