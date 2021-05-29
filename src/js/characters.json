@@ -775,7 +775,7 @@
         ],
         "Javaaaa": [
             { "name": "Lillia Claurel" },
-            { "name": "Joseph Yorinobu" }
+            { "name": "Joseph Yorinobu", "nicknames": ["Majima", "Goro"], "displayName": 3 }
         ],
         "JayAitch5": [
             { "name": "Lil Cap", "displayName": 0 }
