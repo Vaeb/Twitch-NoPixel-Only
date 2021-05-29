@@ -844,7 +844,7 @@
             { "name": "Reverend I.M. Voland", "faction": "Dark Web" }
         ],
         "Juggs": [
-            { "name": "Lenny Large", "faction": "Burger Shot", "displayName": 0 },
+            { "name": "Lenny Large", "faction": "Burger Shot", "nicknames": ["/\\blenny/"], "displayName": 0 },
             { "name": "Traevon Williams", "nicknames": ["The Barber"], "displayName": 3 }
         ],
         "JukeBoxEM": [
@@ -1350,7 +1350,8 @@
             { "name": "Peener Pogue" }
         ],
         "Pez_Br0": [
-            { "name": "Pez Speedwagon", "faction": "BBMC" }
+            { "name": "Pez Speedwagon", "faction": "BBMC" },
+            { "name": "Pezzy Pee" }
         ],
         "PlasticLittle": [
             { "name": "Parson \"Frosty\" Brown", "faction": "Lost MC" }
