@@ -774,8 +774,8 @@
             { "name": "Ryu Tenga" }
         ],
         "Javaaaa": [
-            { "name": "Lillia Claurel" },
-            { "name": "Joseph Yorinobu", "nicknames": ["Majima", "Goro"], "displayName": 3 }
+            { "name": "Joseph Yorinobu", "nicknames": ["Majima", "Goro"], "displayName": 3 },
+            { "name": "Lillia Claurel" }
         ],
         "JayAitch5": [
             { "name": "Lil Cap", "displayName": 0 }
