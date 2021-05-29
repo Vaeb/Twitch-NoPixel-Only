@@ -594,6 +594,9 @@
         "FourMilli": [
             { "name": "Brad Bett", "faction": "NBC" }
         ],
+        "FragZone": [
+            { "name": "Derek Bogart", "faction": "Condemned MC" }
+        ],
         "frogbound": [
             { "name": "Edward Nygma" },
             { "name": "Alexander Egorov" }
