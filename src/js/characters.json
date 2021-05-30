@@ -966,7 +966,7 @@
             { "name": "Karl \"KJ\" Johnny", "faction": "Vagos" }
         ],
         "KristoferYee": [
-            { "name": "Jay Que" }
+            { "name": "Jay Que", "displayName": 0 }
         ],
         "KuroKunoichi13": [
             { "name": "Natalia Omar" }
