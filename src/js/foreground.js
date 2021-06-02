@@ -325,7 +325,7 @@ const filterStreams = async () => {
         ),
     ];
 
-    const keepS = { news: true };
+    const keepS = { News: true };
     factions.forEach((faction) => {
         if (!npFactionsRegex[faction] && !['doc'].includes(faction)) {
             const fullFaction = fullFactionMap[faction];
