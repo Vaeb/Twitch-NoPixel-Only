@@ -163,7 +163,7 @@
             { "name": "[EMS] Boba Stone", "faction": "Medical" }
         ],
         "AuriEllis": [
-            { "name": "Ursula Leichenberg", "faction": "News" }
+            { "name": "Ursula Leichenberg", "faction": "News Media" }
         ],
         "aurvinR": [
             { "name": "[ADA] John Doe", "faction": "DoJ" }
@@ -1251,6 +1251,9 @@
         "netsirk": [
             { "name": "[EMS] Nettie Machete", "faction": "Medical" }
         ],
+        "neutreN": [
+            { "name": "Octane \"Hypergoof\" ?" }
+        ],
         "NeveRossa": [
             { "name": "Dawn Hearte", "faction": "Medical" }
         ],
@@ -1546,7 +1549,7 @@
             { "name": "[Officer] Joel Garcia", "faction": "Police" }
         ],
         "SilentSentry": [
-            { "name": "Ron Otterman", "faction": "News", "nicknames": ["/🎥/"], "displayName": 0 },
+            { "name": "Ron Otterman", "faction": "News Media", "nicknames": ["/🎥/"], "displayName": 0 },
             { "name": "Michael Michaels Jr.", "nicknames": ["MMJR"], "displayName": 0 },
             { "name": "Iroquois \"Snake\" Plisken", "displayName": 0 },
             { "name": "Ziggy Flint", "nicknames": ["/🌿/"], "displayName": 0 }

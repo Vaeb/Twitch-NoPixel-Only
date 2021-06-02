@@ -325,10 +325,11 @@ const filterStreams = async () => {
         ),
     ];
 
+    const keepS = { news: true };
     factions.forEach((faction) => {
         if (!npFactionsRegex[faction] && !['doc'].includes(faction)) {
             const fullFaction = fullFactionMap[faction];
-            let regStr = RegExp.escape(fullFaction[fullFaction.length - 1] === 's' ? fullFaction.slice(0, -1) : fullFaction).toLowerCase();
+            let regStr = RegExp.escape((fullFaction[fullFaction.length - 1] === 's' && !keepS[fullFaction]) ? fullFaction.slice(0, -1) : fullFaction).toLowerCase();
             if (regStr.length <= 3) regStr = `\\b${regStr}\\b`;
             npFactionsRegex[faction] = new RegExp(regStr, 'i');
         }
