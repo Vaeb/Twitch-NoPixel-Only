@@ -365,6 +365,9 @@
         "CoconutB": [
             { "name": "? ?" }
         ],
+        "CodeMiko": [
+            { "name": "Code Psyko", "displayName": 0 }
+        ],
         "ConfusedDevil": [
             { "name": "[Deputy] Travis Tribble", "faction": "Police" }
         ],
