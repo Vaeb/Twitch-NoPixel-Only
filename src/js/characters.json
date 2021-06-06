@@ -1339,6 +1339,9 @@
             { "name": "Ivy Poppins" },
             { "name": "Evee Poppins" }
         ],
+        "omie": [
+            { "name": "Marty Shanks", "faction": "Burger Shot", "assumeServer": "public" }
+        ],
         "OwenSeven": [
             { "name": "[Officer] Owen Svensen", "faction": "Police" }
         ],
