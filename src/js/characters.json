@@ -14,7 +14,7 @@
         { "name": "SSB WRLD", "reg": "\\bssb\\b|ssb[\\s:-]*(?:wo?rld|rp)|ssb\\s+(?:later|after)", "include": 0 },
         { "name": "FrenzyRP", "reg": "\\bfrenzy\\s*rp", "include": 0 },
         { "name": "Grizzley World", "reg": "grizzley[\\s\\-]*wo?rld", "include": 0 },
-        { "name": "", "reg": "\\bgta[\\s:-]*v?[\\s:-]*online|story[\\s\\-]*mode|\\bgta[\\s:-]*v?[\\s\\-]+story|grizzely\\s*rp|\\boc\\s*rp\\b|\\bybn\\b", "include": 0 }
+        { "name": "", "reg": "\\bgta[\\s:-]*v?[\\s:-]*online|chaos\\s*mod\\b|story[\\s\\-]*mode|\\bgta[\\s:-]*v?[\\s\\-]+story|grizzely\\s*rp|\\boc\\s*rp\\b|\\bybn\\b", "include": 0 }
     ],
     "npCharacters": {
         "0Reed": [
