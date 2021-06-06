@@ -51,6 +51,7 @@ let wasZero = false;
 let filterStreamFaction = 'allnopixel';
 
 let regNp;
+let regNpPublic;
 let regOthers;
 
 let npCharacters = {};
@@ -173,6 +174,7 @@ const filterStreams = async () => {
         minViewers, stopOnMin, intervalSeconds, regOthers, npCharacters, useColorsDark, useColorsLight,
     } = fetchResult);
     regNp = new RegExp(fetchResult.regNp, 'i');
+    regNpPublic = new RegExp(fetchResult.regNpPublic, 'i');
     regOthers.forEach((obj) => {
         obj.reg = new RegExp(obj.reg, 'i');
     });
@@ -489,6 +491,8 @@ const filterStreams = async () => {
                     element.style.visibility = null;
                 }
 
+                const onNpPublic = regNpPublic.test(title);
+
                 let nowCharacter;
                 let factionNames = [];
 
@@ -544,33 +548,47 @@ const filterStreams = async () => {
                 if (allowStream === false) {
                     filterState = FSTATES.remove;
                 } else {
+                    let channelElColor;
+                    let liveElDivBgColor;
+                    let liveElColor;
+                    let liveElText;
                     if (hasNowCharacter) {
                         const nowColor = useColors[nowCharacter.factionUse];
                         const nowColorDark = useColorsDark[nowCharacter.factionUse];
-                        channelEl.style.color = nowColor;
-                        liveElDiv.style.backgroundColor = nowColorDark;
-                        liveEl.style.color = useTextColor;
-                        liveEl.textContent = `${nowCharacter.leader ? '♛ ' : ''}${nowCharacter.displayName}`;
+                        channelElColor = nowColor;
+                        liveElDivBgColor = nowColorDark;
+                        liveElColor = useTextColor;
+                        liveElText = `${nowCharacter.leader ? '♛ ' : ''}${nowCharacter.displayName}`;
                     } else if (hasFactions) {
                         const nowColor = useColors[factionNames[0]] || useColors.independent;
                         const nowColorDark = useColorsDark[factionNames[0]] || useColorsDark.independent;
-                        channelEl.style.color = nowColor;
-                        liveElDiv.style.backgroundColor = nowColorDark;
-                        liveEl.style.color = useTextColor;
-                        liveEl.textContent = `< ${fullFactionMap[factionNames[0]] || factionNames[0]} >`;
+                        channelElColor = nowColor;
+                        liveElDivBgColor = nowColorDark;
+                        liveElColor = useTextColor;
+                        liveElText = `< ${fullFactionMap[factionNames[0]] || factionNames[0]} >`;
                     } else if (hasCharacters) {
                         const nowColor = useColors[characters[0].factionUse];
                         const nowColorDark = useColorsDark[characters[0].factionUse];
-                        channelEl.style.color = nowColor;
-                        liveElDiv.style.backgroundColor = nowColorDark;
-                        liveEl.style.color = useTextColor;
-                        liveEl.textContent = `? ${characters[0].displayName} ?`;
+                        channelElColor = nowColor;
+                        liveElDivBgColor = nowColorDark;
+                        liveElColor = useTextColor;
+                        liveElText = `? ${characters[0].displayName} ?`;
                     } else {
-                        channelEl.style.color = useColors.othernp;
-                        liveElDiv.style.backgroundColor = useColorsDark.othernp;
-                        liveEl.style.color = useTextColor;
                         liveEl.style.setProperty('text-transform', 'none', 'important');
-                        liveEl.textContent = `${serverName}`;
+                        channelElColor = useColors.othernp;
+                        liveElDivBgColor = useColorsDark.othernp;
+                        liveElColor = useTextColor;
+                        liveElText = `${serverName}`;
+                    }
+
+                    channelEl.style.color = channelElColor;
+                    liveElDiv.style.backgroundColor = liveElDivBgColor;
+                    liveEl.style.color = liveElColor;
+                    liveEl.textContent = liveElText;
+
+                    if (onNpPublic) {
+                        console.log('on public', channelName, `-webkit-linear-gradient(-60deg, ${liveElDivBgColor} 50%, ${useColors.publicnp} 50%)`);
+                        liveElDiv.style.backgroundImage = `-webkit-linear-gradient(-60deg, ${useColors.publicnp} 50%, ${liveElDivBgColor} 50%)`;
                     }
                 }
             }
