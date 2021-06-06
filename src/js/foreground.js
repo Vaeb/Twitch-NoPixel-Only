@@ -194,9 +194,10 @@ const filterStreams = async () => {
 
     console.log('Fetched data!');
 
-    let [tnoStatus, tnoEnglish, tnoOthers, tnoScrolling, tnoAllowAll] = await getStorage([
+    let [tnoStatus, tnoEnglish, tnoPublic, tnoOthers, tnoScrolling, tnoAllowAll] = await getStorage([
         ['tnoStatus', true],
         ['tnoEnglish', true],
+        ['tnoPublic', true],
         ['tnoOthers', false],
         ['tnoScrolling', false],
         ['tnoAllowAll', false],
@@ -363,7 +364,7 @@ const filterStreams = async () => {
 
         const useTextColor = '#000';
         // const useTextColor = isDark ? '#000' : '#f7f7f8';
-        const isMetaFaction = ['allnopixel', 'alltwitch'].includes(filterStreamFaction);
+        const isMetaFaction = ['allnopixel', 'alltwitch', 'public'].includes(filterStreamFaction);
         const useMinViewers = isMetaFaction ? minViewers : 3;
 
         const allElements = Array.from(document.getElementsByTagName('article'));
@@ -554,7 +555,7 @@ const filterStreams = async () => {
                 if (nowCharacter) assumeServer = nowCharacter.assumeServer;
                 const onNpPublic = assumeServer === 'whitelist' ? regNpPublic.test(title) : !regNpWhitelist.test(title);
 
-                if (allowStream === false) {
+                if (allowStream === false || (onNpPublic && filterStreamFaction !== 'public' && tnoPublic == false) || (!onNpPublic && filterStreamFaction === 'public')) {
                     filterState = FSTATES.remove;
                 } else {
                     let channelElColor;
@@ -795,6 +796,12 @@ const filterStreams = async () => {
                                 </span>
                             </div>
                             <div class="settings-option">
+                                <span class="settings-name">Include NoPixel public:</span>
+                                <span class="settings-value">
+                                    <input id="setting-public" type="checkbox" class="toggle" ${tnoPublic ? 'checked' : ''}>
+                                </span>
+                            </div>
+                            <div class="settings-option">
                                 <span class="settings-name">Include other roleplay servers:</span>
                                 <span class="settings-value">
                                     <input id="setting-others" type="checkbox" class="toggle" ${tnoOthers ? 'checked' : ''}>
@@ -838,6 +845,7 @@ const filterStreams = async () => {
                     const $settingStatus = $('#setting-status');
                     const $settingEnglish = $('#setting-english');
                     const $settingScrolling = $('#setting-scrolling');
+                    const $settingPublic = $('#setting-public');
                     const $settingOthers = $('#setting-others');
                     const $settingShowAll = $('#setting-show-all');
 
@@ -862,6 +870,13 @@ const filterStreams = async () => {
                         setStorage('tnoScrolling', newValue);
                         tnoScrolling = newValue;
                         console.log('Set scrolling-adjustments to:', newValue);
+                    });
+
+                    $settingPublic.change(function () {
+                        const newValue = this.checked;
+                        setStorage('tnoPublic', newValue);
+                        tnoPublic = newValue;
+                        console.log('Set include-public to:', newValue);
                     });
 
                     $settingOthers.change(function () {
@@ -1132,9 +1147,17 @@ const filterStreams = async () => {
             othernp: 'Unknown',
         };
 
+        let mainOptionName = 'All NoPixel (Default)';
+        if (tnoOthers) {
+            mainOptionName = 'All RP (Default)';
+        } else if (!tnoPublic) {
+            mainOptionName = 'All NoPixel-WL (Default)';
+        }
+
         const options = [
-            ['allnopixel', tnoOthers ? 'All RP (Default)' : 'All NoPixel (Default)'],
+            ['allnopixel', mainOptionName],
             ['alltwitch', 'All Twitch (No Filtering)'],
+            ['public', 'NoPixel Public'],
             ...Object.entries(fullFactionMap)
                 .filter(option => excludeFactions.includes(option[0]) === false)
                 .sort((a, b) => (optionSorting[a[0]] || (useColors[a[0]] && 1000) || 2000) - (optionSorting[b[0]] || (useColors[b[0]] && 1000) || 2000))
@@ -1143,6 +1166,7 @@ const filterStreams = async () => {
 
         useColors.allnopixel = '#FFF';
         useColors.alltwitch = '#FFF';
+        useColors.public = '#FFF';
 
         // $labelDiv.find('label').text('Filter streams');
         $labelDiv.remove();
@@ -1179,9 +1203,10 @@ const filterStreams = async () => {
             return false;
         }
 
-        [tnoStatus, tnoEnglish, tnoOthers, tnoScrolling, tnoAllowAll] = await getStorage([
+        [tnoStatus, tnoEnglish, tnoPublic, tnoOthers, tnoScrolling, tnoAllowAll] = await getStorage([
             ['tnoStatus', true],
             ['tnoEnglish', true],
+            ['tnoPublic', true],
             ['tnoOthers', false],
             ['tnoScrolling', false],
             ['tnoAllowAll', false],
