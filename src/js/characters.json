@@ -4,7 +4,7 @@
     "checkOther": true,
     "intervalSeconds": 0.7,
     "regNp": "(?<!not\\s)(?:no[\\s\\-_.]*pixel|\\bn[\\s\\-_.]*p\\b)(?![\\s\\-]+inspired)",
-    "regNpPublic": "(?:no[\\s\\-_.]*pixel|\\bn[\\s\\-_.]*p\\b)(?:[\\s\\-_.]*(?:rp|\\d+\\.?\\d*))?[\\W_]*pub\\w*\\b(?!\\W+(?:later|after))|\\bpub\\w*[\\W_]*(?:no[\\s\\-_.]*pixel|\\bn[\\s\\-_.]*p\\b)|\\bpub\\w*[\\W_]*(?:server|queue)|\\[pub\\w*\\]|!pub\\w*",
+    "regNpPublic": "(?:no[\\s\\-_.]*pixel|\\bn[\\s\\-_.]*p\\b)(?:[\\s\\-_.]*(?:rp|\\d+\\.?\\d*))?[\\W_]*pub\\w*\\b(?!\\W+(?:later|after))|\\bpub\\w*[\\W_]*(?:no[\\s\\-_.]*pixel|\\bn[\\s\\-_.]*p\\b)|\\bpub\\w*[\\W_]*(?:server|queue)|\\[pub\\w*\\]",
     "regOther": "the\\s*family|\\btf\\s?rp|family\\s*rp|twitchrp|\\bt\\W*rp|\\bnon[\\s\\-]*stop|\\bns\\s?rp",
     "regOthers": [
         { "name": "TheFamilyRP", "reg": "the\\s*family|\\btf\\s?rp|family\\s*rp", "include": 1 },
