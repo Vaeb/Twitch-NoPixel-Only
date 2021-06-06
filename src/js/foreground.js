@@ -589,6 +589,7 @@ const filterStreams = async () => {
                     if (onNpPublic) {
                         console.log('on public', channelName, `-webkit-linear-gradient(-60deg, ${liveElDivBgColor} 50%, ${useColors.publicnp} 50%)`);
                         liveElDiv.style.backgroundImage = `-webkit-linear-gradient(-60deg, ${useColors.publicnp} 50%, ${liveElDivBgColor} 50%)`;
+                        // liveElDiv.style.backgroundImage = `linear-gradient(to top left, ${liveElDivBgColor} 50%, ${useColors.publicnp} 50%)`;
                     }
                 }
             }
