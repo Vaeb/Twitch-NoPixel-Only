@@ -1992,6 +1992,7 @@
         "otherfaction": "#32ff7e",
         "independent": "#32ff7e",
         "othernp": "#ffffff",
+        "publicnp": "#81ecec",
         "other": "#81ecec"
     },
     "useColorsLight": {
@@ -2023,6 +2024,7 @@
         "otherfaction": "#12af7e",
         "independent": "#12af7e",
         "othernp": "#000000",
+        "publicnp": "#65b1b8",
         "other": "#65b1b8"
     }
 }
