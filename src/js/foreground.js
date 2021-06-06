@@ -52,6 +52,7 @@ let filterStreamFaction = 'allnopixel';
 
 let regNp;
 let regNpPublic;
+let regNpWhitelist;
 let regOthers;
 
 let npCharacters = {};
@@ -175,6 +176,7 @@ const filterStreams = async () => {
     } = fetchResult);
     regNp = new RegExp(fetchResult.regNp, 'i');
     regNpPublic = new RegExp(fetchResult.regNpPublic, 'i');
+    regNpWhitelist = new RegExp(fetchResult.regNpWhitelist, 'i');
     regOthers.forEach((obj) => {
         obj.reg = new RegExp(obj.reg, 'i');
     });
@@ -298,6 +300,9 @@ const filterStreams = async () => {
             }
 
             foundOthers[char.assume] = true;
+
+            if (!characters.assumeServer) characters.assumeServer = char.assumeServer || 'whitelist';
+            if (!char.assumeServer) char.assumeServer = characters.assumeServer;
         });
 
         if (foundOthers.assumeNp && foundOthers.assumeOther) {
@@ -491,13 +496,14 @@ const filterStreams = async () => {
                     element.style.visibility = null;
                 }
 
-                const onNpPublic = regNpPublic.test(title);
-
                 let nowCharacter;
                 let factionNames = [];
 
+                let assumeServer = 'whitelist';
+
                 if (characters && characters.length) {
                     let lowestPos = Infinity;
+                    assumeServer = characters.assumeServer;
                     for (const char of characters) {
                         const matchPos = titleParsed.indexOfRegex(char.nameReg);
                         if (matchPos > -1 && matchPos < lowestPos) {
@@ -544,6 +550,9 @@ const filterStreams = async () => {
                         allowStream = nowFaction === filterStreamFaction;
                     }
                 }
+
+                if (nowCharacter) assumeServer = nowCharacter.assumeServer;
+                const onNpPublic = assumeServer === 'whitelist' ? regNpPublic.test(title) : !regNpWhitelist.test(title);
 
                 if (allowStream === false) {
                     filterState = FSTATES.remove;
