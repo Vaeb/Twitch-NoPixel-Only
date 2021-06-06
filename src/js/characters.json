@@ -763,7 +763,8 @@
             { "name": "Tyrone \"Big T\" Thompson", "faction": "SSB" }
         ],
         "ItsSlikeR": [
-            { "name": "Abraham Mohammed", "assume": "assumeOther" }
+            { "name": "Abe Moe", "nicknames": ["Don", "Baldy", "Bald"], "displayName": 0 },
+            { "name": "Abraham Mohammed" }
         ],
         "JaboodyShow": [
             { "name": "Jerry Curl", "displayName": 0 },
@@ -1180,7 +1181,7 @@
             { "name": "William \"Bill Ding\" Ding", "nicknames": ["Bill"] }
         ],
         "Ming": [
-            { "name": "Ming Jingtai", "assume": "assumeOther" }
+            { "name": "Ming Jingtai", "assume": "assumeNp" }
         ],
         "miniminter": [
             { "name": "Peter Shufflebottom", "displayName": 0 }
