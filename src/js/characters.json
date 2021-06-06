@@ -1195,7 +1195,7 @@
             { "name": "[EMS] Janus Lee", "faction": "Medical" }
         ],
         "Moboking": [
-            { "name": "[Park Ranger] Ellis Pinzon", "faction": "Police", "nicknames": ["Ronaldo"] },
+            { "name": "[Ranger] Ellis Pinzon", "faction": "Police", "nicknames": ["Ronaldo"] },
             { "name": "Aleksander Bogorov", "faction": "Angels", "nicknames": ["Aleks"], "displayName": 3 },
             { "name": "Elijiah \"Middle E\" Parks", "faction": "SSB" }
         ],
@@ -1236,7 +1236,7 @@
             { "name": "Mike Rosoftsam", "faction": "Cleanbois", "affiliate": true }
         ],
         "Nakkida": [
-            { "name": "[Park Ranger] Tessa Lamb", "faction": "Police", "displayName": 1 },
+            { "name": "[Ranger] Tessa Lamb", "faction": "Police", "displayName": 1 },
             { "name": "Taylor \"Onyx\" White", "faction": "Police" },
             { "name": "Rachel Parker" }
         ],
@@ -1415,7 +1415,7 @@
         ],
         "Ramee": [
             { "name": "Ramee El-Rahman", "faction": "Chang Gang", "nicknames": ["The \"Warlord\"", "The \"Vulture\"", "SBS Patient-0"] },
-            { "name": "[Park Ranger] Conan Clarkson", "faction": "Police" }
+            { "name": "[Ranger] Conan Clarkson", "faction": "Police" }
         ],
         "Rasta": [
             { "name": "Dunn Robinson", "assume": "assumeNpNoOther" },
@@ -1936,7 +1936,7 @@
             { "name": "Tommy Tate", "displayName": 0 }
         ],
         "Ziggy": [
-            { "name": "[Park Ranger] Ziggy Buggs", "faction": "Police", "displayName": 1 },
+            { "name": "[Ranger] Ziggy Buggs", "faction": "Police", "displayName": 1 },
             { "name": "[Lawyer /] Norman Bones", "faction": "DoJ", "displayName": 0 }
         ],
         "zirnrp": [
