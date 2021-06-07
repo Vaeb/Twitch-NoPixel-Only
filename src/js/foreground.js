@@ -161,7 +161,7 @@ const filterStreams = async () => {
         headers: fetchHeaders,
     };
 
-    const myRequest = new Request('https://raw.githubusercontent.com/Vaeb/Twitch-NoPixel-Only/master/src/js/characters.json');
+    const myRequest = new Request('https://vaeb.io:3030/initial_data');
 
     let fetchResult = await fetch(myRequest);
     fetchResult = await fetchResult.json();
@@ -364,8 +364,9 @@ const filterStreams = async () => {
 
         const useTextColor = '#000';
         // const useTextColor = isDark ? '#000' : '#f7f7f8';
-        const isMetaFaction = ['allnopixel', 'alltwitch', 'public'].includes(filterStreamFaction);
-        const useMinViewers = isMetaFaction ? minViewers : 3;
+        const isMetaFaction = ['allnopixel', 'alltwitch'].includes(filterStreamFaction);
+        const isNpMetaFaction = ['allnopixel', 'alltwitch', 'othernp', 'public'].includes(filterStreamFaction);
+        const useMinViewers = isNpMetaFaction ? minViewers : 3;
 
         const allElements = Array.from(document.getElementsByTagName('article'));
         const elements = allElements.filter(element => !element.classList.contains('npChecked'));
@@ -535,10 +536,15 @@ const filterStreams = async () => {
                 const hasFactions = factionNames.length;
                 const hasCharacters = characters && characters.length;
 
+                if (nowCharacter) assumeServer = nowCharacter.assumeServer;
+                const onNpPublic = assumeServer === 'whitelist' ? regNpPublic.test(title) : !regNpWhitelist.test(title);
+
                 let allowStream = isMetaFaction;
                 if (allowStream === false) {
-                    if (filterStreamFaction === 'othernp') { // use conditions below
+                    if (filterStreamFaction === 'othernp') {
                         allowStream = !hasNowCharacter && !hasFactions && !hasCharacters;
+                    } else if (filterStreamFaction === 'public') {
+                        allowStream = onNpPublic;
                     } else {
                         let nowFaction;
                         if (hasNowCharacter) { // use condition below
@@ -552,10 +558,7 @@ const filterStreams = async () => {
                     }
                 }
 
-                if (nowCharacter) assumeServer = nowCharacter.assumeServer;
-                const onNpPublic = assumeServer === 'whitelist' ? regNpPublic.test(title) : !regNpWhitelist.test(title);
-
-                if (allowStream === false || (onNpPublic && filterStreamFaction !== 'public' && tnoPublic == false) || (!onNpPublic && filterStreamFaction === 'public')) {
+                if (allowStream === false || (onNpPublic && filterStreamFaction !== 'public' && tnoPublic == false)) {
                     filterState = FSTATES.remove;
                 } else {
                     let channelElColor;
