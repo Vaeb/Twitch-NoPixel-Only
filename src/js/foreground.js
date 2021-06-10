@@ -67,6 +67,7 @@ const FSTATES = {
     remove: 0,
     nopixel: 1,
     other: 2,
+    hide: 3,
 };
 
 const ASTATES = {
@@ -145,6 +146,8 @@ RegExp.escape = function (string) {
     return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 };
 
+const dateStr = () => new Date(+new Date() + 1000 * 60 * 60).toISOString().replace('T', ' ').replace(/\.\w+$/, '');
+
 let activateInterval;
 let stopInterval;
 
@@ -161,26 +164,51 @@ const filterStreams = async () => {
         headers: fetchHeaders,
     };
 
-    const myRequest = new Request('https://vaeb.io:3030/initial_data');
+    const dataRequest = new Request('http://localhost:3029/tno_data'); // API code is open-source: https://github.com/Vaeb/TNO-Backend
 
-    let fetchResult = await fetch(myRequest);
-    fetchResult = await fetchResult.json();
+    let dataResult = await fetch(dataRequest);
+    try {
+        dataResult = await dataResult.json();
+    } catch (err) {
+        console.error('Failed to fetch character data:');
+        throw new Error(err);
+    }
 
-    if (fetchResult == null || fetchResult.npCharacters == null) {
-        console.log('Failed to fetch character data:', fetchResult);
+    if (dataResult == null || dataResult.npCharacters == null) {
+        console.log('Failed to fetch character data (empty):', dataResult);
         return;
     }
 
+    const streamsRequest = new Request('http://localhost:3029/streams?searchNum=1000'); // API code is open-source: https://github.com/Vaeb/TNO-Backend
+
+    let streamsResult;
+    let allStreams;
+
+    fetch(streamsRequest).then(async (result) => {
+        streamsResult = await result.json();
+
+        if (streamsResult == null || streamsResult.length == 0) {
+            console.log('Failed to fetch streams data (empty):', streamsResult);
+        }
+
+        console.log('streamsResult', typeof streamsResult, streamsResult, streamsResult.length);
+
+        allStreams = streamsResult;
+    }).catch((err) => {
+        console.error('Failed to fetch streams data:');
+        console.error(err);
+    });
+
     ({
         minViewers, stopOnMin, intervalSeconds, regOthers, npCharacters, useColorsDark, useColorsLight,
-    } = fetchResult);
-    regNp = new RegExp(fetchResult.regNp, 'i');
-    regNpPublic = new RegExp(fetchResult.regNpPublic, 'i');
-    regNpWhitelist = new RegExp(fetchResult.regNpWhitelist, 'i');
+    } = dataResult);
+    regNp = new RegExp(dataResult.regNp, 'i');
+    regNpPublic = new RegExp(dataResult.regNpPublic, 'i');
+    regNpWhitelist = new RegExp(dataResult.regNpWhitelist, 'i');
     regOthers.forEach((obj) => {
         obj.reg = new RegExp(obj.reg, 'i');
     });
-    npFactionsRegex = objectMap(fetchResult.npFactionsRegex, regStr => new RegExp(regStr, 'i'));
+    npFactionsRegex = objectMap(dataResult.npFactionsRegex, regStr => new RegExp(regStr, 'i'));
 
     const bodyHexColor = getComputedStyle(document.body).getPropertyValue('--color-background-body');
     let isDark = true;
@@ -300,7 +328,7 @@ const filterStreams = async () => {
                 char.factionUse = 'independent';
             }
 
-            foundOthers[char.assume] = true;
+            if (char.assume !== undefined) foundOthers[char.assume] = true;
 
             if (!characters.assumeServer) characters.assumeServer = char.assumeServer || 'whitelist';
             if (!char.assumeServer) char.assumeServer = characters.assumeServer;
@@ -325,6 +353,8 @@ const filterStreams = async () => {
         }
     }
 
+    console.log(npCharacters);
+
     const factions = [
         ...new Set(
             Object.values(npCharacters)
@@ -332,6 +362,8 @@ const filterStreams = async () => {
                 .flat(1)
         ),
     ];
+
+    console.log(factions);
 
     const keepS = { News: true };
     factions.forEach((faction) => {
@@ -343,19 +375,40 @@ const filterStreams = async () => {
         }
     });
 
-    const npFactionsRegexEnt = Object.entries(npFactionsRegex);
+    console.log(npFactionsRegex);
+
+    const npFactionsRegexEntries = Object.entries(npFactionsRegex);
 
     let isDeleting = false;
     let minLoadedViewers = null;
     let minLoadedText = null;
 
+    // const resetFiltering = () => {
+    //     const elements = Array.from(document.getElementsByTagName('article')).filter(element => element.classList.contains('npChecked'));
+    //     console.log('resetting for', elements.length, 'elements');
+    //     elements.forEach((element) => {
+    //         element.classList.remove('npChecked');
+    //     });
+    // };
+
+    const getMainElFromArticle = el => el.parentElement.parentElement.parentElement.parentElement;
+
     const resetFiltering = () => {
+        const manualElements = Array.from(document.getElementsByTagName('article')).filter(element => element.classList.contains('npManual'));
+        console.log('removing', manualElements.length, 'manual elements');
+        for (const element of manualElements) {
+            getMainElFromArticle(element).remove();
+        }
+
         const elements = Array.from(document.getElementsByTagName('article')).filter(element => element.classList.contains('npChecked'));
         console.log('resetting for', elements.length, 'elements');
         elements.forEach((element) => {
             element.classList.remove('npChecked');
         });
     };
+
+    const metaFactions = ['allnopixel', 'alltwitch'];
+    const npMetaFactions = [...metaFactions, 'othernp', 'publicnp'];
 
     const deleteOthers = () => {
         if (onPage == false) return;
@@ -364,9 +417,9 @@ const filterStreams = async () => {
 
         const useTextColor = '#000';
         // const useTextColor = isDark ? '#000' : '#f7f7f8';
-        const isMetaFaction = ['allnopixel', 'alltwitch'].includes(filterStreamFaction);
-        const isNpMetaFaction = ['allnopixel', 'alltwitch', 'othernp', 'public'].includes(filterStreamFaction);
-        const useMinViewers = isNpMetaFaction ? minViewers : 3;
+        const isMetaFaction = metaFactions.includes(filterStreamFaction);
+        const isNpMetaFaction = npMetaFactions.includes(filterStreamFaction);
+        const minViewersUse = isNpMetaFaction ? minViewers : 3;
 
         const allElements = Array.from(document.getElementsByTagName('article'));
         const elements = allElements.filter(element => !element.classList.contains('npChecked'));
@@ -387,8 +440,9 @@ const filterStreams = async () => {
         // }
 
         elements.forEach((element) => {
+            const isManualStream = element.classList.contains('npManual');
             element.classList.add('npChecked');
-            element = element.parentElement.parentElement.parentElement.parentElement;
+            element = getMainElFromArticle(element);
             const titleEl = element.querySelector('h3');
             const channelEl = element.querySelector("a[data-a-target='preview-card-channel-link']");
             let liveElDiv = element.getElementsByClassName('tw-channel-status-text-indicator')[0];
@@ -396,7 +450,7 @@ const filterStreams = async () => {
 
             let viewersNum = parseFloat(viewers);
             if (viewers.includes('K viewer')) viewersNum *= 1000;
-            if (Number.isNaN(viewersNum)) viewersNum = minLoadedViewers != null ? minLoadedViewers : useMinViewers;
+            if (Number.isNaN(viewersNum)) viewersNum = minLoadedViewers != null ? minLoadedViewers : minViewersUse;
 
             if (minLoadedViewers == null || viewersNum < minLoadedViewers) {
                 minLoadedViewers = viewersNum;
@@ -445,30 +499,34 @@ const filterStreams = async () => {
 
             const nowFilterEnabled = filterEnabled && filterStreamFaction !== 'alltwitch';
 
-            let filterState; // remove, mark-np, mark-other
-            if (nowFilterEnabled) {
-                // If filtering streams is enabled
-                if ((tnoOthers && (onOtherIncluded || onMainOther || (npStreamer && onOther))) || (npStreamer && !mainsOther && !keepNp && onOther)) {
-                    // If is-including-others and streamer on another server, or it's an NP streamer playing another server
-                    filterState = FSTATES.other;
-                } else if (npStreamer && !onMainOther && !onOther) {
-                    // If NoPixel streamer that isn't on another server
-                    filterState = FSTATES.nopixel;
-                    serverName = 'NP';
-                } else {
-                    filterState = FSTATES.remove;
-                }
+            let streamState; // remove, mark-np, mark-other
+            if (isMetaFaction === false && isManualStream === false) {
+                streamState = FSTATES.hide;
             } else {
-                if (npStreamer && !onMainOther && !onOther) {
-                    // If NoPixel streamer that isn't on another server
-                    filterState = FSTATES.nopixel;
-                    serverName = 'NP';
+                if (nowFilterEnabled) {
+                    // If filtering streams is enabled
+                    if ((tnoOthers && (onOtherIncluded || onMainOther || (npStreamer && onOther))) || (npStreamer && !mainsOther && !keepNp && onOther)) {
+                        // If is-including-others and streamer on another server, or it's an NP streamer playing another server
+                        streamState = FSTATES.other;
+                    } else if (npStreamer && !onMainOther && !onOther) {
+                        // If NoPixel streamer that isn't on another server
+                        streamState = FSTATES.nopixel;
+                        serverName = 'NP';
+                    } else {
+                        streamState = FSTATES.remove;
+                    }
                 } else {
-                    filterState = FSTATES.other;
+                    if (npStreamer && !onMainOther && !onOther) {
+                        // If NoPixel streamer that isn't on another server
+                        streamState = FSTATES.nopixel;
+                        serverName = 'NP';
+                    } else {
+                        streamState = FSTATES.other;
+                    }
                 }
             }
 
-            if (filterState === FSTATES.other) {
+            if (streamState === FSTATES.other) {
                 // Other included RP servers
                 if (element.style.display === 'none') {
                     element.style.display = null;
@@ -480,7 +538,7 @@ const filterStreams = async () => {
 
                 const allowStream = isMetaFaction;
                 if (allowStream === false) {
-                    filterState = FSTATES.remove;
+                    streamState = FSTATES.remove;
                 } else {
                     channelEl.style.color = useColors.other;
                     liveElDiv.style.backgroundColor = useColorsDark.other;
@@ -488,7 +546,7 @@ const filterStreams = async () => {
                     liveEl.style.setProperty('text-transform', 'none', 'important');
                     liveEl.textContent = serverName.length > 0 ? `::${serverName}::` : '';
                 }
-            } else if (filterState === FSTATES.nopixel) {
+            } else if (streamState === FSTATES.nopixel) {
                 // NoPixel stream
                 if (element.style.display === 'none') {
                     element.style.display = null;
@@ -516,7 +574,7 @@ const filterStreams = async () => {
                 }
 
                 if (nowCharacter === undefined) {
-                    for (const [faction, regex] of npFactionsRegexEnt) {
+                    for (const [faction, regex] of npFactionsRegexEntries) {
                         const matchPos = title.indexOfRegex(regex);
                         if (matchPos > -1) {
                             const factionObj = { name: faction, index: matchPos, character: characters && characters.find(char => char.faction === faction) };
@@ -543,14 +601,14 @@ const filterStreams = async () => {
                 if (allowStream === false) {
                     if (filterStreamFaction === 'othernp') {
                         allowStream = !hasNowCharacter && !hasFactions && !hasCharacters;
-                    } else if (filterStreamFaction === 'public') {
+                    } else if (filterStreamFaction === 'publicnp') {
                         allowStream = onNpPublic;
                     } else {
                         let nowFaction;
                         if (hasNowCharacter) { // use condition below
                             nowFaction = nowCharacter.factionUse;
                         } else if (hasFactions) {
-                            nowFaction = useColors[factionNames[0]] ? factionNames[0] : 'independent';
+                            nowFaction = factionNames[0];
                         } else if (hasCharacters) {
                             nowFaction = characters[0].factionUse;
                         }
@@ -558,8 +616,8 @@ const filterStreams = async () => {
                     }
                 }
 
-                if (allowStream === false || (onNpPublic && filterStreamFaction !== 'public' && tnoPublic == false)) {
-                    filterState = FSTATES.remove;
+                if (allowStream === false || (onNpPublic && filterStreamFaction !== 'publicnp' && tnoPublic == false)) {
+                    streamState = FSTATES.remove;
                 } else {
                     let channelElColor;
                     let liveElDivBgColor;
@@ -607,12 +665,12 @@ const filterStreams = async () => {
                 }
             }
 
-            if (filterState === FSTATES.remove) {
+            if (streamState === FSTATES.remove || streamState === FSTATES.hide) {
                 // Remove stream
                 // liveEl.textContent = 'REMOVED';
                 // channelEl.style.color = '#ff0074';
 
-                if (viewersNum < useMinViewers) {
+                if (viewersNum < minViewersUse) {
                     if (isFirstRemove && keepDeleting) {
                         keepDeleting = false;
                         if (stopOnMin) {
@@ -626,6 +684,9 @@ const filterStreams = async () => {
                     element.style.visibility = 'hidden';
                     // const images = element.getElementsByClassName('tw-image');
                     // for (let j = 0; j < images.length; j++) images[j].src = '';
+                } else if (streamState === FSTATES.hide) {
+                    element.style.visibility = 'hidden';
+                    console.log('[TNO] Hid');
                 } else if (keepDeleting) {
                     // element.outerHTML = '';
                     // element.parentNode.removeChild(element);
@@ -633,6 +694,8 @@ const filterStreams = async () => {
                     console.log('[TNO] Deleted');
                 }
                 if (isFirstRemove) isFirstRemove = false;
+            } else {
+                console.log(`[${dateStr()}] Handled non-removed stream: ${channelName}`);
             }
         });
 
@@ -902,6 +965,45 @@ const filterStreams = async () => {
         });
     };
 
+    const numToTwitchViewers = (n) => {
+        if (n < 1000) return `${n}`;
+        return `${parseFloat((n / 1e3).toFixed(1))}K`;
+    };
+
+    const addFactionStreams = () => {
+        if (allStreams === undefined) {
+            console.log('Faction filter failed - Streams not fetched yet...');
+            return;
+        }
+
+        const propName = filterStreamFaction !== 'publicnp' ? 'faction' : 'tagFactionSecondary';
+
+        const factionStreams = allStreams.filter(streamData => streamData.faction === filterStreamFaction);
+        console.log('filtered streams:', factionStreams);
+
+        const baseEl = document.querySelector('[data-target="directory-first-item"]');
+
+        // Includes npManual, _ORDER_, _TITLE_, _VIEWERS_, _PFP_, callmekevin (casings)
+        // eslint-disable-next-line max-len
+        const baseHtml = '<div data-target="" style="order: _ORDER_;"><div class="sc-AxjAm kxIWao"><div><div class="sc-AxjAm StDqN"><article data-a-target="card-2" data-a-id="card-callmekevin" class="sc-AxjAm dBWNsP npManual"><div class="sc-AxjAm czqVsG"><div class="sc-AxjAm btYFcj"><div class="ScTextWrapper-sc-14f6evl-1 gboCPP"><div class="ScTextMargin-sc-14f6evl-2 gzxTSt"><div class="sc-AxjAm kJwHLD"><a lines="1" data-a-target="preview-card-title-link" class="ScCoreLink-udwpw5-0 cxXSPs InjectLayout-sc-588ddc-0 gDeqEh tw-link" href="/callmekevin"><div class="sc-AxjAm faFgjY"><h3 title="_TITLE_" class="sc-AxirZ dqHsmV">_TITLE_</h3></div></a></div></div><div class="ScTextMargin-sc-14f6evl-2 gzxTSt"><p class="sc-AxirZ bsqfBW"><a data-test-selector="ChannelLink" data-a-target="preview-card-channel-link" class="ScCoreLink-udwpw5-0 cxXSPs tw-link" href="/callmekevin/videos">CallMeKevin</a></p></div><div class="sc-AxjAm cKgtIZ"><div class="sc-AxjAm ipUaGy"><div class="InjectLayout-sc-588ddc-0 iqJfNY"><div class="InjectLayout-sc-588ddc-0 dDlfVZ"><button class="ScTag-xzp4i-0 evwLTh tw-tag" aria-label="English" data-a-target="English"><div class="ScTagContent-xzp4i-1 jAVAzd">English</div></button></div></div></div></div></div><div class="ScImageWrapper-sc-14f6evl-0 feabhV"><a data-a-target="card-2" data-a-id="card-callmekevin" data-test-selector="preview-card-avatar" class="ScCoreLink-udwpw5-0 FXIKh tw-link" href="/callmekevin/videos"><div class="ScAspectRatio-sc-1sw3lwy-1 jHRTdb tw-aspect"><div class="ScAspectSpacer-sc-1sw3lwy-0 gkBhyN"></div><figure aria-label="callmekevin" class="ScAvatar-sc-12nlgut-0 iULHNk tw-avatar"><img class="InjectLayout-sc-588ddc-0 iyfkau tw-image tw-image-avatar" alt="callmekevin" src="_PFP_"></figure></div></a></div></div></div><div class="sc-AxjAm kJBVIw"><div class="ScWrapper-uo2e2v-0 ggVqeg tw-hover-accent-effect"><div class="ScTransformWrapper-uo2e2v-1 ScCornerTop-uo2e2v-2 druxMB"></div><div class="ScTransformWrapper-uo2e2v-1 ScCornerBottom-uo2e2v-3 ipqJcY"></div><div class="ScTransformWrapper-uo2e2v-1 ScEdgeLeft-uo2e2v-4 ldnizW"></div><div class="ScTransformWrapper-uo2e2v-1 ScEdgeBottom-uo2e2v-5 iyfrlK"></div><div class="ScTransformWrapper-uo2e2v-1 eiQqOY"><a data-a-target="preview-card-image-link" class="ScCoreLink-udwpw5-0 FXIKh tw-link" href="/callmekevin"><div class="sc-AxjAm jpEGpg"><div class="sc-AxjAm hBZJQK"><div class="ScAspectRatio-sc-1sw3lwy-1 dNNaBC tw-aspect"><div class="ScAspectSpacer-sc-1sw3lwy-0 hhnnBG"></div><img alt="_TITLE_ - callmekevin" class="tw-image" src="https://static-cdn.jtvnw.net/previews-ttv/live_user_callmekevin-440x248.jpg"></div><div class="ScPositionOver-sc-1iiybo2-0 hahEKi tw-media-card-image__corners"><div class="sc-AxjAm eFyVLi"><div class="ScChannelStatusTextIndicator-sc-1f5ghgf-0 YoxeW tw-channel-status-text-indicator" font-size="font-size-6"><p class="sc-AxirZ gOlXkb">LIVE</p></div></div><div class="sc-AxjAm iVDSNS"><div class="ScMediaCardStatWrapper-sc-1ncw7wk-0 fdmpWH tw-media-card-stat"><p class="sc-AxirZ ktnnZK">_VIEWERS_ viewers</p></div></div></div></div></div></a></div></div></div></article></div></div></div></div>';
+
+        for (let i = 0; i < factionStreams.length; i++) {
+            const streamData = factionStreams[i];
+            const channelName = streamData.channelName;
+            const channelNameLower = channelName.toLowerCase();
+            const cloneHtml = baseHtml
+                .replace(
+                    new RegExp('callmekevin', 'gi'),
+                    match => (match.toLowerCase() === match ? channelNameLower : channelName)
+                )
+                .replace(/_ORDER_/g, '0')
+                .replace(/_TITLE_/g, streamData.title)
+                .replace(/_VIEWERS_/g, numToTwitchViewers(streamData.viewers))
+                .replace(/_PFP_/g, streamData.profileUrl);
+            baseEl.insertAdjacentHTML('beforebegin', cloneHtml);
+        }
+    };
+
     const activateSelect = (selectFirst = false) => {
         const elSelectCustom = document.getElementsByClassName('js-selectCustom')[0];
         // const elSelectCustomBox = elSelectCustom.children[0];
@@ -988,8 +1090,11 @@ const filterStreams = async () => {
 
             filterStreamFaction = value;
             elSelectCustomInput.value = '';
+            console.log('Updated selected!');
             inputHandler();
             resetFiltering();
+            // if (filterStreamFaction !== 'cleanbois') return;
+            addFactionStreams();
             startDeleting();
         };
 
@@ -1160,7 +1265,7 @@ const filterStreams = async () => {
         const options = [
             ['allnopixel', mainOptionName],
             ['alltwitch', 'All Twitch (No Filtering)'],
-            ['public', 'NoPixel Public'],
+            ['publicnp', 'NoPixel Public'],
             ...Object.entries(fullFactionMap)
                 .filter(option => excludeFactions.includes(option[0]) === false)
                 .sort((a, b) => (optionSorting[a[0]] || (useColors[a[0]] && 1000) || 2000) - (optionSorting[b[0]] || (useColors[b[0]] && 1000) || 2000))
@@ -1169,7 +1274,6 @@ const filterStreams = async () => {
 
         useColors.allnopixel = '#FFF';
         useColors.alltwitch = '#FFF';
-        useColors.public = '#FFF';
 
         // $labelDiv.find('label').text('Filter streams');
         $labelDiv.remove();

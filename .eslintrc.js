@@ -25,6 +25,7 @@ module.exports = {
         ],
         // "default-case": "off",
         eqeqeq: 'off',
+        'implicit-arrow-linebreak': 'off', // for prettier to handle
         'import/no-dynamic-require': 'off',
         indent: ['error', 4],
         'func-names': 'off',
@@ -53,6 +54,7 @@ module.exports = {
         'no-restricted-syntax': 'off',
         'no-underscore-dangle': 'off',
         'no-unused-vars': ['warn', { vars: 'all', args: 'after-used', ignoreRestSiblings: true }],
+        'no-useless-escape': 'off',
         'object-curly-newline': ['error', { minProperties: 7, multiline: true, consistent: true }],
         // 'prefer-destructuring': [
         //     'error',
