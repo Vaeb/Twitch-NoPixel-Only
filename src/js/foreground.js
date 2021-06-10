@@ -179,7 +179,7 @@ const filterStreams = async () => {
         return;
     }
 
-    const streamsRequest = new Request('https://vaeb.io:3030/streams?searchNum=1000'); // API code is open-source: https://github.com/Vaeb/TNO-Backend
+    const streamsRequest = new Request('https://vaeb.io:3030/streams?allowOthers=true'); // API code is open-source: https://github.com/Vaeb/TNO-Backend
 
     let streamsResult;
     let allStreams;
@@ -686,7 +686,6 @@ const filterStreams = async () => {
                     // for (let j = 0; j < images.length; j++) images[j].src = '';
                 } else if (streamState === FSTATES.hide) {
                     element.style.visibility = 'hidden';
-                    console.log('[TNO] Hid');
                 } else if (keepDeleting) {
                     // element.outerHTML = '';
                     // element.parentNode.removeChild(element);
@@ -978,7 +977,7 @@ const filterStreams = async () => {
 
         const propName = filterStreamFaction !== 'publicnp' ? 'faction' : 'tagFactionSecondary';
 
-        const factionStreams = allStreams.filter(streamData => streamData.faction === filterStreamFaction);
+        const factionStreams = allStreams.filter(streamData => streamData[propName] === filterStreamFaction);
         console.log('filtered streams:', factionStreams);
 
         const baseEl = document.querySelector('[data-target="directory-first-item"]');
