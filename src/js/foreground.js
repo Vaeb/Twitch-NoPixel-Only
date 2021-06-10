@@ -164,7 +164,7 @@ const filterStreams = async () => {
         headers: fetchHeaders,
     };
 
-    const dataRequest = new Request('http://vaeb.io:3030/tno_data'); // API code is open-source: https://github.com/Vaeb/TNO-Backend
+    const dataRequest = new Request('https://vaeb.io:3030/tno_data'); // API code is open-source: https://github.com/Vaeb/TNO-Backend
 
     let dataResult = await fetch(dataRequest);
     try {
@@ -179,7 +179,7 @@ const filterStreams = async () => {
         return;
     }
 
-    const streamsRequest = new Request('http://vaeb.io:3030/streams?searchNum=1000'); // API code is open-source: https://github.com/Vaeb/TNO-Backend
+    const streamsRequest = new Request('https://vaeb.io:3030/streams?searchNum=1000'); // API code is open-source: https://github.com/Vaeb/TNO-Backend
 
     let streamsResult;
     let allStreams;
