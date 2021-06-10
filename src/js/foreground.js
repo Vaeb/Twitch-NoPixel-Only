@@ -498,6 +498,7 @@ const filterStreams = async () => {
             const npStreamer = onNp || characters;
 
             const nowFilterEnabled = filterEnabled && filterStreamFaction !== 'alltwitch';
+            const tnoOthersNow = tnoOthers || filterStreamFaction === 'other';
 
             let streamState; // remove, mark-np, mark-other
             if (isMetaFaction === false && isManualStream === false) {
@@ -505,7 +506,7 @@ const filterStreams = async () => {
             } else {
                 if (nowFilterEnabled) {
                     // If filtering streams is enabled
-                    if ((tnoOthers && (onOtherIncluded || onMainOther || (npStreamer && onOther))) || (npStreamer && !mainsOther && !keepNp && onOther)) {
+                    if ((tnoOthersNow && (onOtherIncluded || onMainOther || (npStreamer && onOther))) || (npStreamer && !mainsOther && !keepNp && onOther)) {
                         // If is-including-others and streamer on another server, or it's an NP streamer playing another server
                         streamState = FSTATES.other;
                     } else if (npStreamer && !onMainOther && !onOther) {
@@ -536,7 +537,7 @@ const filterStreams = async () => {
                     element.style.visibility = null;
                 }
 
-                const allowStream = isMetaFaction;
+                const allowStream = isMetaFaction || filterStreamFaction === 'other';
                 if (allowStream === false) {
                     streamState = FSTATES.remove;
                 } else {
@@ -1265,6 +1266,7 @@ const filterStreams = async () => {
             ['allnopixel', mainOptionName],
             ['alltwitch', 'All Twitch (No Filtering)'],
             ['publicnp', 'NoPixel Public'],
+            ['other', 'Other Servers'],
             ...Object.entries(fullFactionMap)
                 .filter(option => excludeFactions.includes(option[0]) === false)
                 .sort((a, b) => (optionSorting[a[0]] || (useColors[a[0]] && 1000) || 2000) - (optionSorting[b[0]] || (useColors[b[0]] && 1000) || 2000))
