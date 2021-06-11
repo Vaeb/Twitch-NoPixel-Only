@@ -1245,7 +1245,7 @@ const filterStreams = async () => {
             .toArray()
             .map(el => $(el));
 
-        const excludeFactions = ['mechanic', 'harmony', 'quickfix', 'tunershop', 'marabunta', 'mersions'];
+        const excludeFactions = ['mechanic', 'harmony', 'quickfix', 'tunershop', 'marabunta', 'mersions', 'podcast'];
 
         const optionSorting = Object.assign(
             {},
@@ -1269,7 +1269,7 @@ const filterStreams = async () => {
                 'bbmc',
                 'angels',
             ].map((option, index) => ({ [option]: index + 1 })),
-            ...['burgershot', 'doc', 'development', 'podcast', 'othernp'].map((option, index) => ({ [option]: 1000 + index + 1 }))
+            ...['burgershot', 'doc', 'development'].map((option, index) => ({ [option]: 1000 + index + 1 }))
         );
 
         optionSorting.independent = 3555;
@@ -1305,6 +1305,8 @@ const filterStreams = async () => {
                 .filter(option => excludeFactions.includes(option[0]) === false)
                 .sort((a, b) => (optionSorting[a[0]] || (useColors[a[0]] && 1000) || 2000) - (optionSorting[b[0]] || (useColors[b[0]] && 1000) || 2000))
                 .map(option => [option[0], optionRename[option[0]] || option[1]]),
+            ['podcast', 'Podcast'],
+            ['othernp', 'Unknown'],
             ['other', 'Other Servers'],
         ];
 
