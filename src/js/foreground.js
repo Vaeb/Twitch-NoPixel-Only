@@ -565,16 +565,26 @@ const filterStreams = async () => {
                     element.style.visibility = null;
                 }
 
+                const hasCharacters = characters && characters.length;
                 let nowCharacter;
                 let factionNames = [];
 
                 let assumeServer = 'whitelist';
                 let onServer = 'whitelist';
 
-                if (characters && characters.length) {
+                if (hasCharacters) {
+                    ({ assumeServer } = characters);
+                }
+
+                if (assumeServer === 'whitelist') {
+                    onServer = regNpPublic.test(title) ? 'public' : 'whitelist';
+                } else {
+                    onServer = regNpWhitelist.test(title) ? 'whitelist' : 'public';
+                }
+
+                if (hasCharacters) {
                     let lowestPos = Infinity;
                     let maxResults = -1;
-                    assumeServer = characters.assumeServer;
                     for (const char of characters) {
                         const matchPositions = [...titleParsed.matchAll(char.nameReg)];
                         const numResults = matchPositions.length;
@@ -585,12 +595,6 @@ const filterStreams = async () => {
                             nowCharacter = char;
                         }
                     }
-                }
-
-                if (assumeServer === 'whitelist') {
-                    onServer = regNpPublic.test(title) ? 'public' : 'whitelist';
-                } else {
-                    onServer = regNpWhitelist.test(title) ? 'whitelist' : 'public';
                 }
 
                 if (nowCharacter === undefined) {
@@ -612,7 +616,6 @@ const filterStreams = async () => {
 
                 const hasNowCharacter = nowCharacter;
                 const hasFactions = factionNames.length;
-                const hasCharacters = characters && characters.length;
 
                 if (nowCharacter) {
                     assumeServer = nowCharacter.assumeServer;
