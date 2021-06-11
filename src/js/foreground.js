@@ -575,11 +575,6 @@ const filterStreams = async () => {
                     let lowestPos = Infinity;
                     let maxResults = -1;
                     assumeServer = characters.assumeServer;
-                    if (assumeServer === 'whitelist') {
-                        onServer = regNpPublic.test(title) ? 'public' : 'whitelist';
-                    } else {
-                        onServer = regNpWhitelist.test(title) ? 'whitelist' : 'public';
-                    }
                     for (const char of characters) {
                         const matchPositions = [...titleParsed.matchAll(char.nameReg)];
                         const numResults = matchPositions.length;
@@ -590,6 +585,12 @@ const filterStreams = async () => {
                             nowCharacter = char;
                         }
                     }
+                }
+
+                if (assumeServer === 'whitelist') {
+                    onServer = regNpPublic.test(title) ? 'public' : 'whitelist';
+                } else {
+                    onServer = regNpWhitelist.test(title) ? 'whitelist' : 'public';
                 }
 
                 if (nowCharacter === undefined) {
