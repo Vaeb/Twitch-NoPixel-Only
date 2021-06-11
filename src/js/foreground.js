@@ -802,7 +802,11 @@ const filterStreams = async () => {
                     const tagSearchDropdownNow = document.querySelector('div.tag-search__scrollable-area');
                     if (!tagSearchDropdownNow) return null;
                     const englishXPath = `descendant::div[text()="${englishWord}"] | descendant::p[text()="${englishWord}"]`;
-                    return document.evaluate(englishXPath, tagSearchDropdownNow, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                    const snapshots = document.evaluate(englishXPath, tagSearchDropdownNow, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+                    if (snapshots.snapshotLength < 2) return null;
+                    const item1 = snapshots.snapshotItem(0);
+                    if (!item1.title || item1.title === 'English') return item1;
+                    return snapshots.snapshotItem(1);
                 }, 1000);
 
                 const isVis2 = $('div.tag-search__scrollable-area:visible')[0] != null;
@@ -1221,22 +1225,26 @@ const filterStreams = async () => {
                 'changgang',
                 'police',
                 'doj',
-                'medical',
-                'larpers',
-                'pegasus',
-                'hoa',
                 'vagos',
                 'ssb',
                 'gsf',
+                'medical',
                 'lostmc',
+                'nbc',
+                'bsk',
+                'hoa',
+                'asrr',
+                'prison',
+                'larpers',
+                'pegasus',
+                'bbmc',
                 'angels',
-                'snakegang',
-                'russians',
             ].map((option, index) => ({ [option]: index + 1 })),
             ...[
                 'burgershot',
                 'doc',
                 'development',
+                'podcast',
                 'othernp',
             ].map((option, index) => ({ [option]: 1000 + index + 1 }))
         );
@@ -1246,10 +1254,14 @@ const filterStreams = async () => {
         const optionRename = {
             hoa: 'Home Owners Association',
             asrr: 'Alta Street Ruff Rydaz',
+            nbc: 'Natural Born Crackheads',
+            bsk: 'Brouge Street Kingz',
+            bbmc: 'Bondi Boys MC',
             doc: 'Department of Corrections',
             doj: 'Lawyers & Judges',
             ssb: 'Ballas',
             gsf: 'Grove Street Families',
+            larpers: 'The Guild',
             angels: 'The Angels',
             lunatix: 'Lunatix MC',
             othernp: 'Unknown',
@@ -1266,11 +1278,11 @@ const filterStreams = async () => {
             ['allnopixel', mainOptionName],
             ['alltwitch', 'All Twitch (No Filtering)'],
             ['publicnp', 'NoPixel Public'],
-            ['other', 'Other Servers'],
             ...Object.entries(fullFactionMap)
                 .filter(option => excludeFactions.includes(option[0]) === false)
                 .sort((a, b) => (optionSorting[a[0]] || (useColors[a[0]] && 1000) || 2000) - (optionSorting[b[0]] || (useColors[b[0]] && 1000) || 2000))
                 .map(option => [option[0], optionRename[option[0]] || option[1]]),
+            ['other', 'Other Servers'],
         ];
 
         useColors.allnopixel = '#FFF';
@@ -1282,7 +1294,7 @@ const filterStreams = async () => {
             <div class="select">
                 <div class="selectWrapper">
                     <div class="selectCustom js-selectCustom" aria-hidden="true">
-                        <div class="selectCustom-row">
+                        <div class="selectCustom-row${!isDark ? ' lightmodeScreen' : ''}">
                             <label class="selectCustom-label tooltip">
                                 Filter streams
                                 <span id="streamCount" class="tooltiptext tooltiptext2">...</span>
