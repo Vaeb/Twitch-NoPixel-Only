@@ -5,28 +5,29 @@
 
 console.log('[TNO] Loading Twitch NoPixel Only...');
 
-const getStorage = (keys, defaultVal = undefined) => new Promise((resolve) => {
-    let useKeys = keys;
-    if (Array.isArray(keys)) useKeys = keys.map(data => (Array.isArray(data) ? data[0] : data));
+const getStorage = (keys, defaultVal = undefined) =>
+    new Promise((resolve) => {
+        let useKeys = keys;
+        if (Array.isArray(keys)) useKeys = keys.map(data => (Array.isArray(data) ? data[0] : data));
 
-    chrome.storage.local.get(useKeys, (values) => {
-        let val;
-        if (typeof keys === 'string') {
-            val = values[keys];
-            if (val === undefined) val = defaultVal;
-        } else {
-            val = [];
-            for (let i = 0; i < keys.length; i++) {
-                const k = useKeys[i];
-                const kDefault = Array.isArray(keys[i]) ? keys[i][1] : undefined;
-                let v = values[k];
-                if (v === undefined) v = kDefault;
-                val.push(v);
+        chrome.storage.local.get(useKeys, (values) => {
+            let val;
+            if (typeof keys === 'string') {
+                val = values[keys];
+                if (val === undefined) val = defaultVal;
+            } else {
+                val = [];
+                for (let i = 0; i < keys.length; i++) {
+                    const k = useKeys[i];
+                    const kDefault = Array.isArray(keys[i]) ? keys[i][1] : undefined;
+                    let v = values[k];
+                    if (v === undefined) v = kDefault;
+                    val.push(v);
+                }
             }
-        }
-        resolve(val);
+            resolve(val);
+        });
     });
-});
 
 const setStorage = async (key, val) => chrome.storage.local.set({ [key]: val });
 
@@ -146,7 +147,11 @@ RegExp.escape = function (string) {
     return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 };
 
-const dateStr = () => new Date(+new Date() + 1000 * 60 * 60).toISOString().replace('T', ' ').replace(/\.\w+$/, '');
+const dateStr = () =>
+    new Date(+new Date() + 1000 * 60 * 60)
+        .toISOString()
+        .replace('T', ' ')
+        .replace(/\.\w+$/, '');
 
 let activateInterval;
 let stopInterval;
@@ -184,20 +189,22 @@ const filterStreams = async () => {
     let streamsResult;
     let allStreams;
 
-    fetch(streamsRequest).then(async (result) => {
-        streamsResult = await result.json();
+    fetch(streamsRequest)
+        .then(async (result) => {
+            streamsResult = await result.json();
 
-        if (streamsResult == null || streamsResult.length == 0) {
-            console.log('Failed to fetch streams data (empty):', streamsResult);
-        }
+            if (streamsResult == null || streamsResult.length == 0) {
+                console.log('Failed to fetch streams data (empty):', streamsResult);
+            }
 
-        console.log('streamsResult', typeof streamsResult, streamsResult, streamsResult.length);
+            console.log('streamsResult', typeof streamsResult, streamsResult, streamsResult.length);
 
-        allStreams = streamsResult;
-    }).catch((err) => {
-        console.error('Failed to fetch streams data:');
-        console.error(err);
-    });
+            allStreams = streamsResult;
+        })
+        .catch((err) => {
+            console.error('Failed to fetch streams data:');
+            console.error(err);
+        });
 
     ({
         minViewers, stopOnMin, intervalSeconds, regOthers, npCharacters, useColorsDark, useColorsLight,
@@ -320,7 +327,8 @@ const filterStreams = async () => {
             }
 
             nameRegAll.push(`\\b(?:${parsedNames.join('|')})\\b`);
-            char.nameReg = new RegExp(nameRegAll.join('|'), nameRegAll.length > 1 ? 'i' : undefined);
+            if (nameRegAll.length > 1) console.log('nameRegAll', nameRegAll);
+            char.nameReg = new RegExp(nameRegAll.join('|'), nameRegAll.length > 1 ? 'ig' : 'g');
 
             if (char.faction != null) {
                 char.factionUse = useColors[char.faction] !== undefined ? char.faction : 'otherfaction';
@@ -369,7 +377,7 @@ const filterStreams = async () => {
     factions.forEach((faction) => {
         if (!npFactionsRegex[faction] && !['doc'].includes(faction)) {
             const fullFaction = fullFactionMap[faction];
-            let regStr = RegExp.escape((fullFaction[fullFaction.length - 1] === 's' && !keepS[fullFaction]) ? fullFaction.slice(0, -1) : fullFaction).toLowerCase();
+            let regStr = RegExp.escape(fullFaction[fullFaction.length - 1] === 's' && !keepS[fullFaction] ? fullFaction.slice(0, -1) : fullFaction).toLowerCase();
             if (regStr.length <= 3) regStr = `\\b${regStr}\\b`;
             npFactionsRegex[faction] = new RegExp(regStr, 'i');
         }
@@ -561,14 +569,24 @@ const filterStreams = async () => {
                 let factionNames = [];
 
                 let assumeServer = 'whitelist';
+                let onServer = 'whitelist';
 
                 if (characters && characters.length) {
                     let lowestPos = Infinity;
+                    let maxResults = -1;
                     assumeServer = characters.assumeServer;
+                    if (assumeServer === 'whitelist') {
+                        onServer = regNpPublic.test(title) ? 'public' : 'whitelist';
+                    } else {
+                        onServer = regNpWhitelist.test(title) ? 'whitelist' : 'public';
+                    }
                     for (const char of characters) {
-                        const matchPos = titleParsed.indexOfRegex(char.nameReg);
-                        if (matchPos > -1 && matchPos < lowestPos) {
-                            lowestPos = matchPos;
+                        const matchPositions = [...titleParsed.matchAll(char.nameReg)];
+                        const numResults = matchPositions.length;
+                        const lowIndex = numResults ? matchPositions[0].index + (char.assumeServer !== onServer ? 1e4 : 0) : -1;
+                        if (lowIndex > -1 && (lowIndex < lowestPos || (lowIndex === lowestPos && numResults > maxResults))) {
+                            lowestPos = lowIndex;
+                            maxResults = numResults;
                             nowCharacter = char;
                         }
                     }
@@ -595,8 +613,16 @@ const filterStreams = async () => {
                 const hasFactions = factionNames.length;
                 const hasCharacters = characters && characters.length;
 
-                if (nowCharacter) assumeServer = nowCharacter.assumeServer;
-                const onNpPublic = assumeServer === 'whitelist' ? regNpPublic.test(title) : !regNpWhitelist.test(title);
+                if (nowCharacter) {
+                    assumeServer = nowCharacter.assumeServer;
+                    if (assumeServer === 'whitelist') {
+                        onServer = regNpPublic.test(title) ? 'public' : 'whitelist';
+                    } else {
+                        onServer = regNpWhitelist.test(title) ? 'whitelist' : 'public';
+                    }
+                }
+
+                const onNpPublic = onServer === 'public';
 
                 let allowStream = isMetaFaction;
                 if (allowStream === false) {
@@ -606,7 +632,8 @@ const filterStreams = async () => {
                         allowStream = onNpPublic;
                     } else {
                         let nowFaction;
-                        if (hasNowCharacter) { // use condition below
+                        if (hasNowCharacter) {
+                            // use condition below
                             nowFaction = nowCharacter.factionUse;
                         } else if (hasFactions) {
                             nowFaction = factionNames[0];
@@ -996,10 +1023,7 @@ const filterStreams = async () => {
             const channelName = streamData.channelName;
             const channelNameLower = channelName.toLowerCase();
             const cloneHtml = baseHtml
-                .replace(
-                    new RegExp('callmekevin', 'gi'),
-                    match => (match.toLowerCase() === match ? channelNameLower : channelName)
-                )
+                .replace(new RegExp('callmekevin', 'gi'), match => (match.toLowerCase() === match ? channelNameLower : channelName))
                 .replace(/_ORDER_/g, '0')
                 .replace(/_TITLE_/g, streamData.title)
                 .replace(/_VIEWERS_/g, numToTwitchViewers(streamData.viewers))
@@ -1116,7 +1140,8 @@ const filterStreams = async () => {
             }
 
             // press Enter or space -> select the option
-            if (e.keyCode === 13) { // space: 32
+            if (e.keyCode === 13) {
+                // space: 32
                 e.preventDefault();
 
                 const option = elSelectCustomOpts.children[optionHoveredIndex];
@@ -1240,13 +1265,7 @@ const filterStreams = async () => {
                 'bbmc',
                 'angels',
             ].map((option, index) => ({ [option]: index + 1 })),
-            ...[
-                'burgershot',
-                'doc',
-                'development',
-                'podcast',
-                'othernp',
-            ].map((option, index) => ({ [option]: 1000 + index + 1 }))
+            ...['burgershot', 'doc', 'development', 'podcast', 'othernp'].map((option, index) => ({ [option]: 1000 + index + 1 }))
         );
 
         optionSorting.independent = 3555;
@@ -1303,7 +1322,12 @@ const filterStreams = async () => {
                         </div>
                         <div class="selectCustom-options">
                             <input class="selectCustom-input" placeholder="Search..."></input>
-                            ${options.map(option => `<div style="color: ${useColors[option[0]] || useColors.independent}" class="selectCustom-option" data-value="${option[0]}">${option[1]}</div>`).join('')}
+                            ${options
+        .map(
+            option =>
+                `<div style="color: ${useColors[option[0]] || useColors.independent}" class="selectCustom-option" data-value="${option[0]}">${option[1]}</div>`
+        )
+        .join('')}
                         </div>
                     </div>
                 </div>
