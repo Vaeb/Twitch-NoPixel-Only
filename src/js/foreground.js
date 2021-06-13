@@ -836,7 +836,7 @@ const filterStreams = async () => {
                     const snapshots = document.evaluate(englishXPath, tagSearchDropdownNow, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
                     if (snapshots.snapshotLength < 2) return null;
                     const item1 = snapshots.snapshotItem(0);
-                    if (!item1.title || item1.title === 'English') return item1;
+                    if (!item1.title || item1.title === englishWord) return item1;
                     return snapshots.snapshotItem(1);
                 }, 1000);
 
