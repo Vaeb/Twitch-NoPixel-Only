@@ -570,11 +570,12 @@ const filterStreams = async () => {
                 let factionNames = [];
 
                 let assumeServer = 'whitelist';
-                let onServer = 'whitelist';
 
                 if (hasCharacters) {
                     ({ assumeServer } = characters);
                 }
+
+                let onServer = assumeServer;
 
                 if (assumeServer === 'whitelist') {
                     onServer = regNpPublic.test(title) ? 'public' : 'whitelist';
@@ -582,13 +583,15 @@ const filterStreams = async () => {
                     onServer = regNpWhitelist.test(title) ? 'whitelist' : 'public';
                 }
 
+                const onServerDetected = onServer !== assumeServer;
+
                 if (hasCharacters) {
                     let lowestPos = Infinity;
                     let maxResults = -1;
                     for (const char of characters) {
                         const matchPositions = [...titleParsed.matchAll(char.nameReg)];
                         const numResults = matchPositions.length;
-                        const lowIndex = numResults ? matchPositions[0].index + (char.assumeServer !== onServer ? 1e4 : 0) : -1;
+                        const lowIndex = numResults ? matchPositions[0].index + (onServerDetected && char.assumeServer !== onServer ? 1e4 : 0) : -1;
                         if (lowIndex > -1 && (lowIndex < lowestPos || (lowIndex === lowestPos && numResults > maxResults))) {
                             lowestPos = lowIndex;
                             maxResults = numResults;
