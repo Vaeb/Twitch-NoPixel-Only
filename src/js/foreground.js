@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 /*
  * Twitch NoPixel Only
  * Created by Vaeb
@@ -37,6 +38,8 @@ String.prototype.indexOfRegex = function (regex, startPos) {
 };
 
 const objectMap = (obj, fn) => Object.fromEntries(Object.entries(obj).map(([k, v], i) => [k, fn(v, k, i)]));
+
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 // Settings
 
@@ -171,12 +174,21 @@ const filterStreams = async () => {
 
     const dataRequest = new Request('https://vaeb.io:3030/tno_data'); // API code is open-source: https://github.com/Vaeb/TNO-Backend
 
-    let dataResult = await fetch(dataRequest);
-    try {
-        dataResult = await dataResult.json();
-    } catch (err) {
-        console.error('Failed to fetch character data:');
-        throw new Error(err);
+    let dataResult;
+    for (let i = 0; i <= 2; i++) {
+        try {
+            dataResult = await fetch(dataRequest);
+            dataResult = await dataResult.json();
+            break;
+        } catch (err) {
+            if (i < 2) {
+                console.log('Failed to fetch character data, retrying...');
+                await sleep(2000);
+            } else {
+                console.error('Failed to fetch character data:');
+                throw new Error(err);
+            }
+        }
     }
 
     if (dataResult == null || dataResult.npCharacters == null) {
