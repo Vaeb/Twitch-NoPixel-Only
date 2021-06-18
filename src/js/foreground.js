@@ -652,8 +652,14 @@ const filterStreams = async () => {
                     }
                 }
 
-                if (!nowCharacter && !hasFactions && hasCharacters && characters.assumeChar) {
-                    nowCharacter = characters.assumeChar;
+                let possibleCharacter = nowCharacter;
+                if (!nowCharacter && !hasFactions && hasCharacters) {
+                    if (characters.assumeChar) {
+                        nowCharacter = characters.assumeChar;
+                        possibleCharacter = nowCharacter;
+                    } else {
+                        possibleCharacter = characters[0];
+                    }
                 }
 
                 if (allowStream === false || (onNpPublic && filterStreamFaction !== 'publicnp' && tnoPublic == false)) {
@@ -677,13 +683,13 @@ const filterStreams = async () => {
                         liveElDivBgColor = nowColorDark;
                         liveElColor = useTextColor;
                         liveElText = `< ${fullFactionMap[factionNames[0]] || factionNames[0]} >`;
-                    } else if (hasCharacters) {
-                        const nowColor = useColors[characters[0].factionUse];
-                        const nowColorDark = useColorsDark[characters[0].factionUse];
+                    } else if (possibleCharacter) {
+                        const nowColor = useColors[possibleCharacter.factionUse];
+                        const nowColorDark = useColorsDark[possibleCharacter.factionUse];
                         channelElColor = nowColor;
                         liveElDivBgColor = nowColorDark;
                         liveElColor = useTextColor;
-                        liveElText = `? ${characters[0].displayName} ?`;
+                        liveElText = `? ${possibleCharacter.displayName} ?`;
                     } else {
                         liveEl.style.setProperty('text-transform', 'none', 'important');
                         channelElColor = useColors.othernp;
