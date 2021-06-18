@@ -340,6 +340,8 @@ const filterStreams = async () => {
 
             if (!characters.assumeServer) characters.assumeServer = char.assumeServer || 'whitelist';
             if (!char.assumeServer) char.assumeServer = characters.assumeServer;
+
+            if (char.assumeChar && !characters.assumeChar) characters.assumeChar = char;
         });
 
         if (foundOthers.assumeNp && foundOthers.assumeOther) {
@@ -617,7 +619,6 @@ const filterStreams = async () => {
                     }
                 }
 
-                const hasNowCharacter = nowCharacter;
                 const hasFactions = factionNames.length;
 
                 if (nowCharacter) {
@@ -634,12 +635,12 @@ const filterStreams = async () => {
                 let allowStream = isMetaFaction;
                 if (allowStream === false) {
                     if (filterStreamFaction === 'othernp') {
-                        allowStream = !hasNowCharacter && !hasFactions && !hasCharacters;
+                        allowStream = !nowCharacter && !hasFactions && !hasCharacters;
                     } else if (filterStreamFaction === 'publicnp') {
                         allowStream = onNpPublic;
                     } else {
                         let nowFaction;
-                        if (hasNowCharacter) {
+                        if (nowCharacter) {
                             // use condition below
                             nowFaction = nowCharacter.factionUse;
                         } else if (hasFactions) {
@@ -651,6 +652,10 @@ const filterStreams = async () => {
                     }
                 }
 
+                if (!nowCharacter && !hasFactions && hasCharacters && characters.assumeChar) {
+                    nowCharacter = characters.assumeChar;
+                }
+
                 if (allowStream === false || (onNpPublic && filterStreamFaction !== 'publicnp' && tnoPublic == false)) {
                     streamState = FSTATES.remove;
                 } else {
@@ -658,7 +663,7 @@ const filterStreams = async () => {
                     let liveElDivBgColor;
                     let liveElColor;
                     let liveElText;
-                    if (hasNowCharacter) {
+                    if (nowCharacter) {
                         const nowColor = useColors[nowCharacter.factionUse];
                         const nowColorDark = useColorsDark[nowCharacter.factionUse];
                         channelElColor = nowColor;
