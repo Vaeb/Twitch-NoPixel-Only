@@ -642,11 +642,11 @@ const filterStreams = async () => {
                         let nowFaction;
                         if (nowCharacter) {
                             // use condition below
-                            nowFaction = nowCharacter.factionUse;
+                            nowFaction = nowCharacter.faction;
                         } else if (hasFactions) {
                             nowFaction = factionNames[0];
                         } else if (hasCharacters) {
-                            nowFaction = characters[0].factionUse;
+                            nowFaction = characters[0].faction;
                         }
                         allowStream = nowFaction === filterStreamFaction;
                     }
