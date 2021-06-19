@@ -201,22 +201,26 @@ const filterStreams = async () => {
     let streamsResult;
     let allStreams;
 
-    fetch(streamsRequest)
-        .then(async (result) => {
-            streamsResult = await result.json();
+    const waitForAllStreams = new Promise((resolve, reject) => {
+        fetch(streamsRequest)
+            .then(async (result) => {
+                streamsResult = await result.json();
 
-            if (streamsResult == null || streamsResult.length == 0) {
-                console.log('Failed to fetch streams data (empty):', streamsResult);
-            }
+                if (streamsResult == null || streamsResult.length == 0) {
+                    console.log('Failed to fetch streams data (empty):', streamsResult);
+                }
 
-            console.log('streamsResult', typeof streamsResult, streamsResult, streamsResult.length);
+                console.log('streamsResult', typeof streamsResult, streamsResult, streamsResult.length);
 
-            allStreams = streamsResult;
-        })
-        .catch((err) => {
-            console.error('Failed to fetch streams data:');
-            console.error(err);
-        });
+                allStreams = streamsResult;
+                resolve(true);
+            })
+            .catch((err) => {
+                console.error('Failed to fetch streams data:');
+                console.error(err);
+                reject(err);
+            });
+    });
 
     ({
         minViewers, stopOnMin, intervalSeconds, regOthers, npCharacters, useColorsDark, useColorsLight,
@@ -1126,7 +1130,7 @@ const filterStreams = async () => {
             });
         };
 
-        const updateCustomSelectChecked = (value, text, isInit = false) => {
+        const updateCustomSelectChecked = async (value, text, isInit = false) => {
             const prevValue = optionChecked;
 
             const elPrevOption = elSelectCustomOpts.querySelector(`[data-value="${prevValue}"`);
@@ -1152,6 +1156,11 @@ const filterStreams = async () => {
             inputHandler();
             resetFiltering();
             // if (filterStreamFaction !== 'cleanbois') return;
+            console.log('FOUND allStreams:', allStreams);
+            if (allStreams === undefined) {
+                console.log('Waiting for streams data first...');
+                await waitForAllStreams;
+            }
             addFactionStreams();
             startDeleting();
         };
