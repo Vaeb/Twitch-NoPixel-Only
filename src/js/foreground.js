@@ -1293,6 +1293,7 @@ const filterStreams = async () => {
                 'ssb',
                 'gsf',
                 'medical',
+                'gulaggang',
                 'lostmc',
                 'nbc',
                 'bsk',
