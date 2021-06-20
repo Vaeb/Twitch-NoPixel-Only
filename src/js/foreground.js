@@ -4,7 +4,15 @@
  * Created by Vaeb
  */
 
-console.log('[TNO] Loading Twitch NoPixel Only...');
+const startDate = new Date();
+const tzOffset = (startDate.getHours() - startDate.getUTCHours()) * 1000 * 60 * 60;
+const dateStr = (date = new Date()) =>
+    new Date(+date + tzOffset)
+        .toISOString()
+        .replace('T', ' ')
+        .replace(/\.\w+$/, '');
+
+console.log(`[${dateStr()}] [TNO] Loading Twitch NoPixel Only...`);
 
 const getStorage = (keys, defaultVal = undefined) =>
     new Promise((resolve) => {
@@ -37,8 +45,6 @@ String.prototype.indexOfRegex = function (regex, startPos) {
     return indexOf >= 0 ? indexOf + (startPos || 0) : indexOf;
 };
 
-const objectMap = (obj, fn) => Object.fromEntries(Object.entries(obj).map(([k, v], i) => [k, fn(v, k, i)]));
-
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 // Settings
@@ -54,15 +60,6 @@ let interval;
 let wasZero = false;
 let filterStreamFaction = 'allnopixel';
 
-let regNp;
-let regNpPublic;
-let regNpWhitelist;
-let regOthers;
-
-let npCharacters = {};
-
-let npFactionsRegex = {};
-
 let useColors = {};
 let useColorsDark = {};
 let useColorsLight = {};
@@ -72,20 +69,6 @@ const FSTATES = {
     nopixel: 1,
     other: 2,
     hide: 3,
-};
-
-const ASTATES = {
-    assumeNpNoOther: -1,
-    assumeNp: 0,
-    assumeOther: 1,
-    someOther: 1.5,
-};
-
-const displayNameDefault = {
-    police: 2,
-    doj: 2,
-    asrr: 0,
-    mersions: 0,
 };
 
 // #00A032 #cd843f #b71540 #ff0074 #8854d0
@@ -144,94 +127,59 @@ const displayNameDefault = {
 //     misfits: '#FFF',
 // };
 
-const fullFactionMap = {};
-
 RegExp.escape = function (string) {
     return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 };
-
-const dateStr = () =>
-    new Date(+new Date() + 1000 * 60 * 60)
-        .toISOString()
-        .replace('T', ' ')
-        .replace(/\.\w+$/, '');
 
 let activateInterval;
 let stopInterval;
 
 const filterStreams = async () => {
-    console.log('Fetching recent character data');
+    console.log(`[${dateStr()}] Fetching NP stream data...`);
     const isDeveloper = typeof document.cookie === 'string' && document.cookie.includes('name=vaeben');
 
     const fetchHeaders = new Headers();
     fetchHeaders.append('pragma', 'no-cache');
     fetchHeaders.append('cache-control', 'no-cache');
 
-    const fetchInit = {
-        method: 'GET',
-        headers: fetchHeaders,
-    };
+    // https://vaeb.io:3030 | http://localhost:3029
+    const dataRequest = new Request('http://localhost:3029/live'); // API code is open-source: https://github.com/Vaeb/TNO-Backend
 
-    const dataRequest = new Request('https://vaeb.io:3030/tno_data'); // API code is open-source: https://github.com/Vaeb/TNO-Backend
-
-    let dataResult;
+    let live;
     for (let i = 0; i <= 2; i++) {
         try {
-            dataResult = await fetch(dataRequest);
-            dataResult = await dataResult.json();
+            const fetchResult = await fetch(dataRequest);
+            live = await fetchResult.json();
             break;
         } catch (err) {
             if (i < 2) {
-                console.log('Failed to fetch character data, retrying...');
+                console.log('Failed to fetch live data, retrying...');
                 await sleep(2000);
             } else {
-                console.error('Failed to fetch character data:');
+                console.error('Failed to fetch live data:');
                 throw new Error(err);
             }
         }
     }
 
-    if (dataResult == null || dataResult.npCharacters == null) {
-        console.log('Failed to fetch character data (empty):', dataResult);
+    if (live == null || live.streams == null || live.streams.length === 0) {
+        console.log('Failed to fetch live data (empty):', live);
         return;
     }
 
-    const streamsRequest = new Request('https://vaeb.io:3030/streams?allowOthers=true'); // API code is open-source: https://github.com/Vaeb/TNO-Backend
+    // let waitForFilterResolve;
+    // const waitForFilter = new Promise((resolve) => {
+    //     waitForFilterResolve = resolve;
+    // });
 
-    let streamsResult;
-    let allStreams;
-
-    const waitForAllStreams = new Promise((resolve, reject) => {
-        fetch(streamsRequest)
-            .then(async (result) => {
-                streamsResult = await result.json();
-
-                if (streamsResult == null || streamsResult.length == 0) {
-                    console.log('Failed to fetch streams data (empty):', streamsResult);
-                }
-
-                console.log('streamsResult', typeof streamsResult, streamsResult, streamsResult.length);
-
-                allStreams = streamsResult;
-                resolve(true);
-            })
-            .catch((err) => {
-                console.error('Failed to fetch streams data:');
-                console.error(err);
-                reject(err);
-            });
-    });
+    // const waitForFilterAndStreams = Promise.all([waitForFilter, waitForAllStreams]);
+    // waitForFilterAndStreams.then(() => {
+    //     console.log('filter and streams ready');
+    // });
 
     ({
-        minViewers, stopOnMin, intervalSeconds, regOthers, npCharacters, useColorsDark, useColorsLight,
-    } = dataResult);
-    regNp = new RegExp(dataResult.regNp, 'i');
-    regNpPublic = new RegExp(dataResult.regNpPublic, 'i');
-    regNpWhitelist = new RegExp(dataResult.regNpWhitelist, 'i');
-    regOthers.forEach((obj) => {
-        obj.reg = new RegExp(obj.reg, 'i');
-    });
-    npFactionsRegex = objectMap(dataResult.npFactionsRegex, regStr => new RegExp(regStr, 'i'));
+        minViewers, stopOnMin, intervalSeconds, useColorsDark, useColorsLight,
+    } = live);
 
     const bodyHexColor = getComputedStyle(document.body).getPropertyValue('--color-background-body');
     let isDark = true;
@@ -243,7 +191,8 @@ const filterStreams = async () => {
         useColors = useColorsDark;
     }
 
-    console.log('Fetched data!');
+    console.log(`[${dateStr()}] Fetched data!`);
+    console.log(live);
 
     let [tnoStatus, tnoEnglish, tnoPublic, tnoOthers, tnoScrolling, tnoAllowAll] = await getStorage([
         ['tnoStatus', true],
@@ -255,155 +204,8 @@ const filterStreams = async () => {
     ]);
     const filterEnabled = !isDeveloper || !tnoAllowAll; // Fail-safe incase extension accidentally gets published with tnoAllowAll enabled
 
-    for (const [streamer, characters] of Object.entries(npCharacters)) {
-        if (characters.length > 0) {
-            characters.push({ name: '<Permathon>', nicknames: ['Permathon', 'Perma?thon'] });
-        }
-
-        const foundOthers = {};
-
-        // eslint-disable-next-line no-loop-func
-        characters.forEach((char) => {
-            const names = char.name.split(/\s+/);
-            const nameRegAll = [];
-            const parsedNames = [];
-            const titles = [];
-            const realNames = [];
-            let knownName;
-            let currentName = null;
-            for (let i = 0; i < names.length; i++) {
-                const name = names[i];
-                let pushName;
-                if (currentName != null) {
-                    currentName.push(name);
-                    if (name.includes(']') || name.includes('"')) {
-                        pushName = currentName.join(' ');
-                        const type1 = pushName.includes('[');
-                        pushName = pushName.replace(/[\[\]"]/g, '');
-                        if (type1) {
-                            titles.push(pushName);
-                        } else {
-                            // had square
-                            knownName = pushName; // had quotes
-                        }
-                        currentName = null;
-                    }
-                } else if (name.includes('[') || name.includes('"')) {
-                    const type1 = name.includes('[');
-                    if ((type1 && name.includes(']')) || (!type1 && name.indexOf('"') !== name.lastIndexOf('"'))) {
-                        pushName = name.replace(/[\[\]"]/g, '');
-                        if (type1) {
-                            titles.push(pushName);
-                        } else {
-                            knownName = pushName;
-                        }
-                    } else {
-                        currentName = [name];
-                    }
-                } else {
-                    pushName = name.replace(/"/g, '');
-                    if (pushName !== name) knownName = pushName; // had quotes
-                    // realNames.push(pushName.replace(/([A-Z])\.\s*/g, '\1'));
-                    realNames.push(pushName.replace(/\./g, ''));
-                }
-                if (pushName) parsedNames.push(RegExp.escape(pushName.toLowerCase()));
-            }
-
-            if (char.nicknames) {
-                if (realNames.length === 1) realNames.push(realNames[0]);
-                if (char.displayName !== 0) realNames.push(...char.nicknames.filter(nck => typeof nck === 'string'));
-                char.nicknames.forEach((nck) => {
-                    if (nck[0] === '/' && nck[nck.length - 1] === '/') {
-                        nameRegAll.push(nck.substring(1, nck.length - 1));
-                    } else {
-                        const nicknameKeywords = [...nck.matchAll(/"([^"]+)"/g)].map(result => result[1]);
-                        if (nicknameKeywords.length > 0) {
-                            parsedNames.push(...nicknameKeywords.map(keyword => RegExp.escape(keyword.toLowerCase())));
-                        } else {
-                            parsedNames.push(RegExp.escape(nck.toLowerCase()));
-                        }
-                    }
-                });
-            }
-
-            const fullFaction = char.faction || 'Independent';
-            char.faction = fullFaction.toLowerCase().replace(' ', '');
-            if (!fullFactionMap[char.faction]) fullFactionMap[char.faction] = fullFaction;
-            if (char.displayName === undefined) char.displayName = displayNameDefault[char.faction] != null ? displayNameDefault[char.faction] : 1;
-            if (typeof char.displayName === 'number') {
-                const displayNum = char.displayName;
-                char.displayName = titles ? `${titles.join(' ')} ` : '';
-                if (knownName !== undefined) {
-                    char.displayName += knownName;
-                } else if (displayNum === 0) {
-                    char.displayName += realNames.join(' ');
-                } else {
-                    char.displayName += realNames[displayNum - 1] || realNames[0];
-                }
-            }
-
-            nameRegAll.push(`\\b(?:${parsedNames.join('|')})\\b`);
-            if (nameRegAll.length > 1) console.log('nameRegAll', nameRegAll);
-            char.nameReg = new RegExp(nameRegAll.join('|'), nameRegAll.length > 1 ? 'ig' : 'g');
-
-            if (char.faction != null) {
-                char.factionUse = useColors[char.faction] !== undefined ? char.faction : 'otherfaction';
-            } else {
-                char.factionUse = 'independent';
-            }
-
-            if (char.assume !== undefined) foundOthers[char.assume] = true;
-
-            if (!characters.assumeServer) characters.assumeServer = char.assumeServer || 'whitelist';
-            if (!char.assumeServer) char.assumeServer = characters.assumeServer;
-
-            if (char.assumeChar && !characters.assumeChar) characters.assumeChar = char;
-        });
-
-        if (foundOthers.assumeNp && foundOthers.assumeOther) {
-            characters.assumeOther = ASTATES.someOther;
-        } else if (foundOthers.assumeOther) {
-            characters.assumeOther = ASTATES.assumeOther;
-        } else if (foundOthers.assumeNpNoOther) {
-            characters.assumeOther = ASTATES.assumeNpNoOther;
-        } else if (foundOthers.assumeNp) {
-            characters.assumeOther = ASTATES.assumeNp;
-        } else {
-            characters.assumeOther = ASTATES.assumeNp;
-        }
-
-        const streamerLower = streamer.toLowerCase();
-        if (streamer !== streamerLower) {
-            npCharacters[streamerLower] = characters;
-            delete npCharacters[streamer];
-        }
-    }
-
-    console.log(npCharacters);
-
-    const factions = [
-        ...new Set(
-            Object.values(npCharacters)
-                .map(characters => characters.map(char => char.faction))
-                .flat(1)
-        ),
-    ];
-
-    console.log(factions);
-
-    const keepS = { News: true };
-    factions.forEach((faction) => {
-        if (!npFactionsRegex[faction] && !['doc'].includes(faction)) {
-            const fullFaction = fullFactionMap[faction];
-            let regStr = RegExp.escape(fullFaction[fullFaction.length - 1] === 's' && !keepS[fullFaction] ? fullFaction.slice(0, -1) : fullFaction).toLowerCase();
-            if (regStr.length <= 3) regStr = `\\b${regStr}\\b`;
-            npFactionsRegex[faction] = new RegExp(regStr, 'i');
-        }
-    });
-
-    console.log(npFactionsRegex);
-
-    const npFactionsRegexEntries = Object.entries(npFactionsRegex);
+    const streamsMap = Object.assign({}, ...live.streams.map(stream => ({ [stream.channelName.toLowerCase()]: stream })));
+    console.log(streamsMap);
 
     let isDeleting = false;
     let minLoadedViewers = null;
@@ -492,39 +294,11 @@ const filterStreams = async () => {
             }
 
             const channelName = channelEl.textContent.toLowerCase();
-            const title = titleEl.textContent;
-            const titleParsed = title.toLowerCase().replace(/\./g, ' '); // ??
-
-            let onOther = false;
-            let onOtherPos = -1;
-            let onOtherIncluded = false;
-            let serverName = '';
-            for (let i = 0; i < regOthers.length; i++) {
-                const regOther = regOthers[i];
-                onOtherPos = title.indexOfRegex(regOther.reg);
-                if (onOtherPos > -1) {
-                    onOther = true;
-                    serverName = regOther.name;
-                    if (regOther.include) onOtherIncluded = true;
-                    break;
-                }
-            }
-
-            let onNp = false;
-            const onNpPos = title.indexOfRegex(regNp);
-            if (onNpPos > -1 && (onOther === false || onNpPos < onOtherPos)) {
-                onNp = true;
-                onOther = false;
-                onOtherIncluded = false;
-            }
-            const characters = npCharacters[channelName];
-            const mainsOther = characters && characters.assumeOther == ASTATES.assumeOther;
-            const keepNp = characters && characters.assumeOther == ASTATES.assumeNpNoOther;
-            const onMainOther = !onNp && mainsOther;
-            const npStreamer = onNp || characters;
+            const stream = streamsMap[channelName];
 
             const nowFilterEnabled = filterEnabled && filterStreamFaction !== 'alltwitch';
             const tnoOthersNow = tnoOthers || filterStreamFaction === 'other';
+            const tnoPublicNow = tnoPublic || filterStreamFaction === 'publicnp';
 
             let streamState; // remove, mark-np, mark-other
             if (isMetaFaction === false && isManualStream === false) {
@@ -532,21 +306,25 @@ const filterStreams = async () => {
             } else {
                 if (nowFilterEnabled) {
                     // If filtering streams is enabled
-                    if ((tnoOthersNow && (onOtherIncluded || onMainOther || (npStreamer && onOther))) || (npStreamer && !mainsOther && !keepNp && onOther)) {
-                        // If is-including-others and streamer on another server, or it's an NP streamer playing another server
-                        streamState = FSTATES.other;
-                    } else if (npStreamer && !onMainOther && !onOther) {
-                        // If NoPixel streamer that isn't on another server
-                        streamState = FSTATES.nopixel;
-                        serverName = 'NP';
-                    } else {
+                    if (!stream) { // Not an RP stream
                         streamState = FSTATES.remove;
+                    } else if (stream.tagFaction === 'other') { // Non-NoPixel RP stream
+                        if (tnoOthersNow || stream.noOthersInclude) {
+                            streamState = FSTATES.other;
+                        } else {
+                            streamState = FSTATES.remove;
+                        }
+                    } else { // NoPixel stream
+                        if (tnoPublicNow || stream.noPublicInclude) { // NoPixel Public if allowed or NoPixel WL Stream
+                            streamState = FSTATES.nopixel;
+                        } else { // Public stream when not allowed
+                            streamState = FSTATES.remove;
+                        }
                     }
                 } else {
-                    if (npStreamer && !onMainOther && !onOther) {
+                    if (stream && stream.tagFaction !== 'other') {
                         // If NoPixel streamer that isn't on another server
                         streamState = FSTATES.nopixel;
-                        serverName = 'NP';
                     } else {
                         streamState = FSTATES.other;
                     }
@@ -571,7 +349,7 @@ const filterStreams = async () => {
                     liveElDiv.style.backgroundColor = useColorsDark.other;
                     liveEl.style.color = useTextColor;
                     liveEl.style.setProperty('text-transform', 'none', 'important');
-                    liveEl.textContent = serverName.length > 0 ? `::${serverName}::` : '';
+                    liveEl.textContent = stream.rpServer ? `::${stream.rpServer}::` : '';
                 }
             } else if (streamState === FSTATES.nopixel) {
                 // NoPixel stream
@@ -583,145 +361,24 @@ const filterStreams = async () => {
                     element.style.visibility = null;
                 }
 
-                const hasCharacters = characters && characters.length;
-                let nowCharacter;
-                let factionNames = [];
-
-                let assumeServer = 'whitelist';
-
-                if (hasCharacters) {
-                    ({ assumeServer } = characters);
-                }
-
-                let onServer = assumeServer;
-
-                if (assumeServer === 'whitelist') {
-                    onServer = regNpPublic.test(title) ? 'public' : 'whitelist';
-                } else {
-                    onServer = regNpWhitelist.test(title) ? 'whitelist' : 'public';
-                }
-
-                const onServerDetected = onServer !== assumeServer;
-
-                if (hasCharacters) {
-                    let lowestPos = Infinity;
-                    let maxResults = -1;
-                    for (const char of characters) {
-                        const matchPositions = [...titleParsed.matchAll(char.nameReg)];
-                        const numResults = matchPositions.length;
-                        const lowIndex = numResults ? matchPositions[0].index + (onServerDetected && char.assumeServer !== onServer ? 1e4 : 0) : -1;
-                        if (lowIndex > -1 && (lowIndex < lowestPos || (lowIndex === lowestPos && numResults > maxResults))) {
-                            lowestPos = lowIndex;
-                            maxResults = numResults;
-                            nowCharacter = char;
-                        }
-                    }
-                }
-
-                if (nowCharacter === undefined) {
-                    for (const [faction, regex] of npFactionsRegexEntries) {
-                        const matchPos = title.indexOfRegex(regex);
-                        if (matchPos > -1) {
-                            const factionObj = { name: faction, index: matchPos, character: characters && characters.find(char => char.faction === faction) };
-                            factionObj.rank = factionObj.character ? 0 : 1;
-                            factionNames.push(factionObj);
-                        }
-                    }
-
-                    if (factionNames.length) {
-                        factionNames.sort((a, b) => a.rank - b.rank || a.index - b.index);
-                        if (factionNames[0].character) nowCharacter = factionNames[0].character;
-                        factionNames = factionNames.map(f => f.name);
-                    }
-                }
-
-                const hasFactions = factionNames.length;
-
-                if (nowCharacter) {
-                    assumeServer = nowCharacter.assumeServer;
-                    if (assumeServer === 'whitelist') {
-                        onServer = regNpPublic.test(title) ? 'public' : 'whitelist';
-                    } else {
-                        onServer = regNpWhitelist.test(title) ? 'whitelist' : 'public';
-                    }
-                }
-
-                const onNpPublic = onServer === 'public';
-
                 let allowStream = isMetaFaction;
                 if (allowStream === false) {
-                    if (filterStreamFaction === 'othernp') {
-                        allowStream = !nowCharacter && !hasFactions && !hasCharacters;
-                    } else if (filterStreamFaction === 'publicnp') {
-                        allowStream = onNpPublic;
-                    } else {
-                        let nowFaction;
-                        if (nowCharacter) {
-                            // use condition below
-                            nowFaction = nowCharacter.faction;
-                        } else if (hasFactions) {
-                            nowFaction = factionNames[0];
-                        } else if (hasCharacters) {
-                            nowFaction = characters[0].faction;
-                        }
-                        allowStream = nowFaction === filterStreamFaction;
-                    }
+                    allowStream = filterStreamFaction === 'publicnp'
+                        ? stream.tagFactionSecondary === 'publicnp'
+                        : stream.factions.includes(filterStreamFaction);
                 }
 
-                let possibleCharacter = nowCharacter;
-                if (!nowCharacter && !hasFactions && hasCharacters) {
-                    if (characters.assumeChar) {
-                        nowCharacter = characters.assumeChar;
-                        possibleCharacter = nowCharacter;
-                    } else {
-                        possibleCharacter = characters[0];
-                    }
-                }
-
-                if (allowStream === false || (onNpPublic && filterStreamFaction !== 'publicnp' && tnoPublic == false)) {
+                if (allowStream === false) {
                     streamState = FSTATES.remove;
                 } else {
-                    let channelElColor;
-                    let liveElDivBgColor;
-                    let liveElColor;
-                    let liveElText;
-                    if (nowCharacter) {
-                        const nowColor = useColors[nowCharacter.factionUse];
-                        const nowColorDark = useColorsDark[nowCharacter.factionUse];
-                        channelElColor = nowColor;
-                        liveElDivBgColor = nowColorDark;
-                        liveElColor = useTextColor;
-                        liveElText = `${nowCharacter.leader ? '♛ ' : ''}${nowCharacter.displayName}`;
-                    } else if (hasFactions) {
-                        const nowColor = useColors[factionNames[0]] || useColors.independent;
-                        const nowColorDark = useColorsDark[factionNames[0]] || useColorsDark.independent;
-                        channelElColor = nowColor;
-                        liveElDivBgColor = nowColorDark;
-                        liveElColor = useTextColor;
-                        liveElText = `< ${fullFactionMap[factionNames[0]] || factionNames[0]} >`;
-                    } else if (possibleCharacter) {
-                        const nowColor = useColors[possibleCharacter.factionUse];
-                        const nowColorDark = useColorsDark[possibleCharacter.factionUse];
-                        channelElColor = nowColor;
-                        liveElDivBgColor = nowColorDark;
-                        liveElColor = useTextColor;
-                        liveElText = `? ${possibleCharacter.displayName} ?`;
-                    } else {
-                        liveEl.style.setProperty('text-transform', 'none', 'important');
-                        channelElColor = useColors.othernp;
-                        liveElDivBgColor = useColorsDark.othernp;
-                        liveElColor = useTextColor;
-                        liveElText = `${serverName}`;
-                    }
+                    channelEl.style.color = useColors[stream.tagFaction];
+                    liveElDiv.style.backgroundColor = useColorsDark[stream.tagFaction];
+                    liveEl.style.color = useTextColor;
+                    liveEl.textContent = stream.tagText;
 
-                    channelEl.style.color = channelElColor;
-                    liveElDiv.style.backgroundColor = liveElDivBgColor;
-                    liveEl.style.color = liveElColor;
-                    liveEl.textContent = liveElText;
-
-                    if (onNpPublic) {
-                        console.log('on public', channelName, `-webkit-linear-gradient(-60deg, ${liveElDivBgColor} 50%, ${useColors.publicnp} 50%)`);
-                        liveElDiv.style.backgroundImage = `-webkit-linear-gradient(-60deg, ${useColors.publicnp} 50%, ${liveElDivBgColor} 50%)`;
+                    if (stream.tagFactionSecondary === 'publicnp') {
+                        console.log('on public', channelName, `-webkit-linear-gradient(-60deg, ${useColorsDark[stream.tagFaction]} 50%, ${useColorsDark.publicnp} 50%)`);
+                        liveElDiv.style.backgroundImage = `-webkit-linear-gradient(-60deg, ${useColorsDark.publicnp} 50%, ${useColorsDark[stream.tagFaction]} 50%)`;
                         // liveElDiv.style.backgroundImage = `linear-gradient(to top left, ${liveElDivBgColor} 50%, ${useColors.publicnp} 50%)`;
                     }
                 }
@@ -732,7 +389,7 @@ const filterStreams = async () => {
                 // liveEl.textContent = 'REMOVED';
                 // channelEl.style.color = '#ff0074';
 
-                if (viewersNum < minViewersUse) {
+                if (viewersNum < minViewersUse && isManualStream === false) {
                     if (isFirstRemove && keepDeleting) {
                         keepDeleting = false;
                         if (stopOnMin) {
@@ -827,7 +484,7 @@ const filterStreams = async () => {
             const streamEl = streamElements[i];
             const channelName = streamEl.querySelector("a[data-a-target='preview-card-channel-link']").textContent.toLowerCase();
             const streamTags = streamEl.querySelectorAll('button.tw-tag');
-            if (npCharacters[channelName] && streamTags.length === 1) {
+            if (streamsMap[channelName] && streamTags.length === 1) {
                 // Could also just check first tag?
                 return streamTags[0].textContent;
             }
@@ -1036,14 +693,13 @@ const filterStreams = async () => {
     };
 
     const addFactionStreams = () => {
-        if (allStreams === undefined) {
+        if (live === undefined) {
             console.log('Faction filter failed - Streams not fetched yet...');
             return;
         }
 
         const propName = filterStreamFaction !== 'publicnp' ? 'faction' : 'tagFactionSecondary';
-
-        const factionStreams = allStreams.filter(streamData => streamData[propName] === filterStreamFaction);
+        const factionStreams = live.streams.filter(stream => stream[propName] === filterStreamFaction);
         console.log('filtered streams:', factionStreams);
 
         const baseEl = document.querySelector('[data-target="directory-first-item"]');
@@ -1053,15 +709,15 @@ const filterStreams = async () => {
         const baseHtml = '<div data-target="" style="order: _ORDER_;"><div class="sc-AxjAm kxIWao"><div><div class="sc-AxjAm StDqN"><article data-a-target="card-2" data-a-id="card-callmekevin" class="sc-AxjAm dBWNsP npManual"><div class="sc-AxjAm czqVsG"><div class="sc-AxjAm btYFcj"><div class="ScTextWrapper-sc-14f6evl-1 gboCPP"><div class="ScTextMargin-sc-14f6evl-2 gzxTSt"><div class="sc-AxjAm kJwHLD"><a lines="1" data-a-target="preview-card-title-link" class="ScCoreLink-udwpw5-0 cxXSPs InjectLayout-sc-588ddc-0 gDeqEh tw-link" href="/callmekevin"><div class="sc-AxjAm faFgjY"><h3 title="_TITLE_" class="sc-AxirZ dqHsmV">_TITLE_</h3></div></a></div></div><div class="ScTextMargin-sc-14f6evl-2 gzxTSt"><p class="sc-AxirZ bsqfBW"><a data-test-selector="ChannelLink" data-a-target="preview-card-channel-link" class="ScCoreLink-udwpw5-0 cxXSPs tw-link" href="/callmekevin/videos">CallMeKevin</a></p></div><div class="sc-AxjAm cKgtIZ"><div class="sc-AxjAm ipUaGy"><div class="InjectLayout-sc-588ddc-0 iqJfNY"><div class="InjectLayout-sc-588ddc-0 dDlfVZ"><button class="ScTag-xzp4i-0 evwLTh tw-tag" aria-label="English" data-a-target="English"><div class="ScTagContent-xzp4i-1 jAVAzd">English</div></button></div></div></div></div></div><div class="ScImageWrapper-sc-14f6evl-0 feabhV"><a data-a-target="card-2" data-a-id="card-callmekevin" data-test-selector="preview-card-avatar" class="ScCoreLink-udwpw5-0 FXIKh tw-link" href="/callmekevin/videos"><div class="ScAspectRatio-sc-1sw3lwy-1 jHRTdb tw-aspect"><div class="ScAspectSpacer-sc-1sw3lwy-0 gkBhyN"></div><figure aria-label="callmekevin" class="ScAvatar-sc-12nlgut-0 iULHNk tw-avatar"><img class="InjectLayout-sc-588ddc-0 iyfkau tw-image tw-image-avatar" alt="callmekevin" src="_PFP_"></figure></div></a></div></div></div><div class="sc-AxjAm kJBVIw"><div class="ScWrapper-uo2e2v-0 ggVqeg tw-hover-accent-effect"><div class="ScTransformWrapper-uo2e2v-1 ScCornerTop-uo2e2v-2 druxMB"></div><div class="ScTransformWrapper-uo2e2v-1 ScCornerBottom-uo2e2v-3 ipqJcY"></div><div class="ScTransformWrapper-uo2e2v-1 ScEdgeLeft-uo2e2v-4 ldnizW"></div><div class="ScTransformWrapper-uo2e2v-1 ScEdgeBottom-uo2e2v-5 iyfrlK"></div><div class="ScTransformWrapper-uo2e2v-1 eiQqOY"><a data-a-target="preview-card-image-link" class="ScCoreLink-udwpw5-0 FXIKh tw-link" href="/callmekevin"><div class="sc-AxjAm jpEGpg"><div class="sc-AxjAm hBZJQK"><div class="ScAspectRatio-sc-1sw3lwy-1 dNNaBC tw-aspect"><div class="ScAspectSpacer-sc-1sw3lwy-0 hhnnBG"></div><img alt="_TITLE_ - callmekevin" class="tw-image" src="https://static-cdn.jtvnw.net/previews-ttv/live_user_callmekevin-440x248.jpg"></div><div class="ScPositionOver-sc-1iiybo2-0 hahEKi tw-media-card-image__corners"><div class="sc-AxjAm eFyVLi"><div class="ScChannelStatusTextIndicator-sc-1f5ghgf-0 YoxeW tw-channel-status-text-indicator" font-size="font-size-6"><p class="sc-AxirZ gOlXkb">LIVE</p></div></div><div class="sc-AxjAm iVDSNS"><div class="ScMediaCardStatWrapper-sc-1ncw7wk-0 fdmpWH tw-media-card-stat"><p class="sc-AxirZ ktnnZK">_VIEWERS_ viewers</p></div></div></div></div></div></a></div></div></div></article></div></div></div></div>';
 
         for (let i = 0; i < factionStreams.length; i++) {
-            const streamData = factionStreams[i];
-            const channelName = streamData.channelName;
+            const stream = factionStreams[i];
+            const channelName = stream.channelName;
             const channelNameLower = channelName.toLowerCase();
             const cloneHtml = baseHtml
                 .replace(new RegExp('callmekevin', 'gi'), match => (match.toLowerCase() === match ? channelNameLower : channelName))
                 .replace(/_ORDER_/g, '0')
-                .replace(/_TITLE_/g, streamData.title)
-                .replace(/_VIEWERS_/g, numToTwitchViewers(streamData.viewers))
-                .replace(/_PFP_/g, streamData.profileUrl);
+                .replace(/_TITLE_/g, stream.title)
+                .replace(/_VIEWERS_/g, numToTwitchViewers(stream.viewers))
+                .replace(/_PFP_/g, stream.profileUrl);
             baseEl.insertAdjacentHTML('beforebegin', cloneHtml);
         }
     };
@@ -1156,11 +812,7 @@ const filterStreams = async () => {
             inputHandler();
             resetFiltering();
             // if (filterStreamFaction !== 'cleanbois') return;
-            console.log('FOUND allStreams:', allStreams);
-            if (allStreams === undefined) {
-                console.log('Waiting for streams data first...');
-                await waitForAllStreams;
-            }
+            console.log('FOUND live:', live ? live.streams.length : -1);
             addFactionStreams();
             startDeleting();
         };
@@ -1294,6 +946,7 @@ const filterStreams = async () => {
                 'gsf',
                 'medical',
                 'gulaggang',
+                'rooster',
                 'lostmc',
                 'nbc',
                 'bsk',
@@ -1316,6 +969,7 @@ const filterStreams = async () => {
             nbc: 'Natural Born Crackheads',
             bsk: 'Brouge Street Kingz',
             bbmc: 'Bondi Boys MC',
+            rooster: 'Rooster Companies',
             doc: 'Department of Corrections',
             doj: 'Lawyers & Judges',
             ssb: 'Ballas',
@@ -1337,7 +991,7 @@ const filterStreams = async () => {
             ['allnopixel', mainOptionName],
             ['alltwitch', 'All Twitch (No Filtering)'],
             ['publicnp', 'NoPixel Public'],
-            ...Object.entries(fullFactionMap)
+            ...Object.entries(live.npFactions)
                 .filter(option => excludeFactions.includes(option[0]) === false)
                 .sort((a, b) => (optionSorting[a[0]] || (useColors[a[0]] && 1000) || 2000) - (optionSorting[b[0]] || (useColors[b[0]] && 1000) || 2000))
                 .map(option => [option[0], optionRename[option[0]] || option[1]]),
@@ -1346,8 +1000,32 @@ const filterStreams = async () => {
             ['other', 'Other Servers'],
         ];
 
+        const propName = filterStreamFaction !== 'publicnp' ? 'faction' : 'tagFactionSecondary';
+        // const numStreams = live.streams.reduce((acc, stream) => {
+        //     for (const faction of factions)
+        // }, {});
+
+        options.sort((a, b) => {
+            const countA = live.factionCount[a[0]] || 0;
+            const countB = live.factionCount[b[0]] || 0;
+            if (countA === countB) return 0;
+            if (countA === 0) return 1;
+            if (countB === 0) return -1;
+            return 0;
+        });
+
+        for (const option of options) {
+            if (live.factionCount[option[0]] === 0) {
+                option.push(false);
+            } else {
+                option.push(true);
+            }
+        }
+
         useColors.allnopixel = '#FFF';
         useColors.alltwitch = '#FFF';
+
+        console.log('>>>>>>>>>>>> setup filter');
 
         // $labelDiv.find('label').text('Filter streams');
         $labelDiv.remove();
@@ -1367,7 +1045,9 @@ const filterStreams = async () => {
                             ${options
         .map(
             option =>
-                `<div style="color: ${useColors[option[0]] || useColors.independent}" class="selectCustom-option" data-value="${option[0]}">${option[1]}</div>`
+                `<div style="color: ${useColors[option[0]] || useColors.independent}" class="selectCustom-option${
+                    option[2] === false ? ' optionNotLive' : ''
+                }" data-value="${option[0]}">${option[1]}${option[2] === false ? ' (Not Live)' : ''}</div>`
         )
         .join('')}
                         </div>

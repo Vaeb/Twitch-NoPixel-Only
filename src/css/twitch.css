@@ -43,9 +43,6 @@ div.settings-option {
     font-weight: 600;
 }
 
-span.settings-name {
-}
-
 span.settings-value {
     float: right;
     /* text-align: right; */
@@ -158,12 +155,12 @@ span.tooltip {
 
 .selectCustom {
     position: relative;
-    /* width: 22rem; */
+    /* width: 28rem; */
     /* height: 30px; */
     top: 0;
     left: 0;
     display: none;
-    width: 22rem;
+    width: 28rem;
 }
 
 @media (hover: hover) {
@@ -243,7 +240,7 @@ span.tooltip {
     position: absolute;
     top: 38px;
     left: 0;
-    width: 22rem;
+    width: 28rem;
     border: 0px solid #6f6f6f;
     border-radius: 0.6rem;
     background-color: rgb(24, 24, 27);
@@ -253,6 +250,7 @@ span.tooltip {
     display: none;
     overflow: auto;
     max-height: 377px;
+    overscroll-behavior: none;
 }
 
 .selectCustom.isActive .selectCustom-options {
@@ -288,6 +286,10 @@ span.tooltip {
     content: '✓';
     position: absolute;
     left: 0.8rem;
+}
+
+.optionNotLive {
+    opacity: 0.4;
 }
 
 .selectCustom-input {
