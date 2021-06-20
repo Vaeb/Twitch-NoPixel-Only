@@ -177,9 +177,7 @@ const filterStreams = async () => {
     //     console.log('filter and streams ready');
     // });
 
-    ({
-        minViewers, stopOnMin, intervalSeconds, useColorsDark, useColorsLight,
-    } = live);
+    ({ minViewers, stopOnMin, intervalSeconds, useColorsDark, useColorsLight } = live);
 
     const bodyHexColor = getComputedStyle(document.body).getPropertyValue('--color-background-body');
     let isDark = true;
@@ -306,18 +304,23 @@ const filterStreams = async () => {
             } else {
                 if (nowFilterEnabled) {
                     // If filtering streams is enabled
-                    if (!stream) { // Not an RP stream
+                    if (!stream) {
+                        // Not an RP stream
                         streamState = FSTATES.remove;
-                    } else if (stream.tagFaction === 'other') { // Non-NoPixel RP stream
+                    } else if (stream.tagFaction === 'other') {
+                        // Non-NoPixel RP stream
                         if (tnoOthersNow || stream.noOthersInclude) {
                             streamState = FSTATES.other;
                         } else {
                             streamState = FSTATES.remove;
                         }
-                    } else { // NoPixel stream
-                        if (tnoPublicNow || stream.noPublicInclude) { // NoPixel Public if allowed or NoPixel WL Stream
+                    } else {
+                        // NoPixel stream
+                        if (tnoPublicNow || stream.noPublicInclude) {
+                            // NoPixel Public if allowed or NoPixel WL Stream
                             streamState = FSTATES.nopixel;
-                        } else { // Public stream when not allowed
+                        } else {
+                            // Public stream when not allowed
                             streamState = FSTATES.remove;
                         }
                     }
@@ -333,6 +336,8 @@ const filterStreams = async () => {
 
             if (streamState === FSTATES.other) {
                 // Other included RP servers
+                const streamPossible = stream || {};
+
                 if (element.style.display === 'none') {
                     element.style.display = null;
                 }
@@ -349,7 +354,7 @@ const filterStreams = async () => {
                     liveElDiv.style.backgroundColor = useColorsDark.other;
                     liveEl.style.color = useTextColor;
                     liveEl.style.setProperty('text-transform', 'none', 'important');
-                    liveEl.textContent = stream.rpServer ? `::${stream.rpServer}::` : '';
+                    liveEl.textContent = streamPossible.rpServer ? `::${streamPossible.rpServer}::` : '';
                 }
             } else if (streamState === FSTATES.nopixel) {
                 // NoPixel stream
@@ -363,9 +368,7 @@ const filterStreams = async () => {
 
                 let allowStream = isMetaFaction;
                 if (allowStream === false) {
-                    allowStream = filterStreamFaction === 'publicnp'
-                        ? stream.tagFactionSecondary === 'publicnp'
-                        : stream.factions.includes(filterStreamFaction);
+                    allowStream = filterStreamFaction === 'publicnp' ? stream.tagFactionSecondary === 'publicnp' : stream.factions.includes(filterStreamFaction);
                 }
 
                 if (allowStream === false) {
@@ -932,11 +935,14 @@ const filterStreams = async () => {
             .toArray()
             .map(el => $(el));
 
-        const excludeFactions = ['mechanic', 'harmony', 'quickfix', 'tunershop', 'marabunta', 'mersions', 'podcast'];
+        const excludeFactions = ['mechanic', 'harmony', 'quickfix', 'tunershop', 'marabunta', 'mersions', 'podcast', 'otherfaction'];
 
         const optionSorting = Object.assign(
             {},
             ...[
+                'allnopixel',
+                'alltwitch',
+                'publicnp',
                 'cleanbois',
                 'changgang',
                 'police',
@@ -958,12 +964,21 @@ const filterStreams = async () => {
                 'bbmc',
                 'angels',
             ].map((option, index) => ({ [option]: index + 1 })),
-            ...['burgershot', 'doc', 'development'].map((option, index) => ({ [option]: 1000 + index + 1 }))
+            ...['burgershot', 'doc', 'development', 'podcast', 'othernp', 'other'].map((option, index) => ({ [option]: 1000 + index + 1 })),
+            ...['independent', 'podcast', 'othernp', 'other'].map((option, index) => ({ [option]: 3000 + index + 1 }))
         );
 
-        optionSorting.independent = 3555;
+        let mainOptionName = 'All NoPixel (Default)';
+        if (tnoOthers) {
+            mainOptionName = 'All RP (Default)';
+        } else if (!tnoPublic) {
+            mainOptionName = 'All NoPixel-WL (Default)';
+        }
 
         const optionRename = {
+            allnopixel: mainOptionName,
+            alltwitch: 'All Twitch (No Filtering)',
+            publicnp: 'NoPixel Public',
             hoa: 'Home Owners Association',
             asrr: 'Alta Street Ruff Rydaz',
             nbc: 'Natural Born Crackheads',
@@ -978,32 +993,15 @@ const filterStreams = async () => {
             angels: 'The Angels',
             lunatix: 'Lunatix MC',
             othernp: 'Unknown',
+            other: 'Other Servers',
         };
 
-        let mainOptionName = 'All NoPixel (Default)';
-        if (tnoOthers) {
-            mainOptionName = 'All RP (Default)';
-        } else if (!tnoPublic) {
-            mainOptionName = 'All NoPixel-WL (Default)';
-        }
-
         const options = [
-            ['allnopixel', mainOptionName],
-            ['alltwitch', 'All Twitch (No Filtering)'],
-            ['publicnp', 'NoPixel Public'],
             ...Object.entries(live.npFactions)
                 .filter(option => excludeFactions.includes(option[0]) === false)
                 .sort((a, b) => (optionSorting[a[0]] || (useColors[a[0]] && 1000) || 2000) - (optionSorting[b[0]] || (useColors[b[0]] && 1000) || 2000))
                 .map(option => [option[0], optionRename[option[0]] || option[1]]),
-            ['podcast', 'Podcast'],
-            ['othernp', 'Unknown'],
-            ['other', 'Other Servers'],
         ];
-
-        const propName = filterStreamFaction !== 'publicnp' ? 'faction' : 'tagFactionSecondary';
-        // const numStreams = live.streams.reduce((acc, stream) => {
-        //     for (const faction of factions)
-        // }, {});
 
         options.sort((a, b) => {
             const countA = live.factionCount[a[0]] || 0;
