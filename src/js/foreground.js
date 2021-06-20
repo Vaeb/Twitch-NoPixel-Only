@@ -1021,7 +1021,9 @@ const filterStreams = async () => {
         }
 
         useColors.allnopixel = '#FFF';
+        useColorsDark.allnopixel = '#FFF';
         useColors.alltwitch = '#FFF';
+        useColorsDark.alltwitch = '#FFF';
 
         console.log('>>>>>>>>>>>> setup filter');
 
@@ -1043,7 +1045,7 @@ const filterStreams = async () => {
                             ${options
         .map(
             option =>
-                `<div style="color: ${useColors[option[0]] || useColors.independent}" class="selectCustom-option${
+                `<div style="color: ${useColorsDark[option[0]] || useColorsDark.independent}" class="selectCustom-option${
                     option[2] === false ? ' optionNotLive' : ''
                 }" data-value="${option[0]}">${option[1]}${option[2] === false ? ' (Not Live)' : ''}</div>`
         )
