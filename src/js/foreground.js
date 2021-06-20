@@ -372,6 +372,7 @@ const filterStreams = async () => {
                 }
 
                 if (allowStream === false) {
+                    // Doesn't match required faction
                     streamState = FSTATES.remove;
                 } else {
                     channelEl.style.color = useColors[stream.tagFaction];
@@ -702,7 +703,8 @@ const filterStreams = async () => {
         }
 
         const propName = filterStreamFaction !== 'publicnp' ? 'faction' : 'tagFactionSecondary';
-        const factionStreams = live.streams.filter(stream => stream[propName] === filterStreamFaction);
+        const factionStreams = live.streams.filter(stream =>
+            (filterStreamFaction === 'publicnp' ? stream.tagFactionSecondary === filterStreamFaction : stream.factions.includes(filterStreamFaction)));
         console.log('filtered streams:', factionStreams);
 
         const baseEl = document.querySelector('[data-target="directory-first-item"]');
