@@ -143,7 +143,7 @@ const filterStreams = async () => {
     fetchHeaders.append('cache-control', 'no-cache');
 
     // https://vaeb.io:3030 | http://localhost:3029
-    const dataRequest = new Request('http://localhost:3029/live'); // API code is open-source: https://github.com/Vaeb/TNO-Backend
+    const dataRequest = new Request('https://vaeb.io:3030/live'); // API code is open-source: https://github.com/Vaeb/TNO-Backend
 
     let live;
     for (let i = 0; i <= 2; i++) {
