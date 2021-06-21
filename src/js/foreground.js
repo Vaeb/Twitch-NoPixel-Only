@@ -696,13 +696,36 @@ const filterStreams = async () => {
         return `${parseFloat((n / 1e3).toFixed(1))}K`;
     };
 
+    const escapeChars = {
+        '¢': 'cent',
+        '£': 'pound',
+        '¥': 'yen',
+        '€': 'euro',
+        '©': 'copy',
+        '®': 'reg',
+        '<': 'lt',
+        '>': 'gt',
+        '"': 'quot',
+        '&': 'amp',
+        "'": '#39',
+    };
+
+    let regexString = '[';
+    for (const key of Object.keys(escapeChars)) {
+        regexString += key;
+    }
+    regexString += ']';
+
+    const regex = new RegExp(regexString, 'g');
+
+    const encodeHtml = str => str.replace(regex, m => `&${escapeChars[m]};`);
+
     const addFactionStreams = () => {
         if (live === undefined) {
             console.log('Faction filter failed - Streams not fetched yet...');
             return;
         }
 
-        const propName = filterStreamFaction !== 'publicnp' ? 'faction' : 'tagFactionSecondary';
         const factionStreams = live.streams.filter(stream =>
             (filterStreamFaction === 'publicnp' ? stream.tagFactionSecondary === filterStreamFaction : stream.factions.includes(filterStreamFaction)));
         console.log('filtered streams:', factionStreams);
@@ -722,6 +745,7 @@ const filterStreams = async () => {
                 .replace(/_CHANNEL1_/g, channelNameLower)
                 .replace(/_CHANNEL2_/g, channelName)
                 .replace(/_ORDER_/g, '0')
+                .replace(/"_TITLE_/g, `"${encodeHtml(stream.title)}`)
                 .replace(/_TITLE_/g, stream.title)
                 .replace(/_VIEWERS_/g, numToTwitchViewers(stream.viewers))
                 .replace(/_PFP_/g, stream.profileUrl);
