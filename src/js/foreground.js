@@ -327,7 +327,12 @@ const filterStreams = async () => {
                 } else {
                     if (stream && stream.tagFaction !== 'other') {
                         // If NoPixel streamer that isn't on another server
-                        streamState = FSTATES.nopixel;
+                        if (isMetaFaction || tnoPublicNow || stream.noPublicInclude) {
+                            streamState = FSTATES.nopixel;
+                        } else {
+                            // Public stream when not allowed and using filter
+                            streamState = FSTATES.remove;
+                        }
                     } else {
                         streamState = FSTATES.other;
                     }
