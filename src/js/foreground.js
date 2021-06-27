@@ -1023,6 +1023,7 @@ const filterStreams = async () => {
             ssb: 'Ballas',
             gsf: 'Grove Street Families',
             larpers: 'The Guild',
+            prison: 'Prison Lifers',
             angels: 'The Angels',
             lunatix: 'Lunatix MC',
             othernp: 'Unknown',
