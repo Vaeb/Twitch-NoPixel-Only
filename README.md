@@ -8,7 +8,7 @@ Once installed, go to https://www.twitch.tv/directory/game/Grand%20Theft%20Auto%
 
 Everything is automatic, you don't have to do anything.
 
-![Twitch NoPixel Only Screenshot](https://i.imgur.com/oZIOuVH.jpg)
+![Twitch NoPixel Only Screenshot 1](https://i.imgur.com/V2WnR4f.jpeg)
 
 ---
 
@@ -35,3 +35,7 @@ The stream will always be included as long as they are playing on NoPixel (and i
 \---
 
 Tip: Keeping the "Force English only" setting enabled will improve performance when scrolling into the lower-viewcount streams.
+
+\---
+
+![Twitch NoPixel Only Gif 1](https://i.imgur.com/denVLQw.gif)
