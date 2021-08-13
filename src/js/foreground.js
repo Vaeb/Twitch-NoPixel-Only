@@ -968,96 +968,13 @@ const filterStreams = async () => {
             .toArray()
             .map(el => $(el));
 
-        const excludeFactions = ['mechanic', 'harmony', 'quickfix', 'tunershop', 'marabunta', 'mersions', 'podcast', 'otherfaction'];
+        const filterFactions = live.filterFactions;
 
-        const optionSorting = Object.assign(
-            {},
-            ...[
-                'allnopixel',
-                'alltwitch',
-                'publicnp',
-                'cleanbois',
-                'changgang',
-                'police',
-                'doj',
-                'vagos',
-                'ssb',
-                'gsf',
-                'medical',
-                'gulaggang',
-                'rooster',
-                'lostmc',
-                'nbc',
-                'bsk',
-                'hoa',
-                'asrr',
-                'prison',
-                'larpers',
-                'pegasus',
-                'bbmc',
-                'angels',
-            ].map((option, index) => ({ [option]: index + 1 })),
-            ...['burgershot', 'doc', 'development', 'podcast', 'othernp', 'other'].map((option, index) => ({ [option]: 1000 + index + 1 })),
-            ...['independent', 'podcast', 'othernp', 'other'].map((option, index) => ({ [option]: 3000 + index + 1 }))
-        );
-
-        let mainOptionName = 'All NoPixel (Default)';
         if (tnoOthers) {
-            mainOptionName = 'All RP (Default)';
+            filterFactions[0][1] = 'All RP (Default)';
         } else if (!tnoPublic) {
-            mainOptionName = 'All NoPixel-WL (Default)';
+            filterFactions[0][1] = 'All NoPixel-WL (Default)';
         }
-
-        const optionRename = {
-            allnopixel: mainOptionName,
-            alltwitch: 'All Twitch (No Filtering)',
-            publicnp: 'NoPixel Public',
-            hoa: 'Home Owners Association',
-            asrr: 'Alta Street Ruff Rydaz',
-            nbc: 'Natural Born Crackheads',
-            bsk: 'Brouge Street Kingz',
-            bbmc: 'Bondi Boys MC',
-            rooster: 'Rooster Companies',
-            doc: 'Department of Corrections',
-            doj: 'Lawyers & Judges',
-            ssb: 'Ballas',
-            gsf: 'Grove Street Families',
-            larpers: 'The Guild',
-            prison: 'Prison Lifers',
-            angels: 'The Angels',
-            lunatix: 'Lunatix MC',
-            othernp: 'Unknown',
-            other: 'Other Servers',
-        };
-
-        const options = [
-            ...Object.entries(live.npFactions)
-                .filter(option => excludeFactions.includes(option[0]) === false)
-                .sort((a, b) => (optionSorting[a[0]] || (useColors[a[0]] && 1000) || 2000) - (optionSorting[b[0]] || (useColors[b[0]] && 1000) || 2000))
-                .map(option => [option[0], optionRename[option[0]] || option[1]]),
-        ];
-
-        options.sort((a, b) => {
-            const countA = live.factionCount[a[0]] || 0;
-            const countB = live.factionCount[b[0]] || 0;
-            if (countA === countB) return 0;
-            if (countA === 0) return 1;
-            if (countB === 0) return -1;
-            return 0;
-        });
-
-        for (const option of options) {
-            if (live.factionCount[option[0]] === 0) {
-                option.push(false);
-            } else {
-                option.push(true);
-            }
-        }
-
-        useColors.allnopixel = '#FFF';
-        useColorsDark.allnopixel = '#FFF';
-        useColors.alltwitch = '#FFF';
-        useColorsDark.alltwitch = '#FFF';
 
         console.log('>>>>>>>>>>>> setup filter');
 
@@ -1076,7 +993,7 @@ const filterStreams = async () => {
                         </div>
                         <div class="selectCustom-options">
                             <input class="selectCustom-input" placeholder="Search..."></input>
-                            ${options
+                            ${filterFactions
         .map(
             option =>
                 `<div style="color: ${useColorsDark[option[0]] || useColorsDark.independent}" class="selectCustom-option${
