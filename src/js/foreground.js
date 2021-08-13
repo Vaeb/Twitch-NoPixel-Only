@@ -976,6 +976,26 @@ const filterStreams = async () => {
             filterFactions[0][1] = 'All NoPixel-WL (Default)';
         }
 
+        if (!tnoPublic) {
+            const factionCountSpecial = { allnopixel: true, alltwitch: true, publicnp: true, other: true };
+            filterFactions.forEach((data) => {
+                if (data[2] === false) return;
+                const mini = data[0];
+                const existsWl = factionCountSpecial[mini]
+                    ? live.factionCount[mini] > 0
+                    : live.streams.some(stream => stream.faction === mini && stream.noPublicInclude === true);
+                if (!existsWl) data[2] = false;
+            });
+        }
+
+        filterFactions.sort((dataA, dataB) => {
+            const emptyA = dataA[2] === false;
+            const emptyB = dataB[2] === false;
+            if (emptyA && !emptyB) return 1;
+            if (emptyB && !emptyA) return -1;
+            return 0;
+        });
+
         console.log('>>>>>>>>>>>> setup filter');
 
         // $labelDiv.find('label').text('Filter streams');
