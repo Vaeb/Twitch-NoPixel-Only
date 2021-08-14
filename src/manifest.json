@@ -1,7 +1,7 @@
 {
     "name": "Twitch NoPixel Only",
     "description": "Automatic filtering and coloring for NoPixel streams on Twitch's GTA page!",
-    "version": "1.7.0",
+    "version": "1.7.1",
     "manifest_version": 2,
     "icons": {
         "16": "images/icon-16.png",

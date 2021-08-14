@@ -373,7 +373,7 @@ const filterStreams = async () => {
 
                 let allowStream = isMetaFaction;
                 if (allowStream === false) {
-                    allowStream = filterStreamFaction === 'publicnp' ? stream.tagFactionSecondary === 'publicnp' : stream.factions.includes(filterStreamFaction);
+                    allowStream = filterStreamFaction === 'publicnp' ? stream.tagFactionSecondary === 'publicnp' : !!stream.factionsMap[filterStreamFaction];
                 }
 
                 if (allowStream === false) {
@@ -732,7 +732,7 @@ const filterStreams = async () => {
         }
 
         const factionStreams = live.streams.filter(stream =>
-            (filterStreamFaction === 'publicnp' ? stream.tagFactionSecondary === filterStreamFaction : stream.factions.includes(filterStreamFaction)));
+            (filterStreamFaction === 'publicnp' ? stream.tagFactionSecondary === filterStreamFaction : !!stream.factionsMap[filterStreamFaction]));
         console.log('filtered streams:', factionStreams);
 
         const baseEl = document.querySelector('[data-target="directory-first-item"]');
@@ -983,7 +983,7 @@ const filterStreams = async () => {
                 const mini = data[0];
                 const existsWl = factionCountSpecial[mini]
                     ? live.factionCount[mini] > 0
-                    : live.streams.some(stream => stream.faction === mini && stream.noPublicInclude === true);
+                    : live.streams.some(stream => !!stream.factionsMap[mini] && stream.noPublicInclude === true);
                 if (!existsWl) data[2] = false;
             });
         }
