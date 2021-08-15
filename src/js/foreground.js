@@ -217,6 +217,30 @@ const filterStreams = async () => {
     //     });
     // };
 
+    const escapeChars = {
+        '¢': 'cent',
+        '£': 'pound',
+        '¥': 'yen',
+        '€': 'euro',
+        '©': 'copy',
+        '®': 'reg',
+        '<': 'lt',
+        '>': 'gt',
+        '"': 'quot',
+        '&': 'amp',
+        "'": '#39',
+    };
+
+    let regexString = '[';
+    for (const key of Object.keys(escapeChars)) {
+        regexString += key;
+    }
+    regexString += ']';
+
+    const regex = new RegExp(regexString, 'g');
+
+    const encodeHtml = str => str.replace(regex, m => `&${escapeChars[m]};`);
+
     const getMainElFromArticle = el => el.parentElement.parentElement.parentElement.parentElement;
 
     const resetFiltering = () => {
@@ -383,7 +407,15 @@ const filterStreams = async () => {
                     channelEl.style.color = useColors[stream.tagFaction];
                     liveElDiv.style.backgroundColor = useColorsDark[stream.tagFaction];
                     liveEl.style.color = useTextColor;
+                    // if (stream.characterName && stream.characterName.includes(']')) {
+                    // const titleMatch = stream.characterName.match(/\[(.*?)\]/);
+                    // const title = encodeHtml(titleMatch[1]);
+                    // const name = stream.characterName.substring(titleMatch.index + title.length + 3);
+                    // if (stream.tagText.includes('♛')) title = `♛ ${title}`;
+                    // liveEl.innerHTML = encodeHtml(stream.tagText).replace(title, `<span style="color: #4d3537;">${title}</span>`);
+                    // } else {
                     liveEl.textContent = stream.tagText;
+                    // }
 
                     if (stream.tagFactionSecondary === 'publicnp') {
                         console.log('on public', channelName, `-webkit-linear-gradient(-60deg, ${useColorsDark[stream.tagFaction]} 50%, ${useColorsDark.publicnp} 50%)`);
@@ -700,30 +732,6 @@ const filterStreams = async () => {
         if (n < 1000) return `${n}`;
         return `${parseFloat((n / 1e3).toFixed(1))}K`;
     };
-
-    const escapeChars = {
-        '¢': 'cent',
-        '£': 'pound',
-        '¥': 'yen',
-        '€': 'euro',
-        '©': 'copy',
-        '®': 'reg',
-        '<': 'lt',
-        '>': 'gt',
-        '"': 'quot',
-        '&': 'amp',
-        "'": '#39',
-    };
-
-    let regexString = '[';
-    for (const key of Object.keys(escapeChars)) {
-        regexString += key;
-    }
-    regexString += ']';
-
-    const regex = new RegExp(regexString, 'g');
-
-    const encodeHtml = str => str.replace(regex, m => `&${escapeChars[m]};`);
 
     const addFactionStreams = () => {
         if (live === undefined) {
