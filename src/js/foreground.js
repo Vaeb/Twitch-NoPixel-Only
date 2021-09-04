@@ -197,11 +197,12 @@ const filterStreams = async () => {
     console.log(`[${dateStr()}] Fetched data!`);
     console.log(live);
 
-    let [tnoStatus, tnoEnglish, tnoPublic, tnoOthers, tnoScrolling, tnoAllowAll] = await getStorage([
+    let [tnoStatus, tnoEnglish, tnoPublic, tnoOthers, tnoSearch, tnoScrolling, tnoAllowAll] = await getStorage([
         ['tnoStatus', true],
         ['tnoEnglish', true],
         ['tnoPublic', true],
         ['tnoOthers', false],
+        ['tnoSearch', true],
         ['tnoScrolling', false],
         ['tnoAllowAll', false],
     ]);
@@ -663,6 +664,12 @@ const filterStreams = async () => {
                                 </span>
                             </div>
                             <div class="settings-option">
+                                <span class="settings-name">View search box:</span>
+                                <span class="settings-value">
+                                    <input id="setting-search" type="checkbox" class="toggle" ${tnoSearch ? 'checked' : ''}>
+                                </span>
+                            </div>
+                            <div class="settings-option">
                                 <span class="settings-name tooltip">Scrolling adjustments:
                                     <span class="tooltiptext">Reduces scrolling lag by making Twitch only fetch one batch of new streams after scrolling to the page bottom.</span>
                                 </span>
@@ -699,6 +706,7 @@ const filterStreams = async () => {
                     const $settingsReload = $('.settings-reload');
                     const $settingStatus = $('#setting-status');
                     const $settingEnglish = $('#setting-english');
+                    const $settingSearch = $('#setting-search');
                     const $settingScrolling = $('#setting-scrolling');
                     const $settingPublic = $('#setting-public');
                     const $settingOthers = $('#setting-others');
@@ -718,6 +726,13 @@ const filterStreams = async () => {
                         setStorage('tnoEnglish', newValue);
                         tnoEnglish = newValue;
                         console.log('Set force-english to:', newValue);
+                    });
+
+                    $settingSearch.change(function () {
+                        const newValue = this.checked;
+                        setStorage('tnoSearch', newValue);
+                        tnoSearch = newValue;
+                        console.log('Set view-search to:', newValue);
                     });
 
                     $settingScrolling.change(function () {
@@ -759,7 +774,7 @@ const filterStreams = async () => {
         return `${parseFloat((n / 1e3).toFixed(1))}K`;
     };
 
-    const addFactionStreams = (bySearchText = false, returnIfExists = false) => {
+    const addFactionStreams = (returnIfExists = false) => {
         if (live === undefined) {
             console.log('Faction filter failed - Streams not fetched yet...');
             return;
@@ -771,9 +786,13 @@ const filterStreams = async () => {
 
         let factionStreams = live.streams;
 
-        if (bySearchText) {
+        const isFilteringText = filterStreamText !== '';
+
+        if (isFilteringText) {
             factionStreams = factionStreams.filter(stream => matchesFilterStreamText(stream));
-        } else {
+        }
+
+        if (!isFilteringText || !metaFactions.includes(filterStreamFaction)) {
             factionStreams = factionStreams.filter(stream =>
                 (filterStreamFaction === 'publicnp' ? stream.tagFactionSecondary === filterStreamFaction : !!stream.factionsMap[filterStreamFaction]));
         }
@@ -1011,7 +1030,9 @@ const filterStreams = async () => {
         resetFiltering();
         // if (filterStreamFaction !== 'cleanbois') return;
         console.log('Filtering for:', filterStreamText);
-        if (filterStreamText !== '') addFactionStreams(true);
+        if (filterStreamText !== '' || !metaFactions.includes(filterStreamFaction)) {
+            addFactionStreams();
+        }
         startDeleting();
     };
 
@@ -1090,38 +1111,40 @@ const filterStreams = async () => {
 
         activateSelect(true);
 
-        $groupDiv.css({ position: 'relative' });
+        if (tnoSearch) {
+            $groupDiv.css({ position: 'relative' });
 
-        const $searchDiv = $('<div class="tno-search-div"></div>');
-        const $searchInput = $searchDiv.append('<input class="tno-search-input" placeholder="Search for character name / nickname / stream...">');
-        $groupDiv.append($searchDiv);
+            const $searchDiv = $('<div class="tno-search-div"></div>');
+            const $searchInput = $searchDiv.append('<input class="tno-search-input" placeholder="Search for character name / nickname / stream...">');
+            $groupDiv.append($searchDiv);
 
-        let inputNumLast = 0;
+            let inputNumLast = 0;
 
-        $searchInput.on('input', (e) => {
-            const inputNumNow = ++inputNumLast;
-            const searchText = e.target.value.toLowerCase().trim();
+            $searchInput.on('input', (e) => {
+                const inputNumNow = ++inputNumLast;
+                const searchText = e.target.value.toLowerCase().trim();
 
-            const textLen = searchText.length;
+                const textLen = searchText.length;
 
-            if (searchText === '' || textLen >= 2) {
-                let waitMs = searchText === '' ? 0 : 650; // 1000
+                if (searchText === '' || textLen >= 2) {
+                    let waitMs = searchText === '' ? 0 : 650; // 1000
 
-                if (textLen > 4) {
-                    waitMs = 100; // 200
-                } else if (textLen > 2) {
-                    waitMs = 300; // 500
-                }
-
-                setTimeout(() => {
-                    if (inputNumNow !== inputNumLast) {
-                        console.log('Cancelled search for', searchText);
-                        return;
+                    if (textLen > 4) {
+                        waitMs = 100; // 200
+                    } else if (textLen > 2) {
+                        waitMs = 300; // 500
                     }
-                    searchForStreams(searchText);
-                }, waitMs);
-            }
-        });
+
+                    setTimeout(() => {
+                        if (inputNumNow !== inputNumLast) {
+                            console.log('Cancelled search for', searchText);
+                            return;
+                        }
+                        searchForStreams(searchText);
+                    }, waitMs);
+                }
+            });
+        }
     };
 
     const twitchGtaUrl = /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V(?!\/videos|\/clips)/;
@@ -1134,11 +1157,12 @@ const filterStreams = async () => {
             return false;
         }
 
-        [tnoStatus, tnoEnglish, tnoPublic, tnoOthers, tnoScrolling, tnoAllowAll] = await getStorage([
+        [tnoStatus, tnoEnglish, tnoPublic, tnoOthers, tnoSearch, tnoScrolling, tnoAllowAll] = await getStorage([
             ['tnoStatus', true],
             ['tnoEnglish', true],
             ['tnoPublic', true],
             ['tnoOthers', false],
+            ['tnoSearch', true],
             ['tnoScrolling', false],
             ['tnoAllowAll', false],
         ]);
