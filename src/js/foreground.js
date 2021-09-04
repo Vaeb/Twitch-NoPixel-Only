@@ -59,6 +59,8 @@ let interval;
 
 let wasZero = false;
 let filterStreamFaction = 'allnopixel';
+let filterStreamText = '';
+let filterStreamTextLookup = '';
 
 let useColors = {};
 let useColorsDark = {};
@@ -70,6 +72,9 @@ const FSTATES = {
     other: 2,
     hide: 3,
 };
+
+const metaFactions = ['allnopixel', 'alltwitch'];
+const npMetaFactions = [...metaFactions, 'othernp', 'publicnp'];
 
 // #00A032 #cd843f #b71540 #ff0074 #8854d0
 // fastlane: '#40739e',
@@ -243,11 +248,13 @@ const filterStreams = async () => {
 
     const getMainElFromArticle = el => el.parentElement.parentElement.parentElement.parentElement;
 
-    const resetFiltering = () => {
-        const manualElements = Array.from(document.getElementsByTagName('article')).filter(element => element.classList.contains('npManual'));
-        console.log('removing', manualElements.length, 'manual elements');
-        for (const element of manualElements) {
-            getMainElFromArticle(element).remove();
+    const resetFiltering = (onlyChecked = false) => {
+        if (!onlyChecked) {
+            const manualElements = Array.from(document.getElementsByTagName('article')).filter(element => element.classList.contains('npManual'));
+            console.log('removing', manualElements.length, 'manual elements');
+            for (const element of manualElements) {
+                getMainElFromArticle(element).remove();
+            }
         }
 
         const elements = Array.from(document.getElementsByTagName('article')).filter(element => element.classList.contains('npChecked'));
@@ -257,8 +264,12 @@ const filterStreams = async () => {
         });
     };
 
-    const metaFactions = ['allnopixel', 'alltwitch'];
-    const npMetaFactions = [...metaFactions, 'othernp', 'publicnp'];
+    const matchesFilterStreamText = stream =>
+        stream.tagText.toLowerCase().includes(filterStreamText)
+            || (stream.characterName && stream.characterName.toLowerCase().includes(filterStreamText))
+            || (stream.nicknameLookup && stream.nicknameLookup.includes(filterStreamTextLookup))
+            || stream.channelName.toLowerCase().includes(filterStreamText)
+            || stream.title.toLowerCase().includes(filterStreamText);
 
     const deleteOthers = () => {
         if (onPage == false) return;
@@ -282,6 +293,8 @@ const filterStreams = async () => {
             console.log('[TNO] _There are so many elements:', elements.length);
             wasZero = elements.length === 0;
         }
+
+        const isFilteringText = filterStreamText !== '';
 
         // if (elements.length > 0 && prevWasZero) {
         //     const $scrollDiv = $('div.root-scrollable.scrollable-area').find('> div.simplebar-scroll-content');
@@ -323,7 +336,7 @@ const filterStreams = async () => {
             const tnoPublicNow = tnoPublic || filterStreamFaction === 'publicnp';
 
             let streamState; // remove, mark-np, mark-other
-            if (isMetaFaction === false && isManualStream === false) {
+            if ((isMetaFaction === false || isFilteringText) && isManualStream === false) {
                 streamState = FSTATES.hide;
             } else {
                 if (nowFilterEnabled) {
@@ -375,7 +388,14 @@ const filterStreams = async () => {
                     element.style.visibility = null;
                 }
 
-                const allowStream = isMetaFaction || filterStreamFaction === 'other';
+                let allowStream = false;
+
+                if (isFilteringText) {
+                    allowStream = true;
+                } else {
+                    allowStream = isMetaFaction || filterStreamFaction === 'other';
+                }
+
                 if (allowStream === false) {
                     streamState = FSTATES.remove;
                 } else {
@@ -395,9 +415,15 @@ const filterStreams = async () => {
                     element.style.visibility = null;
                 }
 
-                let allowStream = isMetaFaction;
-                if (allowStream === false) {
-                    allowStream = filterStreamFaction === 'publicnp' ? stream.tagFactionSecondary === 'publicnp' : !!stream.factionsMap[filterStreamFaction];
+                let allowStream = false;
+
+                if (isFilteringText) {
+                    allowStream = true;
+                } else {
+                    allowStream = isMetaFaction;
+                    if (allowStream === false) {
+                        allowStream = filterStreamFaction === 'publicnp' ? stream.tagFactionSecondary === 'publicnp' : !!stream.factionsMap[filterStreamFaction];
+                    }
                 }
 
                 if (allowStream === false) {
@@ -733,14 +759,24 @@ const filterStreams = async () => {
         return `${parseFloat((n / 1e3).toFixed(1))}K`;
     };
 
-    const addFactionStreams = () => {
+    const addFactionStreams = (bySearchText = false, returnIfExists = false) => {
         if (live === undefined) {
             console.log('Faction filter failed - Streams not fetched yet...');
             return;
         }
 
-        const factionStreams = live.streams.filter(stream =>
-            (filterStreamFaction === 'publicnp' ? stream.tagFactionSecondary === filterStreamFaction : !!stream.factionsMap[filterStreamFaction]));
+        if (returnIfExists && Array.from(document.getElementsByTagName('article')).filter(element => element.classList.contains('npManual')).length > 0) {
+            return;
+        }
+
+        let factionStreams = live.streams;
+
+        if (bySearchText) {
+            factionStreams = factionStreams.filter(stream => matchesFilterStreamText(stream));
+        } else {
+            factionStreams = factionStreams.filter(stream =>
+                (filterStreamFaction === 'publicnp' ? stream.tagFactionSecondary === filterStreamFaction : !!stream.factionsMap[filterStreamFaction]));
+        }
         console.log('filtered streams:', factionStreams);
 
         const baseEl = document.querySelector('[data-target="directory-first-item"]');
@@ -963,9 +999,26 @@ const filterStreams = async () => {
         }
     };
 
+    const parseLookup = (text, retainCase = false) => {
+        text = text.replace(/^\W+|\W+$|[^\w\s]+/g, ' ').replace(/\s+/g, ' ');
+        if (!retainCase) text = text.toLowerCase();
+        return text.trim();
+    };
+
+    const searchForStreams = (searchText) => {
+        filterStreamText = searchText;
+        filterStreamTextLookup = parseLookup(searchText);
+        resetFiltering();
+        // if (filterStreamFaction !== 'cleanbois') return;
+        console.log('Filtering for:', filterStreamText);
+        if (filterStreamText !== '') addFactionStreams(true);
+        startDeleting();
+    };
+
     const setupFilter = async () => {
         const $sortByLabel = $(await waitForElement('label[for="browse-header-filter-by"]'));
         const $sortByDiv = $sortByLabel.parent().parent();
+        const $groupDiv = $sortByDiv.parent();
         const $filterDiv = $sortByDiv.clone();
 
         $filterDiv.insertBefore($sortByDiv);
@@ -1036,6 +1089,39 @@ const filterStreams = async () => {
         `);
 
         activateSelect(true);
+
+        $groupDiv.css({ position: 'relative' });
+
+        const $searchDiv = $('<div class="tno-search-div"></div>');
+        const $searchInput = $searchDiv.append('<input class="tno-search-input" placeholder="Search for character name / nickname / stream...">');
+        $groupDiv.append($searchDiv);
+
+        let inputNumLast = 0;
+
+        $searchInput.on('input', (e) => {
+            const inputNumNow = ++inputNumLast;
+            const searchText = e.target.value.toLowerCase().trim();
+
+            const textLen = searchText.length;
+
+            if (searchText === '' || textLen >= 2) {
+                let waitMs = searchText === '' ? 0 : 650; // 1000
+
+                if (textLen > 4) {
+                    waitMs = 100; // 200
+                } else if (textLen > 2) {
+                    waitMs = 300; // 500
+                }
+
+                setTimeout(() => {
+                    if (inputNumNow !== inputNumLast) {
+                        console.log('Cancelled search for', searchText);
+                        return;
+                    }
+                    searchForStreams(searchText);
+                }, waitMs);
+            }
+        });
     };
 
     const twitchGtaUrl = /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V(?!\/videos|\/clips)/;
