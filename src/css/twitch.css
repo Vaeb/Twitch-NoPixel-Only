@@ -321,8 +321,8 @@ span.tooltip {
     position: absolute;
     width: 544px;
     right: 0;
-    margin-top: -78px;
-    height: 28px;
+    margin-top: -80px;
+    height: 30px;
 }
 
 .tno-search-input {
@@ -342,4 +342,20 @@ span.tooltip {
     border-radius: 0.4rem !important;
     padding: 0.5rem 1rem 0.5rem 1rem !important;
     font-size: 1.3rem !important;
+}
+
+.tno-search-input::placeholder { /* Most modern browsers support this now. */
+    color: rgba(239, 239, 241, 0.7);
+}
+
+.tno-search-input:hover {
+    outline: none;
+    border-color: hsla(0, 0%, 100%, 0.3);
+    background-color: hsla(0, 0%, 100%, 0.2);
+}
+
+.tno-search-input:focus, .tno-search-input:focus:hover {
+    outline: none;
+    border-color: hsla(0, 0%, 100%, 0.3);
+    /* background-color: #000; */
 }
