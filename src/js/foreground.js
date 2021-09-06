@@ -774,25 +774,19 @@ const filterStreams = async () => {
         return `${parseFloat((n / 1e3).toFixed(1))}K`;
     };
 
-    const addFactionStreams = (returnIfExists = false) => {
+    const addFactionStreams = (isFilteringText = false) => {
         if (live === undefined) {
             console.log('Faction filter failed - Streams not fetched yet...');
             return;
         }
 
-        if (returnIfExists && Array.from(document.getElementsByTagName('article')).filter(element => element.classList.contains('npManual')).length > 0) {
-            return;
-        }
-
         let factionStreams = live.streams;
-
-        const isFilteringText = filterStreamText !== '';
 
         if (isFilteringText) {
             factionStreams = factionStreams.filter(stream => matchesFilterStreamText(stream));
         }
 
-        if (!isFilteringText || !metaFactions.includes(filterStreamFaction)) {
+        if (isFilteringText === false) { // !metaFactions.includes(filterStreamFaction)
             factionStreams = factionStreams.filter(stream =>
                 (filterStreamFaction === 'publicnp' ? stream.tagFactionSecondary === filterStreamFaction : !!stream.factionsMap[filterStreamFaction]));
         }
@@ -1030,8 +1024,9 @@ const filterStreams = async () => {
         resetFiltering();
         // if (filterStreamFaction !== 'cleanbois') return;
         console.log('Filtering for:', filterStreamText);
-        if (filterStreamText !== '' || !metaFactions.includes(filterStreamFaction)) {
-            addFactionStreams();
+        const isFilteringText = filterStreamText !== '';
+        if (isFilteringText || !metaFactions.includes(filterStreamFaction)) {
+            addFactionStreams(isFilteringText);
         }
         startDeleting();
     };
