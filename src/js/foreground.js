@@ -444,6 +444,8 @@ const filterStreams = async () => {
                     liveEl.textContent = stream.tagText;
                     // }
 
+                    // For titles, add opacity 0.7 span (?)
+
                     if (stream.tagFactionSecondary === 'publicnp') {
                         console.log('on public', channelName, `-webkit-linear-gradient(-60deg, ${useColorsDark[stream.tagFaction]} 50%, ${useColorsDark.publicnp} 50%)`);
                         liveElDiv.style.backgroundImage = `-webkit-linear-gradient(-60deg, ${useColorsDark.publicnp} 50%, ${useColorsDark[stream.tagFaction]} 50%)`;
