@@ -74,7 +74,7 @@ const FSTATES = {
 };
 
 const metaFactions = ['allnopixel', 'alltwitch'];
-const npMetaFactions = [...metaFactions, 'othernp', 'publicnp'];
+const npMetaFactions = [...metaFactions, 'othernp', 'publicnp', 'international'];
 
 // #00A032 #cd843f #b71540 #ff0074 #8854d0
 // fastlane: '#40739e',
@@ -197,10 +197,11 @@ const filterStreams = async () => {
     console.log(`[${dateStr()}] Fetched data!`);
     console.log(live);
 
-    let [tnoStatus, tnoEnglish, tnoPublic, tnoOthers, tnoSearch, tnoScrolling, tnoAllowAll] = await getStorage([
+    let [tnoStatus, tnoEnglish, tnoPublic, tnoInternational, tnoOthers, tnoSearch, tnoScrolling, tnoAllowAll] = await getStorage([
         ['tnoStatus', true],
         ['tnoEnglish', true],
         ['tnoPublic', true],
+        ['tnoInternational', true],
         ['tnoOthers', false],
         ['tnoSearch', true],
         ['tnoScrolling', false],
@@ -335,6 +336,7 @@ const filterStreams = async () => {
             const nowFilterEnabled = filterEnabled && filterStreamFaction !== 'alltwitch';
             const tnoOthersNow = tnoOthers || filterStreamFaction === 'other';
             const tnoPublicNow = tnoPublic || filterStreamFaction === 'publicnp';
+            const tnoInternationalNow = tnoInternational || filterStreamFaction === 'international';
 
             let streamState; // remove, mark-np, mark-other
             if ((isMetaFaction === false || isFilteringText) && isManualStream === false) {
@@ -354,21 +356,21 @@ const filterStreams = async () => {
                         }
                     } else {
                         // NoPixel stream
-                        if (tnoPublicNow || stream.noPublicInclude) {
-                            // NoPixel Public if allowed or NoPixel WL Stream
+                        if ((tnoPublicNow || stream.noPublicInclude) && (tnoInternationalNow || stream.noInternationalInclude)) {
+                            // NoPixel Public if allowed or NoPixel International if allowed or NoPixel WL Stream
                             streamState = FSTATES.nopixel;
                         } else {
-                            // Public stream when not allowed
+                            // Public/International stream when not allowed
                             streamState = FSTATES.remove;
                         }
                     }
                 } else {
                     if (stream && stream.tagFaction !== 'other') {
                         // If NoPixel streamer that isn't on another server
-                        if (isMetaFaction || tnoPublicNow || stream.noPublicInclude) {
+                        if (isMetaFaction || ((tnoPublicNow || stream.noPublicInclude) && (tnoInternationalNow || stream.noInternationalInclude))) {
                             streamState = FSTATES.nopixel;
                         } else {
-                            // Public stream when not allowed and using filter
+                            // Public/International stream when not allowed and using filter
                             streamState = FSTATES.remove;
                         }
                     } else {
@@ -423,7 +425,13 @@ const filterStreams = async () => {
                 } else {
                     allowStream = isMetaFaction;
                     if (allowStream === false) {
-                        allowStream = filterStreamFaction === 'publicnp' ? stream.tagFactionSecondary === 'publicnp' : !!stream.factionsMap[filterStreamFaction];
+                        if (filterStreamFaction === 'publicnp') {
+                            allowStream = stream.tagFactionSecondary === 'publicnp';
+                        } else if (filterStreamFaction === 'international') {
+                            allowStream = stream.tagFactionSecondary === 'international';
+                        } else {
+                            allowStream = !!stream.factionsMap[filterStreamFaction];
+                        }
                     }
                 }
 
@@ -446,10 +454,10 @@ const filterStreams = async () => {
 
                     // For titles, add opacity 0.7 span (?)
 
-                    if (stream.tagFactionSecondary === 'publicnp') {
-                        console.log('on public', channelName, `-webkit-linear-gradient(-60deg, ${useColorsDark[stream.tagFaction]} 50%, ${useColorsDark.publicnp} 50%)`);
-                        liveElDiv.style.backgroundImage = `-webkit-linear-gradient(-60deg, ${useColorsDark.publicnp} 50%, ${useColorsDark[stream.tagFaction]} 50%)`;
-                        // liveElDiv.style.backgroundImage = `linear-gradient(to top left, ${liveElDivBgColor} 50%, ${useColors.publicnp} 50%)`;
+                    if (stream.tagFactionSecondary === 'publicnp' || stream.tagFactionSecondary === 'international') {
+                        console.log('on', stream.tagFactionSecondary, channelName);
+                        liveElDiv.style.backgroundImage = `-webkit-linear-gradient(-60deg, ${useColorsDark[stream.tagFactionSecondary]} 50%, ${useColorsDark[stream.tagFaction]} 50%)`;
+                        // liveElDiv.style.backgroundImage = `linear-gradient(to top left, ${liveElDivBgColor} 50%, ${useColorsDark[stream.tagFactionSecondary]} 50%)`;
                     }
                 }
             }
@@ -660,6 +668,12 @@ const filterStreams = async () => {
                                 </span>
                             </div>
                             <div class="settings-option">
+                                <span class="settings-name">Include NoPixel international:</span>
+                                <span class="settings-value">
+                                    <input id="setting-international" type="checkbox" class="toggle" ${tnoInternational ? 'checked' : ''}>
+                                </span>
+                            </div>
+                            <div class="settings-option">
                                 <span class="settings-name">Include other roleplay servers:</span>
                                 <span class="settings-value">
                                     <input id="setting-others" type="checkbox" class="toggle" ${tnoOthers ? 'checked' : ''}>
@@ -711,6 +725,7 @@ const filterStreams = async () => {
                     const $settingSearch = $('#setting-search');
                     const $settingScrolling = $('#setting-scrolling');
                     const $settingPublic = $('#setting-public');
+                    const $settingInternational = $('#setting-international');
                     const $settingOthers = $('#setting-others');
                     const $settingShowAll = $('#setting-show-all');
 
@@ -749,6 +764,13 @@ const filterStreams = async () => {
                         setStorage('tnoPublic', newValue);
                         tnoPublic = newValue;
                         console.log('Set include-public to:', newValue);
+                    });
+
+                    $settingInternational.change(function () {
+                        const newValue = this.checked;
+                        setStorage('tnoInternational', newValue);
+                        tnoInternational = newValue;
+                        console.log('Set include-international to:', newValue);
                     });
 
                     $settingOthers.change(function () {
@@ -790,7 +812,7 @@ const filterStreams = async () => {
 
         if (isFilteringText === false) { // !metaFactions.includes(filterStreamFaction)
             factionStreams = factionStreams.filter(stream =>
-                (filterStreamFaction === 'publicnp' ? stream.tagFactionSecondary === filterStreamFaction : !!stream.factionsMap[filterStreamFaction]));
+                (['publicnp', 'international'].includes(filterStreamFaction) ? stream.tagFactionSecondary === filterStreamFaction : !!stream.factionsMap[filterStreamFaction]));
         }
         console.log('filtered streams:', factionStreams);
 
@@ -1049,20 +1071,21 @@ const filterStreams = async () => {
 
         const filterFactions = live.filterFactions;
 
-        if (tnoOthers) {
-            filterFactions[0][1] = 'All RP (Default)';
-        } else if (!tnoPublic) {
-            filterFactions[0][1] = 'All NoPixel-WL (Default)';
-        }
+        let baseWord = 'NoPixel';
+        const flagWords = [];
+        if (tnoOthers) baseWord = 'RP';
+        if (!tnoPublic) flagWords.push('-WL');
+        if (!tnoInternational) flagWords.push('-U.S.');
+        filterFactions[0][1] = `All ${baseWord}${flagWords.join('')} (Default)`;
 
-        if (!tnoPublic) {
-            const factionCountSpecial = { allnopixel: true, alltwitch: true, publicnp: true, other: true };
+        if (!tnoPublic || !tnoInternational) {
+            const factionCountSpecial = { allnopixel: true, alltwitch: true, publicnp: true, international: true, other: true };
             filterFactions.forEach((data) => {
                 if (data[2] === false) return;
                 const mini = data[0];
                 const existsWl = factionCountSpecial[mini]
                     ? live.factionCount[mini] > 0
-                    : live.streams.some(stream => !!stream.factionsMap[mini] && stream.noPublicInclude === true);
+                    : live.streams.some(stream => !!stream.factionsMap[mini] && (tnoPublic || stream.noPublicInclude) && (tnoInternational || stream.noInternationalInclude));
                 if (!existsWl) data[2] = false;
             });
         }
@@ -1154,10 +1177,11 @@ const filterStreams = async () => {
             return false;
         }
 
-        [tnoStatus, tnoEnglish, tnoPublic, tnoOthers, tnoSearch, tnoScrolling, tnoAllowAll] = await getStorage([
+        [tnoStatus, tnoEnglish, tnoPublic, tnoInternational, tnoOthers, tnoSearch, tnoScrolling, tnoAllowAll] = await getStorage([
             ['tnoStatus', true],
             ['tnoEnglish', true],
             ['tnoPublic', true],
+            ['tnoInternational', true],
             ['tnoOthers', false],
             ['tnoSearch', true],
             ['tnoScrolling', false],
