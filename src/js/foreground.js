@@ -197,12 +197,13 @@ const filterStreams = async () => {
     console.log(`[${dateStr()}] Fetched data!`);
     console.log(live);
 
-    let [tnoStatus, tnoEnglish, tnoPublic, tnoInternational, tnoOthers, tnoSearch, tnoScrolling, tnoAllowAll] = await getStorage([
+    let [tnoStatus, tnoEnglish, tnoPublic, tnoInternational, tnoOthers, tnoWlOverride, tnoSearch, tnoScrolling, tnoAllowAll] = await getStorage([
         ['tnoStatus', true],
         ['tnoEnglish', true],
         ['tnoPublic', true],
         ['tnoInternational', true],
         ['tnoOthers', false],
+        ['tnoWlOverride', true],
         ['tnoSearch', true],
         ['tnoScrolling', false],
         ['tnoAllowAll', false],
@@ -334,9 +335,10 @@ const filterStreams = async () => {
             const stream = streamsMap[channelName];
 
             const nowFilterEnabled = filterEnabled && filterStreamFaction !== 'alltwitch';
-            const tnoOthersNow = tnoOthers || filterStreamFaction === 'other';
-            const tnoPublicNow = tnoPublic || filterStreamFaction === 'publicnp';
-            const tnoInternationalNow = tnoInternational || filterStreamFaction === 'international';
+            const tnoWlOverrideNow = tnoWlOverride && stream && stream.wlOverride;
+            const tnoOthersNow = tnoOthers || filterStreamFaction === 'other' || tnoWlOverrideNow;
+            const tnoPublicNow = tnoPublic || filterStreamFaction === 'publicnp' || tnoWlOverrideNow;
+            const tnoInternationalNow = tnoInternational || filterStreamFaction === 'international' || tnoWlOverrideNow;
 
             let streamState; // remove, mark-np, mark-other
             if ((isMetaFaction === false || isFilteringText) && isManualStream === false) {
@@ -662,21 +664,29 @@ const filterStreams = async () => {
                                 </span>
                             </div>
                             <div class="settings-option">
-                                <span class="settings-name">Include NoPixel public:</span>
+                                <span class="settings-name"><span class="bold">Remove</span> NoPixel public streams:</span>
                                 <span class="settings-value">
-                                    <input id="setting-public" type="checkbox" class="toggle" ${tnoPublic ? 'checked' : ''}>
+                                    <input id="setting-public" type="checkbox" class="toggle" ${!tnoPublic ? 'checked' : ''}>
                                 </span>
                             </div>
                             <div class="settings-option">
-                                <span class="settings-name">Include NoPixel international:</span>
+                                <span class="settings-name"><span class="bold">Remove</span> NoPixel international streams:</span>
                                 <span class="settings-value">
-                                    <input id="setting-international" type="checkbox" class="toggle" ${tnoInternational ? 'checked' : ''}>
+                                    <input id="setting-international" type="checkbox" class="toggle" ${!tnoInternational ? 'checked' : ''}>
                                 </span>
                             </div>
                             <div class="settings-option">
-                                <span class="settings-name">Include other roleplay servers:</span>
+                                <span class="settings-name"><span class="bold">Remove</span> other roleplay servers:</span>
                                 <span class="settings-value">
-                                    <input id="setting-others" type="checkbox" class="toggle" ${tnoOthers ? 'checked' : ''}>
+                                    <input id="setting-others" type="checkbox" class="toggle" ${!tnoOthers ? 'checked' : ''}>
+                                </span>
+                            </div>
+                            <div class="settings-option">
+                                <span class="settings-name tooltip">Never <span class="bold">remove</span> streamers who would<br/>normally be on the WL server:
+                                    <span class="tooltiptext tooltiptext-hover">Overrides the "remove" settings above to include streamers from NoPixel-Whitelist, such as Ramee, when they play on another server such as NoPixel Public.</span>
+                                </span>
+                                <span class="settings-value">
+                                    <input id="setting-wl-override" type="checkbox" class="toggle" ${tnoWlOverride ? 'checked' : ''}>
                                 </span>
                             </div>
                             <div class="settings-option">
@@ -687,7 +697,7 @@ const filterStreams = async () => {
                             </div>
                             <div class="settings-option">
                                 <span class="settings-name tooltip">Scrolling adjustments:
-                                    <span class="tooltiptext">Reduces scrolling lag by making Twitch only fetch one batch of new streams after scrolling to the page bottom.</span>
+                                    <span class="tooltiptext tooltiptext-hover">Reduces scrolling lag by making Twitch only fetch one batch of new streams after scrolling to the page bottom.</span>
                                 </span>
                                 <span class="settings-value">
                                     <input id="setting-scrolling" type="checkbox" class="toggle" ${tnoScrolling ? 'checked' : ''}>
@@ -727,6 +737,7 @@ const filterStreams = async () => {
                     const $settingPublic = $('#setting-public');
                     const $settingInternational = $('#setting-international');
                     const $settingOthers = $('#setting-others');
+                    const $settingWlOverride = $('#setting-wl-override');
                     const $settingShowAll = $('#setting-show-all');
 
                     $settingsReload.click(() => window.location.reload());
@@ -760,24 +771,31 @@ const filterStreams = async () => {
                     });
 
                     $settingPublic.change(function () {
-                        const newValue = this.checked;
+                        const newValue = !this.checked; // Reverse for include
                         setStorage('tnoPublic', newValue);
                         tnoPublic = newValue;
                         console.log('Set include-public to:', newValue);
                     });
 
                     $settingInternational.change(function () {
-                        const newValue = this.checked;
+                        const newValue = !this.checked; // Reverse for include
                         setStorage('tnoInternational', newValue);
                         tnoInternational = newValue;
                         console.log('Set include-international to:', newValue);
                     });
 
                     $settingOthers.change(function () {
-                        const newValue = this.checked;
+                        const newValue = !this.checked; // Reverse for include
                         setStorage('tnoOthers', newValue);
                         tnoOthers = newValue;
                         console.log('Set include-others to:', newValue);
+                    });
+
+                    $settingWlOverride.change(function () {
+                        const newValue = this.checked;
+                        setStorage('tnoWlOverride', newValue);
+                        tnoWlOverride = newValue;
+                        console.log('Set wl-override to:', newValue);
                     });
 
                     if ($settingShowAll) {
@@ -1177,12 +1195,13 @@ const filterStreams = async () => {
             return false;
         }
 
-        [tnoStatus, tnoEnglish, tnoPublic, tnoInternational, tnoOthers, tnoSearch, tnoScrolling, tnoAllowAll] = await getStorage([
+        [tnoStatus, tnoEnglish, tnoPublic, tnoInternational, tnoOthers, tnoWlOverride, tnoSearch, tnoScrolling, tnoAllowAll] = await getStorage([
             ['tnoStatus', true],
             ['tnoEnglish', true],
             ['tnoPublic', true],
             ['tnoInternational', true],
             ['tnoOthers', false],
+            ['tnoWlOverride', true],
             ['tnoSearch', true],
             ['tnoScrolling', false],
             ['tnoAllowAll', false],

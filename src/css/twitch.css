@@ -36,7 +36,13 @@ div.settings-options {
 
 div.settings-option {
     margin-bottom: 10px;
-    /* display: flex; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+span.settings-name {
+    margin-right: 8px;
 }
 
 .bold {
@@ -48,6 +54,8 @@ span.settings-value {
     /* text-align: right; */
     box-sizing: border-box;
     margin-left: 13px;
+    display: flex;
+    align-items: center;
 }
 
 input[type='checkbox'] {
@@ -112,9 +120,10 @@ span.tooltip {
     padding: 5px 3px;
     position: absolute;
     z-index: 1;
-    bottom: 150%;
+    bottom: calc(100% + 8px);
     left: 50%;
-    margin-left: -60px;
+    transform: translateX(-50%);
+    /* margin-left: -60px; */
 }
 
 .tooltip .tooltiptext2 {
@@ -142,9 +151,9 @@ span.tooltip {
     border-color: rgba(255, 255, 255, 0.8) transparent transparent transparent;
 }
 
-/* .tooltip:hover .tooltiptext {
+.tooltip:hover .tooltiptext-hover {
     visibility: visible;
-} */
+}
 
 .lightmodeScreen {
     background-color: #000;
