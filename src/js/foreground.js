@@ -591,30 +591,32 @@ const filterStreams = async () => {
                 console.log(`looking for ${englishWord}`);
 
                 const tagSearchDropdown = $('div.tag-search__scrollable-area:visible')[0];
+                const tagSearchContainer = $('div[data-a-target="top-tags-list"]')[0];
                 // const searchResults = $('div[aria-label="Search Results"]:visible')[0];
-                const isVis1 = tagSearchDropdown != null;
+                const isVis1 = tagSearchDropdown != null && tagSearchContainer != null;
                 const isReady1 = isVis1 && tagSearchDropdown.querySelector('div.tw-loading-spinner') == null;
 
                 // eslint-disable-next-line no-await-in-loop
                 englishTag = await waitForElement(() => {
-                    const tagSearchDropdownNow = document.querySelector('div.tag-search__scrollable-area');
-                    if (!tagSearchDropdownNow) return null;
-                    const englishXPath = `descendant::div[text()="${englishWord}"] | descendant::p[text()="${englishWord}"]`;
-                    const snapshots = document.evaluate(englishXPath, tagSearchDropdownNow, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
-                    if (snapshots.snapshotLength < 2) return null;
+                    // const tagSearchDropdownNow = document.querySelector('div.tag-search__scrollable-area');
+                    const tagSearchContainerNow = document.querySelector('div[data-a-target="top-tags-list"]');
+                    if (!tagSearchContainerNow) return null;
+                    const englishXPath = `descendant::div[text()="${englishWord}"]`;
+                    const snapshots = document.evaluate(englishXPath, tagSearchContainerNow, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+                    if (snapshots.snapshotLength < 1) return null;
                     const item1 = snapshots.snapshotItem(0);
-                    if (!item1.title || item1.title === englishWord) return item1;
-                    return snapshots.snapshotItem(1);
+                    // if (!item1.title || item1.title === englishWord) return item1;
+                    return item1;
                 }, 1000);
 
-                const isVis2 = $('div.tag-search__scrollable-area:visible')[0] != null;
+                const isVis2 = $('div[data-a-target="top-tags-list"]')[0] != null;
 
                 if (englishTag == null && isReady1 && isVis2) {
                     numAttempts++;
                     console.log('tag-search appeared', numAttempts);
                 }
 
-                if (numAttempts >= 1) {
+                if (numAttempts >= 2) {
                     console.log(`failed to find ${englishWord} option in tag-search`);
                     break;
                 }
