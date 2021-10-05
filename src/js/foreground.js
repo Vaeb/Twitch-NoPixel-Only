@@ -335,7 +335,7 @@ const filterStreams = async () => {
             const stream = streamsMap[channelName];
 
             const nowFilterEnabled = filterEnabled && filterStreamFaction !== 'alltwitch';
-            const tnoWlOverrideNow = tnoWlOverride && stream && stream.wlOverride;
+            const tnoWlOverrideNow = tnoWlOverride && stream && stream.wlOverride && isMetaFaction;
             const tnoOthersNow = tnoOthers || filterStreamFaction === 'other' || tnoWlOverrideNow;
             const tnoPublicNow = tnoPublic || filterStreamFaction === 'publicnp' || tnoWlOverrideNow;
             const tnoInternationalNow = tnoInternational || filterStreamFaction === 'international' || tnoWlOverrideNow;
