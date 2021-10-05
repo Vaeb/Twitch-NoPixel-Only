@@ -432,7 +432,13 @@ const filterStreams = async () => {
                         } else if (filterStreamFaction === 'international') {
                             allowStream = stream.tagFactionSecondary === 'international';
                         } else {
-                            allowStream = !!stream.factionsMap[filterStreamFaction];
+                            if (stream.factionsMap[filterStreamFaction]) {
+                                allowStream = true;
+                            } else if (filterStreamFaction === 'independent' && stream.factionsMap.othernp) {
+                                allowStream = true;
+                            } else {
+                                allowStream = false;
+                            }
                         }
                     }
                 }
@@ -831,8 +837,14 @@ const filterStreams = async () => {
         }
 
         if (isFilteringText === false) { // !metaFactions.includes(filterStreamFaction)
-            factionStreams = factionStreams.filter(stream =>
-                (['publicnp', 'international'].includes(filterStreamFaction) ? stream.tagFactionSecondary === filterStreamFaction : !!stream.factionsMap[filterStreamFaction]));
+            factionStreams = factionStreams.filter((stream) => {
+                if (['publicnp', 'international'].includes(filterStreamFaction)) {
+                    return stream.tagFactionSecondary === filterStreamFaction;
+                }
+                if (stream.factionsMap[filterStreamFaction]) return true;
+                if (filterStreamFaction === 'independent' && stream.factionsMap.othernp) return true;
+                return false;
+            });
         }
         console.log('filtered streams:', factionStreams);
 
