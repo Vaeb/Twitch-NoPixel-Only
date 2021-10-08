@@ -311,6 +311,7 @@ const filterStreams = async () => {
             element = getMainElFromArticle(element);
             const titleEl = element.querySelector('h3');
             const channelEl = element.querySelector("a[data-a-target='preview-card-channel-link']");
+            const channelElNode = [...channelEl.childNodes].find(node => node.nodeType === 3);
             let liveElDiv = element.getElementsByClassName('tw-channel-status-text-indicator')[0];
             const viewers = element.getElementsByClassName('tw-media-card-stat')[0].textContent;
 
@@ -331,7 +332,7 @@ const filterStreams = async () => {
                 liveEl = $('<div>')[0];
             }
 
-            const channelName = channelEl.textContent.toLowerCase();
+            const channelName = channelElNode.textContent.toLowerCase();
             const stream = streamsMap[channelName];
 
             const nowFilterEnabled = filterEnabled && filterStreamFaction !== 'alltwitch';
@@ -824,28 +825,31 @@ const filterStreams = async () => {
         return `${parseFloat((n / 1e3).toFixed(1))}K`;
     };
 
-    const addFactionStreams = (isFilteringText = false) => {
+    const addFactionStreams = (isFilteringText = false, factionStreams = undefined) => {
         if (live === undefined) {
             console.log('Faction filter failed - Streams not fetched yet...');
             return;
         }
 
-        let factionStreams = live.streams;
+        if (factionStreams === undefined) {
+            factionStreams = live.streams;
 
-        if (isFilteringText) {
-            factionStreams = factionStreams.filter(stream => matchesFilterStreamText(stream));
+            if (isFilteringText) {
+                factionStreams = factionStreams.filter(stream => matchesFilterStreamText(stream));
+            }
+
+            if (isFilteringText === false) { // !metaFactions.includes(filterStreamFaction)
+                factionStreams = factionStreams.filter((stream) => {
+                    if (['publicnp', 'international'].includes(filterStreamFaction)) {
+                        return stream.tagFactionSecondary === filterStreamFaction;
+                    }
+                    if (stream.factionsMap[filterStreamFaction]) return true;
+                    if (filterStreamFaction === 'independent' && stream.factionsMap.othernp) return true;
+                    return false;
+                });
+            }
         }
 
-        if (isFilteringText === false) { // !metaFactions.includes(filterStreamFaction)
-            factionStreams = factionStreams.filter((stream) => {
-                if (['publicnp', 'international'].includes(filterStreamFaction)) {
-                    return stream.tagFactionSecondary === filterStreamFaction;
-                }
-                if (stream.factionsMap[filterStreamFaction]) return true;
-                if (filterStreamFaction === 'independent' && stream.factionsMap.othernp) return true;
-                return false;
-            });
-        }
         console.log('filtered streams:', factionStreams);
 
         const baseEl = document.querySelector('[data-target="directory-first-item"]');
@@ -1074,17 +1078,52 @@ const filterStreams = async () => {
         return text.trim();
     };
 
+    let inputNumLast = 0;
+    let lastResultsStr;
+
     const searchForStreams = (searchText) => {
+        const inputNumNow = ++inputNumLast;
         filterStreamText = searchText;
         filterStreamTextLookup = parseLookup(searchText);
-        resetFiltering();
-        // if (filterStreamFaction !== 'cleanbois') return;
-        console.log('Filtering for:', filterStreamText);
         const isFilteringText = filterStreamText !== '';
-        if (isFilteringText || !metaFactions.includes(filterStreamFaction)) {
-            addFactionStreams(isFilteringText);
+        console.log('Filtering for:', filterStreamText);
+
+        const factionStreams = isFilteringText ? live.streams.filter(stream => matchesFilterStreamText(stream)) : undefined;
+        const nowResultsStr = JSON.stringify(factionStreams);
+        if (nowResultsStr === lastResultsStr) return;
+        lastResultsStr = nowResultsStr;
+
+        const numResults = factionStreams ? factionStreams.length : 0;
+
+        let waitMs = 560; // 560
+
+        if (numResults === 0) {
+            waitMs = 0;
+        } else if (numResults <= 6) {
+            waitMs = 100; // 100
+        } else if (numResults <= 12) {
+            waitMs = 185; // 185
+        } else if (numResults <= 18) {
+            waitMs = 260; // 260
+        } else if (numResults <= 24) {
+            waitMs = 335; // 335
+        } else if (numResults <= 30) {
+            waitMs = 410; // 410
         }
-        startDeleting();
+
+        setTimeout(() => {
+            if (inputNumNow !== inputNumLast) {
+                console.log('Cancelled search for', searchText);
+                return;
+            }
+            console.log(`(${waitMs}) Filtering...`);
+            resetFiltering();
+            // if (filterStreamFaction !== 'cleanbois') return;
+            if (isFilteringText || !metaFactions.includes(filterStreamFaction)) {
+                addFactionStreams(isFilteringText, factionStreams);
+            }
+            startDeleting();
+        }, waitMs);
     };
 
     const setupFilter = async () => {
@@ -1170,30 +1209,13 @@ const filterStreams = async () => {
             const $searchInput = $searchDiv.append('<input class="tno-search-input" placeholder="Search for character name / nickname / stream...">');
             $groupDiv.append($searchDiv);
 
-            let inputNumLast = 0;
-
             $searchInput.on('input', (e) => {
-                const inputNumNow = ++inputNumLast;
                 const searchText = e.target.value.toLowerCase().trim();
 
                 const textLen = searchText.length;
 
                 if (searchText === '' || textLen >= 2) {
-                    let waitMs = searchText === '' ? 0 : 650; // 1000
-
-                    if (textLen > 4) {
-                        waitMs = 100; // 200
-                    } else if (textLen > 2) {
-                        waitMs = 300; // 500
-                    }
-
-                    setTimeout(() => {
-                        if (inputNumNow !== inputNumLast) {
-                            console.log('Cancelled search for', searchText);
-                            return;
-                        }
-                        searchForStreams(searchText);
-                    }, waitMs);
+                    searchForStreams(searchText);
                 }
             });
         }
