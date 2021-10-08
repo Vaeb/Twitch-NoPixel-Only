@@ -1091,7 +1091,6 @@ const filterStreams = async () => {
         const factionStreams = isFilteringText ? live.streams.filter(stream => matchesFilterStreamText(stream)) : undefined;
         const nowResultsStr = JSON.stringify(factionStreams);
         if (nowResultsStr === lastResultsStr) return;
-        lastResultsStr = nowResultsStr;
 
         const numResults = factionStreams ? factionStreams.length : 0;
 
@@ -1112,10 +1111,11 @@ const filterStreams = async () => {
         }
 
         setTimeout(() => {
-            if (inputNumNow !== inputNumLast) {
+            if (inputNumNow !== inputNumLast || nowResultsStr === lastResultsStr) {
                 console.log('Cancelled search for', searchText);
                 return;
             }
+            lastResultsStr = nowResultsStr;
             console.log(`(${waitMs}) Filtering...`);
             resetFiltering();
             // if (filterStreamFaction !== 'cleanbois') return;
