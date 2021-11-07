@@ -462,7 +462,7 @@ const filterStreams = async () => {
                     // }
 
                     if (stream.tagText.startsWith('《')) {
-                        liveEl.style.setProperty('margin-left', '-3px');
+                        liveEl.style.setProperty('margin-left', '-2px');
                     }
 
                     // For titles, add opacity 0.7 span (?)
