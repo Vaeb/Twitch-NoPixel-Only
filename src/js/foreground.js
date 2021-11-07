@@ -461,6 +461,10 @@ const filterStreams = async () => {
                     liveEl.textContent = stream.tagText;
                     // }
 
+                    if (stream.tagText.startsWith('《')) {
+                        liveEl.style.setProperty('margin-left', '-3px');
+                    }
+
                     // For titles, add opacity 0.7 span (?)
 
                     if (stream.tagFactionSecondary === 'publicnp' || stream.tagFactionSecondary === 'international') {
