@@ -12,11 +12,12 @@ Everything is automatic, you don't have to do anything.
 
 ---
 
-This extension is specifically aimed at NoPixel viewers on Twitch. It has two primary features:
+This extension is specifically aimed at NoPixel viewers on Twitch. It has three primary features:
 1. Filtering GTAV streams to only show NoPixel activity.
 2. Automatically tagging/customizing NoPixel streams based on:
     1. the active character being played.
     2. the faction (if any) that the character belongs to.
+3. Searching for specific characters or factions.
 
 ### --- FAQ ---
 
