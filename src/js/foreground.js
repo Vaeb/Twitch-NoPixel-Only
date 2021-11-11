@@ -409,7 +409,7 @@ const filterStreams = async () => {
                     liveElDiv.style.backgroundColor = useColorsDark.other;
                     liveEl.style.color = useTextColor;
                     liveEl.style.setProperty('text-transform', 'none', 'important');
-                    liveEl.textContent = streamPossible.rpServer ? `::${streamPossible.rpServer}::` : '';
+                    liveEl.textContent = streamPossible.tagText ? streamPossible.tagText : '';
                 }
             } else if (streamState === FSTATES.nopixel) {
                 // NoPixel stream
