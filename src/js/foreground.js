@@ -74,7 +74,7 @@ const FSTATES = {
 };
 
 const metaFactions = ['allnopixel', 'alltwitch'];
-const npMetaFactions = [...metaFactions, 'othernp', 'publicnp', 'international'];
+const npMetaFactions = [...metaFactions, 'othernp', 'publicnp', 'international', 'guessed'];
 
 // #00A032 #cd843f #b71540 #ff0074 #8854d0
 // fastlane: '#40739e',
@@ -426,6 +426,7 @@ const filterStreams = async () => {
                 if (isFilteringText) {
                     allowStream = true;
                 } else {
+                    // Don't filter streams on meta factions (not faction specific)
                     allowStream = isMetaFaction;
                     if (allowStream === false) {
                         if (filterStreamFaction === 'publicnp') {
@@ -1154,6 +1155,7 @@ const filterStreams = async () => {
         filterFactions[0][1] = `All ${baseWord}${flagWords.join('')} (Default)`;
 
         if (!tnoPublic || !tnoInternational) {
+            // Faction counts unaffected by TNO settings for WL vs non-WL etc.
             const factionCountSpecial = { allnopixel: true, alltwitch: true, publicnp: true, international: true, other: true };
             filterFactions.forEach((data) => {
                 if (data[2] === false) return;
