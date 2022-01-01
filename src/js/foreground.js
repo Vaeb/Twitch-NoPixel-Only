@@ -678,26 +678,26 @@ const filterStreams = async () => {
                                 </span>
                             </div>
                             <div class="settings-option">
-                                <span class="settings-name"><span class="bold">Remove</span> NoPixel public streams:</span>
+                                <span class="settings-name"><span class="bold">Show</span> NoPixel public streams:</span>
                                 <span class="settings-value">
-                                    <input id="setting-public" type="checkbox" class="toggle" ${!tnoPublic ? 'checked' : ''}>
+                                    <input id="setting-public" type="checkbox" class="toggle" ${tnoPublic ? 'checked' : ''}>
                                 </span>
                             </div>
                             <div class="settings-option">
-                                <span class="settings-name"><span class="bold">Remove</span> NoPixel international streams:</span>
+                                <span class="settings-name"><span class="bold">Show</span> NoPixel international streams:</span>
                                 <span class="settings-value">
-                                    <input id="setting-international" type="checkbox" class="toggle" ${!tnoInternational ? 'checked' : ''}>
+                                    <input id="setting-international" type="checkbox" class="toggle" ${tnoInternational ? 'checked' : ''}>
                                 </span>
                             </div>
                             <div class="settings-option">
-                                <span class="settings-name"><span class="bold">Remove</span> other roleplay servers:</span>
+                                <span class="settings-name"><span class="bold">Show</span> other roleplay servers:</span>
                                 <span class="settings-value">
-                                    <input id="setting-others" type="checkbox" class="toggle" ${!tnoOthers ? 'checked' : ''}>
+                                    <input id="setting-others" type="checkbox" class="toggle" ${tnoOthers ? 'checked' : ''}>
                                 </span>
                             </div>
                             <div class="settings-option">
-                                <span class="settings-name tooltip">Never <span class="bold">remove</span> streamers who would<br/>normally be on the WL server:
-                                    <span class="tooltiptext tooltiptext-hover">Overrides the "remove" settings above to include streamers from NoPixel-Whitelist, such as Ramee, when they play on another server such as NoPixel Public.</span>
+                                <span class="settings-name tooltip">Always <span class="bold">show</span> streamers who would<br/>normally be on the WL server:
+                                    <span class="tooltiptext tooltiptext-hover">Overrides the "show" settings above to always include streamers from NoPixel-Whitelist, such as Buddha, when they play on another server (such as NoPixel Public).</span>
                                 </span>
                                 <span class="settings-value">
                                     <input id="setting-wl-override" type="checkbox" class="toggle" ${tnoWlOverride ? 'checked' : ''}>
@@ -785,21 +785,21 @@ const filterStreams = async () => {
                     });
 
                     $settingPublic.change(function () {
-                        const newValue = !this.checked; // Reverse for include
+                        const newValue = this.checked; // Reverse for remove
                         setStorage('tnoPublic', newValue);
                         tnoPublic = newValue;
                         console.log('Set include-public to:', newValue);
                     });
 
                     $settingInternational.change(function () {
-                        const newValue = !this.checked; // Reverse for include
+                        const newValue = this.checked; // Reverse for remove
                         setStorage('tnoInternational', newValue);
                         tnoInternational = newValue;
                         console.log('Set include-international to:', newValue);
                     });
 
                     $settingOthers.change(function () {
-                        const newValue = !this.checked; // Reverse for include
+                        const newValue = this.checked; // Reverse for remove
                         setStorage('tnoOthers', newValue);
                         tnoOthers = newValue;
                         console.log('Set include-others to:', newValue);
