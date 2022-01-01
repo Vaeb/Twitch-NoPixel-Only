@@ -1167,6 +1167,14 @@ const filterStreams = async () => {
             });
         }
 
+        if (isDeveloper) {
+            const guessedIdx = filterFactions.findIndex(data => data[0] === 'guessed');
+            if (guessedIdx && filterFactions[guessedIdx][2] === true) {
+                const guessed = filterFactions.splice(guessedIdx, 1)[0];
+                filterFactions.splice(2, 0, guessed);
+            }
+        }
+
         filterFactions.sort((dataA, dataB) => {
             const emptyA = dataA[2] === false;
             const emptyB = dataB[2] === false;
