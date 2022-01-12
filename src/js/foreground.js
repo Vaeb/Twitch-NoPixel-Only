@@ -574,7 +574,9 @@ const filterStreams = async () => {
         const streamElements = $('article:visible').toArray();
         for (let i = 0; i < streamElements.length; i++) {
             const streamEl = streamElements[i];
-            const channelName = streamEl.querySelector("a[data-a-target='preview-card-channel-link']").textContent.toLowerCase();
+            const channelName = [...streamEl.querySelector("a[data-a-target='preview-card-channel-link']").childNodes]
+                .find(node => node.nodeType === 3)
+                .textContent.toLowerCase();
             const streamTags = streamEl.querySelectorAll('button.tw-tag');
             if (streamsMap[channelName] && streamTags.length === 1) {
                 // Could also just check first tag?
@@ -590,6 +592,8 @@ const filterStreams = async () => {
 
         const englishWord = identifyEnglish();
 
+        // console.log('englishWord', englishWord);
+
         const hasEnglishTag = document.querySelector(`button[data-a-target="form-tag-${englishWord}"]`) != null;
 
         if (!hasEnglishTag) {
@@ -597,10 +601,11 @@ const filterStreams = async () => {
 
             let numAttempts = 0;
             while (englishTag == null) {
+                // console.log('Starting attempt to add English tag...');
                 const inp = document.querySelector('#dropdown-search-input');
                 inp.select();
 
-                console.log(`looking for ${englishWord}`);
+                // console.log(`Selected dropdown, looking for ${englishWord}`);
 
                 const tagSearchDropdown = $('div.tag-search__scrollable-area:visible')[0];
                 const tagSearchContainer = $('div[data-a-target="top-tags-list"]')[0];
@@ -608,20 +613,27 @@ const filterStreams = async () => {
                 const isVis1 = tagSearchDropdown != null && tagSearchContainer != null;
                 const isReady1 = isVis1 && tagSearchDropdown.querySelector('div.tw-loading-spinner') == null;
 
+                // console.log('Tag dropdown ready:', isVis1, isReady1);
+
                 // eslint-disable-next-line no-await-in-loop
                 englishTag = await waitForElement(() => {
                     // const tagSearchDropdownNow = document.querySelector('div.tag-search__scrollable-area');
                     const tagSearchContainerNow = document.querySelector('div[data-a-target="top-tags-list"]');
                     if (!tagSearchContainerNow) return null;
                     const englishXPath = `descendant::div[text()="${englishWord}"]`;
+                    // console.log('Looking in tags list for:', englishXPath);
                     const snapshots = document.evaluate(englishXPath, tagSearchContainerNow, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+                    // console.log('Results:', snapshots.snapshotLength, snapshots);
                     if (snapshots.snapshotLength < 1) return null;
                     const item1 = snapshots.snapshotItem(0);
+                    // console.log('item1', item1);
                     // if (!item1.title || item1.title === englishWord) return item1;
                     return item1;
                 }, 1000);
 
                 const isVis2 = $('div[data-a-target="top-tags-list"]')[0] != null;
+
+                // console.log('English tag:', englishTag, '|', 'Tags list ready:', isVis2);
 
                 if (englishTag == null && isReady1 && isVis2) {
                     numAttempts++;
