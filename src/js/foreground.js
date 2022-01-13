@@ -1272,7 +1272,7 @@ const filterStreams = async () => {
 
         console.log('>>>>>>>>>>>> setup filter');
 
-        const isMetaFaction = metaFactions.includes(filterStreamFaction);
+        // const isMetaFaction = metaFactions.includes(filterStreamFaction);
 
         // $labelDiv.find('label').text('Filter factions');
         $labelDiv.remove();
