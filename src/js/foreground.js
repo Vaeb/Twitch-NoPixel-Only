@@ -143,46 +143,65 @@ const filterStreams = async () => {
     console.log(`[${dateStr()}] Fetching NP stream data...`);
     const isDeveloper = typeof document.cookie === 'string' && document.cookie.includes('name=vaeben');
 
-    const fetchHeaders = new Headers();
-    fetchHeaders.append('pragma', 'no-cache');
-    fetchHeaders.append('cache-control', 'no-cache');
-
-    // https://vaeb.io:3030 | http://localhost:3029
-    const dataRequest = new Request('https://vaeb.io:3030/live'); // API code is open-source: https://github.com/Vaeb/TNO-Backend
-
     let live;
-    for (let i = 0; i <= 2; i++) {
-        try {
-            const fetchResult = await fetch(dataRequest);
-            live = await fetchResult.json();
-            break;
-        } catch (err) {
-            if (i < 2) {
-                console.log('Failed to fetch live data, retrying...');
-                await sleep(2000);
-            } else {
-                console.error('Failed to fetch live data:');
-                throw new Error(err);
+    let streamsMap;
+    let filterListeners = [];
+
+    const requestLiveData = async () => {
+        const fetchHeaders = new Headers();
+        fetchHeaders.append('pragma', 'no-cache');
+        fetchHeaders.append('cache-control', 'no-cache');
+
+        // https://vaeb.io:3030 | http://localhost:3029
+        const dataRequest = new Request('https://vaeb.io:3030/live'); // API code is open-source: https://github.com/Vaeb/TNO-Backend
+
+        const maxTries = 4;
+        for (let i = 0; i < maxTries; i++) {
+            try {
+                const fetchResult = await fetch(dataRequest);
+                live = await fetchResult.json();
+                break;
+            } catch (err) {
+                if (i < (maxTries - 1)) {
+                    console.log('Failed to fetch live data, retrying...');
+                    await sleep(2000);
+                } else {
+                    console.error('Failed to fetch live data:');
+                    throw new Error(err);
+                }
             }
         }
-    }
 
-    if (live == null || live.streams == null || live.streams.length === 0) {
-        console.log('Failed to fetch live data (empty):', live);
-        return;
-    }
+        if (live == null || live.streams == null || live.streams.length === 0) {
+            console.log('Failed to fetch live data (empty):', live);
+            return false;
+        }
 
-    // let waitForFilterResolve;
-    // const waitForFilter = new Promise((resolve) => {
-    //     waitForFilterResolve = resolve;
-    // });
+        // let waitForFilterResolve;
+        // const waitForFilter = new Promise((resolve) => {
+        //     waitForFilterResolve = resolve;
+        // });
 
-    // const waitForFilterAndStreams = Promise.all([waitForFilter, waitForAllStreams]);
-    // waitForFilterAndStreams.then(() => {
-    //     console.log('filter and streams ready');
-    // });
+        // const waitForFilterAndStreams = Promise.all([waitForFilter, waitForAllStreams]);
+        // waitForFilterAndStreams.then(() => {
+        //     console.log('filter and streams ready');
+        // });
 
-    ({ minViewers, stopOnMin, intervalSeconds, useColorsDark, useColorsLight } = live);
+        ({ minViewers, stopOnMin, intervalSeconds, useColorsDark, useColorsLight } = live);
+
+        console.log(`[${dateStr()}] Fetched data!`);
+        console.log('live', live);
+
+        streamsMap = Object.assign({}, ...live.streams.map(stream => ({ [stream.channelName.toLowerCase()]: stream })));
+        console.log('streamsMap', streamsMap);
+
+        return true;
+    };
+
+    const requestResult = await requestLiveData();
+    console.log('requestResult', requestResult);
+
+    if (requestResult !== true) return;
 
     const bodyHexColor = getComputedStyle(document.body).getPropertyValue('--color-background-body');
     let isDark = true;
@@ -193,9 +212,6 @@ const filterStreams = async () => {
     } else {
         useColors = useColorsDark;
     }
-
-    console.log(`[${dateStr()}] Fetched data!`);
-    console.log(live);
 
     let [tnoStatus, tnoEnglish, tnoPublic, tnoInternational, tnoOthers, tnoWlOverride, tnoSearch, tnoScrolling, tnoAllowAll] = await getStorage([
         ['tnoStatus', true],
@@ -209,9 +225,6 @@ const filterStreams = async () => {
         ['tnoAllowAll', false],
     ]);
     const filterEnabled = !isDeveloper || !tnoAllowAll; // Fail-safe incase extension accidentally gets published with tnoAllowAll enabled
-
-    const streamsMap = Object.assign({}, ...live.streams.map(stream => ({ [stream.channelName.toLowerCase()]: stream })));
-    console.log(streamsMap);
 
     let isDeleting = false;
     let minLoadedViewers = null;
@@ -426,7 +439,7 @@ const filterStreams = async () => {
                 if (isFilteringText) {
                     allowStream = true;
                 } else {
-                    // Don't filter streams on meta factions (not faction specific)
+                    // Don't do filtering on meta factions (not faction specific)
                     allowStream = isMetaFaction;
                     if (allowStream === false) {
                         if (filterStreamFaction === 'publicnp') {
@@ -505,7 +518,7 @@ const filterStreams = async () => {
                 }
                 if (isFirstRemove) isFirstRemove = false;
             } else {
-                console.log(`[${dateStr()}] Handled non-removed stream: ${channelName}`);
+                console.log(`[${dateStr()}] Handled allowed stream: ${channelName}`);
             }
         });
 
@@ -680,7 +693,7 @@ const filterStreams = async () => {
                     <div class="tno-settings-container">
                         <div class="settings-titles">
                             <span class="settings-title">TNO Settings</span>
-                            <span class="settings-reload">&#x27f3;</span>
+                            <span class="tno-reload settings-reload">&#x27f3;</span>
                         </div>
                         <div class="settings-options">
                             <div class="settings-option">
@@ -739,7 +752,7 @@ const filterStreams = async () => {
     isDeveloper
         ? `
                             <div class="settings-option">
-                                <span class="settings-name">Filter streams</span>
+                                <span class="settings-name">Enable filtering</span>
                                 <span class="settings-value">
                                     <input id="setting-show-all" type="checkbox" class="toggle" ${!tnoAllowAll ? 'checked' : ''}>
                                 </span>
@@ -892,7 +905,26 @@ const filterStreams = async () => {
         }
     };
 
-    const activateSelect = (selectFirst = false) => {
+    let setupFilter;
+    const destroyFilter = () => {
+        const filterDiv = document.querySelector('.tno-filter-options');
+        if (!filterDiv) return;
+        for (const eventListener of filterListeners) {
+            const { el, evName, evFunc } = eventListener;
+            el.removeEventListener(evName, evFunc); // try catch
+        }
+        filterListeners = [];
+        const searchDiv = document.querySelector('.tno-search-div');
+        filterDiv.remove();
+        if (searchDiv) searchDiv.remove();
+    };
+
+    const addFilterListener = (el, evName, evFunc) => {
+        el.addEventListener(evName, evFunc);
+        filterListeners.push({ el, evName, evFunc });
+    };
+
+    const activateSelect = (selectFirst = false, selectFaction = undefined) => {
         const elSelectCustom = document.getElementsByClassName('js-selectCustom')[0];
         // const elSelectCustomBox = elSelectCustom.children[0];
         const elSelectCustomBox = elSelectCustom.getElementsByClassName('selectCustom-trigger')[0];
@@ -901,6 +933,7 @@ const filterStreams = async () => {
         const customOptsList = Array.from(elSelectCustomOpts.children);
         const optionsCount = customOptsList.length;
         const defaultLabel = elSelectCustomBox.getAttribute('data-value');
+        const filterReloadBtn = elSelectCustom.querySelector('.filter-reload');
 
         let optionChecked = null;
         let optionHoveredIndex = 0;
@@ -938,6 +971,7 @@ const filterStreams = async () => {
         };
 
         const watchClickOutside = (e) => {
+            // console.log('Event happened: watchClickOutside');
             const didClickedOutside = !elSelectCustom.contains(e.target);
             if (didClickedOutside) {
                 closeSelectCustom();
@@ -978,7 +1012,7 @@ const filterStreams = async () => {
 
             filterStreamFaction = value;
             elSelectCustomInput.value = '';
-            console.log('Updated selected!');
+            console.log('Updated selected!', filterStreamFaction);
             inputHandler();
             resetFiltering();
             // if (filterStreamFaction !== 'cleanbois') return;
@@ -988,6 +1022,7 @@ const filterStreams = async () => {
         };
 
         const supportKeyboardNavigation = (e) => {
+            // console.log('Key pressed');
             // press down -> go next
             if (e.keyCode === 40 && optionHoveredIndex < optionsCount - 1) {
                 e.preventDefault(); // prevent page scrolling
@@ -1032,8 +1067,8 @@ const filterStreams = async () => {
             }
 
             // Add related event listeners
-            document.addEventListener('click', watchClickOutside);
-            document.addEventListener('keydown', supportKeyboardNavigation);
+            addFilterListener(document, 'click', watchClickOutside);
+            addFilterListener(document, 'keydown', supportKeyboardNavigation);
 
             elSelectCustomInput.focus();
         };
@@ -1051,7 +1086,9 @@ const filterStreams = async () => {
         };
 
         // Toggle custom select visibility when clicking the box
-        elSelectCustomBox.addEventListener('click', (e) => {
+        // eslint-disable-next-line prefer-arrow-callback
+        addFilterListener(elSelectCustomBox, 'click', function (e) {
+            // console.log('Clicked select box');
             const isClosed = !elSelectCustom.classList.contains('isActive');
 
             if (isClosed) {
@@ -1065,24 +1102,46 @@ const filterStreams = async () => {
         customOptsList.forEach((elOption, index) => {
             if (index === 0) return;
 
-            elOption.addEventListener('click', (e) => {
+            // eslint-disable-next-line prefer-arrow-callback
+            addFilterListener(elOption, 'click', function (e) {
+                // console.log('Clicked option');
                 const value = e.target.getAttribute('data-value');
 
                 updateCustomSelectChecked(value, e.target.textContent);
                 closeSelectCustom();
             });
 
-            elOption.addEventListener('mouseenter', (e) => {
+            // eslint-disable-next-line prefer-arrow-callback
+            addFilterListener(elOption, 'mouseenter', function (e) {
+                // console.log('Mouse entered option');
                 updateCustomSelectHovered(index);
             });
 
             // TODO: Toggle these event listeners based on selectCustom visibility
         });
 
-        elSelectCustomInput.addEventListener('input', e => inputHandler(e.target.value));
+        // eslint-disable-next-line prefer-arrow-callback
+        addFilterListener(elSelectCustomInput, 'input', function (e) {
+            // console.log('Input entered');
+            inputHandler(e.target.value);
+        });
+
+        // eslint-disable-next-line prefer-arrow-callback
+        addFilterListener(filterReloadBtn, 'click', async function (e) {
+            console.log('Refreshing streams...');
+            destroyFilter();
+            await requestLiveData();
+            await setupFilter(filterStreamFaction);
+            resetFiltering();
+            addFactionStreams();
+            startDeleting();
+            console.log('Refresh complete!');
+        });
 
         if (selectFirst) {
-            const initOption = elSelectCustomOpts.children[1];
+            const initOption = selectFaction === undefined
+                ? elSelectCustomOpts.children[1]
+                : elSelectCustomOpts.querySelector(`[data-value="${selectFaction}"`);
             const initOptionValue = initOption.getAttribute('data-value');
             const initOptionText = initOption.textContent;
             updateCustomSelectChecked(initOptionValue, initOptionText, true);
@@ -1143,13 +1202,14 @@ const filterStreams = async () => {
         }, waitMs);
     };
 
-    const setupFilter = async () => {
+    const setupFilterFactions = async (selectFaction) => {
         const $sortByLabel = $(await waitForElement('label[for="browse-header-filter-by"]'));
         const $sortByDiv = $sortByLabel.parent().parent();
         const $groupDiv = $sortByDiv.parent();
         const $filterDiv = $sortByDiv.clone();
 
         $filterDiv.insertBefore($sortByDiv);
+        $filterDiv.addClass('tno-filter-options');
         $filterDiv.css({ marginRight: '15px' });
 
         const [$labelDiv, $dropdownDiv] = $filterDiv
@@ -1197,13 +1257,16 @@ const filterStreams = async () => {
 
         console.log('>>>>>>>>>>>> setup filter');
 
-        // $labelDiv.find('label').text('Filter streams');
+        // $labelDiv.find('label').text('Filter factions');
         $labelDiv.remove();
         $dropdownDiv.html(`
             <div class="select">
                 <div class="selectWrapper">
                     <div class="selectCustom js-selectCustom" aria-hidden="true">
                         <div class="selectCustom-row${!isDark ? ' lightmodeScreen' : ''}">
+                            <div class="filter-reload-box">
+                                <span class="tno-reload filter-reload">&#x27f3;</span>
+                            </div>
                             <label class="selectCustom-label tooltip">
                                 Filter streams
                                 <span id="streamCount" class="tooltiptext tooltiptext2">...</span>
@@ -1226,7 +1289,14 @@ const filterStreams = async () => {
             </div>
         `);
 
-        activateSelect(true);
+        activateSelect(true, selectFaction);
+
+        return [$groupDiv, $filterDiv];
+    };
+
+    // eslint-disable-next-line prefer-const
+    setupFilter = async (selectFaction) => {
+        const [$groupDiv] = await setupFilterFactions(selectFaction);
 
         if (tnoSearch) {
             $groupDiv.css({ position: 'relative' });
@@ -1235,7 +1305,8 @@ const filterStreams = async () => {
             const $searchInput = $searchDiv.append('<input class="tno-search-input" placeholder="Search for character name / nickname / stream...">');
             $groupDiv.append($searchDiv);
 
-            $searchInput.on('input', (e) => {
+            // eslint-disable-next-line prefer-arrow-callback
+            addFilterListener($searchInput[0], 'input', function (e) {
                 const searchText = e.target.value.toLowerCase().trim();
 
                 const textLen = searchText.length;

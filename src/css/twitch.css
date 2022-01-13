@@ -1,5 +1,5 @@
 div.swal2-popup.swal2-modal {
-    background: linear-gradient(180deg, #2d2f39 0%, #1f2027 100%);
+    background: linear-gradient(180deg, hsl(230, 12%, 20%) 0%, #1f2027 100%);
 }
 
 div.swal2-content {
@@ -22,11 +22,19 @@ span.settings-title {
     text-transform: none;
 }
 
-span.settings-reload {
+span.tno-reload {
     float: right;
     cursor: pointer;
     font-size: 20px;
     width: 27px;
+    text-align: center;
+}
+
+span.filter-reload {
+    color: white;
+    margin-right: 2px;
+    font-size: 16px;
+    line-height: 30px;
     text-align: center;
 }
 
