@@ -1283,7 +1283,7 @@ const filterStreams = async () => {
                         <div class="selectCustom-row${!isDark ? ' lightmodeScreen' : ''}">
                             <div class="filter-reload-box tooltip${isMetaFaction ? ' tno-hide' : ''}">
                                 <span id="tno-reload-message" class="tooltiptext tooltiptext-hover">
-                                    Refreshes live streams —<br/>Updates streams everywhere <span class="bold">except</span> the default view.
+                                    Refresh live streams —<br/>Click once to update streams on all filters <span class="bold">except</span> the default view.
                                 </span>
                                 <span class="tno-reload filter-reload">&#x27f3;</span>
                             </div>
