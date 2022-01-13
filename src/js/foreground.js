@@ -1006,16 +1006,16 @@ const filterStreams = async () => {
                 elOption.classList.add('isActive');
             }
 
-            const isMetaFaction = metaFactions.includes(value);
-            if (isMetaFaction) {
-                if (!filterReloadBox.classList.contains('tno-hide')) {
-                    filterReloadBox.classList.add('tno-hide');
-                }
-            } else {
-                if (filterReloadBox.classList.contains('tno-hide')) {
-                    filterReloadBox.classList.remove('tno-hide');
-                }
-            }
+            // const isMetaFaction = metaFactions.includes(value);
+            // if (isMetaFaction) {
+            //     if (!filterReloadBox.classList.contains('tno-hide')) {
+            //         filterReloadBox.classList.add('tno-hide');
+            //     }
+            // } else {
+            //     if (filterReloadBox.classList.contains('tno-hide')) {
+            //         filterReloadBox.classList.remove('tno-hide');
+            //     }
+            // }
 
             elSelectCustomBox.textContent = text;
             elSelectCustomBox.style.color = elOption.style.color;
@@ -1281,9 +1281,9 @@ const filterStreams = async () => {
                 <div class="selectWrapper">
                     <div class="selectCustom js-selectCustom" aria-hidden="true">
                         <div class="selectCustom-row${!isDark ? ' lightmodeScreen' : ''}">
-                            <div class="filter-reload-box tooltip${isMetaFaction ? ' tno-hide' : ''}">
+                            <div class="filter-reload-box tooltip">
                                 <span id="tno-reload-message" class="tooltiptext tooltiptext-hover">
-                                    Refresh live streams —<br/>Click once to update streams on all filters <span class="bold">except</span> the default view.
+                                    Refresh live NoPixel data —<br/><span class="bold">Does not affect the default view</span><br/>Click once to update streams on all filters <span class="bold">except</span> the default view.
                                 </span>
                                 <span class="tno-reload filter-reload">&#x27f3;</span>
                             </div>
