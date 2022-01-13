@@ -146,6 +146,7 @@ const filterStreams = async () => {
     let live;
     let streamsMap;
     let filterListeners = [];
+    let timeId = `#${new Date().getTime()}`;
 
     const requestLiveData = async () => {
         const fetchHeaders = new Headers();
@@ -886,7 +887,7 @@ const filterStreams = async () => {
 
         // Includes npManual, _ORDER_, _TITLE_, _VIEWERS_, _PFP_, _CHANNEL1_, _CHANNEL2_
         // eslint-disable-next-line max-len
-        const baseHtml = '<div data-target="" style="order: _ORDER_;"><div class="Layout-sc-nxg1ff-0 gelPlG"><div><div class="Layout-sc-nxg1ff-0"><article data-a-target="card-5" data-a-id="card-_CHANNEL1_" class="Layout-sc-nxg1ff-0 brQlbt"><div class="Layout-sc-nxg1ff-0 iIAhIi"><div class="Layout-sc-nxg1ff-0 hrHBDV"><div class="ScTextWrapper-sc-14f6evl-1 iBqVGm"><div class="ScTextMargin-sc-14f6evl-2 eKiDzQ"><div class="Layout-sc-nxg1ff-0 fRvrDF"><a lines="1" data-a-target="preview-card-title-link" class="ScCoreLink-sc-udwpw5-0 fcQsXy ScCoreLink-sc-ybxm10-0 dMidYq tw-link" href="/_CHANNEL1_"><h3 title="_TITLE_" class="CoreText-sc-cpl358-0 fUgCvd">_TITLE_</h3></a></div></div><div class="ScTextMargin-sc-14f6evl-2 eKiDzQ"><p class="CoreText-sc-cpl358-0 fjLexy"><a data-test-selector="ChannelLink" data-a-target="preview-card-channel-link" class="ScCoreLink-sc-udwpw5-0 fcQsXy tw-link" href="/_CHANNEL1_/videos">_CHANNEL2_</a></p></div><div class="Layout-sc-nxg1ff-0 kEFnEs"><div class="InjectLayout-sc-588ddc-0 MwAVT"><div class="InjectLayout-sc-588ddc-0 ghsXmJ"><button class="ScTag-sc-xzp4i-0 fHyEvT tw-tag" aria-label="English" data-a-target="English"><div class="ScTagContent-sc-xzp4i-1 haExrz">English</div></button></div><div class="InjectLayout-sc-588ddc-0 bFngIW"><button class="ScTag-sc-xzp4i-0 fHyEvT tw-tag" aria-label="Roleplay" data-a-target="Roleplay"><div class="ScTagContent-sc-xzp4i-1 haExrz">Roleplay</div></button></div></div></div></div><div class="ScImageWrapper-sc-14f6evl-0 cmYNsK"><a data-a-target="card-5" data-a-id="card-_CHANNEL1_" data-test-selector="preview-card-avatar" class="ScCoreLink-sc-udwpw5-0 ffziHP tw-link" href="/_CHANNEL1_/videos"><div class="ScAspectRatio-sc-1sw3lwy-1 bCGRDg tw-aspect"><div class="ScAspectSpacer-sc-1sw3lwy-0 gMCXS"></div><figure aria-label="_CHANNEL1_" class="ScAvatar-sc-12nlgut-0 dZlkMz tw-avatar"><img class="InjectLayout-sc-588ddc-0 hYROTF tw-image tw-image-avatar" alt="_CHANNEL1_" src="_PFP_"></figure></div></a></div><div class="Layout-sc-nxg1ff-0 jpyMJQ"><div class="Layout-sc-nxg1ff-0 gafAGD"><div class="InjectLayout-sc-588ddc-0 iETGeJ"><div class="Layout-sc-nxg1ff-0 feedback-card"><div data-toggle-balloon-id="61a55721-19ba-4355-9e00-e3fc4de9e783" class="Layout-sc-nxg1ff-0 emWtQg"><div data-test-selector="toggle-balloon-wrapper__mouse-enter-detector" style="display: inherit;"><button class="ScCoreButton-sc-1qn4ixc-0 jnsGXs ScButtonIcon-sc-o7ndmn-0 kWIWPW" aria-label="Recommendation feedback" data-a-target="rec-feedback-card-button"><div class="ScButtonIconFigure-sc-o7ndmn-1 fcBkwj"><div class="ScIconLayout-sc-1bgeryd-0 cOOGTE tw-icon"><div class="ScAspectRatio-sc-1sw3lwy-1 bneAWp tw-aspect"><div class="ScAspectSpacer-sc-1sw3lwy-0 gMCXS"></div><svg width="100%" height="100%" version="1.1" viewBox="0 0 20 20" x="0px" y="0px" class="ScIconSVG-sc-1bgeryd-1 eOJUoR"><g><path d="M10 18a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM8 4a2 2 0 104 0 2 2 0 00-4 0z"></path></g></svg></div></div></div></button></div></div></div></div></div></div></div></div><div class="ScWrapper-sc-uo2e2v-0 cgPMX tw-hover-accent-effect"><div class="ScTransformWrapper-sc-uo2e2v-1 ScCornerTop-sc-uo2e2v-2 jVWgwl clavjZ"></div><div class="ScTransformWrapper-sc-uo2e2v-1 ScCornerBottom-sc-uo2e2v-3 EXRmd IuyYw"></div><div class="ScTransformWrapper-sc-uo2e2v-1 ScEdgeLeft-sc-uo2e2v-4 bcUivF bdxTKy"></div><div class="ScTransformWrapper-sc-uo2e2v-1 ScEdgeBottom-sc-uo2e2v-5 gxyywR fcGdAu"></div><div class="ScTransformWrapper-sc-uo2e2v-1 deIBcl"><a data-a-target="preview-card-image-link" class="ScCoreLink-sc-udwpw5-0 ffziHP tw-link" href="/_CHANNEL1_"><div class="Layout-sc-nxg1ff-0 fCDjEZ"><div class="ScAspectRatio-sc-1sw3lwy-1 bneAWp tw-aspect"><div class="ScAspectSpacer-sc-1sw3lwy-0 fA-DHaR"></div><img alt="_TITLE_ - _CHANNEL1_" class="tw-image" src="https://static-cdn.jtvnw.net/previews-ttv/live_user__CHANNEL1_-440x248.jpg"></div><div class="ScPositionCorner-sc-1iiybo2-1 iONvNB"><div class="ScChannelStatusTextIndicator-sc-1f5ghgf-0 hwlNix tw-channel-status-text-indicator" font-size="font-size-6"><p class="CoreText-sc-cpl358-0 beStfT">LIVE</p></div></div><div class="ScPositionCorner-sc-1iiybo2-1 dYinol"><div class="ScMediaCardStatWrapper-sc-1ncw7wk-0 bfxdoE tw-media-card-stat">_VIEWERS_ viewers</div></div></div></a></div></div></article></div></div></div></div>';
+        const baseHtml = `<div data-target="" style="order: _ORDER_;"><div class="Layout-sc-nxg1ff-0 gelPlG"><div><div class="Layout-sc-nxg1ff-0"><article data-a-target="card-5" data-a-id="card-_CHANNEL1_" class="Layout-sc-nxg1ff-0 brQlbt"><div class="Layout-sc-nxg1ff-0 iIAhIi"><div class="Layout-sc-nxg1ff-0 hrHBDV"><div class="ScTextWrapper-sc-14f6evl-1 iBqVGm"><div class="ScTextMargin-sc-14f6evl-2 eKiDzQ"><div class="Layout-sc-nxg1ff-0 fRvrDF"><a lines="1" data-a-target="preview-card-title-link" class="ScCoreLink-sc-udwpw5-0 fcQsXy ScCoreLink-sc-ybxm10-0 dMidYq tw-link" href="/_CHANNEL1_"><h3 title="_TITLE_" class="CoreText-sc-cpl358-0 fUgCvd">_TITLE_</h3></a></div></div><div class="ScTextMargin-sc-14f6evl-2 eKiDzQ"><p class="CoreText-sc-cpl358-0 fjLexy"><a data-test-selector="ChannelLink" data-a-target="preview-card-channel-link" class="ScCoreLink-sc-udwpw5-0 fcQsXy tw-link" href="/_CHANNEL1_/videos">_CHANNEL2_</a></p></div><div class="Layout-sc-nxg1ff-0 kEFnEs"><div class="InjectLayout-sc-588ddc-0 MwAVT"><div class="InjectLayout-sc-588ddc-0 ghsXmJ"><button class="ScTag-sc-xzp4i-0 fHyEvT tw-tag" aria-label="English" data-a-target="English"><div class="ScTagContent-sc-xzp4i-1 haExrz">English</div></button></div><div class="InjectLayout-sc-588ddc-0 bFngIW"><button class="ScTag-sc-xzp4i-0 fHyEvT tw-tag" aria-label="Roleplay" data-a-target="Roleplay"><div class="ScTagContent-sc-xzp4i-1 haExrz">Roleplay</div></button></div></div></div></div><div class="ScImageWrapper-sc-14f6evl-0 cmYNsK"><a data-a-target="card-5" data-a-id="card-_CHANNEL1_" data-test-selector="preview-card-avatar" class="ScCoreLink-sc-udwpw5-0 ffziHP tw-link" href="/_CHANNEL1_/videos"><div class="ScAspectRatio-sc-1sw3lwy-1 bCGRDg tw-aspect"><div class="ScAspectSpacer-sc-1sw3lwy-0 gMCXS"></div><figure aria-label="_CHANNEL1_" class="ScAvatar-sc-12nlgut-0 dZlkMz tw-avatar"><img class="InjectLayout-sc-588ddc-0 hYROTF tw-image tw-image-avatar" alt="_CHANNEL1_" src="_PFP_"></figure></div></a></div><div class="Layout-sc-nxg1ff-0 jpyMJQ"><div class="Layout-sc-nxg1ff-0 gafAGD"><div class="InjectLayout-sc-588ddc-0 iETGeJ"><div class="Layout-sc-nxg1ff-0 feedback-card"><div data-toggle-balloon-id="61a55721-19ba-4355-9e00-e3fc4de9e783" class="Layout-sc-nxg1ff-0 emWtQg"><div data-test-selector="toggle-balloon-wrapper__mouse-enter-detector" style="display: inherit;"><button class="ScCoreButton-sc-1qn4ixc-0 jnsGXs ScButtonIcon-sc-o7ndmn-0 kWIWPW" aria-label="Recommendation feedback" data-a-target="rec-feedback-card-button"><div class="ScButtonIconFigure-sc-o7ndmn-1 fcBkwj"><div class="ScIconLayout-sc-1bgeryd-0 cOOGTE tw-icon"><div class="ScAspectRatio-sc-1sw3lwy-1 bneAWp tw-aspect"><div class="ScAspectSpacer-sc-1sw3lwy-0 gMCXS"></div><svg width="100%" height="100%" version="1.1" viewBox="0 0 20 20" x="0px" y="0px" class="ScIconSVG-sc-1bgeryd-1 eOJUoR"><g><path d="M10 18a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM8 4a2 2 0 104 0 2 2 0 00-4 0z"></path></g></svg></div></div></div></button></div></div></div></div></div></div></div></div><div class="ScWrapper-sc-uo2e2v-0 cgPMX tw-hover-accent-effect"><div class="ScTransformWrapper-sc-uo2e2v-1 ScCornerTop-sc-uo2e2v-2 jVWgwl clavjZ"></div><div class="ScTransformWrapper-sc-uo2e2v-1 ScCornerBottom-sc-uo2e2v-3 EXRmd IuyYw"></div><div class="ScTransformWrapper-sc-uo2e2v-1 ScEdgeLeft-sc-uo2e2v-4 bcUivF bdxTKy"></div><div class="ScTransformWrapper-sc-uo2e2v-1 ScEdgeBottom-sc-uo2e2v-5 gxyywR fcGdAu"></div><div class="ScTransformWrapper-sc-uo2e2v-1 deIBcl"><a data-a-target="preview-card-image-link" class="ScCoreLink-sc-udwpw5-0 ffziHP tw-link" href="/_CHANNEL1_"><div class="Layout-sc-nxg1ff-0 fCDjEZ"><div class="ScAspectRatio-sc-1sw3lwy-1 bneAWp tw-aspect"><div class="ScAspectSpacer-sc-1sw3lwy-0 fA-DHaR"></div><img alt="_TITLE_ - _CHANNEL1_" class="tw-image" src="https://static-cdn.jtvnw.net/previews-ttv/live_user__CHANNEL1_-440x248.jpg${timeId}"></div><div class="ScPositionCorner-sc-1iiybo2-1 iONvNB"><div class="ScChannelStatusTextIndicator-sc-1f5ghgf-0 hwlNix tw-channel-status-text-indicator" font-size="font-size-6"><p class="CoreText-sc-cpl358-0 beStfT">LIVE</p></div></div><div class="ScPositionCorner-sc-1iiybo2-1 dYinol"><div class="ScMediaCardStatWrapper-sc-1ncw7wk-0 bfxdoE tw-media-card-stat">_VIEWERS_ viewers</div></div></div></a></div></div></article></div></div></div></div>`;
 
         for (let i = 0; i < factionStreams.length; i++) {
             const stream = factionStreams[i];
@@ -924,7 +925,7 @@ const filterStreams = async () => {
         filterListeners.push({ el, evName, evFunc });
     };
 
-    const activateSelect = (selectFirst = false, selectFaction = undefined) => {
+    const activateSelect = (selectFirst = false) => {
         const elSelectCustom = document.getElementsByClassName('js-selectCustom')[0];
         // const elSelectCustomBox = elSelectCustom.children[0];
         const elSelectCustomBox = elSelectCustom.getElementsByClassName('selectCustom-trigger')[0];
@@ -933,6 +934,7 @@ const filterStreams = async () => {
         const customOptsList = Array.from(elSelectCustomOpts.children);
         const optionsCount = customOptsList.length;
         const defaultLabel = elSelectCustomBox.getAttribute('data-value');
+        const filterReloadBox = elSelectCustom.querySelector('.filter-reload-box');
         const filterReloadBtn = elSelectCustom.querySelector('.filter-reload');
 
         let optionChecked = null;
@@ -1002,6 +1004,17 @@ const filterStreams = async () => {
 
             if (elOption) {
                 elOption.classList.add('isActive');
+            }
+
+            const isMetaFaction = metaFactions.includes(value);
+            if (isMetaFaction) {
+                if (!filterReloadBox.classList.contains('tno-hide')) {
+                    filterReloadBox.classList.add('tno-hide');
+                }
+            } else {
+                if (filterReloadBox.classList.contains('tno-hide')) {
+                    filterReloadBox.classList.remove('tno-hide');
+                }
             }
 
             elSelectCustomBox.textContent = text;
@@ -1129,9 +1142,10 @@ const filterStreams = async () => {
         // eslint-disable-next-line prefer-arrow-callback
         addFilterListener(filterReloadBtn, 'click', async function (e) {
             console.log('Refreshing streams...');
+            timeId = `?${new Date().getTime()}`;
             destroyFilter();
             await requestLiveData();
-            await setupFilter(filterStreamFaction);
+            await setupFilter();
             resetFiltering();
             addFactionStreams();
             startDeleting();
@@ -1139,9 +1153,7 @@ const filterStreams = async () => {
         });
 
         if (selectFirst) {
-            const initOption = selectFaction === undefined
-                ? elSelectCustomOpts.children[1]
-                : elSelectCustomOpts.querySelector(`[data-value="${selectFaction}"`);
+            const initOption = elSelectCustomOpts.querySelector(`[data-value="${filterStreamFaction}"`);
             const initOptionValue = initOption.getAttribute('data-value');
             const initOptionText = initOption.textContent;
             updateCustomSelectChecked(initOptionValue, initOptionText, true);
@@ -1202,7 +1214,16 @@ const filterStreams = async () => {
         }, waitMs);
     };
 
-    const setupFilterFactions = async (selectFaction) => {
+    const genDefaultFaction = () => {
+        let baseWord = 'NoPixel';
+        const flagWords = [];
+        if (tnoOthers) baseWord = 'RP';
+        if (!tnoPublic) flagWords.push('-WL');
+        if (!tnoInternational) flagWords.push('-U.S.');
+        return `All ${baseWord}${flagWords.join('')} (Default)`;
+    };
+
+    const setupFilterFactions = async () => {
         const $sortByLabel = $(await waitForElement('label[for="browse-header-filter-by"]'));
         const $sortByDiv = $sortByLabel.parent().parent();
         const $groupDiv = $sortByDiv.parent();
@@ -1218,13 +1239,7 @@ const filterStreams = async () => {
             .map(el => $(el));
 
         const filterFactions = live.filterFactions;
-
-        let baseWord = 'NoPixel';
-        const flagWords = [];
-        if (tnoOthers) baseWord = 'RP';
-        if (!tnoPublic) flagWords.push('-WL');
-        if (!tnoInternational) flagWords.push('-U.S.');
-        filterFactions[0][1] = `All ${baseWord}${flagWords.join('')} (Default)`;
+        filterFactions[0][1] = genDefaultFaction();
 
         if (!tnoPublic || !tnoInternational) {
             // Faction counts unaffected by TNO settings for WL vs non-WL etc.
@@ -1257,6 +1272,8 @@ const filterStreams = async () => {
 
         console.log('>>>>>>>>>>>> setup filter');
 
+        const isMetaFaction = metaFactions.includes(filterStreamFaction);
+
         // $labelDiv.find('label').text('Filter factions');
         $labelDiv.remove();
         $dropdownDiv.html(`
@@ -1264,7 +1281,10 @@ const filterStreams = async () => {
                 <div class="selectWrapper">
                     <div class="selectCustom js-selectCustom" aria-hidden="true">
                         <div class="selectCustom-row${!isDark ? ' lightmodeScreen' : ''}">
-                            <div class="filter-reload-box">
+                            <div class="filter-reload-box tooltip${isMetaFaction ? ' tno-hide' : ''}">
+                                <span id="tno-reload-message" class="tooltiptext tooltiptext-hover">
+                                    Refreshes live streams —<br/>Updates streams everywhere <span class="bold">except</span> the default view.
+                                </span>
                                 <span class="tno-reload filter-reload">&#x27f3;</span>
                             </div>
                             <label class="selectCustom-label tooltip">
@@ -1289,14 +1309,14 @@ const filterStreams = async () => {
             </div>
         `);
 
-        activateSelect(true, selectFaction);
+        activateSelect(true);
 
         return [$groupDiv, $filterDiv];
     };
 
     // eslint-disable-next-line prefer-const
-    setupFilter = async (selectFaction) => {
-        const [$groupDiv] = await setupFilterFactions(selectFaction);
+    setupFilter = async () => {
+        const [$groupDiv] = await setupFilterFactions();
 
         if (tnoSearch) {
             $groupDiv.css({ position: 'relative' });
