@@ -32,10 +32,12 @@ span.tno-reload {
     font-size: 20px;
     width: 27px;
     text-align: center;
+    opacity: 0.88;
 }
 
 span#tno-reload-message {
     white-space: normal;
+    color: #EEEEEE;
 }
 
 div.filter-reload-box {
