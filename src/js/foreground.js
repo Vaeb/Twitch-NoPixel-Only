@@ -906,6 +906,21 @@ const filterStreams = async () => {
         }
     };
 
+    const fixReloadEnabled = (isEnabled) => {
+        const filterReloadBtn = document.querySelector('.filter-reload');
+        const isMetaFaction = metaFactions.includes(filterStreamFaction);
+
+        if (isEnabled || !isMetaFaction) {
+            if (filterReloadBtn.classList.contains('tno-hide')) {
+                filterReloadBtn.classList.remove('tno-hide');
+            }
+        } else {
+            if (!filterReloadBtn.classList.contains('tno-hide')) {
+                filterReloadBtn.classList.add('tno-hide');
+            }
+        }
+    };
+
     let setupFilter;
     const destroyFilter = () => {
         const filterDiv = document.querySelector('.tno-filter-options');
@@ -1006,24 +1021,15 @@ const filterStreams = async () => {
                 elOption.classList.add('isActive');
             }
 
-            // const isMetaFaction = metaFactions.includes(value);
-            // if (isMetaFaction) {
-            //     if (!filterReloadBox.classList.contains('tno-hide')) {
-            //         filterReloadBox.classList.add('tno-hide');
-            //     }
-            // } else {
-            //     if (filterReloadBox.classList.contains('tno-hide')) {
-            //         filterReloadBox.classList.remove('tno-hide');
-            //     }
-            // }
-
             elSelectCustomBox.textContent = text;
             elSelectCustomBox.style.color = elOption.style.color;
             optionChecked = value;
 
+            filterStreamFaction = value;
+            fixReloadEnabled();
+
             if (isInit) return;
 
-            filterStreamFaction = value;
             elSelectCustomInput.value = '';
             console.log('Updated selected!', filterStreamFaction);
             inputHandler();
@@ -1205,6 +1211,7 @@ const filterStreams = async () => {
             }
             lastResultsStr = nowResultsStr;
             console.log(`(${waitMs}) Filtering...`);
+            fixReloadEnabled(isFilteringText);
             resetFiltering();
             // if (filterStreamFaction !== 'cleanbois') return;
             if (isFilteringText || !metaFactions.includes(filterStreamFaction)) {
@@ -1283,7 +1290,9 @@ const filterStreams = async () => {
                         <div class="selectCustom-row${!isDark ? ' lightmodeScreen' : ''}">
                             <div class="filter-reload-box tooltip">
                                 <span id="tno-reload-message" class="tooltiptext tooltiptext-hover">
-                                    Refresh live NoPixel data —<br/><span class="bold">Does not affect the default view</span><br/>Click once to update streams on all filters <span class="bold">except</span> the default view.
+                                    Refresh live NoPixel data —<br/>
+                                    Click once to update streams on all filters <span class="bold">except</span> the default view.<br/>
+                                    If it's red then you're looking at the default view.
                                 </span>
                                 <span class="tno-reload filter-reload">&#x27f3;</span>
                             </div>

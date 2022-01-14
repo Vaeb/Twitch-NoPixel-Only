@@ -22,10 +22,6 @@ span.settings-title {
     text-transform: none;
 }
 
-.tno-hide {
-    visibility: hidden;
-}
-
 span.tno-reload {
     float: right;
     cursor: pointer;
@@ -37,7 +33,7 @@ span.tno-reload {
 
 span#tno-reload-message {
     white-space: normal;
-    color: #EEEEEE;
+    color: #F3F3F3;
 }
 
 div.filter-reload-box {
@@ -45,10 +41,14 @@ div.filter-reload-box {
 }
 
 span.filter-reload {
-    color: white;
-    font-size: 16px;
+    color: #32ff7e;
+    font-size: 20px;
     line-height: 30px;
     text-align: center;
+}
+
+.tno-hide {
+    color: #e74c3c !important;
 }
 
 div.settings-options {
