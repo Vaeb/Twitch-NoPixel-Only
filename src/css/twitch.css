@@ -49,6 +49,7 @@ span.filter-reload {
 
 .tno-hide {
     color: #F3746C !important;
+    opacity: 0.75 !important;
 }
 
 div.settings-options {
