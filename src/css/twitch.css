@@ -47,6 +47,10 @@ span.filter-reload {
     text-align: center;
 }
 
+.tno-other {
+    color: #009000 !important;
+}
+
 .tno-hide {
     color: #F3746C !important;
     opacity: 0.75 !important;

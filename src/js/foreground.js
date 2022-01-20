@@ -52,6 +52,7 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 let minViewers;
 let stopOnMin;
 let intervalSeconds;
+let fullDebugging = false;
 
 let keepDeleting = true;
 let onPage = false;
@@ -230,6 +231,9 @@ const filterStreams = async () => {
     let isDeleting = false;
     let minLoadedViewers = null;
     let minLoadedText = null;
+    let rollStart = 0;
+    let alwaysRoll = false;
+    const rollAddMax = 30;
 
     // const resetFiltering = () => {
     //     const elements = Array.from(document.getElementsByTagName('article')).filter(element => element.classList.contains('npChecked'));
@@ -295,7 +299,7 @@ const filterStreams = async () => {
 
         const useTextColor = '#000';
         // const useTextColor = isDark ? '#000' : '#f7f7f8';
-        const isMetaFaction = metaFactions.includes(filterStreamFaction);
+        const isMetaFaction = metaFactions.includes(filterStreamFaction) && rollStart == 0;
         const isNpMetaFaction = npMetaFactions.includes(filterStreamFaction);
         const minViewersUse = isNpMetaFaction ? minViewers : 3;
 
@@ -447,6 +451,8 @@ const filterStreams = async () => {
                             allowStream = stream.tagFactionSecondary === 'publicnp';
                         } else if (filterStreamFaction === 'international') {
                             allowStream = stream.tagFactionSecondary === 'international';
+                        } else if (filterStreamFaction === 'allnopixel' && rollStart > 0) {
+                            allowStream = stream.factionsMap.whitelistnp;
                         } else {
                             if (stream.factionsMap[filterStreamFaction]) {
                                 allowStream = true;
@@ -519,7 +525,7 @@ const filterStreams = async () => {
                 }
                 if (isFirstRemove) isFirstRemove = false;
             } else {
-                console.log(`[${dateStr()}] Handled allowed stream: ${channelName}`);
+                if (fullDebugging) console.log(`[${dateStr()}] Handled allowed stream: ${channelName}`);
             }
         });
 
@@ -856,45 +862,99 @@ const filterStreams = async () => {
         return `${parseFloat((n / 1e3).toFixed(1))}K`;
     };
 
-    const addFactionStreams = (isFilteringText = false, factionStreams = undefined) => {
+    let addFactionStreams;
+
+    const makeScrollEvent = (lastEl) => {
+        console.log('Making scroll event for:', lastEl);
+
+        const options = {
+            root: document.documentElement,
+        };
+
+        let observer;
+
+        // eslint-disable-next-line prefer-const
+        observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.intersectionRatio > 0) {
+                    observer.unobserve(lastEl);
+                    console.log('Fetching next batch of streams');
+                    addFactionStreams(false, undefined, true);
+                }
+            });
+        }, options);
+
+        observer.observe(lastEl);
+    };
+
+    // eslint-disable-next-line prefer-const
+    addFactionStreams = (isFilteringText = false, streams = undefined, useRoll = undefined) => {
         if (live === undefined) {
             console.log('Faction filter failed - Streams not fetched yet...');
             return;
         }
 
-        if (factionStreams === undefined) {
-            factionStreams = live.streams;
+        if (useRoll === undefined && filterStreamFaction === 'allnopixel' && rollStart > 0) {
+            useRoll = true;
+            rollStart = 0;
+        }
+
+        const rollIds = [];
+
+        if (streams === undefined) {
+            streams = live.streams;
 
             if (isFilteringText) {
-                factionStreams = factionStreams.filter(stream => matchesFilterStreamText(stream));
+                streams = streams.filter(stream => matchesFilterStreamText(stream));
             }
 
             if (isFilteringText === false) { // !metaFactions.includes(filterStreamFaction)
-                factionStreams = factionStreams.filter((stream) => {
-                    if (['publicnp', 'international'].includes(filterStreamFaction)) {
-                        return stream.tagFactionSecondary === filterStreamFaction;
+                if (useRoll) {
+                    const numStreams = streams.length;
+                    let numAdded = 0;
+                    const results = [];
+                    while (numAdded < rollAddMax && rollStart < numStreams) {
+                        const idx = rollStart;
+                        const stream = streams[idx];
+                        rollStart++;
+                        if (stream.factionsMap.whitelistnp) {
+                            results.push(stream);
+                            rollIds.push(idx);
+                            numAdded++;
+                        }
                     }
-                    if (stream.factionsMap[filterStreamFaction]) return true;
-                    if (filterStreamFaction === 'independent' && stream.factionsMap.othernp) return true;
-                    return false;
-                });
+                    streams = results;
+                } else {
+                    streams = streams.filter((stream) => {
+                        if (['publicnp', 'international'].includes(filterStreamFaction)) {
+                            return stream.tagFactionSecondary === filterStreamFaction;
+                        }
+                        if (stream.factionsMap[filterStreamFaction]) return true;
+                        if (filterStreamFaction === 'independent' && stream.factionsMap.othernp) return true;
+                        return false;
+                    });
+                }
             }
         }
 
-        console.log('filtered streams:', factionStreams);
+        console.log('filtered streams:', streams);
 
         const baseEl = document.querySelector('[data-target="directory-first-item"]');
+        const baseParent = baseEl.parentElement;
+        const wasRoll = rollIds.length > 0;
 
         // Includes npManual, _ORDER_, _TITLE_, _VIEWERS_, _PFP_, _CHANNEL1_, _CHANNEL2_
         // eslint-disable-next-line max-len
-        const baseHtml = `<div data-target="" style="order: _ORDER_;"><div class="Layout-sc-nxg1ff-0 gelPlG"><div><div class="Layout-sc-nxg1ff-0"><article data-a-target="card-5" data-a-id="card-_CHANNEL1_" class="Layout-sc-nxg1ff-0 brQlbt"><div class="Layout-sc-nxg1ff-0 iIAhIi"><div class="Layout-sc-nxg1ff-0 hrHBDV"><div class="ScTextWrapper-sc-14f6evl-1 iBqVGm"><div class="ScTextMargin-sc-14f6evl-2 eKiDzQ"><div class="Layout-sc-nxg1ff-0 fRvrDF"><a lines="1" data-a-target="preview-card-title-link" class="ScCoreLink-sc-udwpw5-0 fcQsXy ScCoreLink-sc-ybxm10-0 dMidYq tw-link" href="/_CHANNEL1_"><h3 title="_TITLE_" class="CoreText-sc-cpl358-0 fUgCvd">_TITLE_</h3></a></div></div><div class="ScTextMargin-sc-14f6evl-2 eKiDzQ"><p class="CoreText-sc-cpl358-0 fjLexy"><a data-test-selector="ChannelLink" data-a-target="preview-card-channel-link" class="ScCoreLink-sc-udwpw5-0 fcQsXy tw-link" href="/_CHANNEL1_/videos">_CHANNEL2_</a></p></div><div class="Layout-sc-nxg1ff-0 kEFnEs"><div class="InjectLayout-sc-588ddc-0 MwAVT"><div class="InjectLayout-sc-588ddc-0 ghsXmJ"><button class="ScTag-sc-xzp4i-0 fHyEvT tw-tag" aria-label="English" data-a-target="English"><div class="ScTagContent-sc-xzp4i-1 haExrz">English</div></button></div><div class="InjectLayout-sc-588ddc-0 bFngIW"><button class="ScTag-sc-xzp4i-0 fHyEvT tw-tag" aria-label="Roleplay" data-a-target="Roleplay"><div class="ScTagContent-sc-xzp4i-1 haExrz">Roleplay</div></button></div></div></div></div><div class="ScImageWrapper-sc-14f6evl-0 cmYNsK"><a data-a-target="card-5" data-a-id="card-_CHANNEL1_" data-test-selector="preview-card-avatar" class="ScCoreLink-sc-udwpw5-0 ffziHP tw-link" href="/_CHANNEL1_/videos"><div class="ScAspectRatio-sc-1sw3lwy-1 bCGRDg tw-aspect"><div class="ScAspectSpacer-sc-1sw3lwy-0 gMCXS"></div><figure aria-label="_CHANNEL1_" class="ScAvatar-sc-12nlgut-0 dZlkMz tw-avatar"><img class="InjectLayout-sc-588ddc-0 hYROTF tw-image tw-image-avatar" alt="_CHANNEL1_" src="_PFP_"></figure></div></a></div><div class="Layout-sc-nxg1ff-0 jpyMJQ"><div class="Layout-sc-nxg1ff-0 gafAGD"><div class="InjectLayout-sc-588ddc-0 iETGeJ"><div class="Layout-sc-nxg1ff-0 feedback-card"><div data-toggle-balloon-id="61a55721-19ba-4355-9e00-e3fc4de9e783" class="Layout-sc-nxg1ff-0 emWtQg"><div data-test-selector="toggle-balloon-wrapper__mouse-enter-detector" style="display: inherit;"><button class="ScCoreButton-sc-1qn4ixc-0 jnsGXs ScButtonIcon-sc-o7ndmn-0 kWIWPW" aria-label="Recommendation feedback" data-a-target="rec-feedback-card-button"><div class="ScButtonIconFigure-sc-o7ndmn-1 fcBkwj"><div class="ScIconLayout-sc-1bgeryd-0 cOOGTE tw-icon"><div class="ScAspectRatio-sc-1sw3lwy-1 bneAWp tw-aspect"><div class="ScAspectSpacer-sc-1sw3lwy-0 gMCXS"></div><svg width="100%" height="100%" version="1.1" viewBox="0 0 20 20" x="0px" y="0px" class="ScIconSVG-sc-1bgeryd-1 eOJUoR"><g><path d="M10 18a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM8 4a2 2 0 104 0 2 2 0 00-4 0z"></path></g></svg></div></div></div></button></div></div></div></div></div></div></div></div><div class="ScWrapper-sc-uo2e2v-0 cgPMX tw-hover-accent-effect"><div class="ScTransformWrapper-sc-uo2e2v-1 ScCornerTop-sc-uo2e2v-2 jVWgwl clavjZ"></div><div class="ScTransformWrapper-sc-uo2e2v-1 ScCornerBottom-sc-uo2e2v-3 EXRmd IuyYw"></div><div class="ScTransformWrapper-sc-uo2e2v-1 ScEdgeLeft-sc-uo2e2v-4 bcUivF bdxTKy"></div><div class="ScTransformWrapper-sc-uo2e2v-1 ScEdgeBottom-sc-uo2e2v-5 gxyywR fcGdAu"></div><div class="ScTransformWrapper-sc-uo2e2v-1 deIBcl"><a data-a-target="preview-card-image-link" class="ScCoreLink-sc-udwpw5-0 ffziHP tw-link" href="/_CHANNEL1_"><div class="Layout-sc-nxg1ff-0 fCDjEZ"><div class="ScAspectRatio-sc-1sw3lwy-1 bneAWp tw-aspect"><div class="ScAspectSpacer-sc-1sw3lwy-0 fA-DHaR"></div><img alt="_TITLE_ - _CHANNEL1_" class="tw-image" src="https://static-cdn.jtvnw.net/previews-ttv/live_user__CHANNEL1_-440x248.jpg${timeId}"></div><div class="ScPositionCorner-sc-1iiybo2-1 iONvNB"><div class="ScChannelStatusTextIndicator-sc-1f5ghgf-0 hwlNix tw-channel-status-text-indicator" font-size="font-size-6"><p class="CoreText-sc-cpl358-0 beStfT">LIVE</p></div></div><div class="ScPositionCorner-sc-1iiybo2-1 dYinol"><div class="ScMediaCardStatWrapper-sc-1ncw7wk-0 bfxdoE tw-media-card-stat">_VIEWERS_ viewers</div></div></div></a></div></div></article></div></div></div></div>`;
+        const baseHtml = `<div class="tno-stream" id="tno-stream-_TNOID_" data-target="" style="order: _ORDER_;"><div class="Layout-sc-nxg1ff-0 gelPlG"><div><div class="Layout-sc-nxg1ff-0"><article data-a-target="card-5" data-a-id="card-_CHANNEL1_" class="Layout-sc-nxg1ff-0 brQlbt"><div class="Layout-sc-nxg1ff-0 iIAhIi"><div class="Layout-sc-nxg1ff-0 hrHBDV"><div class="ScTextWrapper-sc-14f6evl-1 iBqVGm"><div class="ScTextMargin-sc-14f6evl-2 eKiDzQ"><div class="Layout-sc-nxg1ff-0 fRvrDF"><a lines="1" data-a-target="preview-card-title-link" class="ScCoreLink-sc-udwpw5-0 fcQsXy ScCoreLink-sc-ybxm10-0 dMidYq tw-link" href="/_CHANNEL1_"><h3 title="_TITLE_" class="CoreText-sc-cpl358-0 fUgCvd">_TITLE_</h3></a></div></div><div class="ScTextMargin-sc-14f6evl-2 eKiDzQ"><p class="CoreText-sc-cpl358-0 fjLexy"><a data-test-selector="ChannelLink" data-a-target="preview-card-channel-link" class="ScCoreLink-sc-udwpw5-0 fcQsXy tw-link" href="/_CHANNEL1_/videos">_CHANNEL2_</a></p></div><div class="Layout-sc-nxg1ff-0 kEFnEs"><div class="InjectLayout-sc-588ddc-0 MwAVT"><div class="InjectLayout-sc-588ddc-0 ghsXmJ"><button class="ScTag-sc-xzp4i-0 fHyEvT tw-tag" aria-label="English" data-a-target="English"><div class="ScTagContent-sc-xzp4i-1 haExrz">English</div></button></div><div class="InjectLayout-sc-588ddc-0 bFngIW"><button class="ScTag-sc-xzp4i-0 fHyEvT tw-tag" aria-label="Roleplay" data-a-target="Roleplay"><div class="ScTagContent-sc-xzp4i-1 haExrz">Roleplay</div></button></div></div></div></div><div class="ScImageWrapper-sc-14f6evl-0 cmYNsK"><a data-a-target="card-5" data-a-id="card-_CHANNEL1_" data-test-selector="preview-card-avatar" class="ScCoreLink-sc-udwpw5-0 ffziHP tw-link" href="/_CHANNEL1_/videos"><div class="ScAspectRatio-sc-1sw3lwy-1 bCGRDg tw-aspect"><div class="ScAspectSpacer-sc-1sw3lwy-0 gMCXS"></div><figure aria-label="_CHANNEL1_" class="ScAvatar-sc-12nlgut-0 dZlkMz tw-avatar"><img class="InjectLayout-sc-588ddc-0 hYROTF tw-image tw-image-avatar" alt="_CHANNEL1_" src="_PFP_"></figure></div></a></div><div class="Layout-sc-nxg1ff-0 jpyMJQ"><div class="Layout-sc-nxg1ff-0 gafAGD"><div class="InjectLayout-sc-588ddc-0 iETGeJ"><div class="Layout-sc-nxg1ff-0 feedback-card"><div data-toggle-balloon-id="61a55721-19ba-4355-9e00-e3fc4de9e783" class="Layout-sc-nxg1ff-0 emWtQg"><div data-test-selector="toggle-balloon-wrapper__mouse-enter-detector" style="display: inherit;"><button class="ScCoreButton-sc-1qn4ixc-0 jnsGXs ScButtonIcon-sc-o7ndmn-0 kWIWPW" aria-label="Recommendation feedback" data-a-target="rec-feedback-card-button"><div class="ScButtonIconFigure-sc-o7ndmn-1 fcBkwj"><div class="ScIconLayout-sc-1bgeryd-0 cOOGTE tw-icon"><div class="ScAspectRatio-sc-1sw3lwy-1 bneAWp tw-aspect"><div class="ScAspectSpacer-sc-1sw3lwy-0 gMCXS"></div><svg width="100%" height="100%" version="1.1" viewBox="0 0 20 20" x="0px" y="0px" class="ScIconSVG-sc-1bgeryd-1 eOJUoR"><g><path d="M10 18a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM8 4a2 2 0 104 0 2 2 0 00-4 0z"></path></g></svg></div></div></div></button></div></div></div></div></div></div></div></div><div class="ScWrapper-sc-uo2e2v-0 cgPMX tw-hover-accent-effect"><div class="ScTransformWrapper-sc-uo2e2v-1 ScCornerTop-sc-uo2e2v-2 jVWgwl clavjZ"></div><div class="ScTransformWrapper-sc-uo2e2v-1 ScCornerBottom-sc-uo2e2v-3 EXRmd IuyYw"></div><div class="ScTransformWrapper-sc-uo2e2v-1 ScEdgeLeft-sc-uo2e2v-4 bcUivF bdxTKy"></div><div class="ScTransformWrapper-sc-uo2e2v-1 ScEdgeBottom-sc-uo2e2v-5 gxyywR fcGdAu"></div><div class="ScTransformWrapper-sc-uo2e2v-1 deIBcl"><a data-a-target="preview-card-image-link" class="ScCoreLink-sc-udwpw5-0 ffziHP tw-link" href="/_CHANNEL1_"><div class="Layout-sc-nxg1ff-0 fCDjEZ"><div class="ScAspectRatio-sc-1sw3lwy-1 bneAWp tw-aspect"><div class="ScAspectSpacer-sc-1sw3lwy-0 fA-DHaR"></div><img alt="_TITLE_ - _CHANNEL1_" class="tw-image" src="https://static-cdn.jtvnw.net/previews-ttv/live_user__CHANNEL1_-440x248.jpg${timeId}"></div><div class="ScPositionCorner-sc-1iiybo2-1 iONvNB"><div class="ScChannelStatusTextIndicator-sc-1f5ghgf-0 hwlNix tw-channel-status-text-indicator" font-size="font-size-6"><p class="CoreText-sc-cpl358-0 beStfT">LIVE</p></div></div><div class="ScPositionCorner-sc-1iiybo2-1 dYinol"><div class="ScMediaCardStatWrapper-sc-1ncw7wk-0 bfxdoE tw-media-card-stat">_VIEWERS_ viewers</div></div></div></a></div></div></article></div></div></div></div>`;
 
-        for (let i = 0; i < factionStreams.length; i++) {
-            const stream = factionStreams[i];
+        for (let i = 0; i < streams.length; i++) {
+            const stream = streams[i];
             const channelName = stream.channelName;
             const channelNameLower = channelName.toLowerCase();
+            const idx = wasRoll ? rollIds[i] : i;
             const cloneHtml = baseHtml
                 .replace(/(?<=<article .*?)class="/i, 'class="npManual ')
+                .replace(/_TNOID_/g, `${idx}`)
                 .replace(/_CHANNEL1_/g, channelNameLower)
                 .replace(/_CHANNEL2_/g, channelName)
                 .replace(/_ORDER_/g, '0')
@@ -903,6 +963,26 @@ const filterStreams = async () => {
                 .replace(/_VIEWERS_/g, numToTwitchViewers(stream.viewers))
                 .replace(/_PFP_/g, stream.profileUrl);
             baseEl.insertAdjacentHTML('beforebegin', cloneHtml);
+            const streamEl = baseParent.querySelector(`#tno-stream-${idx}`);
+            if (wasRoll && i === streams.length - 1) {
+                makeScrollEvent(streamEl);
+            }
+        }
+    };
+
+    const addClass = (el, ...classes) => {
+        for (const c of classes) {
+            if (!el.classList.contains(c)) {
+                el.classList.add(c);
+            }
+        }
+    };
+
+    const removeClass = (el, ...classes) => {
+        for (const c of classes) {
+            if (el.classList.contains(c)) {
+                el.classList.remove(c);
+            }
         }
     };
 
@@ -911,12 +991,14 @@ const filterStreams = async () => {
         const isMetaFaction = metaFactions.includes(filterStreamFaction);
 
         if (isEnabled || !isMetaFaction) {
-            if (filterReloadBtn.classList.contains('tno-hide')) {
-                filterReloadBtn.classList.remove('tno-hide');
-            }
+            removeClass(filterReloadBtn, 'tno-hide', 'tno-other');
         } else {
-            if (!filterReloadBtn.classList.contains('tno-hide')) {
-                filterReloadBtn.classList.add('tno-hide');
+            if (filterStreamFaction === 'allnopixel') {
+                removeClass(filterReloadBtn, 'tno-hide');
+                addClass(filterReloadBtn, 'tno-other');
+            } else {
+                removeClass(filterReloadBtn, 'tno-other');
+                addClass(filterReloadBtn, 'tno-hide');
             }
         }
     };
@@ -1149,11 +1231,13 @@ const filterStreams = async () => {
         addFilterListener(filterReloadBtn, 'click', async function (e) {
             console.log('Refreshing streams...');
             timeId = `?${new Date().getTime()}`;
-            destroyFilter();
-            await requestLiveData();
-            await setupFilter();
-            resetFiltering();
-            addFactionStreams();
+            rollStart = 0;
+            if (filterStreamFaction === 'allnopixel') alwaysRoll = true;
+            destroyFilter(); // Remove previous buttons/events
+            await requestLiveData(); // Fetch new data from API endpoint
+            await setupFilter(); // Setup new buttons/events
+            resetFiltering(); // Reset twitch elements to original state (npChecked/remove)
+            addFactionStreams(false, undefined, alwaysRoll); // Add pseudo elements for faction
             startDeleting();
             console.log('Refresh complete!');
         });
@@ -1215,6 +1299,7 @@ const filterStreams = async () => {
             resetFiltering();
             // if (filterStreamFaction !== 'cleanbois') return;
             if (isFilteringText || !metaFactions.includes(filterStreamFaction)) {
+                console.log('qz');
                 addFactionStreams(isFilteringText, factionStreams);
             }
             startDeleting();
@@ -1291,8 +1376,13 @@ const filterStreams = async () => {
                             <div class="filter-reload-box tooltip">
                                 <span id="tno-reload-message" class="tooltiptext tooltiptext-hover">
                                     Refresh live NoPixel data —<br/>
-                                    Click once to update streams on all filters <span class="bold">except</span> the default view.<br/>
-                                    If it's red then you're looking at the default view.
+                                    Click once to update streams on all filters
+                                    ${alwaysRoll ? `
+                                        .
+                                    ` : `
+                                        .<br/>
+                                        The default view is separate<br/>(refresh it by clicking once while viewing the default view).
+                                    `}
                                 </span>
                                 <span class="tno-reload filter-reload">&#x27f3;</span>
                             </div>
