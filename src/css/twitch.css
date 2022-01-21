@@ -156,6 +156,10 @@ span.tooltip {
         width: 260px;
 }
 
+.tooltip .tooltiptext-wider2 {
+        width: 279px;
+}
+
 .tooltip .tooltiptext2 {
     white-space: nowrap;
     width: fit-content;

@@ -781,7 +781,8 @@ const filterStreams = async () => {
                                 <span class="tooltiptext tooltiptext-hover tooltiptext-wider1">
                                     When you use the "Filter streams" dropdown to view a faction, it works by hiding all streams on the page and creating new custom ones that look the same.
                                     Enabling this setting will use the same system on the default view. The benefit of this is no lag/delay when scrolling down, even to the 1 viewer NoPixel streams.
-                                    The downside is that extensions like FFZ won't be able to display uptime labels. It could also temporarily break if Twitch updates their site (in which case just disable this setting for a few days).
+                                    The downside is if you sort streams by Recommended, they will be biased towards higher viewcount streams.<br/>
+                                    It could also temporarily break if Twitch updates their site (in which case just disable this setting for a few days).
                                 </span>
                                 </span>
                                 <span class="settings-value">
@@ -1447,13 +1448,15 @@ const filterStreams = async () => {
                     <div class="selectCustom js-selectCustom" aria-hidden="true">
                         <div class="selectCustom-row${!isDark ? ' lightmodeScreen' : ''}">
                             <div class="filter-reload-box tooltip">
-                                <span id="tno-reload-message" class="tooltiptext tooltiptext-hover">
+                                <span id="tno-reload-message" class="tooltiptext tooltiptext-hover tooltiptext-wider2">
                                     Refresh live NoPixel data —<br/>
-                                    Click once to update streams on all filters${(alwaysRoll || showOnDefault) ? ` and the default view.<br/>
-                                    To stop the default view from being refreshed, use the settings menu<br/>
+                                    Click once to update streams on all filters${(alwaysRoll || showOnDefault) ? ` and the default view.<br/><br/>
+                                    To stop the default view being refreshed, use the settings menu<br/>
                                     (⚙️ Twitch NoPixel Only button).
-                                    ` : `.<br/>
-                                    This won't refresh the default view unless you click it while on the default view (dark green refresh button).
+                                    ` : `.<br/><br/>
+                                    This will only refresh the default view when clicked without viewing a faction<br/>(dark green refresh button).<br/><br/>
+                                    To make the refresh button always update the default view, use the settings menu<br/>
+                                    (⚙️ Twitch NoPixel Only button).
                                     `}
                                 </span>
                                 <span class="tno-reload filter-reload">&#x27f3;</span>
