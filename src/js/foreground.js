@@ -679,6 +679,19 @@ const filterStreams = async () => {
         }
     };
 
+    let destroyFilter;
+    let setupFilter;
+    let addFactionStreams;
+
+    const onSettingChanged = async () => {
+        destroyFilter(); // Remove previous buttons/events
+        await setupFilter(); // Setup new buttons/events
+        resetFiltering(); // Reset twitch elements to original state (npChecked/remove)
+        addFactionStreams(false, undefined); // Add pseudo elements for faction
+        startDeleting();
+        console.log('Refreshed for setting changes!');
+    };
+
     const addSettings = async () => {
         const $followBtn = $(await waitForElement('[data-test-selector="follow-game-button-component"]'));
 
@@ -831,6 +844,7 @@ const filterStreams = async () => {
                         setStorage('tnoSearch', newValue);
                         tnoSearch = newValue;
                         console.log('Set view-search to:', newValue);
+                        onSettingChanged();
                     });
 
                     $settingScrolling.change(function () {
@@ -838,6 +852,7 @@ const filterStreams = async () => {
                         setStorage('tnoScrolling', newValue);
                         tnoScrolling = newValue;
                         console.log('Set scrolling-adjustments to:', newValue);
+                        onSettingChanged();
                     });
 
                     $settingPublic.change(function () {
@@ -845,6 +860,7 @@ const filterStreams = async () => {
                         setStorage('tnoPublic', newValue);
                         tnoPublic = newValue;
                         console.log('Set include-public to:', newValue);
+                        onSettingChanged();
                     });
 
                     $settingInternational.change(function () {
@@ -852,6 +868,7 @@ const filterStreams = async () => {
                         setStorage('tnoInternational', newValue);
                         tnoInternational = newValue;
                         console.log('Set include-international to:', newValue);
+                        onSettingChanged();
                     });
 
                     $settingOthers.change(function () {
@@ -859,6 +876,7 @@ const filterStreams = async () => {
                         setStorage('tnoOthers', newValue);
                         tnoOthers = newValue;
                         console.log('Set include-others to:', newValue);
+                        onSettingChanged();
                     });
 
                     $settingWlOverride.change(function () {
@@ -866,13 +884,17 @@ const filterStreams = async () => {
                         setStorage('tnoWlOverride', newValue);
                         tnoWlOverride = newValue;
                         console.log('Set wl-override to:', newValue);
+                        onSettingChanged();
                     });
 
                     $settingCustom.change(function () {
                         const newValue = this.checked;
                         setStorage('tnoAlwaysCustom', newValue);
                         tnoAlwaysCustom = newValue;
+                        alwaysRoll = newValue;
+                        if (newValue === false) rollStart = 0;
                         console.log('Set always-custom to:', newValue);
+                        onSettingChanged();
                     });
 
                     $settingReloadDef.change(function () {
@@ -880,6 +902,7 @@ const filterStreams = async () => {
                         setStorage('tnoReloadDefault', newValue);
                         tnoReloadDefault = newValue;
                         console.log('Set reload-default to:', newValue);
+                        onSettingChanged();
                     });
 
                     if ($settingShowAll) {
@@ -888,6 +911,7 @@ const filterStreams = async () => {
                             setStorage('tnoAllowAll', newValue);
                             tnoAllowAll = newValue;
                             console.log('Set show-all to:', newValue);
+                            onSettingChanged();
                         });
                     }
                 },
@@ -899,8 +923,6 @@ const filterStreams = async () => {
         if (n < 1000) return `${n}`;
         return `${parseFloat((n / 1e3).toFixed(1))}K`;
     };
-
-    let addFactionStreams;
 
     const makeScrollEvent = (lastEl) => {
         console.log('Making scroll event for:', lastEl);
@@ -926,15 +948,16 @@ const filterStreams = async () => {
     };
 
     // eslint-disable-next-line prefer-const
-    addFactionStreams = (isFilteringText = false, streams = undefined, useRoll = undefined) => {
+    addFactionStreams = (isFilteringText = false, streams = undefined, continueRoll = false) => {
         if (live === undefined) {
             console.log('Faction filter failed - Streams not fetched yet...');
             return;
         }
 
-        if (useRoll === undefined && filterStreamFaction === 'allnopixel' && rollStart > 0) {
+        let useRoll = false;
+        if (filterStreamFaction === 'allnopixel' && (alwaysRoll || rollStart > 0)) {
             useRoll = true;
-            rollStart = 0;
+            if (!continueRoll) rollStart = 0;
         }
 
         const rollIds = [];
@@ -1043,8 +1066,7 @@ const filterStreams = async () => {
         }
     };
 
-    let setupFilter;
-    const destroyFilter = () => {
+    destroyFilter = () => {
         const filterDiv = document.querySelector('.tno-filter-options');
         if (!filterDiv) return;
         for (const eventListener of filterListeners) {
@@ -1277,7 +1299,7 @@ const filterStreams = async () => {
             await requestLiveData(); // Fetch new data from API endpoint
             await setupFilter(); // Setup new buttons/events
             resetFiltering(); // Reset twitch elements to original state (npChecked/remove)
-            addFactionStreams(false, undefined, alwaysRoll); // Add pseudo elements for faction
+            addFactionStreams(false, undefined); // Add pseudo elements for faction
             startDeleting();
             console.log('Refresh complete!');
         });
@@ -1418,8 +1440,11 @@ const filterStreams = async () => {
                             <div class="filter-reload-box tooltip">
                                 <span id="tno-reload-message" class="tooltiptext tooltiptext-hover">
                                     Refresh live NoPixel data —<br/>
-                                    Click once to update streams on all filters${(alwaysRoll || showOnDefault) ? ' and the default view.' : `.<br/>
-                                        The default view is separate<br/>(refresh it by clicking once while viewing the default view).
+                                    Click once to update streams on all filters${(alwaysRoll || showOnDefault) ? ` and the default view.<br/>
+                                    To stop the default view from being refreshed, use the settings menu<br/>
+                                    (⚙️ Twitch NoPixel Only button).
+                                    ` : `.<br/>
+                                    This won't refresh the default view unless you click it while on the default view (dark green refresh button).
                                     `}
                                 </span>
                                 <span class="tno-reload filter-reload">&#x27f3;</span>
@@ -1518,7 +1543,7 @@ const filterStreams = async () => {
         setupFilter();
 
         if (alwaysRoll) {
-            addFactionStreams(false, undefined, alwaysRoll);
+            addFactionStreams(false, undefined);
         }
 
         console.log('[TNO] Starting interval');
