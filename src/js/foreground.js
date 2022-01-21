@@ -781,7 +781,7 @@ const filterStreams = async () => {
                                 <span class="tooltiptext tooltiptext-hover tooltiptext-wider1">
                                     When you use the "Filter streams" dropdown to view a faction, it works by hiding all streams on the page and creating new custom ones that look the same.
                                     Enabling this setting will use the same system on the default view. The benefit of this is no lag/delay when scrolling down, even to the 1 viewer NoPixel streams.
-                                    The downside is if you sort streams by Recommended, they will be biased towards higher viewcount streams.<br/>
+                                    The downside is if you sort streams by Recommended, it won't be able to completely replicate the order.<br/>
                                     It could also temporarily break if Twitch updates their site (in which case just disable this setting for a few days).
                                 </span>
                                 </span>
