@@ -74,7 +74,12 @@ const FSTATES = {
     hide: 3,
 };
 
-const metaFactions = ['allnopixel', 'alltwitch'];
+const META_FACTIONS = new Map([ // Key represents alwaysRoll value
+    [false, ['allnopixel', 'alltwitch']],
+    [true, ['alltwitch']],
+]);
+
+let metaFactions = META_FACTIONS.get(false);
 const npMetaFactions = [...metaFactions, 'othernp', 'publicnp', 'international', 'guessed'];
 
 // #00A032 #cd843f #b71540 #ff0074 #8854d0
@@ -235,6 +240,7 @@ const filterStreams = async () => {
     let minLoadedText = null;
     let rollStart = 0;
     let alwaysRoll = tnoAlwaysCustom;
+    metaFactions = META_FACTIONS.get(alwaysRoll);
     const rollAddMax = 30;
 
     // const resetFiltering = () => {
@@ -301,7 +307,7 @@ const filterStreams = async () => {
 
         const useTextColor = '#000';
         // const useTextColor = isDark ? '#000' : '#f7f7f8';
-        const isMetaFaction = metaFactions.includes(filterStreamFaction) && rollStart == 0;
+        const isMetaFaction = metaFactions.includes(filterStreamFaction);
         const isNpMetaFaction = npMetaFactions.includes(filterStreamFaction);
         const minViewersUse = isNpMetaFaction ? minViewers : 3;
 
@@ -892,6 +898,7 @@ const filterStreams = async () => {
                         setStorage('tnoAlwaysCustom', newValue);
                         tnoAlwaysCustom = newValue;
                         alwaysRoll = newValue;
+                        metaFactions = META_FACTIONS.get(alwaysRoll);
                         if (newValue === false) rollStart = 0;
                         console.log('Set always-custom to:', newValue);
                         onSettingChanged();
@@ -1294,7 +1301,10 @@ const filterStreams = async () => {
             console.log('Refreshing streams...');
             timeId = `?${new Date().getTime()}`;
             rollStart = 0;
-            if (filterStreamFaction === 'allnopixel' || tnoReloadDefault) alwaysRoll = true;
+            if (filterStreamFaction === 'allnopixel' || tnoReloadDefault) {
+                alwaysRoll = true;
+                metaFactions = META_FACTIONS.get(alwaysRoll);
+            }
             destroyFilter(); // Remove previous buttons/events
             await requestLiveData(); // Fetch new data from API endpoint
             await setupFilter(); // Setup new buttons/events
@@ -1361,7 +1371,6 @@ const filterStreams = async () => {
             resetFiltering();
             // if (filterStreamFaction !== 'cleanbois') return;
             if (isFilteringText || !metaFactions.includes(filterStreamFaction)) {
-                console.log('qz');
                 addFactionStreams(isFilteringText, factionStreams);
             }
             startDeleting();
@@ -1525,6 +1534,7 @@ const filterStreams = async () => {
         ]);
 
         alwaysRoll = tnoAlwaysCustom;
+        metaFactions = META_FACTIONS.get(alwaysRoll);
         rollStart = 0;
 
         addSettings(); // Settings should show even if status disabled
