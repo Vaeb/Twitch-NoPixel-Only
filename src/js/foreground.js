@@ -1376,8 +1376,7 @@ const filterStreams = async () => {
                             <div class="filter-reload-box tooltip">
                                 <span id="tno-reload-message" class="tooltiptext tooltiptext-hover">
                                     Refresh live NoPixel data —<br/>
-                                    Click once to update streams on all filters
-                                    ${alwaysRoll ? '.' : `.<br/>
+                                    Click once to update streams on all filters${alwaysRoll ? '.' : `.<br/>
                                         The default view is separate<br/>(refresh it by clicking once while viewing the default view).
                                     `}
                                 </span>
