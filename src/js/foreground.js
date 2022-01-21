@@ -52,7 +52,7 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 let minViewers;
 let stopOnMin;
 let intervalSeconds;
-let fullDebugging = false;
+const fullDebugging = false;
 
 let keepDeleting = true;
 let onPage = false;
@@ -215,7 +215,7 @@ const filterStreams = async () => {
         useColors = useColorsDark;
     }
 
-    let [tnoStatus, tnoEnglish, tnoPublic, tnoInternational, tnoOthers, tnoWlOverride, tnoSearch, tnoScrolling, tnoAllowAll] = await getStorage([
+    let [tnoStatus, tnoEnglish, tnoPublic, tnoInternational, tnoOthers, tnoWlOverride, tnoSearch, tnoScrolling, tnoAlwaysCustom, tnoReloadDefault, tnoAllowAll] = await getStorage([
         ['tnoStatus', true],
         ['tnoEnglish', true],
         ['tnoPublic', true],
@@ -224,6 +224,8 @@ const filterStreams = async () => {
         ['tnoWlOverride', true],
         ['tnoSearch', true],
         ['tnoScrolling', false],
+        ['tnoAlwaysCustom', false],
+        ['tnoReloadDefault', true],
         ['tnoAllowAll', false],
     ]);
     const filterEnabled = !isDeveloper || !tnoAllowAll; // Fail-safe incase extension accidentally gets published with tnoAllowAll enabled
@@ -232,7 +234,7 @@ const filterStreams = async () => {
     let minLoadedViewers = null;
     let minLoadedText = null;
     let rollStart = 0;
-    let alwaysRoll = false;
+    let alwaysRoll = tnoAlwaysCustom;
     const rollAddMax = 30;
 
     // const resetFiltering = () => {
@@ -755,6 +757,26 @@ const filterStreams = async () => {
                                     <input id="setting-english" type="checkbox" class="toggle" ${tnoEnglish ? 'checked' : ''}>
                                 </span>
                             </div>
+                            <div class="settings-option">
+                                <span class="settings-name tooltip">Use custom stream elements instead of filtering:
+                                <span class="tooltiptext tooltiptext-hover tooltiptext-wider1">
+                                    When you use the "Filter streams" dropdown to view a faction, it works by hiding all streams on the page and creating new custom ones that look the same.
+                                    Enabling this setting will use the same system on the default view. The benefit of this is no lag/delay when scrolling down, even to the 1 viewer NoPixel streams.
+                                    The downside is that extensions like FFZ won't be able to display uptime labels. It could also temporarily break if Twitch updates their site (in which case just disable this setting for a few days).
+                                </span>
+                                </span>
+                                <span class="settings-value">
+                                    <input id="setting-custom" type="checkbox" class="toggle" ${tnoAlwaysCustom ? 'checked' : ''}>
+                                </span>
+                            </div>
+                            <div class="settings-option">
+                                <span class="settings-name tooltip">Refresh button updates default view:
+                                    <span class="tooltiptext tooltiptext-hover">Clicking the green refresh button while viewing a faction will also refresh the default view. Uses custom stream elements.</span>
+                                </span>
+                                <span class="settings-value">
+                                    <input id="setting-reload-def" type="checkbox" class="toggle" ${tnoReloadDefault ? 'checked' : ''}>
+                                </span>
+                            </div>
                             ${
     isDeveloper
         ? `
@@ -784,6 +806,8 @@ const filterStreams = async () => {
                     const $settingInternational = $('#setting-international');
                     const $settingOthers = $('#setting-others');
                     const $settingWlOverride = $('#setting-wl-override');
+                    const $settingCustom = $('#setting-custom');
+                    const $settingReloadDef = $('#setting-reload-def');
                     const $settingShowAll = $('#setting-show-all');
 
                     $settingsReload.click(() => window.location.reload());
@@ -842,6 +866,20 @@ const filterStreams = async () => {
                         setStorage('tnoWlOverride', newValue);
                         tnoWlOverride = newValue;
                         console.log('Set wl-override to:', newValue);
+                    });
+
+                    $settingCustom.change(function () {
+                        const newValue = this.checked;
+                        setStorage('tnoAlwaysCustom', newValue);
+                        tnoAlwaysCustom = newValue;
+                        console.log('Set always-custom to:', newValue);
+                    });
+
+                    $settingReloadDef.change(function () {
+                        const newValue = this.checked;
+                        setStorage('tnoReloadDefault', newValue);
+                        tnoReloadDefault = newValue;
+                        console.log('Set reload-default to:', newValue);
                     });
 
                     if ($settingShowAll) {
@@ -988,9 +1026,11 @@ const filterStreams = async () => {
 
     const fixReloadEnabled = (isEnabled) => {
         const filterReloadBtn = document.querySelector('.filter-reload');
-        const isMetaFaction = metaFactions.includes(filterStreamFaction);
+        const isDefaultView = filterStreamFaction === 'allnopixel';
+        const isMetaFaction = metaFactions.includes(filterStreamFaction) && !isDefaultView;
+        const showOnDefaultNow = isDefaultView && (alwaysRoll || tnoReloadDefault);
 
-        if (isEnabled || !isMetaFaction) {
+        if (isEnabled || showOnDefaultNow || (isMetaFaction === false && !isDefaultView)) {
             removeClass(filterReloadBtn, 'tno-hide', 'tno-other');
         } else {
             if (filterStreamFaction === 'allnopixel') {
@@ -1232,7 +1272,7 @@ const filterStreams = async () => {
             console.log('Refreshing streams...');
             timeId = `?${new Date().getTime()}`;
             rollStart = 0;
-            if (filterStreamFaction === 'allnopixel') alwaysRoll = true;
+            if (filterStreamFaction === 'allnopixel' || tnoReloadDefault) alwaysRoll = true;
             destroyFilter(); // Remove previous buttons/events
             await requestLiveData(); // Fetch new data from API endpoint
             await setupFilter(); // Setup new buttons/events
@@ -1364,6 +1404,8 @@ const filterStreams = async () => {
 
         console.log('>>>>>>>>>>>> setup filter');
 
+        const showOnDefault = alwaysRoll || tnoReloadDefault;
+
         // const isMetaFaction = metaFactions.includes(filterStreamFaction);
 
         // $labelDiv.find('label').text('Filter factions');
@@ -1376,7 +1418,7 @@ const filterStreams = async () => {
                             <div class="filter-reload-box tooltip">
                                 <span id="tno-reload-message" class="tooltiptext tooltiptext-hover">
                                     Refresh live NoPixel data —<br/>
-                                    Click once to update streams on all filters${alwaysRoll ? '.' : `.<br/>
+                                    Click once to update streams on all filters${(alwaysRoll || showOnDefault) ? ' and the default view.' : `.<br/>
                                         The default view is separate<br/>(refresh it by clicking once while viewing the default view).
                                     `}
                                 </span>
@@ -1443,7 +1485,7 @@ const filterStreams = async () => {
             return false;
         }
 
-        [tnoStatus, tnoEnglish, tnoPublic, tnoInternational, tnoOthers, tnoWlOverride, tnoSearch, tnoScrolling, tnoAllowAll] = await getStorage([
+        [tnoStatus, tnoEnglish, tnoPublic, tnoInternational, tnoOthers, tnoWlOverride, tnoSearch, tnoScrolling, tnoAlwaysCustom, tnoReloadDefault, tnoAllowAll] = await getStorage([
             ['tnoStatus', true],
             ['tnoEnglish', true],
             ['tnoPublic', true],
@@ -1452,8 +1494,13 @@ const filterStreams = async () => {
             ['tnoWlOverride', true],
             ['tnoSearch', true],
             ['tnoScrolling', false],
+            ['tnoAlwaysCustom', false],
+            ['tnoReloadDefault', true],
             ['tnoAllowAll', false],
         ]);
+
+        alwaysRoll = tnoAlwaysCustom;
+        rollStart = 0;
 
         addSettings(); // Settings should show even if status disabled
 
@@ -1469,6 +1516,10 @@ const filterStreams = async () => {
         }
 
         setupFilter();
+
+        if (alwaysRoll) {
+            addFactionStreams(false, undefined, alwaysRoll);
+        }
 
         console.log('[TNO] Starting interval');
         startDeleting();
