@@ -40,12 +40,48 @@ const getStorage = (keys, defaultVal = undefined) =>
 
 const setStorage = async (key, val) => chrome.storage.local.set({ [key]: val });
 
+const remStorage = async key => chrome.storage.local.remove(key);
+
+// eslint-disable-next-line
+window.tnoGet = getStorage;
+// eslint-disable-next-line
+window.tnoSet = setStorage;
+// eslint-disable-next-line
+window.tnoRem = remStorage;
+
 String.prototype.indexOfRegex = function (regex, startPos) {
     const indexOf = this.substring(startPos || 0).search(regex);
     return indexOf >= 0 ? indexOf + (startPos || 0) : indexOf;
 };
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+const waitForElement = async (selector, maxTime = Infinity) => {
+    let el;
+    let timer;
+
+    if (typeof selector === 'string') {
+        const selectorString = selector;
+        selector = () => document.querySelector(selectorString);
+    }
+
+    const initStamp = +new Date();
+
+    while ((el = selector()) == null) {
+        // eslint-disable-next-line
+        await new Promise((resolve) => {
+            cancelAnimationFrame(timer);
+            timer = requestAnimationFrame(resolve);
+        });
+
+        if (+new Date() - initStamp >= maxTime) {
+            console.log('waitForElement timed out after', maxTime, 'ms');
+            break;
+        }
+    }
+
+    return el;
+};
 
 // Settings
 
@@ -72,6 +108,13 @@ const FSTATES = {
     nopixel: 1,
     other: 2,
     hide: 3,
+};
+
+const SORTS = {
+    recommended: 1,
+    high: 2,
+    low: 3,
+    recent: 4,
 };
 
 const META_FACTIONS = new Map([ // Key represents alwaysRoll value
@@ -145,7 +188,7 @@ RegExp.escape = function (string) {
 let activateInterval;
 let stopInterval;
 
-const filterStreams = async () => {
+const filterStreams = async () => { // Remember: The code here runs upon loading twitch.tv, not the GTAV page. For the latter, use activateInterval.
     console.log(`[${dateStr()}] Fetching NP stream data...`);
     const isDeveloper = typeof document.cookie === 'string' && document.cookie.includes('name=vaeben');
 
@@ -220,6 +263,25 @@ const filterStreams = async () => {
         useColors = useColorsDark;
     }
 
+    let sortType = SORTS.recommended;
+
+    const fixSortType = async (n) => {
+        const sortByLabel = await waitForElement('label[for="browse-header-filter-by"]', n);
+        const sortByDiv = sortByLabel.parentNode.parentNode;
+
+        const sortTypeText = sortByDiv.querySelector('button[data-a-target="browse-sort-menu"]').textContent.toLowerCase();
+        if (sortTypeText.includes('recommended')) {
+            sortType = SORTS.recommended;
+        } else if (sortTypeText.includes('high to')) {
+            sortType = SORTS.high;
+        } else if (sortTypeText.includes('low to')) {
+            sortType = SORTS.low;
+        } else if (sortTypeText.includes('recent')) {
+            sortType = SORTS.recent;
+        }
+    };
+
+    // If tnoReloadDefault hasn't been manually set yet then set to false if sort=Recommended, else set to true
     let [tnoStatus, tnoEnglish, tnoPublic, tnoInternational, tnoOthers, tnoWlOverride, tnoSearch, tnoScrolling, tnoAlwaysCustom, tnoReloadDefault, tnoAllowAll] = await getStorage([
         ['tnoStatus', true],
         ['tnoEnglish', true],
@@ -230,9 +292,10 @@ const filterStreams = async () => {
         ['tnoSearch', true],
         ['tnoScrolling', false],
         ['tnoAlwaysCustom', false],
-        ['tnoReloadDefault', true],
+        ['tnoReloadDefault', false],
         ['tnoAllowAll', false],
     ]);
+
     const filterEnabled = !isDeveloper || !tnoAllowAll; // Fail-safe incase extension accidentally gets published with tnoAllowAll enabled
 
     let isDeleting = false;
@@ -240,6 +303,7 @@ const filterStreams = async () => {
     let minLoadedText = null;
     let rollStart = 0;
     let alwaysRoll = tnoAlwaysCustom;
+
     metaFactions = META_FACTIONS.get(alwaysRoll);
     const rollAddMax = 30;
 
@@ -570,33 +634,6 @@ const filterStreams = async () => {
         deleteOthers();
     };
 
-    const waitForElement = async (selector, maxTime = Infinity) => {
-        let el;
-        let timer;
-
-        if (typeof selector === 'string') {
-            const selectorString = selector;
-            selector = () => document.querySelector(selectorString);
-        }
-
-        const initStamp = +new Date();
-
-        while ((el = selector()) == null) {
-            // eslint-disable-next-line
-            await new Promise((resolve) => {
-                cancelAnimationFrame(timer);
-                timer = requestAnimationFrame(resolve);
-            });
-
-            if (+new Date() - initStamp >= maxTime) {
-                console.log('waitForElement timed out after', maxTime, 'ms');
-                break;
-            }
-        }
-
-        return el;
-    };
-
     const identifyEnglish = () => {
         // Make sure it doesn't run until stream elements (and tags) are fully loaded
         const streamElements = $('article:visible').toArray();
@@ -781,7 +818,7 @@ const filterStreams = async () => {
                                 <span class="tooltiptext tooltiptext-hover tooltiptext-wider1">
                                     When you use the "Filter streams" dropdown to view a faction, it works by hiding all streams on the page and creating new custom ones that look the same.
                                     Enabling this setting will use the same system on the default view. The benefit of this is no lag/delay when scrolling down, even to the 1 viewer NoPixel streams.
-                                    The downside is if you sort streams by Recommended, it won't be able to completely replicate the order.<br/>
+                                    The downside is if you sort streams by Recommended, the order of streams will instead be based on viewcount.<br/>
                                     It could also temporarily break if Twitch updates their site (in which case just disable this setting for a few days).
                                 </span>
                                 </span>
@@ -1496,8 +1533,8 @@ const filterStreams = async () => {
             $groupDiv.css({ position: 'relative' });
 
             const $searchDiv = $('<div class="tno-search-div"></div>');
-            const $searchInput = $searchDiv.append('<input class="tno-search-input" placeholder="Search for character name / nickname / stream...">');
-            $groupDiv.append($searchDiv);
+            const $searchInput = $searchDiv.append(`<input class="tno-search-input${isDark ? '' : ' tno-search-input-lightmode'}" placeholder="Search for character name / nickname / stream...">`);
+            $groupDiv.prepend($searchDiv);
 
             // eslint-disable-next-line prefer-arrow-callback
             addFilterListener($searchInput[0], 'input', function (e) {
@@ -1522,6 +1559,8 @@ const filterStreams = async () => {
             return false;
         }
 
+        await fixSortType();
+
         [tnoStatus, tnoEnglish, tnoPublic, tnoInternational, tnoOthers, tnoWlOverride, tnoSearch, tnoScrolling, tnoAlwaysCustom, tnoReloadDefault, tnoAllowAll] = await getStorage([
             ['tnoStatus', true],
             ['tnoEnglish', true],
@@ -1532,7 +1571,7 @@ const filterStreams = async () => {
             ['tnoSearch', true],
             ['tnoScrolling', false],
             ['tnoAlwaysCustom', false],
-            ['tnoReloadDefault', true],
+            ['tnoReloadDefault', sortType !== SORTS.recommended],
             ['tnoAllowAll', false],
         ]);
 

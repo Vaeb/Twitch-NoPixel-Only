@@ -402,3 +402,8 @@ span.tooltip {
     border-color: hsla(0, 0%, 100%, 0.3);
     /* background-color: #000; */
 }
+
+.tno-search-input.tno-search-input-lightmode {
+    background-color: rgba(0, 0, 0, 0.76);
+    border-color: rgba(0, 0, 0, 0.76);
+}
