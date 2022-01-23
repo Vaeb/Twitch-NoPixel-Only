@@ -1023,11 +1023,10 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                         const idx = rollStart;
                         const stream = streams[idx];
                         rollStart++;
-                        if (stream.factionsMap.whitelistnp) {
-                            results.push(stream);
-                            rollIds.push(idx);
-                            numAdded++;
-                        }
+                        // Given stream is acceptable...
+                        results.push(stream);
+                        rollIds.push(idx);
+                        numAdded++;
                     }
                     streams = results;
                 } else {
