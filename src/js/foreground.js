@@ -98,6 +98,7 @@ let wasZero = false;
 let filterStreamFaction = 'allnopixel';
 let filterStreamText = '';
 let filterStreamTextLookup = '';
+let isFilteringText = false;
 
 let useColors = {};
 let useColorsDark = {};
@@ -117,13 +118,27 @@ const SORTS = {
     recent: 4,
 };
 
-const META_FACTIONS = new Map([ // Key represents alwaysRoll value
+const REAL_VIEWS = new Map([ // Key represents alwaysRoll value
     [false, ['allnopixel', 'alltwitch']],
     [true, ['alltwitch']],
 ]);
 
-let metaFactions = META_FACTIONS.get(false);
-const npMetaFactions = [...metaFactions, 'othernp', 'publicnp', 'international', 'guessed'];
+let realViews = REAL_VIEWS.get(false); // Views with real-stream elements
+
+const universalFactions = ['allnopixel', 'alltwitch'];
+
+const onDefaultView = () => filterStreamFaction === 'allnopixel' && isFilteringText === false;
+
+const onRealView = () => realViews.includes(filterStreamFaction) && isFilteringText === false;
+
+const onUniversalFaction = () => universalFactions.includes(filterStreamFaction) && isFilteringText === false;
+
+// Does view contain multiple actual RP factions (rather than just a dedicated RP faction)
+// Both real-stream and manual-stream
+const onNpMetaFaction = () => {
+    const npMetaFactions = [...universalFactions, 'othernp', 'publicnp', 'international', 'guessed'];
+    return isFilteringText || npMetaFactions.includes(filterStreamFaction);
+};
 
 // #00A032 #cd843f #b71540 #ff0074 #8854d0
 // fastlane: '#40739e',
@@ -304,7 +319,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     let rollStart = 0;
     let alwaysRoll = tnoAlwaysCustom;
 
-    metaFactions = META_FACTIONS.get(alwaysRoll);
+    realViews = REAL_VIEWS.get(alwaysRoll);
     const rollAddMax = 30;
 
     // const resetFiltering = () => {
@@ -369,10 +384,13 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         // if (onPage == false || isDeleting === true) return;
         isDeleting = true;
 
+        isFilteringText = filterStreamText !== '';
+
         const useTextColor = '#000';
         // const useTextColor = isDark ? '#000' : '#f7f7f8';
-        const isMetaFaction = metaFactions.includes(filterStreamFaction);
-        const isNpMetaFaction = npMetaFactions.includes(filterStreamFaction);
+        const isRealView = onRealView();
+        const isUniversalFaction = onUniversalFaction();
+        const isNpMetaFaction = onNpMetaFaction();
         const minViewersUse = isNpMetaFaction ? minViewers : 3;
 
         const allElements = Array.from(document.getElementsByTagName('article'));
@@ -386,8 +404,6 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             console.log('[TNO] _There are so many elements:', elements.length);
             wasZero = elements.length === 0;
         }
-
-        const isFilteringText = filterStreamText !== '';
 
         // if (elements.length > 0 && prevWasZero) {
         //     const $scrollDiv = $('div.root-scrollable.scrollable-area').find('> div.simplebar-scroll-content');
@@ -426,13 +442,13 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             const stream = streamsMap[channelName];
 
             const nowFilterEnabled = filterEnabled && filterStreamFaction !== 'alltwitch';
-            const tnoWlOverrideNow = tnoWlOverride && stream && stream.wlOverride && isMetaFaction;
+            const tnoWlOverrideNow = tnoWlOverride && stream && stream.wlOverride && isNpMetaFaction;
             const tnoOthersNow = tnoOthers || filterStreamFaction === 'other' || tnoWlOverrideNow;
             const tnoPublicNow = tnoPublic || filterStreamFaction === 'publicnp' || tnoWlOverrideNow;
             const tnoInternationalNow = tnoInternational || filterStreamFaction === 'international' || tnoWlOverrideNow;
 
             let streamState; // remove, mark-np, mark-other
-            if ((isMetaFaction === false || isFilteringText) && isManualStream === false) {
+            if (isManualStream === false && isRealView === false) { // If real-stream and on a view with manual-streams-only
                 streamState = FSTATES.hide;
             } else {
                 if (nowFilterEnabled) {
@@ -460,7 +476,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                 } else {
                     if (stream && stream.tagFaction !== 'other') {
                         // If NoPixel streamer that isn't on another server
-                        if (isMetaFaction || ((tnoPublicNow || stream.noPublicInclude) && (tnoInternationalNow || stream.noInternationalInclude))) {
+                        if (isUniversalFaction || isFilteringText || ((tnoPublicNow || stream.noPublicInclude) && (tnoInternationalNow || stream.noInternationalInclude))) {
                             streamState = FSTATES.nopixel;
                         } else {
                             // Public/International stream when not allowed and using filter
@@ -484,13 +500,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                     element.style.visibility = null;
                 }
 
-                let allowStream = false;
-
-                if (isFilteringText) {
-                    allowStream = true;
-                } else {
-                    allowStream = isMetaFaction || filterStreamFaction === 'other';
-                }
+                const allowStream = isUniversalFaction || isFilteringText || filterStreamFaction === 'other';
 
                 if (allowStream === false) {
                     streamState = FSTATES.remove;
@@ -517,14 +527,14 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                     allowStream = true;
                 } else {
                     // Don't do filtering on meta factions (not faction specific)
-                    allowStream = isMetaFaction;
+                    allowStream = isUniversalFaction;
                     if (allowStream === false) {
                         if (filterStreamFaction === 'publicnp') {
                             allowStream = stream.tagFactionSecondary === 'publicnp';
                         } else if (filterStreamFaction === 'international') {
                             allowStream = stream.tagFactionSecondary === 'international';
-                        } else if (filterStreamFaction === 'allnopixel' && rollStart > 0) {
-                            allowStream = stream.factionsMap.whitelistnp;
+                        // } else if (isDefaultView && rollStart > 0) {
+                            // allowStream = stream.factionsMap.whitelistnp;
                         } else {
                             if (stream.factionsMap[filterStreamFaction]) {
                                 allowStream = true;
@@ -604,7 +614,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         if (streamCount) {
             if (minLoadedText != null) streamCount.textContent = `Smallest stream on page: ${minLoadedText}`;
 
-            // if (!isMetaFaction) { // visibility: visible;
+            // if (!isUniversalFaction) { // visibility: visible;
             // streamCount.style.visibility = 'visible';
             // } else {
             streamCount.style.visibility = null;
@@ -730,7 +740,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         destroyFilter(); // Remove previous buttons/events
         await setupFilter(); // Setup new buttons/events
         resetFiltering(); // Reset twitch elements to original state (npChecked/remove)
-        addFactionStreams(false, undefined); // Add pseudo elements for faction
+        addFactionStreams(undefined); // Add pseudo elements for faction
         startDeleting();
         console.log('Refreshed for setting changes!');
     };
@@ -936,7 +946,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                         setStorage('tnoAlwaysCustom', newValue);
                         tnoAlwaysCustom = newValue;
                         alwaysRoll = newValue;
-                        metaFactions = META_FACTIONS.get(alwaysRoll);
+                        realViews = REAL_VIEWS.get(alwaysRoll);
                         if (newValue === false) rollStart = 0;
                         console.log('Set always-custom to:', newValue);
                         onSettingChanged();
@@ -984,7 +994,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                 if (entry.intersectionRatio > 0) {
                     observer.unobserve(lastEl);
                     console.log('Fetching next batch of streams');
-                    addFactionStreams(false, undefined, true);
+                    addFactionStreams(undefined, true);
                 }
             });
         }, options);
@@ -993,14 +1003,14 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     };
 
     // eslint-disable-next-line prefer-const
-    addFactionStreams = (isFilteringText = false, streams = undefined, continueRoll = false) => {
+    addFactionStreams = (streams = undefined, continueRoll = false) => {
         if (live === undefined) {
             console.log('Faction filter failed - Streams not fetched yet...');
             return;
         }
 
         let useRoll = false;
-        if (filterStreamFaction === 'allnopixel' && (alwaysRoll || rollStart > 0)) {
+        if (onDefaultView() && (alwaysRoll || rollStart > 0)) {
             useRoll = true;
             if (!continueRoll) rollStart = 0;
         }
@@ -1014,7 +1024,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                 streams = streams.filter(stream => matchesFilterStreamText(stream));
             }
 
-            if (isFilteringText === false) { // !metaFactions.includes(filterStreamFaction)
+            if (isFilteringText === false) { // !onUniversalFaction()
                 if (useRoll) {
                     const numStreams = streams.length;
                     let numAdded = 0;
@@ -1091,20 +1101,20 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         }
     };
 
-    const fixReloadEnabled = (isEnabled) => {
+    const fixReloadEnabled = () => {
         const filterReloadBtn = document.querySelector('.filter-reload');
-        const isDefaultView = filterStreamFaction === 'allnopixel';
-        const isMetaFaction = metaFactions.includes(filterStreamFaction) && !isDefaultView;
+        const isDefaultView = onDefaultView();
+        const isRealView = onRealView() && !isDefaultView; // all-twitch
         const showOnDefaultNow = isDefaultView && (alwaysRoll || tnoReloadDefault);
 
-        if (isEnabled || showOnDefaultNow || (isMetaFaction === false && !isDefaultView)) {
-            removeClass(filterReloadBtn, 'tno-hide', 'tno-other');
+        if (isFilteringText || showOnDefaultNow || (isRealView === false && isDefaultView === false)) { // Filtering text or showable-on-default or not universal
+            removeClass(filterReloadBtn, 'tno-hide', 'tno-other'); // Full button
         } else {
-            if (filterStreamFaction === 'allnopixel') {
-                removeClass(filterReloadBtn, 'tno-hide');
+            if (isDefaultView) {
+                removeClass(filterReloadBtn, 'tno-hide'); // Partial (dark-green) button
                 addClass(filterReloadBtn, 'tno-other');
             } else {
-                removeClass(filterReloadBtn, 'tno-other');
+                removeClass(filterReloadBtn, 'tno-other'); // Red button
                 addClass(filterReloadBtn, 'tno-hide');
             }
         }
@@ -1338,15 +1348,15 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             console.log('Refreshing streams...');
             timeId = `?${new Date().getTime()}`;
             rollStart = 0;
-            if (filterStreamFaction === 'allnopixel' || tnoReloadDefault) {
+            if (onDefaultView() || tnoReloadDefault) {
                 alwaysRoll = true;
-                metaFactions = META_FACTIONS.get(alwaysRoll);
+                realViews = REAL_VIEWS.get(alwaysRoll);
             }
             destroyFilter(); // Remove previous buttons/events
             await requestLiveData(); // Fetch new data from API endpoint
             await setupFilter(); // Setup new buttons/events
             resetFiltering(); // Reset twitch elements to original state (npChecked/remove)
-            addFactionStreams(false, undefined); // Add pseudo elements for faction
+            addFactionStreams(undefined); // Add pseudo elements for faction
             startDeleting();
             console.log('Refresh complete!');
         });
@@ -1372,7 +1382,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         const inputNumNow = ++inputNumLast;
         filterStreamText = searchText;
         filterStreamTextLookup = parseLookup(searchText);
-        const isFilteringText = filterStreamText !== '';
+        isFilteringText = filterStreamText !== '';
         console.log('Filtering for:', filterStreamText);
 
         const factionStreams = isFilteringText ? live.streams.filter(stream => matchesFilterStreamText(stream)) : undefined;
@@ -1404,11 +1414,11 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             }
             lastResultsStr = nowResultsStr;
             console.log(`(${waitMs}) Filtering...`);
-            fixReloadEnabled(isFilteringText);
+            fixReloadEnabled();
             resetFiltering();
             // if (filterStreamFaction !== 'cleanbois') return;
-            if (isFilteringText || !metaFactions.includes(filterStreamFaction)) {
-                addFactionStreams(isFilteringText, factionStreams);
+            if (onRealView() === false) { // Runs in all cases except on real view
+                addFactionStreams(factionStreams);
             }
             startDeleting();
         }, waitMs);
@@ -1474,7 +1484,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
         const showOnDefault = alwaysRoll || tnoReloadDefault;
 
-        // const isMetaFaction = metaFactions.includes(filterStreamFaction);
+        // const isRealView = onRealView();
 
         // $labelDiv.find('label').text('Filter factions');
         $labelDiv.remove();
@@ -1532,8 +1542,10 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             $groupDiv.css({ position: 'relative' });
 
             const $searchDiv = $('<div class="tno-search-div"></div>');
-            const $searchInput = $searchDiv.append(`<input class="tno-search-input${isDark ? '' : ' tno-search-input-lightmode'}" placeholder="Search for character name / nickname / stream...">`);
+            const $searchInput = $searchDiv.append(`<input class="tno-search-input${isDark ? '' : ' tno-search-input-lightmode'}" placeholder="Search for character name / nickname / stream..."/>`);
             $groupDiv.prepend($searchDiv);
+
+            if (isFilteringText) document.querySelector('.tno-search-input').value = filterStreamText;
 
             // eslint-disable-next-line prefer-arrow-callback
             addFilterListener($searchInput[0], 'input', function (e) {
@@ -1575,7 +1587,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         ]);
 
         alwaysRoll = tnoAlwaysCustom;
-        metaFactions = META_FACTIONS.get(alwaysRoll);
+        realViews = REAL_VIEWS.get(alwaysRoll);
         rollStart = 0;
 
         addSettings(); // Settings should show even if status disabled
@@ -1594,7 +1606,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         setupFilter();
 
         if (alwaysRoll) {
-            addFactionStreams(false, undefined);
+            addFactionStreams(undefined);
         }
 
         console.log('[TNO] Starting interval');
