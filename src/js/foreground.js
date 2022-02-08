@@ -90,6 +90,9 @@ let stopOnMin;
 let intervalSeconds;
 const fullDebugging = false;
 
+let baseHtml;
+let baseHtmlFb;
+
 let keepDeleting = true;
 let onPage = false;
 let interval;
@@ -253,10 +256,35 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         //     console.log('filter and streams ready');
         // });
 
-        ({ minViewers, stopOnMin, intervalSeconds, useColorsDark, useColorsLight } = live);
+        ({ minViewers, stopOnMin, intervalSeconds, useColorsDark, useColorsLight, baseHtml, baseHtmlFb } = live);
 
         console.log(`[${dateStr()}] Fetched data!`);
         console.log('live', live);
+
+        const streams = live.streams;
+        const numStreamsFb = live.streamsFb.length;
+
+        if (numStreamsFb > 0) {
+            let fbIdx = 0;
+            let addStream = live.streamsFb[fbIdx];
+            for (let i = 0; i < streams.length; i++) {
+                const stream = streams[i];
+                if (addStream.viewers >= stream.viewers) {
+                    streams.splice(i, 0, addStream);
+                    fbIdx++;
+                    if (fbIdx < numStreamsFb) {
+                        addStream = live.streamsFb[fbIdx];
+                    } else {
+                        break;
+                    }
+                }
+            }
+            if (fbIdx < numStreamsFb) {
+                for (let i = fbIdx; i < numStreamsFb; i++) {
+                    streams.push(live.streamsFb[i]);
+                }
+            }
+        }
 
         streamsMap = Object.assign({}, ...live.streams.map(stream => ({ [stream.channelName.toLowerCase()]: stream })));
         console.log('streamsMap', streamsMap);
@@ -1059,21 +1087,21 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         const baseParent = baseEl.parentElement;
         const wasRoll = rollIds.length > 0;
 
-        // Includes npManual, _ORDER_, _TITLE_, _VIEWERS_, _PFP_, _CHANNEL1_, _CHANNEL2_
-        // eslint-disable-next-line max-len
-        const baseHtml = `<div data-target="" style="order: _ORDER_;"><div class="Layout-sc-nxg1ff-0 hwqnUg"><div><div class="Layout-sc-nxg1ff-0"><article data-a-target="card-10" data-a-id="card-_CHANNEL1_" class="Layout-sc-nxg1ff-0 hTbBzX"><div class="Layout-sc-nxg1ff-0 gIDgyI"><div class="Layout-sc-nxg1ff-0 iTDkvD"><div class="ScTextWrapper-sc-14f6evl-1 cndMhY"><div class="ScTextMargin-sc-14f6evl-2 feEGBq"><div class="Layout-sc-nxg1ff-0 AjNUj"><a lines="1" data-a-target="preview-card-title-link" class="ScCoreLink-sc-udwpw5-0 iwYxXk ScCoreLink-sc-ybxm10-0 iEEhdE tw-link" href="/_CHANNEL1_"><h3 title="_TITLE_" class="CoreText-sc-cpl358-0 hkccBP">_TITLE_</h3></a></div></div><div class="ScTextMargin-sc-14f6evl-2 feEGBq"><p class="CoreText-sc-cpl358-0 gzYAzs"><a data-test-selector="ChannelLink" data-a-target="preview-card-channel-link" class="ScCoreLink-sc-udwpw5-0 iwYxXk tw-link" href="/_CHANNEL1_/videos">_CHANNEL2_</a></p></div><div class="Layout-sc-nxg1ff-0 gwFCeO"><div class="InjectLayout-sc-588ddc-0 bFhJdp"><div class="InjectLayout-sc-588ddc-0 hoDLKA"><button class="ScTag-sc-xzp4i-0 hrkHJN tw-tag" aria-label="English" data-a-target="English"><div class="ScTagContent-sc-xzp4i-1 iYcwjl">English</div></button></div></div></div></div><div class="ScImageWrapper-sc-14f6evl-0 eBvtgw"><a data-a-target="card-10" data-a-id="card-_CHANNEL1_" data-test-selector="preview-card-avatar" class="ScCoreLink-sc-udwpw5-0 hUIOdd tw-link" href="/_CHANNEL1_/videos"><div class="ScAspectRatio-sc-1sw3lwy-1 flFnOO tw-aspect"><div class="ScAspectSpacer-sc-1sw3lwy-0 giUbvo"></div><figure aria-label="_CHANNEL1_" class="ScAvatar-sc-12nlgut-0 hnnsXF tw-avatar"><img class="InjectLayout-sc-588ddc-0 bxsmXn tw-image tw-image-avatar" alt="_CHANNEL1_" src="_PFP_"></figure></div></a></div></div></div><div class="ScWrapper-sc-uo2e2v-0 bbtaKw tw-hover-accent-effect"><div class="ScTransformWrapper-sc-uo2e2v-1 ScCornerTop-sc-uo2e2v-2 dKYJaX eXxFuv"></div><div class="ScTransformWrapper-sc-uo2e2v-1 ScCornerBottom-sc-uo2e2v-3 bNOuEj dzSwHO"></div><div class="ScTransformWrapper-sc-uo2e2v-1 ScEdgeLeft-sc-uo2e2v-4 kIKqjn cdcwLw"></div><div class="ScTransformWrapper-sc-uo2e2v-1 ScEdgeBottom-sc-uo2e2v-5 cuGbfn geiifk"></div><div class="ScTransformWrapper-sc-uo2e2v-1 icKHub"><a data-a-target="preview-card-image-link" class="ScCoreLink-sc-udwpw5-0 hUIOdd tw-link" href="/_CHANNEL1_"><div class="Layout-sc-nxg1ff-0 bcTnJT"><div class="ScAspectRatio-sc-1sw3lwy-1 dJaMsL tw-aspect"><div class="ScAspectSpacer-sc-1sw3lwy-0 lnBtND"></div><img alt="_TITLE_ - _CHANNEL1_" class="tw-image" src="https://static-cdn.jtvnw.net/previews-ttv/live_user__CHANNEL1_-440x248.jpg${timeId}"></div><div class="ScPositionCorner-sc-1iiybo2-1 ibaFTb"><div class="ScChannelStatusTextIndicator-sc-1f5ghgf-0 cbXzwD tw-channel-status-text-indicator" font-size="font-size-6"><p class="CoreText-sc-cpl358-0 joOBZx">LIVE</p></div></div><div class="ScPositionCorner-sc-1iiybo2-1 fIveqX"><div class="ScMediaCardStatWrapper-sc-1ncw7wk-0 gPUAhy tw-media-card-stat">_VIEWERS_ viewers</div></div></div></a></div></div></article></div></div></div></div>`;
-        const fbHtml = baseHtml
-            .replaceAll('href="/_CHANNEL1_/videos"', 'href="https://www.facebook.com/_CHANNEL1_/live_videos"')
-            .replaceAll('href="/_CHANNEL1_"', 'href="https://www.facebook.com/gaming/_CHANNEL1_"');
-
         for (let i = 0; i < streams.length; i++) {
             const stream = streams[i];
             const channelName = stream.channelName;
             const channelNameLower = channelName.toLowerCase();
             const idx = wasRoll ? rollIds[i] : i;
-            const cloneHtml = (stream.facebook ? fbHtml : baseHtml)
+            let cloneHtml = baseHtml;
+            if (stream.facebook) {
+                cloneHtml = baseHtmlFb
+                    .replace(/_VIDEOURL_/g, `${stream.videoUrl}`)
+                    .replace(/_THUMBNAIL_/g, `${stream.thumbnailUrl}`);
+            }
+            cloneHtml = cloneHtml
                 .replace(/(?<=<article .*?)class="/i, 'class="npManual ')
                 .replace(/_TNOID_/g, `${idx}`)
+                .replace(/_TIMEID_/g, `${timeId}`)
                 .replace(/_CHANNEL1_/g, channelNameLower)
                 .replace(/_CHANNEL2_/g, channelName)
                 .replace(/_ORDER_/g, '0')
