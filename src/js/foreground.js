@@ -83,6 +83,8 @@ const waitForElement = async (selector, maxTime = Infinity) => {
     return el;
 };
 
+const twitchGtaUrl = /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V(?!\/videos|\/clips)/;
+
 // Settings
 
 let minViewers;
@@ -221,8 +223,8 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         fetchHeaders.append('cache-control', 'no-cache');
 
         // https://vaeb.io:3030 | http://localhost:3029
-        // const dataRequest = new Request('https://vaeb.io:3030/live'); // API code is open-source: https://github.com/Vaeb/TNO-Backend
-        const dataRequest = new Request('http://localhost:3029/live'); // API code is open-source: https://github.com/Vaeb/TNO-Backend
+        const dataRequest = new Request('https://vaeb.io:3030/live'); // API code is open-source: https://github.com/Vaeb/TNO-Backend
+        // const dataRequest = new Request('http://localhost:3029/live'); // API code is open-source: https://github.com/Vaeb/TNO-Backend
 
         const maxTries = 4;
         for (let i = 0; i < maxTries; i++) {
@@ -285,6 +287,21 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                 }
             }
         }
+
+        console.log('Checking for permission');
+        // chrome.permissions.request({ origins: ['https://mobile.facebook.com/*'] }, (granted) => {
+        //     // The callback argument will be true if the user granted the permissions.
+        //     if (granted) {
+        //         console.log('Permission granted!');
+        if (twitchGtaUrl.test(window.location.href)) {
+            chrome.runtime.sendMessage({ msgType: 'get-fb-streams', msgData: { channelsFb: live.channelsFb, tick: live.tick } }, (response) => {
+                console.log('GOT RESPONSE FOR FB STREAMS:', response);
+            });
+        }
+        //     } else {
+        //         console.log('Permission denied...');
+        //     }
+        // });
 
         streamsMap = Object.assign({}, ...live.streams.map(stream => ({ [stream.channelName.toLowerCase()]: stream })));
         console.log('streamsMap', streamsMap);
@@ -1592,7 +1609,6 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         }
     };
 
-    const twitchGtaUrl = /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V(?!\/videos|\/clips)/;
     onPage = twitchGtaUrl.test(window.location.href);
 
     activateInterval = async () => {

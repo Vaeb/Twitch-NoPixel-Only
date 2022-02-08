@@ -41,6 +41,7 @@
         "storage"
     ],
     "host_permissions": [
-        "https://vaeb.io/*"
+        "https://vaeb.io/*",
+        "https://mobile.facebook.com/*"
     ]
 }
