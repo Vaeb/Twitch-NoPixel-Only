@@ -296,6 +296,9 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         if (twitchGtaUrl.test(window.location.href)) {
             chrome.runtime.sendMessage({ msgType: 'get-fb-streams', msgData: { channelsFb: live.channelsFb, tick: live.tick } }, (response) => {
                 console.log('GOT RESPONSE FOR FB STREAMS:', response);
+                if (response && response.length > 0) {
+                    live.streams = response;
+                }
             });
         }
         //     } else {
