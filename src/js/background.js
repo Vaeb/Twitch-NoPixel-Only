@@ -30,7 +30,7 @@ const handleGetFbStreams = async (msgData, nowTime) => {
     }
     lastFbLookup = nowTime;
 
-    const { channelsFb, tick } = msgData;
+    const { channelsFb, fbSleep, tick } = msgData;
     // ////////// FB STREAM CHECK
     console.log('Checking for fb streams...');
     const fbStreamsRaw = [];
@@ -56,7 +56,7 @@ const handleGetFbStreams = async (msgData, nowTime) => {
         }
         console.log('finished with', streamer);
         // eslint-disable-next-line no-await-in-loop
-        await sleep(2100);
+        await sleep(fbSleep);
     }
 
     const fbStreams = fbStreamsRaw
