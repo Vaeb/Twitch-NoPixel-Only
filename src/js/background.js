@@ -87,13 +87,13 @@ const handleGetFbStreams = async (msgData, nowTime) => {
         .sort((a, b) => b.viewers - a.viewers);
 
     // const npStreams = await (await fetch('http://localhost:3029/parse_streams', {
-    // const npStreams = await (await fetch('https://vaeb.io:3030/parse_streams', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({ fbStreams, tick }),
-    // })).json();
+    const npStreams = await (await fetch('https://vaeb.io:3030/parse_streams', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ fbStreams, tick }),
+    })).json();
 
     // console.log('GOT npStreams FROM SERVER:', npStreams);
 
