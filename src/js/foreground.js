@@ -289,7 +289,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         }
 
         console.log('Checking for permission');
-        // chrome.permissions.request({ origins: ['https://mobile.facebook.com/*'] }, (granted) => {
+        // chrome.permissions.request({ origins: ['https://mobile.facebook.com/gaming/*'] }, (granted) => {
         //     // The callback argument will be true if the user granted the permissions.
         //     if (granted) {
         //         console.log('Permission granted!');
