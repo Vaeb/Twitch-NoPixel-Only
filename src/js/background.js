@@ -1,5 +1,7 @@
 console.log('TNO Refreshed');
 
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 const twitchUrl = /^https:\/\/www\.twitch\.tv\//;
 const twitchGtaUrl = /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V(?!\/videos|\/clips)/;
 
@@ -57,6 +59,8 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
                 fbStreamsRaw.push([streamer, body]);
             }
             console.log('finished with', streamer);
+            // eslint-disable-next-line no-await-in-loop
+            await sleep(1600);
         }
 
         const fbStreams = fbStreamsRaw
@@ -87,20 +91,20 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
             .sort((a, b) => b.viewers - a.viewers);
 
         // const npStreams = await (await fetch('http://localhost:3029/parse_streams', {
-        const npStreams = await (await fetch('https://vaeb.io:3030/parse_streams', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ fbStreams, tick }),
-        })).json();
+        // const npStreams = await (await fetch('https://vaeb.io:3030/parse_streams', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({ fbStreams, tick }),
+        // })).json();
 
-        console.log('GOT npStreams FROM SERVER:', npStreams);
+        // console.log('GOT npStreams FROM SERVER:', npStreams);
 
-        if (npStreams != null && npStreams.length > 0) {
-            console.log('using');
-            return sendResponse(npStreams);
-        }
+        // if (npStreams != null && npStreams.length > 0) {
+        //     console.log('using');
+        //     return sendResponse(npStreams);
+        // }
 
         return sendResponse([]);
     }
