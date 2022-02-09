@@ -23,6 +23,14 @@ chrome.action.onClicked.addListener((activeTab) => {
 
 const getRandomDec = (min, max) => Math.random() * (max - min) + min;
 
+const shuffle = (arr) => {
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+};
+
 let lastFbLookup = 0;
 
 const handleGetFbStreams = async (msgData, nowTime) => {
@@ -30,6 +38,7 @@ const handleGetFbStreams = async (msgData, nowTime) => {
         channelsFb,
         tick,
         fbDebounce,
+        fbMaxLookup,
         fbSleep,
         fbGroupSize,
         fbGroupSleepInc,
@@ -42,12 +51,18 @@ const handleGetFbStreams = async (msgData, nowTime) => {
         return [];
     }
     lastFbLookup = nowTime;
+    const isInitial = fbLastMajorChange == 0;
+    console.log('isInitial', isInitial);
+
+    let channelsFbNow = shuffle([...channelsFb]);
+    if (fbMaxLookup > -1 && isInitial === false) {
+        channelsFbNow = channelsFbNow.slice(0, fbMaxLookup);
+    }
 
     // ////////// FB STREAM CHECK
-    console.log(new Date(), 'Checking for fb streams...');
+    console.log(new Date(), 'Checking for fb streams...', fbMaxLookup);
     const fbStreamsRaw = [];
-    let channelNum = 0;
-    for (const streamer of channelsFb) {
+    for (const [channelNum, streamer] of Object.entries(channelsFbNow)) {
         console.log('looking up', streamer);
         // const headers = new Headers();
         // headers.append('Content-Type', 'text/html');
@@ -57,6 +72,8 @@ const handleGetFbStreams = async (msgData, nowTime) => {
         const res = await fetch(`https://mobile.facebook.com/gaming/${streamer}`);
         // eslint-disable-next-line no-await-in-loop
         const body = await res.text();
+        lastFbLookup = +new Date();
+
         const isLive = body.includes('playbackIsLiveStreaming&quot;:true');
         const isBad = body.includes('temporarily');
         if (isBad) {
@@ -68,44 +85,43 @@ const handleGetFbStreams = async (msgData, nowTime) => {
             fbStreamsRaw.push([streamer, body]);
         }
         console.log('finished with', streamer, isLive);
+        if (isLive) console.log('>> LIVE!');
 
-        const isInitial = fbLastMajorChange == 0;
-
-        const groupNum = Math.floor(channelNum / fbGroupSize);
-        const baseDebounce = fbSleep + (fbGroupSleepInc * groupNum);
-        const nowDebounce = isInitial ? fbSleep : baseDebounce + getRandomDec(-fbRandomRadius, fbRandomRadius);
-        console.log(groupNum, baseDebounce, nowDebounce, isInitial);
-        // eslint-disable-next-line no-await-in-loop
-        await sleep(nowDebounce);
-        channelNum++;
+        if (channelNum < channelsFbNow.length - 1) {
+            const groupNum = Math.floor(channelNum / fbGroupSize);
+            const baseDebounce = fbSleep + (fbGroupSleepInc * groupNum);
+            const nowDebounce = isInitial ? fbSleep : baseDebounce + getRandomDec(-fbRandomRadius, fbRandomRadius);
+            console.log(groupNum, baseDebounce, nowDebounce, isInitial);
+            // eslint-disable-next-line no-await-in-loop
+            await sleep(nowDebounce);
+        }
     }
 
-    const fbStreams = fbStreamsRaw
-        .filter(result => result !== undefined)
-        .map((data) => {
-            const [streamer, body] = data;
-            const videoUrl = (body.match(/&quot;videoURL&quot;:&quot;(.*?)&quot;/) || ['', ''])[1]
-                .replace(/\\/g, '');
-            const viewCountStr = (body.match(/>LIVE<[\s\S]+?<\/i>([\d.K]+)<\/span>/) || [])[1];
-            let viewCount = parseFloat(viewCountStr);
-            if (viewCountStr.includes('K')) viewCount *= 1000;
-            const pfpUrl = (body.match(/[ "]profpic"[\s\S]+?(http.+?)&#039;/) || ['', ''])[1]
-                .replace(/\\(\w\w) /g, (_, hex) => String.fromCharCode(parseInt(hex, 16)));
-            const thumbnailUrl = (body.match(/\sdata-store=[\s\S]+?background: url\(&#039;(http.+?)&#039;/) || ['', ''])[1]
-                .replace(/\\(\w\w) /g, (_, hex) => String.fromCharCode(parseInt(hex, 16)));
-            // console.log(streamer, viewCountStr, videoUrl);
+    const fbStreams = {};
+    for (const data of fbStreamsRaw) {
+        if (data === undefined) continue;
+        const [streamer, body] = data;
+        const videoUrl = (body.match(/&quot;videoURL&quot;:&quot;(.*?)&quot;/) || ['', ''])[1]
+            .replace(/\\/g, '');
+        const viewCountStr = (body.match(/>LIVE<[\s\S]+?<\/i>([\d.K]+)<\/span>/) || [])[1];
+        let viewCount = parseFloat(viewCountStr);
+        if (viewCountStr.includes('K')) viewCount *= 1000;
+        const pfpUrl = (body.match(/[ "]profpic"[\s\S]+?(http.+?)&#039;/) || ['', ''])[1]
+            .replace(/\\(\w\w) /g, (_, hex) => String.fromCharCode(parseInt(hex, 16)));
+        const thumbnailUrl = (body.match(/\sdata-store=[\s\S]+?background: url\(&#039;(http.+?)&#039;/) || ['', ''])[1]
+            .replace(/\\(\w\w) /g, (_, hex) => String.fromCharCode(parseInt(hex, 16)));
+        // console.log(streamer, viewCountStr, videoUrl);
 
-            return {
-                userDisplayName: streamer,
-                videoUrl,
-                title: `《Facebook Gaming - ${streamer}》`,
-                viewers: viewCount,
-                profileUrlOverride: pfpUrl,
-                thumbnailUrl,
-                facebook: true,
-            };
-        })
-        .sort((a, b) => b.viewers - a.viewers);
+        fbStreams[streamer] = {
+            userDisplayName: streamer,
+            videoUrl,
+            title: `《Facebook Gaming - ${streamer}》`,
+            viewers: viewCount,
+            profileUrlOverride: pfpUrl,
+            thumbnailUrl,
+            facebook: true,
+        };
+    }
 
     // const npStreams = await (await fetch('http://localhost:3029/parse_streams', {
     const npStreams = await (await fetch('https://vaeb.io:3030/parse_streams', {
@@ -113,7 +129,7 @@ const handleGetFbStreams = async (msgData, nowTime) => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ fbStreams, tick }),
+        body: JSON.stringify({ fbChannels: channelsFbNow, fbStreams, tick }),
     })).json();
 
     console.log('GOT npStreams FROM SERVER:', npStreams);

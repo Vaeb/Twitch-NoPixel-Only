@@ -42,6 +42,6 @@
     ],
     "host_permissions": [
         "https://vaeb.io/*",
-        "https://mobile.facebook.com/gaming/*"
+        "https://*.facebook.com/gaming/*"
     ]
 }

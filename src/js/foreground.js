@@ -214,13 +214,27 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
     let live;
     let streamsMap;
+    let insertAfterReal;
     let filterListeners = [];
     let timeId = `#${new Date().getTime()}`;
 
     let onSettingChanged;
 
     const handleStreams = () => {
+        const streams = live.streams;
+
         streamsMap = Object.assign({}, ...live.streams.map(stream => ({ [stream.channelName.toLowerCase()]: stream })));
+
+        insertAfterReal = {};
+        for (let i = 0; i < streams.length; i++) {
+            const nowStream = streams[i];
+            if (nowStream.facebook) {
+                const prevStreamName = i === 0 ? '_start_' : streams[i - 1].channelName.toLowerCase();
+                insertAfterReal[prevStreamName] = nowStream; // Must be inserted in order (adjacent edge-case)
+            }
+        }
+
+        console.log('insertAfterReal', insertAfterReal);
     };
 
     const requestLiveData = async () => {
@@ -306,6 +320,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                     channelsFb: live.channelsFb,
                     tick: live.tick,
                     fbDebounce: live.fbDebounce,
+                    fbMaxLookup: live.fbMaxLookup,
                     fbSleep: live.fbSleep,
                     fbGroupSize: live.fbGroupSize,
                     fbGroupSleepInc: live.fbGroupSleepInc,
@@ -448,6 +463,71 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             || stream.channelName.toLowerCase().includes(filterStreamText)
             || stream.title.toLowerCase().includes(filterStreamText);
 
+    const addClass = (el, ...classes) => {
+        for (const c of classes) {
+            if (!el.classList.contains(c)) {
+                el.classList.add(c);
+            }
+        }
+    };
+
+    const removeClass = (el, ...classes) => {
+        for (const c of classes) {
+            if (el.classList.contains(c)) {
+                el.classList.remove(c);
+            }
+        }
+    };
+
+    const numToTwitchViewers = (n) => {
+        if (n < 1000) return `${n}`;
+        return `${parseFloat((n / 1e3).toFixed(1))}K`;
+    };
+
+    const makeStreamHtml = (stream, idx) => {
+        if (idx === undefined) idx = stream.id;
+
+        const channelName = stream.channelName;
+        const channelNameLower = channelName.toLowerCase();
+        let cloneHtml = baseHtml;
+        if (stream.facebook) {
+            cloneHtml = baseHtmlFb
+                .replace(/_VIDEOURL_/g, `${stream.videoUrl}`)
+                .replace(/_THUMBNAIL_/g, `${stream.thumbnailUrl}`);
+        }
+        cloneHtml = cloneHtml
+            .replace(/(?<=<article .*?)class="/i, 'class="npManual ')
+            .replace(/_TNOID_/g, `${idx}`)
+            .replace(/_TIMEID_/g, `${timeId}`)
+            .replace(/_CHANNEL1_/g, channelNameLower)
+            .replace(/_CHANNEL2_/g, channelName)
+            .replace(/_ORDER_/g, '0')
+            .replace(/"_TITLE_/g, `"${encodeHtml(stream.title)}`)
+            .replace(/_TITLE_/g, stream.title)
+            .replace(/_VIEWERS_/g, numToTwitchViewers(stream.viewers))
+            .replace(/_PFP_/g, stream.profileUrl);
+        return cloneHtml;
+    };
+
+    const insertStreamSingle = (baseIdx, baseChannelName, elements, element, stream = insertAfterReal[baseChannelName]) => {
+        console.log('> ADDING', stream.channelName, 'after', baseChannelName, element);
+        const newIdx = stream.id;
+        const cloneHtml = makeStreamHtml(stream);
+        element.insertAdjacentHTML('afterEnd', cloneHtml);
+        const streamEl = document.querySelector(`#tno-stream-${newIdx}`);
+        const article = streamEl.querySelector('article');
+        streamEl.style.order = element.style.order;
+        // addClass(article, 'npChecked');
+        elements.splice(baseIdx + 1, 0, article);
+    };
+
+    const getChannelNameFromEl = (element, fromArticle = false) => {
+        if (fromArticle) element = getMainElFromArticle(element);
+        const channelEl = element.querySelector("a[data-a-target='preview-card-channel-link']");
+        const channelElNode = [...channelEl.childNodes].find(node => node.nodeType === 3);
+        const channelName = channelElNode.textContent.toLowerCase();
+    };
+
     const deleteOthers = () => {
         if (onPage == false) return;
         // if (onPage == false || isDeleting === true) return;
@@ -480,7 +560,15 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         //     console.log('before-deletion bottomRem:', bottomRem);
         // }
 
-        elements.forEach((element) => {
+        let allowNextManual = false;
+
+        console.log('>>>> STARTING NEW ELEMENTS LOOP');
+
+        for (let elementIdx = 0; elementIdx < elements.length; elementIdx++) {
+            let element = elements[elementIdx];
+            const allowNextManualNow = allowNextManual; // Manuals not being removed here?
+            allowNextManual = false;
+
             const isManualStream = element.classList.contains('npManual');
             element.classList.add('npChecked');
             element = getMainElFromArticle(element);
@@ -509,6 +597,9 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
             const channelName = channelElNode.textContent.toLowerCase();
             const stream = streamsMap[channelName];
+            if (isManualStream) console.log('checking manual stream', channelName);
+
+            console.log('CHECKING', channelName);
 
             const nowFilterEnabled = filterEnabled && filterStreamFaction !== 'alltwitch';
             const tnoWlOverrideNow = tnoWlOverride && stream && stream.wlOverride && isNpMetaFaction;
@@ -516,9 +607,24 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             const tnoPublicNow = tnoPublic || filterStreamFaction === 'publicnp' || tnoWlOverrideNow;
             const tnoInternationalNow = tnoInternational || filterStreamFaction === 'international' || tnoWlOverrideNow;
 
+            if (isRealView && insertAfterReal[channelName]) {
+                const addStream = insertAfterReal[channelName];
+                const removeEls = [...document.querySelectorAll(`#tno-stream-${addStream.id}`)];
+                for (const removeEl of removeEls) {
+                    removeEl.remove();
+                }
+                insertStreamSingle(elementIdx, channelName, elements, element, addStream);
+                // console.log(elements.map(el => getChannelNameFromEl(el)));
+                allowNextManual = true;
+            }
+
             let streamState; // remove, mark-np, mark-other
             if (isManualStream === false && isRealView === false) { // If real-stream and on a view with manual-streams-only
                 streamState = FSTATES.hide;
+            } else if (isManualStream === true && isRealView === true && allowNextManualNow === false) { // If real-stream and on a view with manual-streams-only
+                element.remove();
+                console.log('REMOVED BAD', channelName, element);
+                continue;
             } else {
                 if (nowFilterEnabled) {
                     // If filtering streams is enabled
@@ -678,7 +784,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             } else {
                 if (fullDebugging) console.log(`[${dateStr()}] Handled allowed stream: ${channelName}`);
             }
-        });
+        }
 
         if (streamCount) {
             if (minLoadedText != null) streamCount.textContent = `Smallest stream on page: ${minLoadedText}`;
@@ -1043,11 +1149,6 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         });
     };
 
-    const numToTwitchViewers = (n) => {
-        if (n < 1000) return `${n}`;
-        return `${parseFloat((n / 1e3).toFixed(1))}K`;
-    };
-
     const makeScrollEvent = (lastEl) => {
         console.log('Making scroll event for:', lastEl);
 
@@ -1128,47 +1229,13 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         const wasRoll = rollIds.length > 0;
 
         for (let i = 0; i < streams.length; i++) {
-            const stream = streams[i];
-            const channelName = stream.channelName;
-            const channelNameLower = channelName.toLowerCase();
             const idx = wasRoll ? rollIds[i] : i;
-            let cloneHtml = baseHtml;
-            if (stream.facebook) {
-                cloneHtml = baseHtmlFb
-                    .replace(/_VIDEOURL_/g, `${stream.videoUrl}`)
-                    .replace(/_THUMBNAIL_/g, `${stream.thumbnailUrl}`);
-            }
-            cloneHtml = cloneHtml
-                .replace(/(?<=<article .*?)class="/i, 'class="npManual ')
-                .replace(/_TNOID_/g, `${idx}`)
-                .replace(/_TIMEID_/g, `${timeId}`)
-                .replace(/_CHANNEL1_/g, channelNameLower)
-                .replace(/_CHANNEL2_/g, channelName)
-                .replace(/_ORDER_/g, '0')
-                .replace(/"_TITLE_/g, `"${encodeHtml(stream.title)}`)
-                .replace(/_TITLE_/g, stream.title)
-                .replace(/_VIEWERS_/g, numToTwitchViewers(stream.viewers))
-                .replace(/_PFP_/g, stream.profileUrl);
+            const stream = streams[i];
+            const cloneHtml = makeStreamHtml(stream, idx);
             baseEl.insertAdjacentHTML('beforebegin', cloneHtml);
             const streamEl = baseParent.querySelector(`#tno-stream-${idx}`);
             if (wasRoll && i === streams.length - 1) {
                 makeScrollEvent(streamEl);
-            }
-        }
-    };
-
-    const addClass = (el, ...classes) => {
-        for (const c of classes) {
-            if (!el.classList.contains(c)) {
-                el.classList.add(c);
-            }
-        }
-    };
-
-    const removeClass = (el, ...classes) => {
-        for (const c of classes) {
-            if (el.classList.contains(c)) {
-                el.classList.remove(c);
             }
         }
     };
