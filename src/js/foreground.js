@@ -307,6 +307,10 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                     tick: live.tick,
                     fbDebounce: live.fbDebounce,
                     fbSleep: live.fbSleep,
+                    fbGroupSize: live.fbGroupSize,
+                    fbGroupSleepInc: live.fbGroupSleepInc,
+                    fbRandomRadius: live.fbRandomRadius,
+                    fbLastMajorChange: live.fbLastMajorChange,
                 },
             }, (response) => {
                 console.log('GOT RESPONSE FOR FB STREAMS:', response);

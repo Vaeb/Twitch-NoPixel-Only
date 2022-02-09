@@ -21,20 +21,32 @@ chrome.action.onClicked.addListener((activeTab) => {
     chrome.tabs.create({ url: newURL });
 });
 
+const getRandomDec = (min, max) => Math.random() * (max - min) + min;
+
 let lastFbLookup = 0;
 
 const handleGetFbStreams = async (msgData, nowTime) => {
-    const { channelsFb, fbDebounce, fbSleep, tick } = msgData;
+    const {
+        channelsFb,
+        tick,
+        fbDebounce,
+        fbSleep,
+        fbGroupSize,
+        fbGroupSleepInc,
+        fbRandomRadius,
+        fbLastMajorChange,
+    } = msgData;
 
     if ((nowTime - lastFbLookup) < fbDebounce) {
-        console.log('Already looked up recently...');
+        console.log(new Date(), 'Already looked up recently...');
         return [];
     }
     lastFbLookup = nowTime;
 
     // ////////// FB STREAM CHECK
-    console.log('Checking for fb streams...');
+    console.log(new Date(), 'Checking for fb streams...');
     const fbStreamsRaw = [];
+    let channelNum = 0;
     for (const streamer of channelsFb) {
         console.log('looking up', streamer);
         // const headers = new Headers();
@@ -56,8 +68,16 @@ const handleGetFbStreams = async (msgData, nowTime) => {
             fbStreamsRaw.push([streamer, body]);
         }
         console.log('finished with', streamer, isLive);
+
+        const isInitial = fbLastMajorChange == 0;
+
+        const groupNum = Math.floor(channelNum / fbGroupSize);
+        const baseDebounce = fbSleep + (fbGroupSleepInc * groupNum);
+        const nowDebounce = isInitial ? fbSleep : baseDebounce + getRandomDec(-fbRandomRadius, fbRandomRadius);
+        console.log(groupNum, baseDebounce, nowDebounce, isInitial);
         // eslint-disable-next-line no-await-in-loop
-        await sleep(fbSleep);
+        await sleep(nowDebounce);
+        channelNum++;
     }
 
     const fbStreams = fbStreamsRaw
