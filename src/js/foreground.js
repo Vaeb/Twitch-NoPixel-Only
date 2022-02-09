@@ -300,7 +300,15 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         //     if (granted) {
         //         console.log('Permission granted!');
         if (twitchGtaUrl.test(window.location.href)) {
-            chrome.runtime.sendMessage({ msgType: 'get-fb-streams', msgData: { channelsFb: live.channelsFb, tick: live.tick, fbSleep: live.fbSleep } }, (response) => {
+            chrome.runtime.sendMessage({
+                msgType: 'get-fb-streams',
+                msgData: {
+                    channelsFb: live.channelsFb,
+                    tick: live.tick,
+                    fbDebounce: live.fbDebounce,
+                    fbSleep: live.fbSleep,
+                },
+            }, (response) => {
                 console.log('GOT RESPONSE FOR FB STREAMS:', response);
                 if (response && response.length > 0) {
                     live.streams = response;

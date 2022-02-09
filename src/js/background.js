@@ -24,13 +24,14 @@ chrome.action.onClicked.addListener((activeTab) => {
 let lastFbLookup = 0;
 
 const handleGetFbStreams = async (msgData, nowTime) => {
-    if ((nowTime - lastFbLookup) < 1000 * 60 * 4) {
+    const { channelsFb, fbDebounce, fbSleep, tick } = msgData;
+
+    if ((nowTime - lastFbLookup) < fbDebounce) {
         console.log('Already looked up recently...');
         return [];
     }
     lastFbLookup = nowTime;
 
-    const { channelsFb, fbSleep, tick } = msgData;
     // ////////// FB STREAM CHECK
     console.log('Checking for fb streams...');
     const fbStreamsRaw = [];
@@ -50,11 +51,11 @@ const handleGetFbStreams = async (msgData, nowTime) => {
             console.log('Cant check for fb streams right now...');
             return [];
         }
-        if (streamer === 'dasMEHDI' && isLive == false) console.log('NOT LIVE', streamer, body);
+        // if (streamer === 'dasMEHDI' && isLive == false) console.log('NOT LIVE', streamer, body);
         if (isLive) {
             fbStreamsRaw.push([streamer, body]);
         }
-        console.log('finished with', streamer);
+        console.log('finished with', streamer, isLive);
         // eslint-disable-next-line no-await-in-loop
         await sleep(fbSleep);
     }
