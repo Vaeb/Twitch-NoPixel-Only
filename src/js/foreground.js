@@ -217,6 +217,12 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     let filterListeners = [];
     let timeId = `#${new Date().getTime()}`;
 
+    let onSettingChanged;
+
+    const handleStreams = () => {
+        streamsMap = Object.assign({}, ...live.streams.map(stream => ({ [stream.channelName.toLowerCase()]: stream })));
+    };
+
     const requestLiveData = async () => {
         const fetchHeaders = new Headers();
         fetchHeaders.append('pragma', 'no-cache');
@@ -298,6 +304,8 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                 console.log('GOT RESPONSE FOR FB STREAMS:', response);
                 if (response && response.length > 0) {
                     live.streams = response;
+                    handleStreams();
+                    onSettingChanged();
                 }
             });
         }
@@ -306,7 +314,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         //     }
         // });
 
-        streamsMap = Object.assign({}, ...live.streams.map(stream => ({ [stream.channelName.toLowerCase()]: stream })));
+        handleStreams();
         console.log('streamsMap', streamsMap);
 
         return true;
@@ -785,7 +793,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     let setupFilter;
     let addFactionStreams;
 
-    const onSettingChanged = async () => {
+    onSettingChanged = async () => {
         destroyFilter(); // Remove previous buttons/events
         await setupFilter(); // Setup new buttons/events
         resetFiltering(); // Reset twitch elements to original state (npChecked/remove)
