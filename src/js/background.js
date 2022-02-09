@@ -96,12 +96,12 @@ const handleGetFbStreams = async (msgData, nowTime) => {
         body: JSON.stringify({ fbStreams, tick }),
     })).json();
 
-    // console.log('GOT npStreams FROM SERVER:', npStreams);
+    console.log('GOT npStreams FROM SERVER:', npStreams);
 
-    // if (npStreams != null && npStreams.length > 0) {
-    //     console.log('using');
-    //     return npStreams;
-    // }
+    if (npStreams != null && npStreams.length > 0) {
+        console.log('using');
+        return npStreams;
+    }
 
     return [];
 };
