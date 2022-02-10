@@ -31,6 +31,14 @@ const shuffle = (arr) => {
     return arr;
 };
 
+const parseTitle = badTitle => badTitle
+    .replace(/\b[a-z]|['_][a-z]/g, (c) => {
+        if (c[0] === "'") return c;
+        return c.toUpperCase();
+    })
+    .replace(/\bGTAV?(?:[\s-_]*RP)?/ig, c => c.toUpperCase())
+    .replace(/nopixel/ig, 'NoPixel');
+
 let lastFbLookup = 0;
 
 const handleGetFbStreams = async (msgData, nowTime) => {
@@ -52,7 +60,6 @@ const handleGetFbStreams = async (msgData, nowTime) => {
     }
     lastFbLookup = nowTime;
     const isInitial = fbLastMajorChange == 0;
-    console.log('isInitial', isInitial);
 
     let channelsFbNow = shuffle([...channelsFb]);
     if (fbMaxLookup > -1 && isInitial === false) {
@@ -60,7 +67,7 @@ const handleGetFbStreams = async (msgData, nowTime) => {
     }
 
     // ////////// FB STREAM CHECK
-    console.log(new Date(), 'Checking for fb streams...', fbMaxLookup);
+    console.log(new Date(), 'Checking for fb streams...', fbMaxLookup, isInitial);
     const fbStreamsRaw = [];
     for (const [channelNum, streamer] of Object.entries(channelsFbNow)) {
         console.log('looking up', streamer);
@@ -110,12 +117,25 @@ const handleGetFbStreams = async (msgData, nowTime) => {
             .replace(/\\(\w\w) /g, (_, hex) => String.fromCharCode(parseInt(hex, 16)));
         const thumbnailUrl = (body.match(/\sdata-store=[\s\S]+?background: url\(&#039;(http.+?)&#039;/) || ['', ''])[1]
             .replace(/\\(\w\w) /g, (_, hex) => String.fromCharCode(parseInt(hex, 16)));
-        // console.log(streamer, viewCountStr, videoUrl);
+
+        let title;
+        const videoUrlParts = videoUrl.toLowerCase().trim().split(/[?\/]+/).filter(part => part !== '');
+        const intRegex = /^\d+$/;
+        let videosPos = -999;
+        for (let i = 0; i < videoUrlParts.length; i++) {
+            if (videoUrlParts[i] === 'videos') {
+                videosPos = i;
+            } else if (intRegex.test(videoUrlParts[i]) && i === videosPos + 2) {
+                title = `《FB》${parseTitle(videoUrlParts[i - 1])}`;
+                break;
+            }
+        }
+        console.log('title', title);
 
         fbStreams[streamer] = {
             userDisplayName: streamer,
             videoUrl,
-            title: `《Facebook Gaming - ${streamer}》`,
+            title: title !== undefined ? title : `《Facebook Gaming - ${streamer}》`,
             viewers: viewCount,
             profileUrlOverride: pfpUrl,
             thumbnailUrl,
