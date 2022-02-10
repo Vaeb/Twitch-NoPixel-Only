@@ -32,12 +32,14 @@ const shuffle = (arr) => {
 };
 
 const parseTitle = badTitle => badTitle
-    .replace(/\b[a-z]|['_][a-z]/g, (c) => {
+    .replace(/[-_]|\b[a-z]|['][a-z]/g, (c) => {
         if (c[0] === "'") return c;
+        if (['-', '_'].includes(c)) return ' ';
         return c.toUpperCase();
     })
     .replace(/\bGTAV?(?:[\s-_]*RP)?/ig, c => c.toUpperCase())
-    .replace(/nopixel/ig, 'NoPixel');
+    .replace(/nopixel/ig, 'NoPixel')
+    .trim();
 
 let lastFbLookup = 0;
 
@@ -108,7 +110,7 @@ const handleGetFbStreams = async (msgData, nowTime) => {
     for (const data of fbStreamsRaw) {
         if (data === undefined) continue;
         const [streamer, body] = data;
-        const videoUrl = (body.match(/&quot;videoURL&quot;:&quot;(.*?)&quot;/) || ['', ''])[1]
+        let videoUrl = (body.match(/&quot;videoURL&quot;:&quot;(.*?)&quot;/) || ['', ''])[1]
             .replace(/\\/g, '');
         const viewCountStr = (body.match(/>LIVE<[\s\S]+?<\/i>([\d.K]+)<\/span>/) || [])[1];
         let viewCount = parseFloat(viewCountStr);
@@ -126,7 +128,9 @@ const handleGetFbStreams = async (msgData, nowTime) => {
             if (videoUrlParts[i] === 'videos') {
                 videosPos = i;
             } else if (intRegex.test(videoUrlParts[i]) && i === videosPos + 2) {
-                title = `《FB》${parseTitle(videoUrlParts[i - 1])}`;
+                const videoUrlTitle = videoUrlParts[i - 1];
+                videoUrl = videoUrl.replace(`/${videoUrlTitle}`, '');
+                title = `《FB》${parseTitle(videoUrlTitle)}`;
                 break;
             }
         }
