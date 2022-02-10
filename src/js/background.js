@@ -37,8 +37,9 @@ const parseTitle = badTitle => badTitle
         if (['-', '_'].includes(c)) return ' ';
         return c.toUpperCase();
     })
-    .replace(/\bGTAV?(?:[\s-_]*RP)?/ig, c => c.toUpperCase())
+    .replace(/\bGTAV?/ig, c => c.toUpperCase())
     .replace(/nopixel/ig, 'NoPixel')
+    .replace(/\brp/ig, 'RP')
     .trim();
 
 let lastFbLookup = 0;
