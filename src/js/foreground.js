@@ -562,7 +562,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
         let allowNextManual = false;
 
-        console.log('>>>> STARTING NEW ELEMENTS LOOP');
+        // console.log('>>>> STARTING NEW ELEMENTS LOOP');
 
         for (let elementIdx = 0; elementIdx < elements.length; elementIdx++) {
             let element = elements[elementIdx];
@@ -597,9 +597,6 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
             const channelName = channelElNode.textContent.toLowerCase();
             const stream = streamsMap[channelName];
-            if (isManualStream) console.log('checking manual stream', channelName);
-
-            console.log('CHECKING', channelName);
 
             const nowFilterEnabled = filterEnabled && filterStreamFaction !== 'alltwitch';
             const tnoWlOverrideNow = tnoWlOverride && stream && stream.wlOverride && isNpMetaFaction;
