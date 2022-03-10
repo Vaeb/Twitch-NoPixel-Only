@@ -384,8 +384,8 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     let [tnoStatus, tnoEnglish, tnoPublic, tnoInternational, tnoOthers, tnoWlOverride, tnoSearch, tnoScrolling, tnoAlwaysCustom, tnoReloadDefault, tnoAllowAll] = await getStorage([
         ['tnoStatus', true],
         ['tnoEnglish', true],
-        ['tnoPublic', true],
-        ['tnoInternational', true],
+        ['tnoPublic', false],
+        ['tnoInternational', false],
         ['tnoOthers', false],
         ['tnoWlOverride', true],
         ['tnoSearch', true],
@@ -1710,8 +1710,8 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         [tnoStatus, tnoEnglish, tnoPublic, tnoInternational, tnoOthers, tnoWlOverride, tnoSearch, tnoScrolling, tnoAlwaysCustom, tnoReloadDefault, tnoAllowAll] = await getStorage([
             ['tnoStatus', true],
             ['tnoEnglish', true],
-            ['tnoPublic', true],
-            ['tnoInternational', true],
+            ['tnoPublic', false],
+            ['tnoInternational', false],
             ['tnoOthers', false],
             ['tnoWlOverride', true],
             ['tnoSearch', true],
