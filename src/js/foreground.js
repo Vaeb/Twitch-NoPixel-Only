@@ -210,7 +210,7 @@ let stopInterval;
 
 const filterStreams = async () => { // Remember: The code here runs upon loading twitch.tv, not the GTAV page. For the latter, use activateInterval.
     console.log(`[${dateStr()}] Fetching NP stream data...`);
-    const isDeveloper = typeof document.cookie === 'string' && document.cookie.includes('name=vaeben');
+    const isDeveloper = typeof document.cookie === 'string' && document.cookie.includes('name=admdev');
 
     let live;
     let streamsMap;
@@ -281,7 +281,6 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         ({ minViewers, stopOnMin, intervalSeconds, useColorsDark, useColorsLight, baseHtml, baseHtmlFb } = live);
 
         console.log(`[${dateStr()}] Fetched data!`);
-        console.log('live', live);
 
         const streams = live.streams;
         const numStreamsFb = live.streamsFb.length;
@@ -308,6 +307,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             }
         }
 
+        console.log('live', live);
         console.log('Checking for permission');
         // chrome.permissions.request({ origins: ['https://mobile.facebook.com/gaming/*'] }, (granted) => {
         //     // The callback argument will be true if the user granted the permissions.
