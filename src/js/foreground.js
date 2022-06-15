@@ -523,7 +523,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
     const getChannelNameFromEl = (element, fromArticle = false) => {
         if (fromArticle) element = getMainElFromArticle(element);
-        const channelEl = element.querySelector("a[data-a-target='preview-card-channel-link']");
+        const channelEl = element.querySelector("p[data-a-target='preview-card-channel-link']");
         const channelElNode = [...channelEl.childNodes].find(node => node.nodeType === 3);
         const channelName = channelElNode.textContent.toLowerCase();
     };
@@ -573,7 +573,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             element.classList.add('npChecked');
             element = getMainElFromArticle(element);
             const titleEl = element.querySelector('h3');
-            const channelEl = element.querySelector("a[data-a-target='preview-card-channel-link']");
+            const channelEl = element.querySelector("p[data-a-target='preview-card-channel-link']");
             const channelElNode = [...channelEl.childNodes].find(node => node.nodeType === 3);
             let liveElDiv = element.getElementsByClassName('tw-channel-status-text-indicator')[0];
             const viewers = element.getElementsByClassName('tw-media-card-stat')[0].textContent;
@@ -821,7 +821,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         const streamElements = $('article:visible').toArray();
         for (let i = 0; i < streamElements.length; i++) {
             const streamEl = streamElements[i];
-            const channelName = [...streamEl.querySelector("a[data-a-target='preview-card-channel-link']").childNodes]
+            const channelName = [...streamEl.querySelector("p[data-a-target='preview-card-channel-link']").childNodes]
                 .find(node => node.nodeType === 3)
                 .textContent.toLowerCase();
             const streamTags = streamEl.querySelectorAll('button.tw-tag');
