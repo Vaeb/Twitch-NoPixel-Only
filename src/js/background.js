@@ -16,7 +16,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     }
 });
 
-chrome.action.onClicked.addListener((activeTab) => {
+chrome.browserAction.onClicked.addListener((activeTab) => {
     const newURL = 'https://www.twitch.tv/directory/game/Grand%20Theft%20Auto%20V';
     chrome.tabs.create({ url: newURL });
 });
