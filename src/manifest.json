@@ -2,7 +2,7 @@
     "name": "Twitch NoPixel Only",
     "description": "Automatic filtering and coloring for NoPixel streams on Twitch's GTA page!",
     "version": "1.13.5",
-    "manifest_version": 2,
+    "manifest_version": 3,
     "icons": {
         "16": "images/icon-16.png",
         "32": "images/icon-32.png",
@@ -10,12 +10,9 @@
         "128": "images/icon-128.png"
     },
     "background": {
-        "scripts": [
-            "js/jquery-3.5.1.min.js",
-            "js/background.js"
-        ]
+        "service_worker": "js/background.js"
     },
-    "browser_action": {
+    "action": {
         "default_icon": {
             "16": "images/icon-16.png",
             "32": "images/icon-32.png",
@@ -41,8 +38,9 @@
     ],
     "permissions": [
         "tabs",
-        "storage",
-        "https://www.twitch.tv/*",
+        "storage"
+    ],
+    "host_permissions": [
         "https://vaeb.io/*",
         "https://*.facebook.com/gaming/*"
     ]
