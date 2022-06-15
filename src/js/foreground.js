@@ -523,7 +523,8 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
     const getChannelNameFromEl = (element, fromArticle = false) => {
         if (fromArticle) element = getMainElFromArticle(element);
-        const channelEl = element.querySelector("a[data-a-target='preview-card-channel-link']");
+        let channelEl = element.querySelector("a[data-a-target='preview-card-channel-link']");
+        channelEl = channelEl.querySelector("p[data-a-target='preview-card-channel-link']") || channelEl;
         const channelElNode = [...channelEl.childNodes].find(node => node.nodeType === 3);
         const channelName = channelElNode.textContent.toLowerCase();
     };
@@ -573,7 +574,8 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             element.classList.add('npChecked');
             element = getMainElFromArticle(element);
             const titleEl = element.querySelector('h3');
-            const channelEl = element.querySelector("a[data-a-target='preview-card-channel-link']");
+            let channelEl = element.querySelector("a[data-a-target='preview-card-channel-link']");
+            channelEl = channelEl.querySelector("p[data-a-target='preview-card-channel-link']") || channelEl;
             const channelElNode = [...channelEl.childNodes].find(node => node.nodeType === 3);
             let liveElDiv = element.getElementsByClassName('tw-channel-status-text-indicator')[0];
             const viewers = element.getElementsByClassName('tw-media-card-stat')[0].textContent;
@@ -677,9 +679,9 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                 if (allowStream === false) {
                     streamState = FSTATES.remove;
                 } else {
-                    channelEl.style.color = useColors.other;
-                    liveElDiv.style.backgroundColor = useColorsDark.other;
-                    liveEl.style.color = useTextColor;
+                    channelEl.style.setProperty('color', useColors.other, 'important');
+                    liveElDiv.style.setProperty('background-color', useColorsDark.other, 'important');
+                    liveEl.style.setProperty('color', useTextColor, 'important');
                     liveEl.style.setProperty('text-transform', 'none', 'important');
                     liveEl.textContent = streamPossible.tagText ? streamPossible.tagText : '';
                 }
@@ -723,9 +725,9 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                     // Doesn't match required faction
                     streamState = FSTATES.remove;
                 } else {
-                    channelEl.style.color = useColors[stream.tagFaction];
-                    liveElDiv.style.backgroundColor = useColorsDark[stream.tagFaction];
-                    liveEl.style.color = useTextColor;
+                    channelEl.style.setProperty('color', useColors[stream.tagFaction], 'important');
+                    liveElDiv.style.setProperty('background-color', useColorsDark[stream.tagFaction], 'important');
+                    liveEl.style.setProperty('color', useTextColor, 'important');
                     // if (stream.characterName && stream.characterName.includes(']')) {
                     // const titleMatch = stream.characterName.match(/\[(.*?)\]/);
                     // const title = encodeHtml(titleMatch[1]);
@@ -752,8 +754,6 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
             if (streamState === FSTATES.remove || streamState === FSTATES.hide) {
                 // Remove stream
-                // liveEl.textContent = 'REMOVED';
-                // channelEl.style.color = '#ff0074';
 
                 if (viewersNum < minViewersUse && isManualStream === false) {
                     if (isFirstRemove && keepDeleting) {
@@ -821,7 +821,9 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         const streamElements = $('article:visible').toArray();
         for (let i = 0; i < streamElements.length; i++) {
             const streamEl = streamElements[i];
-            const channelName = [...streamEl.querySelector("a[data-a-target='preview-card-channel-link']").childNodes]
+            let channelEl = streamEl.querySelector("a[data-a-target='preview-card-channel-link']");
+            channelEl = channelEl.querySelector("p[data-a-target='preview-card-channel-link']") || channelEl;
+            const channelName = [...channelEl.childNodes]
                 .find(node => node.nodeType === 3)
                 .textContent.toLowerCase();
             const streamTags = streamEl.querySelectorAll('button.tw-tag');
