@@ -662,6 +662,8 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                 }
             }
 
+            const hoverEl = element.querySelector('.tw-hover-accent-effect');
+
             if (streamState === FSTATES.other) {
                 // Other included RP servers
                 const streamPossible = stream || {};
@@ -684,6 +686,8 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                     liveEl.style.setProperty('color', useTextColor, 'important');
                     liveEl.style.setProperty('text-transform', 'none', 'important');
                     liveEl.textContent = streamPossible.tagText ? streamPossible.tagText : '';
+
+                    hoverEl?.style.setProperty('--color-accent', useColors.other);
                 }
             } else if (streamState === FSTATES.nopixel) {
                 // NoPixel stream
@@ -737,6 +741,8 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                     // } else {
                     liveEl.textContent = stream.tagText;
                     // }
+
+                    hoverEl?.style.setProperty('--color-accent', useColors[stream.tagFaction]);
 
                     if (stream.tagText.startsWith('《')) {
                         liveEl.style.setProperty('margin-left', '-2px');
