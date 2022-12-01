@@ -1847,14 +1847,22 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
     onPage = twitchGtaUrl.test(window.location.href);
 
+    const updateClipsEl = (el) => {
+        const parentDiv = el.parentElement;
+        const newDiv = document.createElement('div');
+        newDiv.classList.add('newDiv');
+        newDiv.textContent = 'NEW';
+        parentDiv.prepend(newDiv);
+        parentDiv.style.position = 'relative';
+        el.textContent = 'NoPixel Clips';
+    };
+
     activateInterval = async () => {
         // Remember that this will run twice without reloading when switching from Clips/Videos back to channels
         clipMode = document.querySelector('div.top-clips-time-filter div[data-test-selector="toggle-balloon-wrapper__mouse-enter-detector"] .tw-pill')?.textContent || '7d';
 
         waitForElement('[data-a-target="game-directory-clips-tab"] p.tw-title', 1000 * 60)
-            .then((el) => {
-                el.textContent = 'NoPixel Clips';
-            });
+            .then(updateClipsEl);
 
         if (interval != null) {
             console.log("[TNO] Couldn't start interval (already running)");
@@ -1932,9 +1940,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             clipMode = document.querySelector('div.top-clips-time-filter div[data-test-selector="toggle-balloon-wrapper__mouse-enter-detector"] .tw-pill')?.textContent || '7d';
 
             waitForElement('[data-a-target="game-directory-clips-tab"] p.tw-title', 1000 * 60)
-                .then((el) => {
-                    el.textContent = 'NoPixel Clips';
-                });
+                .then(updateClipsEl);
 
             await fixSortType();
 
