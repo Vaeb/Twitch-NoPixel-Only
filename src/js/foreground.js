@@ -1710,9 +1710,11 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             $groupDiv[0].style.setProperty('justify-content', 'space-between', 'important');
             $groupDiv[0].style.setProperty('-webkit-box-align', 'center', 'important');
             $groupDiv[0].style.setProperty('align-items', 'center', 'important');
+            $filterDiv.insertAfter($sortByDiv);
+        } else {
+            $filterDiv.insertBefore($sortByDiv);
         }
 
-        $filterDiv.insertBefore($sortByDiv);
         $filterDiv.addClass('tno-filter-options');
         $filterDiv.css({ marginRight: '15px' });
 
@@ -1848,6 +1850,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     onPage = twitchGtaUrl.test(window.location.href);
 
     const updateClipsEl = (el) => {
+        if (document.querySelector('.newDiv')) return;
         const parentDiv = el.parentElement;
         const newDiv = document.createElement('div');
         newDiv.classList.add('newDiv');

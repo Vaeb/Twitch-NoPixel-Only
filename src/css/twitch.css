@@ -229,8 +229,8 @@ span.tooltip {
         /* display: block; */
         display: flex;
         flex-direction: column;
-        /* align-items: flex-end; */
-        align-items: flex-start;
+        align-items: flex-end;
+        /* align-items: flex-start; */
         /* overflow: hidden; */
         white-space: nowrap;
     }
