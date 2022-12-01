@@ -83,7 +83,9 @@ const waitForElement = async (selector, maxTime = Infinity) => {
     return el;
 };
 
-const twitchGtaUrl = /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V(?!\/videos|\/clips)/;
+const twitchGtaUrl = /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V(?!\/videos)/;
+
+const checkClips = () => /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V\/clips/.test(window.location.href);
 
 // Settings
 
@@ -94,9 +96,12 @@ const fullDebugging = false;
 
 let baseHtml;
 let baseHtmlFb;
+let baseHtmlClip;
 
 let keepDeleting = true;
 let onPage = false;
+let curPage = '';
+let bigChange = false;
 let interval;
 
 let wasZero = false;
@@ -104,6 +109,9 @@ let filterStreamFaction = 'allnopixel';
 let filterStreamText = '';
 let filterStreamTextLookup = '';
 let isFilteringText = false;
+
+const isLive = () => curPage === 'live';
+const isClips = () => curPage === 'clips';
 
 let useColors = {};
 let useColorsDark = {};
@@ -123,6 +131,8 @@ const SORTS = {
     recent: 4,
 };
 
+let alwaysRoll = false;
+
 const REAL_VIEWS = new Map([ // Key represents alwaysRoll value
     [false, ['allnopixel', 'alltwitch']],
     [true, ['alltwitch']],
@@ -134,7 +144,9 @@ const universalFactions = ['allnopixel', 'alltwitch'];
 
 const onDefaultView = () => filterStreamFaction === 'allnopixel' && isFilteringText === false;
 
-const onRealView = () => realViews.includes(filterStreamFaction) && isFilteringText === false;
+const onRealViewAccurate = () => ['allnopixel', 'alltwitch'].includes(filterStreamFaction);
+
+const onTwitchView = () => realViews.includes(filterStreamFaction) && isFilteringText === false && (alwaysRoll === false || filterStreamFaction === 'alltwitch');
 
 const onUniversalFaction = () => universalFactions.includes(filterStreamFaction) && isFilteringText === false;
 
@@ -207,6 +219,7 @@ RegExp.escape = function (string) {
 
 let activateInterval;
 let stopInterval;
+let handleStart;
 
 const filterStreams = async () => { // Remember: The code here runs upon loading twitch.tv, not the GTAV page. For the latter, use activateInterval.
     console.log(`[${dateStr()}] Fetching NP stream data...`);
@@ -217,6 +230,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     let insertAfterReal;
     let filterListeners = [];
     let timeId = `#${new Date().getTime()}`;
+    let clipMode = '7d';
 
     let onSettingChanged;
 
@@ -251,6 +265,19 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             try {
                 const fetchResult = await fetch(dataRequest);
                 live = await fetchResult.json();
+                for (const clips of Object.values(live.clipGroups)) {
+                    for (let c = 0; c < clips.length; c++) {
+                        const clip = clips[c];
+                        const streamer = live.streamerData[clip.channelName.toLowerCase()];
+                        clips[c] = new Proxy(clip, {
+                            get: (target, prop) => {
+                                const realValue = target[prop];
+                                if (realValue !== undefined) return realValue;
+                                return streamer[prop];
+                            },
+                        });
+                    }
+                }
                 break;
             } catch (err) {
                 if (i < (maxTries - 1)) {
@@ -278,7 +305,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         //     console.log('filter and streams ready');
         // });
 
-        ({ minViewers, stopOnMin, intervalSeconds, useColorsDark, useColorsLight, baseHtml, baseHtmlFb } = live);
+        ({ minViewers, stopOnMin, intervalSeconds, useColorsDark, useColorsLight, baseHtml, baseHtmlFb, baseHtmlClip } = live);
 
         console.log(`[${dateStr()}] Fetched data!`);
 
@@ -365,6 +392,8 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     let sortType = SORTS.recommended;
 
     const fixSortType = async (n) => {
+        if (isClips()) return false;
+
         const sortByLabel = await waitForElement('label[for="browse-header-filter-by"]', n);
         const sortByDiv = sortByLabel.parentNode.parentNode;
 
@@ -378,6 +407,8 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         } else if (sortTypeText.includes('recent')) {
             sortType = SORTS.recent;
         }
+
+        return true;
     };
 
     // If tnoReloadDefault hasn't been manually set yet then set to false if sort=Recommended, else set to true
@@ -401,7 +432,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     let minLoadedViewers = null;
     let minLoadedText = null;
     let rollStart = 0;
-    let alwaysRoll = tnoAlwaysCustom;
+    alwaysRoll = tnoAlwaysCustom;
 
     realViews = REAL_VIEWS.get(alwaysRoll);
     const rollAddMax = 30;
@@ -438,7 +469,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
     const encodeHtml = str => str.replace(regex, m => `&${escapeChars[m]};`);
 
-    const getMainElFromArticle = el => el.parentElement.parentElement.parentElement.parentElement;
+    const getMainElFromArticle = el => (isLive() ? el.parentElement.parentElement.parentElement.parentElement : el.parentElement);
 
     const resetFiltering = (onlyChecked = false) => {
         if (!onlyChecked) {
@@ -484,16 +515,60 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         return `${parseFloat((n / 1e3).toFixed(1))}K`;
     };
 
+    const formatClipTime = (clipStamp) => {
+        const nowStamp = +new Date();
+        const elapsed = nowStamp - clipStamp;
+        // Say number of seconds if under 1 minute elapsed:
+        if (elapsed < 60000) {
+            const seconds = Math.floor(elapsed / 1000);
+            return `${seconds} second${seconds === 1 ? '' : 's'} ago`;
+        }
+        // Say number of minutes if under 1 hour elapsed:
+        if (elapsed < 3600000) {
+            const minutes = Math.floor(elapsed / 60000);
+            return `${minutes} minute${minutes === 1 ? '' : 's'} ago`;
+        }
+        // Say number of hours if under 24 hours elapsed:
+        if (elapsed < 86400000) {
+            const hours = Math.floor(elapsed / 3600000);
+            return `${hours} hour${hours === 1 ? '' : 's'} ago`;
+        }
+        // Say number of days if under 30.42 days elapsed:
+        if (elapsed < 2628288000) {
+            const days = Math.floor(elapsed / 86400000);
+            if (days === 1) return 'Yesterday';
+            return `${days} days ago`;
+        }
+        // Say number of months if under 12 months elapsed:
+        if (elapsed < 31536000000) {
+            const months = Math.floor(elapsed / 2628288000);
+            if (months === 1) return 'Last month';
+            return `${months} months ago`;
+        }
+        // Say number of years:
+        const years = Math.floor(elapsed / 31536000000);
+        if (years === 1) return 'Last year';
+        return `${years} years ago`;
+    };
+
     const makeStreamHtml = (stream, idx) => {
         if (idx === undefined) idx = stream.id;
 
         const channelName = stream.channelName;
         const channelNameLower = channelName.toLowerCase();
-        let cloneHtml = baseHtml;
+        let cloneHtml = isLive() ? baseHtml : baseHtmlClip;
         if (stream.facebook) {
             cloneHtml = baseHtmlFb
                 .replace(/_VIDEOURL_/g, `${stream.videoUrl}`)
                 .replace(/_THUMBNAIL_/g, `${stream.thumbnailUrl}`);
+        }
+        if (isClips()) {
+            cloneHtml = cloneHtml
+                .replace(/_ID_/g, stream.id)
+                .replace(/_DURATION_/g, stream.duration)
+                .replace(/_DATE_/g, formatClipTime(stream.creationStamp))
+                // .replace(/_CLIPPER1_/g, stream.clipperName)
+                .replace(/_THUMBNAIL_/g, stream.thumbnailUrl);
         }
         cloneHtml = cloneHtml
             .replace(/(?<=<article .*?)class="/i, 'class="npManual ')
@@ -538,7 +613,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
         const useTextColor = '#000';
         // const useTextColor = isDark ? '#000' : '#f7f7f8';
-        const isRealView = onRealView();
+        const isRealView = onTwitchView();
         const isUniversalFaction = onUniversalFaction();
         const isNpMetaFaction = onNpMetaFaction();
         const minViewersUse = isNpMetaFaction ? minViewers : 3;
@@ -577,11 +652,16 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             let channelEl = element.querySelector("a[data-a-target='preview-card-channel-link']");
             channelEl = channelEl.querySelector("p[data-a-target='preview-card-channel-link']") || channelEl;
             const channelElNode = [...channelEl.childNodes].find(node => node.nodeType === 3);
-            let liveElDiv = element.getElementsByClassName('tw-channel-status-text-indicator')[0];
-            const viewers = element.getElementsByClassName('tw-media-card-stat')[0].textContent;
+            let liveElDiv = isLive()
+                ? element.getElementsByClassName('tw-channel-status-text-indicator')[0]
+                : element.getElementsByClassName('tw-media-card-stat')[0];
+            const viewers = isLive()
+                ? element.getElementsByClassName('tw-media-card-stat')[0].textContent
+                : element.getElementsByClassName('tw-media-card-stat')[1].textContent;
 
             let viewersNum = parseFloat(viewers);
-            if (viewers.includes('K viewer')) viewersNum *= 1000;
+            if (viewers.includes('K view')) viewersNum *= 1000;
+            else if (viewers.includes('M view')) viewersNum *= 1000000;
             if (Number.isNaN(viewersNum)) viewersNum = minLoadedViewers != null ? minLoadedViewers : minViewersUse;
 
             if (minLoadedViewers == null || viewersNum < minLoadedViewers) {
@@ -589,16 +669,20 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                 minLoadedText = viewers;
             }
 
+            // console.log(titleEl.textContent, viewers, viewersNum, liveElDiv);
+
             let liveEl;
             if (liveElDiv != null) {
-                liveEl = liveElDiv.children[0];
+                liveEl = isLive() ? liveElDiv.children[0] : liveElDiv;
             } else {
                 liveElDiv = $('<div>')[0];
                 liveEl = $('<div>')[0];
             }
 
             const channelName = channelElNode.textContent.toLowerCase();
-            const stream = streamsMap[channelName];
+            const stream = isLive() ? streamsMap[channelName] : live.streamerData[channelName];
+
+            // console.log(elementIdx, 'Checking stream el:', channelName, stream?.tagText, element);
 
             const nowFilterEnabled = filterEnabled && filterStreamFaction !== 'alltwitch';
             const tnoWlOverrideNow = tnoWlOverride && stream && stream.wlOverride && isNpMetaFaction;
@@ -620,7 +704,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             let streamState; // remove, mark-np, mark-other
             if (isManualStream === false && isRealView === false) { // If real-stream and on a view with manual-streams-only
                 streamState = FSTATES.hide;
-            } else if (isManualStream === true && isRealView === true && allowNextManualNow === false) { // If real-stream and on a view with manual-streams-only
+            } else if (isManualStream === true && isRealView === true && allowNextManualNow === false) {
                 element.remove();
                 console.log('REMOVED BAD', channelName, element);
                 continue;
@@ -663,6 +747,16 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             }
 
             const hoverEl = element.querySelector('.tw-hover-accent-effect');
+
+            if (isClips() && isRealView) {
+                if (element.style.display === 'none') {
+                    element.style.display = null;
+                }
+
+                if (element.style.visibility === 'hidden') {
+                    element.style.visibility = null;
+                }
+            }
 
             if (streamState === FSTATES.other) {
                 // Other included RP servers
@@ -732,6 +826,16 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                     channelEl.style.setProperty('color', useColors[stream.tagFaction], 'important');
                     liveElDiv.style.setProperty('background-color', useColorsDark[stream.tagFaction], 'important');
                     liveEl.style.setProperty('color', useTextColor, 'important');
+                    if (isClips()) {
+                        liveEl.style.setProperty('font-family', '"Inter","Roobert","Helvetica Neue",Helvetica,Arial,sans-serif', 'important');
+                        liveEl.style.setProperty('font-size', '13px', 'important');
+                        liveEl.style.setProperty('font-weight', '600', 'important');
+                        liveEl.style.setProperty('border-radius', '0.4rem', 'important');
+                        liveEl.style.setProperty('padding', '0px 0.5rem', 'important');
+                        liveEl.style.setProperty('white-space', 'nowrap', 'important');
+                        liveEl.style.setProperty('text-transform', 'uppercase', 'important');
+                        liveEl.style.setProperty('line-height', '1.5', 'important');
+                    }
                     // if (stream.characterName && stream.characterName.includes(']')) {
                     // const titleMatch = stream.characterName.match(/\[(.*?)\]/);
                     // const title = encodeHtml(titleMatch[1]);
@@ -760,6 +864,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
             if (streamState === FSTATES.remove || streamState === FSTATES.hide) {
                 // Remove stream
+                // console.log('Removal state:', streamState === FSTATES.remove ? 'remove' : '', streamState === FSTATES.hide ? 'hide' : '');
 
                 if (viewersNum < minViewersUse && isManualStream === false) {
                     if (isFirstRemove && keepDeleting) {
@@ -772,15 +877,15 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                             console.log('[TNO] Clearing stream thumbnails with low viewers');
                         }
                     }
-                    element.style.visibility = 'hidden';
+                    if (isLive() || isRealView === false) element.style.visibility = 'hidden';
                     // const images = element.getElementsByClassName('tw-image');
                     // for (let j = 0; j < images.length; j++) images[j].src = '';
                 } else if (streamState === FSTATES.hide) {
-                    element.style.visibility = 'hidden';
-                } else if (keepDeleting) {
+                    if (isLive() || isRealView === false) element.style.visibility = 'hidden';
+                } else if (keepDeleting && streamState === FSTATES.remove) {
                     // element.outerHTML = '';
                     // element.parentNode.removeChild(element);
-                    element.style.display = 'none';
+                    if (isLive() || isRealView === false) element.style.display = 'none';
                     console.log('[TNO] Deleted');
                 }
                 if (isFirstRemove) isFirstRemove = false;
@@ -1164,10 +1269,10 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         let observer;
 
         // eslint-disable-next-line prefer-const
-        observer = new IntersectionObserver((entries, observer) => {
+        observer = new IntersectionObserver((entries, observerThis) => {
             entries.forEach((entry) => {
                 if (entry.intersectionRatio > 0) {
-                    observer.unobserve(lastEl);
+                    observerThis.unobserve(lastEl);
                     console.log('Fetching next batch of streams');
                     addFactionStreams(undefined, true);
                 }
@@ -1185,21 +1290,33 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         }
 
         let useRoll = false;
-        if (onDefaultView() && (alwaysRoll || rollStart > 0)) {
+        if ((onDefaultView() || isClips()) && (alwaysRoll || rollStart > 0)) {
             useRoll = true;
             if (!continueRoll) rollStart = 0;
         }
 
+        const initRollStart = rollStart;
         const rollIds = [];
 
         if (streams === undefined) {
-            streams = live.streams;
+            streams = isLive() ? live.streams : live.clipGroups[clipMode];
 
             if (isFilteringText) {
                 streams = streams.filter(stream => matchesFilterStreamText(stream));
             }
 
             if (isFilteringText === false) { // !onUniversalFaction()
+                if (!onRealViewAccurate()) {
+                    streams = streams.filter((stream) => {
+                        if (['publicnp', 'international'].includes(filterStreamFaction)) {
+                            return stream.tagFactionSecondary === filterStreamFaction;
+                        }
+                        if (stream.factionsMap[filterStreamFaction]) return true;
+                        if (filterStreamFaction === 'independent' && stream.factionsMap.othernp) return true;
+                        return false;
+                    });
+                }
+
                 if (useRoll) {
                     const numStreams = streams.length;
                     let numAdded = 0;
@@ -1213,23 +1330,15 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                         rollIds.push(idx);
                         numAdded++;
                     }
+                    console.log('numAdded', numAdded, 'rollAddMax', rollAddMax, 'rollStart', rollStart, 'numStreams', numStreams);
                     streams = results;
-                } else {
-                    streams = streams.filter((stream) => {
-                        if (['publicnp', 'international'].includes(filterStreamFaction)) {
-                            return stream.tagFactionSecondary === filterStreamFaction;
-                        }
-                        if (stream.factionsMap[filterStreamFaction]) return true;
-                        if (filterStreamFaction === 'independent' && stream.factionsMap.othernp) return true;
-                        return false;
-                    });
                 }
             }
         }
 
-        console.log('filtered streams:', streams);
+        console.log('filtered streams:', streams, curPage, initRollStart, 'rollStart', rollStart);
 
-        const baseEl = document.querySelector('[data-target="directory-first-item"]');
+        const baseEl = isLive() ? document.querySelector('[data-target="directory-first-item"]') : document.querySelector('[data-a-target="clips-card-0"]:not(.tno-stream)');
         const baseParent = baseEl.parentElement;
         const wasRoll = rollIds.length > 0;
 
@@ -1248,7 +1357,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     const fixReloadEnabled = () => {
         const filterReloadBtn = document.querySelector('.filter-reload');
         const isDefaultView = onDefaultView();
-        const isRealView = onRealView() && !isDefaultView; // all-twitch
+        const isRealView = onTwitchView() && !isDefaultView; // all-twitch
         const showOnDefaultNow = isDefaultView && (alwaysRoll || tnoReloadDefault);
 
         if (isFilteringText || showOnDefaultNow || (isRealView === false && isDefaultView === false)) { // Filtering text or showable-on-default or not universal
@@ -1561,7 +1670,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             fixReloadEnabled();
             resetFiltering();
             // if (filterStreamFaction !== 'cleanbois') return;
-            if (onRealView() === false) { // Runs in all cases except on real view
+            if (onTwitchView() === false) { // Runs in all cases except on real view
                 addFactionStreams(factionStreams);
             }
             startDeleting();
@@ -1582,6 +1691,14 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         const $sortByDiv = $sortByLabel.parent().parent();
         const $groupDiv = $sortByDiv.parent();
         const $filterDiv = $sortByDiv.clone();
+
+        if (isClips()) {
+            $groupDiv[0].style.setProperty('display', 'flex', 'important');
+            $groupDiv[0].style.setProperty('-webkit-box-pack', 'justify', 'important');
+            $groupDiv[0].style.setProperty('justify-content', 'space-between', 'important');
+            $groupDiv[0].style.setProperty('-webkit-box-align', 'center', 'important');
+            $groupDiv[0].style.setProperty('align-items', 'center', 'important');
+        }
 
         $filterDiv.insertBefore($sortByDiv);
         $filterDiv.addClass('tno-filter-options');
@@ -1628,7 +1745,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
         const showOnDefault = alwaysRoll || tnoReloadDefault;
 
-        // const isRealView = onRealView();
+        // const isRealView = onTwitchView();
 
         // $labelDiv.find('label').text('Filter factions');
         $labelDiv.remove();
@@ -1652,7 +1769,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                                 <span class="tno-reload filter-reload">&#x27f3;</span>
                             </div>
                             <label class="selectCustom-label tooltip">
-                                Filter streams
+                                Filter ${isLive() ? 'streams' : 'clips'}
                                 <span id="streamCount" class="tooltiptext tooltiptext2">...</span>
                             </label>
                             <div class="selectCustom-trigger"></div>
@@ -1686,7 +1803,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             $groupDiv.css({ position: 'relative' });
 
             const $searchDiv = $('<div class="tno-search-div"></div>');
-            const $searchInput = $searchDiv.append(`<input class="tno-search-input${isDark ? '' : ' tno-search-input-lightmode'}" placeholder="Search for character name / nickname / stream..."/>`);
+            const $searchInput = $searchDiv.append(`<input class="tno-search-input${isDark ? '' : ' tno-search-input-lightmode'}" placeholder="Search for character name / nickname / ${isClips() ? 'clip title' : 'stream'}..."/>`);
             $groupDiv.prepend($searchDiv);
 
             if (isFilteringText) document.querySelector('.tno-search-input').value = filterStreamText;
@@ -1708,6 +1825,13 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
     activateInterval = async () => {
         // Remember that this will run twice without reloading when switching from Clips/Videos back to channels
+        clipMode = document.querySelector('div.top-clips-time-filter div[data-test-selector="toggle-balloon-wrapper__mouse-enter-detector"] .tw-pill')?.textContent || '7d';
+
+        waitForElement('[data-a-target="game-directory-clips-tab"] p.tw-title', 1000 * 60)
+            .then((el) => {
+                el.textContent = 'NoPixel Clips';
+            });
+
         if (interval != null) {
             console.log("[TNO] Couldn't start interval (already running)");
             return false;
@@ -1724,7 +1848,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             ['tnoWlOverride', true],
             ['tnoSearch', true],
             ['tnoScrolling', false],
-            ['tnoAlwaysCustom', false],
+            ['tnoAlwaysCustom', sortType !== SORTS.recommended],
             ['tnoReloadDefault', sortType !== SORTS.recommended],
             ['tnoAllowAll', false],
         ]);
@@ -1749,7 +1873,13 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         setupFilter();
 
         if (alwaysRoll) {
-            addFactionStreams(undefined);
+            waitForElement(() => {
+                const baseElLive = document.querySelector('[data-target="directory-first-item"]');
+                const baseElClips = document.querySelector('[data-a-target="clips-card-0"]:not(.tno-stream)');
+                return baseElLive || baseElClips || null;
+            }).then(() => {
+                addFactionStreams(undefined);
+            });
         }
 
         console.log('[TNO] Starting interval');
@@ -1771,9 +1901,53 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         return true;
     };
 
+    handleStart = async (request) => {
+        if (request === undefined) {
+            await activateInterval();
+        } else if (request.bigChange) {
+            clipMode = document.querySelector('div.top-clips-time-filter div[data-test-selector="toggle-balloon-wrapper__mouse-enter-detector"] .tw-pill')?.textContent || '7d';
+
+            waitForElement('[data-a-target="game-directory-clips-tab"] p.tw-title', 1000 * 60)
+                .then((el) => {
+                    el.textContent = 'NoPixel Clips';
+                });
+
+            await fixSortType();
+
+            rollStart = 0;
+
+            // addSettings(); // Settings should show even if status disabled
+
+            if (tnoStatus === false) {
+                console.log("[TNO] Couldn't start bigChange (status set to disabled)");
+                return;
+            }
+
+            if (tnoEnglish) {
+                selectEnglish();
+            }
+
+            destroyFilter(); // Remove previous buttons/events
+            await setupFilter(); // Setup new buttons/events
+            resetFiltering(); // Reset twitch elements to original state (npChecked/remove)
+            if (alwaysRoll) {
+                await waitForElement(() => {
+                    const baseElLive = document.querySelector('[data-target="directory-first-item"]');
+                    const baseElClips = document.querySelector('[data-a-target="clips-card-0"]:not(.tno-stream)');
+                    return baseElLive || baseElClips || null;
+                });
+                addFactionStreams(undefined);
+            }
+            startDeleting();
+
+            console.log('[TNO] BigChange started');
+        }
+    };
+
     setTimeout(() => {
         if (onPage) {
-            activateInterval();
+            curPage = checkClips() ? 'clips' : 'live';
+            handleStart();
         }
     }, 1000);
 };
@@ -1783,9 +1957,13 @@ filterStreams();
 // Twitch switches page without any reloading:
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log('[TNO] PAGE STATUS:', request);
+    curPage = request.curPage;
+    bigChange = request.bigChange;
     if (request.status === 'START') {
         onPage = true;
-        if (activateInterval != null) activateInterval();
+        if (activateInterval != null) {
+            handleStart(request);
+        }
     } else if (request.status === 'STOP') {
         onPage = false;
         if (stopInterval != null) stopInterval();

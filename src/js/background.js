@@ -3,14 +3,36 @@ console.log('TNO Refreshed');
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 const twitchUrl = /^https:\/\/www\.twitch\.tv\//;
-const twitchGtaUrl = /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V(?!\/videos|\/clips)/;
+const twitchGtaUrl = /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V(?!\/videos)/;
+const twitchGtaUrlClips = /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V\/clips/;
+
+const curPage = {};
+const curRange = {};
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    if (changeInfo.url) {
-        if (twitchUrl.test(changeInfo.url)) {
-            const onPage = twitchGtaUrl.test(changeInfo.url);
+    const url = changeInfo.url;
+    if (url) {
+        if (twitchUrl.test(url)) {
+            const onPage = twitchGtaUrl.test(url);
+            const oldPage = curPage[tabId];
+            const oldRange = curRange[tabId];
+            if (onPage) {
+                curRange[tabId] = (url.match(/\brange=(\w+)/i) || [])[1];
+                if (twitchGtaUrlClips.test(url)) {
+                    curPage[tabId] = 'clips';
+                } else {
+                    curPage[tabId] = 'live';
+                }
+            } else {
+                curPage[tabId] = undefined;
+                curRange[tabId] = undefined;
+            }
+            console.log(curPage[tabId] !== oldPage || curRange[tabId] !== oldRange, tabId, curPage[tabId], oldPage, curRange[tabId], oldRange, url);
             chrome.tabs.sendMessage(tabId, {
                 status: onPage ? 'START' : 'STOP',
+                curPage: curPage[tabId],
+                range: curRange[tabId],
+                bigChange: curPage[tabId] !== oldPage || curRange[tabId] !== oldRange,
             });
         }
     }
