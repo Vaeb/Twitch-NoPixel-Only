@@ -567,7 +567,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                 .replace(/_ID_/g, stream.id)
                 .replace(/_DURATION_/g, stream.duration)
                 .replace(/_DATE_/g, formatClipTime(stream.creationStamp))
-                // .replace(/_CLIPPER1_/g, stream.clipperName)
+                .replace(/_CLIPPER1_/g, stream.clipperName)
                 .replace(/_THUMBNAIL_/g, stream.thumbnailUrl);
         }
         cloneHtml = cloneHtml
@@ -1637,8 +1637,9 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         filterStreamTextLookup = parseLookup(searchText);
         isFilteringText = filterStreamText !== '';
         console.log('Filtering for:', filterStreamText);
+        const streams = isLive() ? live.streams : live.clipGroups[clipMode];
 
-        const factionStreams = isFilteringText ? live.streams.filter(stream => matchesFilterStreamText(stream)) : undefined;
+        const factionStreams = isFilteringText ? streams.filter(stream => matchesFilterStreamText(stream)) : undefined;
         const nowResultsStr = JSON.stringify(factionStreams);
         if (nowResultsStr === lastResultsStr) return;
 
@@ -1715,12 +1716,13 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         if (!tnoPublic || !tnoInternational) {
             // Faction counts unaffected by TNO settings for WL vs non-WL etc.
             const factionCountSpecial = { allnopixel: true, alltwitch: true, publicnp: true, international: true, other: true };
+            const streams = isLive() ? live.streams : live.clipGroups[clipMode];
             filterFactions.forEach((data) => {
                 if (data[2] === false) return;
                 const mini = data[0];
                 const existsWl = factionCountSpecial[mini]
                     ? live.factionCount[mini] > 0
-                    : live.streams.some(stream => !!stream.factionsMap[mini] && (tnoPublic || stream.noPublicInclude) && (tnoInternational || stream.noInternationalInclude));
+                    : streams.some(stream => !!stream.factionsMap[mini] && (tnoPublic || stream.noPublicInclude) && (tnoInternational || stream.noInternationalInclude));
                 if (!existsWl) data[2] = false;
             });
         }
