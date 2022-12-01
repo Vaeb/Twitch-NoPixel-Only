@@ -1907,7 +1907,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
         setupFilter();
 
-        if (alwaysRoll) {
+        if (!onTwitchView()) {
             waitForElement(() => {
                 const baseElLive = document.querySelector('[data-target="directory-first-item"]');
                 const baseElClips = document.querySelector('[data-a-target="clips-card-0"]:not(.tno-stream)');
@@ -1963,7 +1963,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             destroyFilter(); // Remove previous buttons/events
             await setupFilter(); // Setup new buttons/events
             resetFiltering(); // Reset twitch elements to original state (npChecked/remove)
-            if (alwaysRoll) {
+            if (!onTwitchView()) {
                 await waitForElement(() => {
                     const baseElLive = document.querySelector('[data-target="directory-first-item"]');
                     const baseElClips = document.querySelector('[data-a-target="clips-card-0"]:not(.tno-stream)');
