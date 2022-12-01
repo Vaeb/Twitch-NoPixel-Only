@@ -138,7 +138,7 @@ const REAL_VIEWS = new Map([ // Key represents alwaysRoll value
     [true, ['alltwitch']],
 ]);
 
-let realViews = REAL_VIEWS.get(false); // Views with real-stream elements
+let realViews = REAL_VIEWS.get(alwaysRoll); // Views with real-stream elements
 
 const universalFactions = ['allnopixel', 'alltwitch'];
 
@@ -146,7 +146,9 @@ const onDefaultView = () => filterStreamFaction === 'allnopixel' && isFilteringT
 
 const onRealViewAccurate = () => ['allnopixel', 'alltwitch'].includes(filterStreamFaction);
 
-const onTwitchView = () => realViews.includes(filterStreamFaction) && isFilteringText === false && (alwaysRoll === false || filterStreamFaction === 'alltwitch');
+//  && (alwaysRoll === false || filterStreamFaction === 'alltwitch')
+// On twitch view if filter-faction is on a twitch-always faction + no text filtering + (not manual or filter-faction is alltwitch)
+const onTwitchView = () => realViews.includes(filterStreamFaction) && isFilteringText === false;
 
 const onUniversalFaction = () => universalFactions.includes(filterStreamFaction) && isFilteringText === false;
 
@@ -433,7 +435,6 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     let minLoadedText = null;
     let rollStart = 0;
     alwaysRoll = tnoAlwaysCustom;
-
     realViews = REAL_VIEWS.get(alwaysRoll);
     const rollAddMax = 30;
 
@@ -567,7 +568,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                 .replace(/_ID_/g, stream.id)
                 .replace(/_DURATION_/g, stream.duration)
                 .replace(/_DATE_/g, formatClipTime(stream.creationStamp))
-                .replace(/_CLIPPER1_/g, stream.clipperName)
+                // .replace(/_CLIPPER1_/g, stream.clipperName)
                 .replace(/_THUMBNAIL_/g, stream.thumbnailUrl);
         }
         cloneHtml = cloneHtml
@@ -655,6 +656,9 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             let liveElDiv = isLive()
                 ? element.getElementsByClassName('tw-channel-status-text-indicator')[0]
                 : element.getElementsByClassName('tw-media-card-stat')[0];
+            if (isClips() && !element.getElementsByClassName('tw-media-card-stat')[1]) {
+                console.log('ERROR MISSING ELEMENT DESCENDANTS !!!!!', element, elementIdx, titleEl.textContent, liveElDiv);
+            }
             const viewers = isLive()
                 ? element.getElementsByClassName('tw-media-card-stat')[0].textContent
                 : element.getElementsByClassName('tw-media-card-stat')[1].textContent;
@@ -690,7 +694,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             const tnoPublicNow = tnoPublic || filterStreamFaction === 'publicnp' || tnoWlOverrideNow;
             const tnoInternationalNow = tnoInternational || filterStreamFaction === 'international' || tnoWlOverrideNow;
 
-            if (isRealView && insertAfterReal[channelName]) {
+            if (isRealView && insertAfterReal[channelName] && isLive()) {
                 const addStream = insertAfterReal[channelName];
                 const removeEls = [...document.querySelectorAll(`#tno-stream-${addStream.id}`)];
                 for (const removeEl of removeEls) {
@@ -1289,14 +1293,20 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             return;
         }
 
+        if (streams === undefined && onTwitchView()) {
+            return;
+        }
+
         let useRoll = false;
-        if ((onDefaultView() || isClips()) && (alwaysRoll || rollStart > 0)) {
+        if (isClips() || (onDefaultView() && (alwaysRoll || rollStart > 0))) {
             useRoll = true;
             if (!continueRoll) rollStart = 0;
         }
 
         const initRollStart = rollStart;
         const rollIds = [];
+
+        console.log('addFactionStreams', 'orig streams', streams, useRoll);
 
         if (streams === undefined) {
             streams = isLive() ? live.streams : live.clipGroups[clipMode];

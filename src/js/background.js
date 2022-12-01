@@ -27,12 +27,14 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
                 curPage[tabId] = undefined;
                 curRange[tabId] = undefined;
             }
-            console.log(curPage[tabId] !== oldPage || curRange[tabId] !== oldRange, tabId, curPage[tabId], oldPage, curRange[tabId], oldRange, url);
+            // diff & clips page must have range in url
+            const bigChange = (curPage[tabId] !== oldPage || curRange[tabId] !== oldRange) && (curPage[tabId] !== 'clips' || curRange[tabId] !== undefined);
+            console.log(bigChange, tabId, curPage[tabId], oldPage, curRange[tabId], oldRange, url);
             chrome.tabs.sendMessage(tabId, {
                 status: onPage ? 'START' : 'STOP',
                 curPage: curPage[tabId],
                 range: curRange[tabId],
-                bigChange: curPage[tabId] !== oldPage || curRange[tabId] !== oldRange,
+                bigChange,
             });
         }
     }
@@ -135,8 +137,8 @@ const handleGetFbStreams = async (msgData, nowTime) => {
         const [streamer, body] = data;
         let videoUrl = (body.match(/&quot;videoURL&quot;:&quot;(.*?)&quot;/) || ['', ''])[1]
             .replace(/\\/g, '');
-        const viewCountStr = (body.match(/>LIVE<[\s\S]+?<\/i>([\d.K]+)<\/span>/) || [])[1];
-        let viewCount = parseFloat(viewCountStr);
+        const viewCountStr = (body.match(/>LIVE<[\s\S]+?<\/i>([\d.,K]+)<\/span>/) || [])[1];
+        let viewCount = parseFloat(viewCountStr ? viewCountStr.replace(/,/g, '.') : viewCountStr);
         if (viewCountStr.includes('K')) viewCount *= 1000;
         const pfpUrl = (body.match(/[ "]profpic"[\s\S]+?(http.+?)&#039;/) || ['', ''])[1]
             .replace(/\\(\w\w) /g, (_, hex) => String.fromCharCode(parseInt(hex, 16)));
