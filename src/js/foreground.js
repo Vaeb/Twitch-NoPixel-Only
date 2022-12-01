@@ -1698,6 +1698,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     };
 
     const setupFilterFactions = async () => {
+        console.log('Creating filter factions');
         const $sortByLabel = $(await waitForElement('label[for="browse-header-filter-by"]'));
         const $sortByDiv = $sortByLabel.parent().parent();
         const $groupDiv = $sortByDiv.parent();
@@ -1720,7 +1721,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             .toArray()
             .map(el => $(el));
 
-        const filterFactions = live.filterFactions;
+        const filterFactions = JSON.parse(JSON.stringify(live.filterFactions));
         filterFactions[0][1] = genDefaultFaction();
 
         if (!tnoPublic || !tnoInternational) {
@@ -1733,7 +1734,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                 const existsWl = factionCountSpecial[mini]
                     ? live.factionCount[mini] > 0
                     : streams.some(stream => !!stream.factionsMap[mini] && (tnoPublic || stream.noPublicInclude) && (tnoInternational || stream.noInternationalInclude));
-                if (!existsWl) data[2] = false;
+                if (!existsWl && isLive()) data[2] = false;
             });
         }
 
@@ -1745,13 +1746,24 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             }
         }
 
-        filterFactions.sort((dataA, dataB) => {
-            const emptyA = dataA[2] === false;
-            const emptyB = dataB[2] === false;
-            if (emptyA && !emptyB) return 1;
-            if (emptyB && !emptyA) return -1;
-            return 0;
-        });
+        if (isLive()) {
+            filterFactions.sort((dataA, dataB) => {
+                const emptyA = dataA[2] === false;
+                const emptyB = dataB[2] === false;
+                if (emptyA && !emptyB) return 1;
+                if (emptyB && !emptyA) return -1;
+                return 0;
+            });
+        } else {
+            filterFactions.forEach((data) => {
+                data[2] = true;
+            });
+            filterFactions.sort((dataA, dataB) => {
+                const idxA = dataA[3];
+                const idxB = dataB[3];
+                return idxA - idxB;
+            });
+        }
 
         console.log('>>>>>>>>>>>> setup filter');
 
