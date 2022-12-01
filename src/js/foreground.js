@@ -1701,7 +1701,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         console.log('Creating filter factions');
         const $sortByLabel = $(await waitForElement('label[for="browse-header-filter-by"]'));
         const $sortByDiv = $sortByLabel.parent().parent();
-        const $groupDiv = $sortByDiv.parent();
+        let $groupDiv = $sortByDiv.parent();
         const $filterDiv = $sortByDiv.clone();
 
         if (isClips()) {
@@ -1710,7 +1710,15 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             $groupDiv[0].style.setProperty('justify-content', 'space-between', 'important');
             $groupDiv[0].style.setProperty('-webkit-box-align', 'center', 'important');
             $groupDiv[0].style.setProperty('align-items', 'center', 'important');
-            $filterDiv.insertAfter($sortByDiv);
+            $groupDiv[0].style.setProperty('flex-wrap', 'wrap', 'important');
+            $groupDiv[0].style.setProperty('gap', '13px', 'important');
+            const rightDiv = document.createElement('div');
+            rightDiv.style = `
+                display: flex;
+            `;
+            $groupDiv[0].append(rightDiv);
+            rightDiv.append($filterDiv[0]);
+            $groupDiv = $(rightDiv);
         } else {
             $filterDiv.insertBefore($sortByDiv);
         }
@@ -1778,7 +1786,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         $dropdownDiv.html(`
             <div class="select">
                 <div class="selectWrapper">
-                    <div class="selectCustom js-selectCustom" aria-hidden="true">
+                    <div class="selectCustom${isClips() ? ' selectCustom-clips' : ''} js-selectCustom" aria-hidden="true">
                         <div class="selectCustom-row${!isDark ? ' lightmodeScreen' : ''}">
                             <div class="filter-reload-box tooltip">
                                 <span id="tno-reload-message" class="tooltiptext tooltiptext-hover tooltiptext-wider2">
@@ -1826,11 +1834,12 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         const [$groupDiv] = await setupFilterFactions();
 
         if (tnoSearch) {
-            $groupDiv.css({ position: 'relative' });
+            if (isLive()) $groupDiv.css({ position: 'relative' });
 
-            const $searchDiv = $('<div class="tno-search-div"></div>');
+            const $searchDiv = $(`<div class="tno-search-div${isClips() ? ' tno-search-div-clips' : ''}"></div>`);
             const $searchInput = $searchDiv.append(`<input class="tno-search-input${isDark ? '' : ' tno-search-input-lightmode'}" placeholder="Search for character name / nickname / ${isClips() ? 'clip title' : 'stream'}..."/>`);
-            $groupDiv.prepend($searchDiv);
+            if (isLive()) $groupDiv.prepend($searchDiv);
+            else $groupDiv.append($searchDiv);
 
             if (isFilteringText) document.querySelector('.tno-search-input').value = filterStreamText;
 
