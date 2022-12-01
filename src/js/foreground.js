@@ -568,7 +568,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                 .replace(/_ID_/g, stream.id)
                 .replace(/_DURATION_/g, stream.duration)
                 .replace(/_DATE_/g, formatClipTime(stream.creationStamp))
-                // .replace(/_CLIPPER1_/g, stream.clipperName)
+                .replace(/_CLIPPER1_/g, stream.clipperName)
                 .replace(/_THUMBNAIL_/g, stream.thumbnailUrl);
         }
         cloneHtml = cloneHtml
