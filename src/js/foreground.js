@@ -689,7 +689,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             // console.log(elementIdx, 'Checking stream el:', channelName, stream?.tagText, element);
 
             const nowFilterEnabled = filterEnabled && filterStreamFaction !== 'alltwitch';
-            const tnoWlOverrideNow = tnoWlOverride && stream && stream.wlOverride && isNpMetaFaction;
+            const tnoWlOverrideNow = tnoWlOverride && stream && stream.wlOverride;
             const tnoOthersNow = tnoOthers || filterStreamFaction === 'other' || tnoWlOverrideNow;
             const tnoPublicNow = tnoPublic || filterStreamFaction === 'publicnp' || tnoWlOverrideNow;
             const tnoInternationalNow = tnoInternational || filterStreamFaction === 'international' || tnoWlOverrideNow;
