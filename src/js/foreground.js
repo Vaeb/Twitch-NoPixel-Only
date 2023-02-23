@@ -219,6 +219,13 @@ RegExp.escape = function (string) {
     return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 };
 
+const makeEl = (html) => {
+    const template = document.createElement('template');
+    html = html.trim();
+    template.innerHTML = html;
+    return template.content.firstChild;
+};
+
 let activateInterval;
 let stopInterval;
 let handleStart;
@@ -396,10 +403,9 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     const fixSortType = async (n) => {
         if (isClips()) return false;
 
-        const sortByLabel = await waitForElement('label[for="browse-header-filter-by"]', n);
-        const sortByDiv = sortByLabel.parentNode.parentNode;
+        const sortTypeDiv = await waitForElement('button[data-a-target="browse-sort-menu"]', n);
+        const sortTypeText = sortTypeDiv.textContent.toLowerCase();
 
-        const sortTypeText = sortByDiv.querySelector('button[data-a-target="browse-sort-menu"]').textContent.toLowerCase();
         if (sortTypeText.includes('recommended')) {
             sortType = SORTS.recommended;
         } else if (sortTypeText.includes('high to')) {
@@ -1699,37 +1705,34 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
     const setupFilterFactions = async () => {
         console.log('Creating filter factions');
-        const $sortByLabel = $(await waitForElement('label[for="browse-header-filter-by"]'));
-        const $sortByDiv = $sortByLabel.parent().parent();
-        let $groupDiv = $sortByDiv.parent();
-        const $filterDiv = $sortByDiv.clone();
+        const sortByLabel = await waitForElement('button[data-a-target="browse-sort-menu"]');
+        const sortByDiv = sortByLabel.parentElement.parentElement.parentElement.parentElement;
+        let groupDiv = sortByDiv.parentElement;
+        const filterDiv = sortByDiv.cloneNode(true);
 
         if (isClips()) {
-            $groupDiv[0].style.setProperty('display', 'flex', 'important');
-            $groupDiv[0].style.setProperty('-webkit-box-pack', 'justify', 'important');
-            $groupDiv[0].style.setProperty('justify-content', 'space-between', 'important');
-            $groupDiv[0].style.setProperty('-webkit-box-align', 'center', 'important');
-            $groupDiv[0].style.setProperty('align-items', 'center', 'important');
-            $groupDiv[0].style.setProperty('flex-wrap', 'wrap', 'important');
-            $groupDiv[0].style.setProperty('gap', '13px', 'important');
+            groupDiv.style.setProperty('display', 'flex', 'important');
+            groupDiv.style.setProperty('-webkit-box-pack', 'justify', 'important');
+            groupDiv.style.setProperty('justify-content', 'space-between', 'important');
+            groupDiv.style.setProperty('-webkit-box-align', 'center', 'important');
+            groupDiv.style.setProperty('align-items', 'center', 'important');
+            groupDiv.style.setProperty('flex-wrap', 'wrap', 'important');
+            groupDiv.style.setProperty('gap', '13px', 'important');
             const rightDiv = document.createElement('div');
             rightDiv.style = `
                 display: flex;
             `;
-            $groupDiv[0].append(rightDiv);
-            rightDiv.append($filterDiv[0]);
-            $groupDiv = $(rightDiv);
+            groupDiv.append(rightDiv);
+            rightDiv.append(filterDiv);
+            groupDiv = rightDiv;
         } else {
-            $filterDiv.insertBefore($sortByDiv);
+            sortByDiv.before(filterDiv); // Insert filterDiv before sortByDiv
         }
 
-        $filterDiv.addClass('tno-filter-options');
-        $filterDiv.css({ marginRight: '15px' });
+        filterDiv.classList.add('tno-filter-options');
+        filterDiv.style.setProperty('margin-right', '15px');
 
-        const [$labelDiv, $dropdownDiv] = $filterDiv
-            .children()
-            .toArray()
-            .map(el => $(el));
+        const [labelDiv, dropdownDiv] = filterDiv.children;
 
         const filterFactions = JSON.parse(JSON.stringify(live.filterFactions));
         filterFactions[0][1] = genDefaultFaction();
@@ -1782,8 +1785,8 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         // const isRealView = onTwitchView();
 
         // $labelDiv.find('label').text('Filter factions');
-        $labelDiv.remove();
-        $dropdownDiv.html(`
+        labelDiv.remove();
+        dropdownDiv.innerHTML = `
             <div class="select">
                 <div class="selectWrapper">
                     <div class="selectCustom${isClips() ? ' selectCustom-clips' : ''} js-selectCustom" aria-hidden="true">
@@ -1822,29 +1825,30 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                     </div>
                 </div>
             </div>
-        `);
+        `;
 
         activateSelect(true);
 
-        return [$groupDiv, $filterDiv];
+        return [groupDiv, filterDiv];
     };
 
     // eslint-disable-next-line prefer-const
     setupFilter = async () => {
-        const [$groupDiv] = await setupFilterFactions();
+        const [groupDiv] = await setupFilterFactions();
 
         if (tnoSearch) {
-            if (isLive()) $groupDiv.css({ position: 'relative' });
+            if (isLive()) groupDiv.style.setProperty('position', 'relative');
 
-            const $searchDiv = $(`<div class="tno-search-div${isClips() ? ' tno-search-div-clips' : ''}"></div>`);
-            const $searchInput = $searchDiv.append(`<input class="tno-search-input${isDark ? '' : ' tno-search-input-lightmode'}" placeholder="Search for character name / nickname / ${isClips() ? 'clip title' : 'stream'}..."/>`);
-            if (isLive()) $groupDiv.prepend($searchDiv);
-            else $groupDiv.append($searchDiv);
+            const searchDiv = makeEl(`<div class="tno-search-div${isClips() ? ' tno-search-div-clips' : ''}"></div>`);
+            const searchInput = makeEl(`<input class="tno-search-input${isDark ? '' : ' tno-search-input-lightmode'}" placeholder="Search for character name / nickname / ${isClips() ? 'clip title' : 'stream'}..."/>`);
+            searchDiv.append(searchInput);
+            if (isLive()) groupDiv.prepend(searchDiv);
+            else groupDiv.append(searchDiv);
 
             if (isFilteringText) document.querySelector('.tno-search-input').value = filterStreamText;
 
             // eslint-disable-next-line prefer-arrow-callback
-            addFilterListener($searchInput[0], 'input', function (e) {
+            addFilterListener(searchInput, 'input', function (e) {
                 const searchText = e.target.value.toLowerCase().trim();
 
                 const textLen = searchText.length;
