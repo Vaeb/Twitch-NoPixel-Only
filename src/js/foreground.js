@@ -83,9 +83,9 @@ const waitForElement = async (selector, maxTime = Infinity) => {
     return el;
 };
 
-const twitchGtaUrl = /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V(?!\/videos)/;
+const twitchGtaUrl = /^https:\/\/www\.twitch\.tv\/directory\/(game\/Grand%20Theft%20Auto%20V|category\/grand-theft-auto-v)(?!\/videos)/;
 
-const checkClips = () => /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V\/clips/.test(window.location.href);
+const checkClips = () => /^https:\/\/www\.twitch\.tv\/directory\/(game\/Grand%20Theft%20Auto%20V|category\/grand-theft-auto-v)\/clips/.test(window.location.href);
 
 // Settings
 
