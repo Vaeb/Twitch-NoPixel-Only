@@ -3,8 +3,8 @@ console.log('TNO Refreshed');
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 const twitchUrl = /^https:\/\/www\.twitch\.tv\//;
-const twitchGtaUrl = /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V(?!\/videos)/;
-const twitchGtaUrlClips = /^https:\/\/www\.twitch\.tv\/directory\/game\/Grand%20Theft%20Auto%20V\/clips/;
+const twitchGtaUrl = /^https:\/\/www\.twitch\.tv\/directory\/(game\/Grand%20Theft%20Auto%20V|category\/grand-theft-auto-v)(?!\/videos)/;
+const twitchGtaUrlClips = /^https:\/\/www\.twitch\.tv\/directory\/(game\/Grand%20Theft%20Auto%20V|category\/grand-theft-auto-v)\/clips/;
 
 const curPage = {};
 const curRange = {};
@@ -41,7 +41,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 
 chrome.action.onClicked.addListener((activeTab) => {
-    const newURL = 'https://www.twitch.tv/directory/game/Grand%20Theft%20Auto%20V';
+    const newURL = 'https://www.twitch.tv/directory/category/grand-theft-auto-v';
     chrome.tabs.create({ url: newURL });
 });
 
