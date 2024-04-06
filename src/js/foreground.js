@@ -103,6 +103,7 @@ let onPage = false;
 let curPage = '';
 let bigChange = false;
 let interval;
+let newLayout = false;
 
 let wasZero = false;
 let filterStreamFaction = 'allnopixel';
@@ -625,7 +626,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         const isNpMetaFaction = onNpMetaFaction();
         const minViewersUse = isNpMetaFaction ? minViewers : 3;
 
-        const allElements = Array.from(document.getElementsByTagName('article'));
+        const allElements = newLayout ? Array.from(document.getElementsByClassName('switcher-preview-card__wrapper')) : Array.from(document.getElementsByTagName('article'));
         const elements = allElements.filter(element => !element.classList.contains('npChecked'));
         const streamCount = document.getElementById('streamCount');
 
@@ -656,9 +657,10 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             element.classList.add('npChecked');
             element = getMainElFromArticle(element);
             const titleEl = element.querySelector('h3');
-            let channelEl = element.querySelector("a[data-a-target='preview-card-channel-link']");
-            channelEl = channelEl.querySelector("p[data-a-target='preview-card-channel-link']") || channelEl;
-            const channelElNode = [...channelEl.childNodes].find(node => node.nodeType === 3);
+            let channelEl = newLayout ? element.querySelector('p[title]') : element.querySelector("a[data-a-target='preview-card-channel-link']");
+            channelEl = channelEl.querySelector("p[data-a-target='preview-card-channel-link']") || channelEl; // old layout thing
+            const channelElNode = newLayout ? channelEl : [...channelEl.childNodes].find(node => node.nodeType === 3)
+
             let liveElDiv = isLive()
                 ? element.getElementsByClassName('tw-channel-status-text-indicator')[0]
                 : element.getElementsByClassName('tw-media-card-stat')[0];
@@ -1354,7 +1356,10 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
         console.log('filtered streams:', streams, curPage, initRollStart, 'rollStart', rollStart);
 
-        const baseEl = isLive() ? document.querySelector('[data-target="directory-first-item"]') : document.querySelector('[data-a-target="clips-card-0"]:not(.tno-stream)');
+        let baseEl = isLive() ? document.querySelector('[data-target="directory-first-item"]') : document.querySelector('[data-a-target="clips-card-0"]:not(.tno-stream)');
+        if (newLayout) {
+            baseEl = document.querySelector('.tw-tower > div');
+        }
         const baseParent = baseEl.parentElement;
         const wasRoll = rollIds.length > 0;
 
@@ -1861,6 +1866,11 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     };
 
     onPage = twitchGtaUrl.test(window.location.href);
+    // check if can find any <article>, if not, assume new layout. In the future might want to come up with better way of 'versioning' layouts,
+    // but surely Twitch wouldn't test multiple different layouts at the same time... This'll also break if Twitch for some reason adds <article> somewhere...
+    if (onPage && document.getElementsByTagName('article').length === 0) {
+        newLayout = true;
+    }
 
     const updateClipsEl = (el) => {
         if (document.querySelector('.newDiv')) return;
