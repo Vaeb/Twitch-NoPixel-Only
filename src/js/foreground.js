@@ -1854,9 +1854,9 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             if (isLive()) groupDiv.style.setProperty('position', 'relative');
 
             const searchDiv = makeEl(`<div class="tno-search-div${isClips() ? ' tno-search-div-clips' : ''}"></div>`);
-            const searchInput = makeEl(`<input class="tno-search-input${isDark ? '' : ' tno-search-input-lightmode'}" placeholder="Search for character name / nickname / ${isClips() ? 'clip title' : 'stream'}..."/>`);
+            const searchInput = makeEl(`<input class="tno-search-input${isDark ? '' : ' tno-search-input-lightmode'}" placeholder="Search character / nickname / ${isClips() ? 'clip title' : 'stream'}..."/>`);
             searchDiv.append(searchInput);
-            if (isLive()) groupDiv.prepend(searchDiv);
+            if (isLive()) groupDiv.firstChild.append(searchDiv);
             else groupDiv.append(searchDiv);
 
             if (isFilteringText) document.querySelector('.tno-search-input').value = filterStreamText;
