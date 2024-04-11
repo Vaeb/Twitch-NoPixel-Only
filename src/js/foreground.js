@@ -1043,19 +1043,24 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     };
 
     const addSettings = async () => {
-        const $followBtn = $(await waitForElement('[data-test-selector="follow-game-button-component"]'));
+        const $followBtn = $(await waitForElement(newLayout ? '[data-a-target="follow-button"]' : '[data-test-selector="follow-game-button-component"]'));
 
         if (document.querySelector('.tno-settings-btn') != null) return; // Switching from clips/videos back to channels
 
         const $container = $followBtn.parent().parent();
+        const $btnContainer = $('<div></div>');
         const $setEnglishBtn = $('<button>⚙️ Twitch NoPixel Only</button>');
+
+        $btnContainer.addClass($followBtn.parent().attr('class'));
+
         $setEnglishBtn.addClass($followBtn.attr('class'));
         $setEnglishBtn.addClass('tno-settings-btn');
         $setEnglishBtn.css({
             margin: '0 0 0 10px',
             padding: '0 10px',
         });
-        $container.append($setEnglishBtn);
+
+        $container.append($btnContainer.append($setEnglishBtn));
 
         $setEnglishBtn.click(() => {
             Swal.fire({
