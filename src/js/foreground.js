@@ -479,16 +479,20 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
     const getMainElFromArticle = el => (isLive() ? el.parentElement.parentElement.parentElement.parentElement : el.parentElement);
 
+    const getPreviewCardElements = () => {
+        return newLayout ? Array.from(document.getElementsByClassName('switcher-preview-card__wrapper')) : Array.from(document.getElementsByTagName('article'));
+    }
+
     const resetFiltering = (onlyChecked = false) => {
         if (!onlyChecked) {
-            const manualElements = Array.from(document.getElementsByTagName('article')).filter(element => element.classList.contains('npManual'));
+            const manualElements = getPreviewCardElements().filter(element => element.classList.contains('npManual'));
             console.log('removing', manualElements.length, 'manual elements');
             for (const element of manualElements) {
                 getMainElFromArticle(element).remove();
             }
         }
 
-        const elements = Array.from(document.getElementsByTagName('article')).filter(element => element.classList.contains('npChecked'));
+        const elements = getPreviewCardElements().filter(element => element.classList.contains('npChecked'));
         console.log('resetting for', elements.length, 'elements');
         elements.forEach((element) => {
             element.classList.remove('npChecked');
@@ -626,7 +630,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         const isNpMetaFaction = onNpMetaFaction();
         const minViewersUse = isNpMetaFaction ? minViewers : 3;
 
-        const allElements = newLayout ? Array.from(document.getElementsByClassName('switcher-preview-card__wrapper')) : Array.from(document.getElementsByTagName('article'));
+        const allElements = getPreviewCardElements();
         const elements = allElements.filter(element => !element.classList.contains('npChecked'));
         const streamCount = document.getElementById('streamCount');
 
