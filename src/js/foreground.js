@@ -1056,17 +1056,17 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     };
 
     const addSettings = async () => {
-        const $followBtn = $(await waitForElement(newLayout ? '[data-a-target="follow-button"]' : '[data-test-selector="follow-game-button-component"]'));
+        const $twitchBtn = $(await waitForElement(newLayout ? '[data-a-target="rec-feedback-card-button"]' : '[data-test-selector="follow-game-button-component"]'));
 
         if (document.querySelector('.tno-settings-btn') != null) return; // Switching from clips/videos back to channels
 
-        const $container = $followBtn.parent().parent();
+        const $container = newLayout ? $twitchBtn.parent().parent().parent().parent().parent() : $twitchBtn.parent().parent();
         const $btnContainer = $('<div></div>');
         const $setEnglishBtn = $('<button>⚙️ Twitch NoPixel Only</button>');
 
-        $btnContainer.addClass($followBtn.parent().attr('class'));
+        $btnContainer.addClass($twitchBtn.parent().attr('class'));
 
-        $setEnglishBtn.addClass($followBtn.attr('class'));
+        $setEnglishBtn.addClass($twitchBtn.attr('class'));
         $setEnglishBtn.addClass('tno-settings-btn');
         $setEnglishBtn.css({
             margin: '0 0 0 10px',
