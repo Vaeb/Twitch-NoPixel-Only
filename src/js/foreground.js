@@ -477,7 +477,12 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
     const encodeHtml = str => str.replace(regex, m => `&${escapeChars[m]};`);
 
-    const getMainElFromArticle = el => (isLive() ? el.parentElement.parentElement.parentElement.parentElement : el.parentElement);
+    const getMainElFromArticle = el => {
+        if (newLayout) {
+            return el.closest("a").parentElement;
+        }
+        return isLive() ? el.parentElement.parentElement.parentElement.parentElement : el.parentElement;
+    };
 
     const getPreviewCardElements = () => {
         return newLayout ? Array.from(document.getElementsByClassName('switcher-preview-card__wrapper')) : Array.from(document.getElementsByTagName('article'));
@@ -568,6 +573,10 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
         const channelName = stream.channelName;
         const channelNameLower = channelName.toLowerCase();
+        if (newLayout) {
+            baseHtml = `<div class="tno-stream Layout-sc-1xcs6mc-0 jCGmCy" id="tno-stream-_TNOID_"><a tabindex="-1" class="ScCoreLink-sc-16kq0mq-0 eFqEFL tw-link" href="/_CHANNEL1_"><div class="Layout-sc-1xcs6mc-0 czvHDe"><div class="Layout-sc-1xcs6mc-0 ScLayoutCssVars-sc-10awzi2-1 dLwYMh hoAkTp tw-root--theme-light"><button class="ScInteractableBase-sc-ofisyf-0 ScInteractableDefault-sc-ofisyf-1 ineRox etibmD tw-interactable"><div class="Layout-sc-1xcs6mc-0 fioenC switcher-preview-card__wrapper _NPMANUAL_"><div class="Layout-sc-1xcs6mc-0 kXqTTl"><div class="Layout-sc-1xcs6mc-0 cyohHX"><div class="ScChannelStatusTextIndicator-sc-qtgrnb-0 xVKBI tw-channel-status-text-indicator"><p class="CoreText-sc-1txzju1-0 bfNjIO">_CHANNEL2_</p></div></div><div class="Layout-sc-1xcs6mc-0 duHgVC"><div class="ScMediaCardStatWrapper-sc-anph5i-0 jRUNHm tw-media-card-stat">_VIEWERS_ viewers</div></div><div class="ScAspectRatio-sc-18km980-1 doeqbO tw-aspect"><div class="ScAspectSpacer-sc-18km980-0 fCNuzu"></div><img class="tw-image" alt="_TITLE_" src="https://static-cdn.jtvnw.net/previews-ttv/live_user__CHANNEL1_-440x248.jpg"></div></div><div class="Layout-sc-1xcs6mc-0 hHChJw"><div class="Layout-sc-1xcs6mc-0 VSWqv"><div class="ScAvatar-sc-144b42z-0 iYOpTC tw-avatar"><img class="InjectLayout-sc-1i43xsx-0 cXFDOs tw-image tw-image-avatar" alt="_CHANNEL2_" src="_PFP_"></div></div><div class="Layout-sc-1xcs6mc-0 bmuhcM"><div class="Layout-sc-1xcs6mc-0 iUlBlt"><span class="CoreText-sc-1txzju1-0 jfGRkC">_TITLE_</span></div><div class="Layout-sc-1xcs6mc-0 xxjeD"><p title="Saleem" class="CoreText-sc-1txzju1-0 kWOAPT">_CHANNEL2_</p><div class="Layout-sc-1xcs6mc-0 kYiMlu"><div class="ScFigure-sc-wkgzod-0 bHrjoy tw-svg"><svg width="12" height="12" viewBox="0 0 12 12" aria-label="Verified Partner"><path fill-rule="evenodd" d="M10 2 6 1 2 2 1 6l1 4 4 1 4-1 1-4-1-4ZM5.5 8.5 9 5 7.5 3.5l-2 2-1-1L3 6l2.5 2.5Z" clip-rule="evenodd"></path></svg></div></div></div><div class="Layout-sc-1xcs6mc-0 fAVISI"><div class="Layout-sc-1xcs6mc-0 eVlpVN"><p title="_TITLE_" class="CoreText-sc-1txzju1-0 hucggK">_TITLE_</p></div></div></div></div></div></button></div></div></a></div>`;
+            // todo baseHtmlClip for new layout
+        }
         let cloneHtml = isLive() ? baseHtml : baseHtmlClip;
         if (stream.facebook) {
             cloneHtml = baseHtmlFb
@@ -584,6 +593,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         }
         cloneHtml = cloneHtml
             .replace(/(?<=<article .*?)class="/i, 'class="npManual ')
+            .replace(/_NPMANUAL_/g, 'npManual')
             .replace(/_TNOID_/g, `${idx}`)
             .replace(/_TIMEID_/g, `${timeId}`)
             .replace(/_CHANNEL1_/g, channelNameLower)
@@ -660,7 +670,6 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             const isManualStream = element.classList.contains('npManual');
             element.classList.add('npChecked');
             element = getMainElFromArticle(element);
-            const titleEl = element.querySelector('h3');
             let channelEl = newLayout ? element.querySelector('p[title]') : element.querySelector("a[data-a-target='preview-card-channel-link']");
             channelEl = channelEl.querySelector("p[data-a-target='preview-card-channel-link']") || channelEl; // old layout thing
             const channelElNode = newLayout ? channelEl : [...channelEl.childNodes].find(node => node.nodeType === 3)
@@ -669,7 +678,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                 ? element.getElementsByClassName('tw-channel-status-text-indicator')[0]
                 : element.getElementsByClassName('tw-media-card-stat')[0];
             if (isClips() && !element.getElementsByClassName('tw-media-card-stat')[1]) {
-                console.log('ERROR MISSING ELEMENT DESCENDANTS !!!!!', element, elementIdx, titleEl.textContent, liveElDiv);
+                console.log('ERROR MISSING ELEMENT DESCENDANTS !!!!!', element, elementIdx, liveElDiv);
             }
             const viewers = isLive()
                 ? element.getElementsByClassName('tw-media-card-stat')[0].textContent
@@ -685,7 +694,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                 minLoadedText = viewers;
             }
 
-            // console.log(titleEl.textContent, viewers, viewersNum, liveElDiv);
+            // console.log(viewers, viewersNum, liveElDiv);
 
             let liveEl;
             if (liveElDiv != null) {
