@@ -1885,11 +1885,6 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     };
 
     onPage = twitchGtaUrl.test(window.location.href);
-    // check if can find any <article>, if not, assume new layout. In the future might want to come up with better way of 'versioning' layouts,
-    // but surely Twitch wouldn't test multiple different layouts at the same time... This'll also break if Twitch for some reason adds <article> somewhere...
-    if (onPage && document.getElementsByTagName('article').length === 0) {
-        newLayout = true;
-    }
 
     const updateClipsEl = (el) => {
         if (document.querySelector('.newDiv')) return;
@@ -1979,6 +1974,14 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     };
 
     handleStart = async (request) => {
+        await waitForElement('.tw-tower .tw-image'); // making sure tower is properly loaded before checking for new layout
+
+        // check if can find <article> in tower, if not, assume new layout. In the future might want to come up with better way of 'versioning' layouts,
+        // but surely Twitch wouldn't test multiple different layouts at the same time...
+        if (document.querySelector('.tw-tower').getElementsByTagName('article').length === 0) {
+            newLayout = true;
+        }
+
         if (request === undefined) {
             await activateInterval();
         } else if (request.bigChange) {
@@ -2019,12 +2022,10 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         }
     };
 
-    setTimeout(() => {
-        if (onPage) {
-            curPage = checkClips() ? 'clips' : 'live';
-            handleStart();
-        }
-    }, 1000);
+    if (onPage) {
+        curPage = checkClips() ? 'clips' : 'live';
+        handleStart();
+    }
 };
 
 filterStreams();
