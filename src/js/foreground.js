@@ -485,7 +485,8 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     };
 
     const getPreviewCardElements = () => {
-        return newLayout ? Array.from(document.getElementsByClassName('switcher-preview-card__wrapper')) : Array.from(document.getElementsByTagName('article'));
+        let tower = document.querySelector('.tw-tower');
+        return newLayout ? Array.from(tower.getElementsByClassName('switcher-preview-card__wrapper')) : Array.from(tower.getElementsByTagName('article'));
     }
 
     const resetFiltering = (onlyChecked = false) => {
