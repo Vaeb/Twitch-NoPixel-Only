@@ -44,5 +44,5 @@ Tip: Keeping the "Force English only" setting enabled will improve performance w
 
 ### --- ISSUES / TODO ---
 
-NoPixel Clips tab: If you have selected a faction on the "Live channels" page, clip tab will not show any clips. Remove the filter to see clips.
+NoPixel Clips tab: If you have selected a faction on the "Live channels" page, clip tab will not show any clips. Remove the filter to see clips. 
 Beta Twitch layout: Changing between live/videos/clips tabs hides the "NoPixel settings" button, reload page on Live Channels tab to get it back.
