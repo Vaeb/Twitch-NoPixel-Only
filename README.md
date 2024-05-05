@@ -8,7 +8,8 @@ Once installed, go to https://www.twitch.tv/directory/game/Grand%20Theft%20Auto%
 
 Everything is automatic, you don't have to do anything.
 
-![Twitch NoPixel Only Screenshot 1](https://i.imgur.com/V2WnR4f.jpeg)
+![Screenshot (on current Twitch layout)](https://i.imgur.com/WXij1pE.png)
+![Screenshot (on new beta Twitch layout)](https://i.imgur.com/Mhkrt4I.png)
 
 ---
 
@@ -40,3 +41,8 @@ Tip: Keeping the "Force English only" setting enabled will improve performance w
 \---
 
 ![Twitch NoPixel Only Gif 1](https://i.imgur.com/denVLQw.gif)
+
+### --- ISSUES / TODO ---
+
+NoPixel Clips tab: If you have selected a faction on the "Live channels" page, clip tab will not show any clips. Remove the filter to see clips.
+Beta Twitch layout: Changing between live/videos/clips tabs hides the "NoPixel settings" button, reload page on Live Channels tab to get it back.
