@@ -575,7 +575,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         const channelNameLower = channelName.toLowerCase();
         if (newLayout) {
             baseHtml = `<div class="tno-stream Layout-sc-1xcs6mc-0 jCGmCy" id="tno-stream-_TNOID_"><a tabindex="-1" class="ScCoreLink-sc-16kq0mq-0 eFqEFL tw-link" href="/_CHANNEL1_"><div class="Layout-sc-1xcs6mc-0 czvHDe"><div class="Layout-sc-1xcs6mc-0 ScLayoutCssVars-sc-10awzi2-1 dLwYMh hoAkTp tw-root--theme-light"><button class="ScInteractableBase-sc-ofisyf-0 ScInteractableDefault-sc-ofisyf-1 ineRox etibmD tw-interactable"><div class="Layout-sc-1xcs6mc-0 fioenC switcher-preview-card__wrapper _NPMANUAL_"><div class="Layout-sc-1xcs6mc-0 kXqTTl"><div class="Layout-sc-1xcs6mc-0 cyohHX"><div class="ScChannelStatusTextIndicator-sc-qtgrnb-0 xVKBI tw-channel-status-text-indicator"><p class="CoreText-sc-1txzju1-0 bfNjIO">_CHANNEL2_</p></div></div><div class="Layout-sc-1xcs6mc-0 duHgVC"><div class="ScMediaCardStatWrapper-sc-anph5i-0 jRUNHm tw-media-card-stat">_VIEWERS_ viewers</div></div><div class="ScAspectRatio-sc-18km980-1 doeqbO tw-aspect"><div class="ScAspectSpacer-sc-18km980-0 fCNuzu"></div><img class="tw-image" alt="_TITLE_" src="https://static-cdn.jtvnw.net/previews-ttv/live_user__CHANNEL1_-440x248.jpg"></div></div><div class="Layout-sc-1xcs6mc-0 hHChJw"><div class="Layout-sc-1xcs6mc-0 VSWqv"><div class="ScAvatar-sc-144b42z-0 iYOpTC tw-avatar"><img class="InjectLayout-sc-1i43xsx-0 cXFDOs tw-image tw-image-avatar" alt="_CHANNEL2_" src="_PFP_"></div></div><div class="Layout-sc-1xcs6mc-0 bmuhcM"><div class="Layout-sc-1xcs6mc-0 iUlBlt"><span class="CoreText-sc-1txzju1-0 jfGRkC">_TITLE_</span></div><div class="Layout-sc-1xcs6mc-0 xxjeD"><p title="Saleem" class="CoreText-sc-1txzju1-0 kWOAPT">_CHANNEL2_</p><div class="Layout-sc-1xcs6mc-0 kYiMlu"><div class="ScFigure-sc-wkgzod-0 bHrjoy tw-svg"><svg width="12" height="12" viewBox="0 0 12 12" aria-label="Verified Partner"><path fill-rule="evenodd" d="M10 2 6 1 2 2 1 6l1 4 4 1 4-1 1-4-1-4ZM5.5 8.5 9 5 7.5 3.5l-2 2-1-1L3 6l2.5 2.5Z" clip-rule="evenodd"></path></svg></div></div></div><div class="Layout-sc-1xcs6mc-0 fAVISI"><div class="Layout-sc-1xcs6mc-0 eVlpVN"><p title="_TITLE_" class="CoreText-sc-1txzju1-0 hucggK">_TITLE_</p></div></div></div></div></div></button></div></div></a></div>`;
-            // todo baseHtmlClip for new layout
+            baseHtmlClip = `<div class="tno-stream Layout-sc-1xcs6mc-0 jCGmCy" id="tno-stream-_TNOID_"><a tabindex="-1" class="ScCoreLink-sc-16kq0mq-0 eFqEFL tw-link" href="/_CHANNEL1_"><div class="Layout-sc-1xcs6mc-0 czvHDe"><div class="Layout-sc-1xcs6mc-0 ScLayoutCssVars-sc-10awzi2-1 dLwYMh hoAkTp tw-root--theme-light"><button class="ScInteractableBase-sc-ofisyf-0 ScInteractableDefault-sc-ofisyf-1 ineRox etibmD tw-interactable"><div class="Layout-sc-1xcs6mc-0 fioenC switcher-preview-card__wrapper _NPMANUAL_"><div class="Layout-sc-1xcs6mc-0 kXqTTl"><div class="Layout-sc-1xcs6mc-0 cyohHX"><div class="ScChannelStatusTextIndicator-sc-qtgrnb-0 xVKBI tw-channel-status-text-indicator"><p class="CoreText-sc-1txzju1-0 bfNjIO">_CHANNEL2_</p></div></div><div class="Layout-sc-1xcs6mc-0 duHgVC"><div class="ScMediaCardStatWrapper-sc-anph5i-0 jRUNHm tw-media-card-stat">_VIEWERS_ viewers</div></div><div class="ScAspectRatio-sc-18km980-1 doeqbO tw-aspect"><div class="ScAspectSpacer-sc-18km980-0 fCNuzu"></div><img class="tw-image" alt="_TITLE_" src="https://static-cdn.jtvnw.net/previews-ttv/live_user__CHANNEL1_-440x248.jpg"></div></div><div class="Layout-sc-1xcs6mc-0 hHChJw"><div class="Layout-sc-1xcs6mc-0 VSWqv"><div class="ScAvatar-sc-144b42z-0 iYOpTC tw-avatar"><img class="InjectLayout-sc-1i43xsx-0 cXFDOs tw-image tw-image-avatar" alt="_CHANNEL2_" src="_PFP_"></div></div><div class="Layout-sc-1xcs6mc-0 bmuhcM"><div class="Layout-sc-1xcs6mc-0 iUlBlt"><span class="CoreText-sc-1txzju1-0 jfGRkC">_TITLE_</span></div><div class="Layout-sc-1xcs6mc-0 xxjeD"><p title="Saleem" class="CoreText-sc-1txzju1-0 kWOAPT">_CHANNEL2_</p><div class="Layout-sc-1xcs6mc-0 kYiMlu"><div class="ScFigure-sc-wkgzod-0 bHrjoy tw-svg"><svg width="12" height="12" viewBox="0 0 12 12" aria-label="Verified Partner"><path fill-rule="evenodd" d="M10 2 6 1 2 2 1 6l1 4 4 1 4-1 1-4-1-4ZM5.5 8.5 9 5 7.5 3.5l-2 2-1-1L3 6l2.5 2.5Z" clip-rule="evenodd"></path></svg></div></div></div><div class="Layout-sc-1xcs6mc-0 fAVISI"><div class="Layout-sc-1xcs6mc-0 eVlpVN"><p title="_TITLE_" class="CoreText-sc-1txzju1-0 hucggK">_TITLE_</p></div></div></div></div></div></button></div></div></a></div>`
         }
         let cloneHtml = isLive() ? baseHtml : baseHtmlClip;
         if (stream.facebook) {
@@ -660,7 +660,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
         let allowNextManual = false;
 
-        // console.log('>>>> STARTING NEW ELEMENTS LOOP');
+        // console.log('>>>> STARTING NEW ELEMENTS LOOP, newLayout:', newLayout, "isLive", isLive(), "isClips", isClips());
 
         for (let elementIdx = 0; elementIdx < elements.length; elementIdx++) {
             let element = elements[elementIdx];
@@ -1950,8 +1950,8 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
         if (!onTwitchView()) {
             waitForElement(() => {
-                const baseElLive = document.querySelector('[data-target="directory-first-item"]');
-                const baseElClips = document.querySelector('[data-a-target="clips-card-0"]:not(.tno-stream)');
+                const baseElLive = newLayout ? document.querySelector('.tw-tower > div') : document.querySelector('[data-target="directory-first-item"]');
+                const baseElClips = newLayout ? document.querySelector('.tw-tower > div:not(.tno-stream)') : document.querySelector('[data-a-target="clips-card-0"]:not(.tno-stream)');
                 return baseElLive || baseElClips || null;
             }).then(() => {
                 addFactionStreams(undefined);
@@ -2006,8 +2006,8 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             resetFiltering(); // Reset twitch elements to original state (npChecked/remove)
             if (!onTwitchView()) {
                 await waitForElement(() => {
-                    const baseElLive = document.querySelector('[data-target="directory-first-item"]');
-                    const baseElClips = document.querySelector('[data-a-target="clips-card-0"]:not(.tno-stream)');
+                    const baseElLive = newLayout ? document.querySelector('.tw-tower > div') : document.querySelector('[data-target="directory-first-item"]');
+                    const baseElClips = newLayout ? document.querySelector('.tw-tower > div:not(.tno-stream)') : document.querySelector('[data-a-target="clips-card-0"]:not(.tno-stream)');
                     return baseElLive || baseElClips || null;
                 });
                 addFactionStreams(undefined);
