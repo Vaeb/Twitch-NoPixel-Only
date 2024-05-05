@@ -4,7 +4,7 @@ Install for Chrome: https://chrome.google.com/webstore/detail/twitch-nopixel-onl
 
 Install for Firefox: https://addons.mozilla.org/en-GB/firefox/addon/twitch-nopixel-only/
 
-Once installed, go to https://www.twitch.tv/directory/game/Grand%20Theft%20Auto%20V to use.
+Once installed, go to https://www.twitch.tv/directory/category/grand-theft-auto-v to use.
 
 Everything is automatic, you don't have to do anything.
 
@@ -44,5 +44,6 @@ Tip: Keeping the "Force English only" setting enabled will improve performance w
 
 ### --- ISSUES / TODO ---
 
-NoPixel Clips tab: If you have selected a faction on the "Live channels" page, clip tab will not show any clips. Remove the filter to see clips. 
+NoPixel Clips tab: If you have selected a faction on the "Live channels" page, clip tab will not show any clips. Remove the filter to see clips.
+
 Beta Twitch layout: Changing between live/videos/clips tabs hides the "NoPixel settings" button, reload page on Live Channels tab to get it back.
