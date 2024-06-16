@@ -656,9 +656,8 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             element.classList.add('npChecked');
             element = getMainElFromArticle(element);
             const titleEl = element.querySelector('h3');
-            let channelEl = element.querySelector("a[data-a-target='preview-card-channel-link']");
-            channelEl = channelEl.querySelector("p[data-a-target='preview-card-channel-link']") || channelEl;
-            const channelElNode = [...channelEl.childNodes].find(node => node.nodeType === 3);
+            let channelEl = element.querySelector("a[data-a-target='preview-card-channel-link'] > div");
+            const channelElNode = [...channelEl.childNodes].find(node => node.nodeType === 3) || channelEl;
             let liveElDiv = isLive()
                 ? element.getElementsByClassName('tw-channel-status-text-indicator')[0]
                 : element.getElementsByClassName('tw-media-card-stat')[0];
