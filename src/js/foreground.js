@@ -103,6 +103,7 @@ let onPage = false;
 let curPage = '';
 let bigChange = false;
 let interval;
+let newLayout = false;
 
 let wasZero = false;
 let filterStreamFaction = 'allnopixel';
@@ -476,18 +477,28 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
     const encodeHtml = str => str.replace(regex, m => `&${escapeChars[m]};`);
 
-    const getMainElFromArticle = el => (isLive() ? el.parentElement.parentElement.parentElement.parentElement : el.parentElement);
+    const getMainElFromArticle = el => {
+        if (newLayout) {
+            return el.closest("a").parentElement;
+        }
+        return isLive() ? el.parentElement.parentElement.parentElement.parentElement : el.parentElement;
+    };
+
+    const getPreviewCardElements = () => {
+        let tower = document.querySelector('.tw-tower');
+        return newLayout ? Array.from(tower.getElementsByClassName('switcher-preview-card__wrapper')) : Array.from(tower.getElementsByTagName('article'));
+    }
 
     const resetFiltering = (onlyChecked = false) => {
         if (!onlyChecked) {
-            const manualElements = Array.from(document.getElementsByTagName('article')).filter(element => element.classList.contains('npManual'));
+            const manualElements = getPreviewCardElements().filter(element => element.classList.contains('npManual'));
             console.log('removing', manualElements.length, 'manual elements');
             for (const element of manualElements) {
                 getMainElFromArticle(element).remove();
             }
         }
 
-        const elements = Array.from(document.getElementsByTagName('article')).filter(element => element.classList.contains('npChecked'));
+        const elements = getPreviewCardElements().filter(element => element.classList.contains('npChecked'));
         console.log('resetting for', elements.length, 'elements');
         elements.forEach((element) => {
             element.classList.remove('npChecked');
@@ -563,6 +574,10 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
         const channelName = stream.channelName;
         const channelNameLower = channelName.toLowerCase();
+        if (newLayout) {
+            baseHtml = `<div class="tno-stream Layout-sc-1xcs6mc-0 jCGmCy" id="tno-stream-_TNOID_"><a tabindex="-1" class="ScCoreLink-sc-16kq0mq-0 eFqEFL tw-link" href="/_CHANNEL1_"><div class="Layout-sc-1xcs6mc-0 czvHDe"><div class="Layout-sc-1xcs6mc-0 ScLayoutCssVars-sc-10awzi2-1 dLwYMh hoAkTp tw-root--theme-light"><button class="ScInteractableBase-sc-ofisyf-0 ScInteractableDefault-sc-ofisyf-1 ineRox etibmD tw-interactable"><div class="Layout-sc-1xcs6mc-0 fioenC switcher-preview-card__wrapper _NPMANUAL_"><div class="Layout-sc-1xcs6mc-0 kXqTTl"><div class="Layout-sc-1xcs6mc-0 cyohHX"><div class="ScChannelStatusTextIndicator-sc-qtgrnb-0 xVKBI tw-channel-status-text-indicator"><p class="CoreText-sc-1txzju1-0 bfNjIO">_CHANNEL2_</p></div></div><div class="Layout-sc-1xcs6mc-0 duHgVC"><div class="ScMediaCardStatWrapper-sc-anph5i-0 jRUNHm tw-media-card-stat">_VIEWERS_ viewers</div></div><div class="ScAspectRatio-sc-18km980-1 doeqbO tw-aspect"><div class="ScAspectSpacer-sc-18km980-0 fCNuzu"></div><img class="tw-image" alt="_TITLE_" src="https://static-cdn.jtvnw.net/previews-ttv/live_user__CHANNEL1_-440x248.jpg"></div></div><div class="Layout-sc-1xcs6mc-0 hHChJw"><div class="Layout-sc-1xcs6mc-0 VSWqv"><div class="ScAvatar-sc-144b42z-0 iYOpTC tw-avatar"><img class="InjectLayout-sc-1i43xsx-0 cXFDOs tw-image tw-image-avatar" alt="_CHANNEL2_" src="_PFP_"></div></div><div class="Layout-sc-1xcs6mc-0 bmuhcM"><div class="Layout-sc-1xcs6mc-0 iUlBlt"><span class="CoreText-sc-1txzju1-0 jfGRkC">_TITLE_</span></div><div class="Layout-sc-1xcs6mc-0 xxjeD"><p title="Saleem" class="CoreText-sc-1txzju1-0 kWOAPT">_CHANNEL2_</p><div class="Layout-sc-1xcs6mc-0 kYiMlu"><div class="ScFigure-sc-wkgzod-0 bHrjoy tw-svg"><svg width="12" height="12" viewBox="0 0 12 12" aria-label="Verified Partner"><path fill-rule="evenodd" d="M10 2 6 1 2 2 1 6l1 4 4 1 4-1 1-4-1-4ZM5.5 8.5 9 5 7.5 3.5l-2 2-1-1L3 6l2.5 2.5Z" clip-rule="evenodd"></path></svg></div></div></div><div class="Layout-sc-1xcs6mc-0 fAVISI"><div class="Layout-sc-1xcs6mc-0 eVlpVN"><p title="_TITLE_" class="CoreText-sc-1txzju1-0 hucggK">_TITLE_</p></div></div></div></div></div></button></div></div></a></div>`;
+            baseHtmlClip = `<div class="tno-stream Layout-sc-1xcs6mc-0 jCGmCy" id="tno-stream-_TNOID_"><a tabindex="-1" class="ScCoreLink-sc-16kq0mq-0 eFqEFL tw-link" href="/_CHANNEL1_"><div class="Layout-sc-1xcs6mc-0 czvHDe"><div class="Layout-sc-1xcs6mc-0 ScLayoutCssVars-sc-10awzi2-1 dLwYMh hoAkTp tw-root--theme-light"><button class="ScInteractableBase-sc-ofisyf-0 ScInteractableDefault-sc-ofisyf-1 ineRox etibmD tw-interactable"><div class="Layout-sc-1xcs6mc-0 fioenC switcher-preview-card__wrapper _NPMANUAL_"><div class="Layout-sc-1xcs6mc-0 kXqTTl"><div class="Layout-sc-1xcs6mc-0 cyohHX"><div class="ScChannelStatusTextIndicator-sc-qtgrnb-0 xVKBI tw-channel-status-text-indicator"><p class="CoreText-sc-1txzju1-0 bfNjIO">_CHANNEL2_</p></div></div><div class="Layout-sc-1xcs6mc-0 duHgVC"><div class="ScMediaCardStatWrapper-sc-anph5i-0 jRUNHm tw-media-card-stat">_VIEWERS_ viewers</div></div><div class="ScAspectRatio-sc-18km980-1 doeqbO tw-aspect"><div class="ScAspectSpacer-sc-18km980-0 fCNuzu"></div><img class="tw-image" alt="_TITLE_" src="https://static-cdn.jtvnw.net/previews-ttv/live_user__CHANNEL1_-440x248.jpg"></div></div><div class="Layout-sc-1xcs6mc-0 hHChJw"><div class="Layout-sc-1xcs6mc-0 VSWqv"><div class="ScAvatar-sc-144b42z-0 iYOpTC tw-avatar"><img class="InjectLayout-sc-1i43xsx-0 cXFDOs tw-image tw-image-avatar" alt="_CHANNEL2_" src="_PFP_"></div></div><div class="Layout-sc-1xcs6mc-0 bmuhcM"><div class="Layout-sc-1xcs6mc-0 iUlBlt"><span class="CoreText-sc-1txzju1-0 jfGRkC">_TITLE_</span></div><div class="Layout-sc-1xcs6mc-0 xxjeD"><p title="Saleem" class="CoreText-sc-1txzju1-0 kWOAPT">_CHANNEL2_</p><div class="Layout-sc-1xcs6mc-0 kYiMlu"><div class="ScFigure-sc-wkgzod-0 bHrjoy tw-svg"><svg width="12" height="12" viewBox="0 0 12 12" aria-label="Verified Partner"><path fill-rule="evenodd" d="M10 2 6 1 2 2 1 6l1 4 4 1 4-1 1-4-1-4ZM5.5 8.5 9 5 7.5 3.5l-2 2-1-1L3 6l2.5 2.5Z" clip-rule="evenodd"></path></svg></div></div></div><div class="Layout-sc-1xcs6mc-0 fAVISI"><div class="Layout-sc-1xcs6mc-0 eVlpVN"><p title="_TITLE_" class="CoreText-sc-1txzju1-0 hucggK">_TITLE_</p></div></div></div></div></div></button></div></div></a></div>`
+        }
         let cloneHtml = isLive() ? baseHtml : baseHtmlClip;
         if (stream.facebook) {
             cloneHtml = baseHtmlFb
@@ -579,6 +594,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         }
         cloneHtml = cloneHtml
             .replace(/(?<=<article .*?)class="/i, 'class="npManual ')
+            .replace(/_NPMANUAL_/g, 'npManual')
             .replace(/_TNOID_/g, `${idx}`)
             .replace(/_TIMEID_/g, `${timeId}`)
             .replace(/_CHANNEL1_/g, channelNameLower)
@@ -625,7 +641,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         const isNpMetaFaction = onNpMetaFaction();
         const minViewersUse = isNpMetaFaction ? minViewers : 3;
 
-        const allElements = Array.from(document.getElementsByTagName('article'));
+        const allElements = getPreviewCardElements();
         const elements = allElements.filter(element => !element.classList.contains('npChecked'));
         const streamCount = document.getElementById('streamCount');
 
@@ -645,7 +661,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
         let allowNextManual = false;
 
-        // console.log('>>>> STARTING NEW ELEMENTS LOOP');
+        // console.log('>>>> STARTING NEW ELEMENTS LOOP, newLayout:', newLayout, "isLive", isLive(), "isClips", isClips());
 
         for (let elementIdx = 0; elementIdx < elements.length; elementIdx++) {
             let element = elements[elementIdx];
@@ -655,14 +671,16 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             const isManualStream = element.classList.contains('npManual');
             element.classList.add('npChecked');
             element = getMainElFromArticle(element);
-            const titleEl = element.querySelector('h3');
-            let channelEl = element.querySelector("a[data-a-target='preview-card-channel-link'] > div");
-            const channelElNode = [...channelEl.childNodes].find(node => node.nodeType === 3) || channelEl;
+
+            let channelEl = newLayout ? element.querySelector('p[title]') : element.querySelector("a[data-a-target='preview-card-channel-link'] > div");
+            channelEl = newLayout ? channelEl.querySelector("p[data-a-target='preview-card-channel-link']") || channelEl : channelEl; // old layout thing
+            const channelElNode = newLayout ? channelEl : [...channelEl.childNodes].find(node => node.nodeType === 3) || channelEl;
+
             let liveElDiv = isLive()
                 ? element.getElementsByClassName('tw-channel-status-text-indicator')[0]
                 : element.getElementsByClassName('tw-media-card-stat')[0];
             if (isClips() && !element.getElementsByClassName('tw-media-card-stat')[1]) {
-                console.log('ERROR MISSING ELEMENT DESCENDANTS !!!!!', element, elementIdx, titleEl.textContent, liveElDiv);
+                console.log('ERROR MISSING ELEMENT DESCENDANTS !!!!!', element, elementIdx, liveElDiv);
             }
             const viewers = isLive()
                 ? element.getElementsByClassName('tw-media-card-stat')[0].textContent
@@ -678,7 +696,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                 minLoadedText = viewers;
             }
 
-            // console.log(titleEl.textContent, viewers, viewersNum, liveElDiv);
+            // console.log(viewers, viewersNum, liveElDiv);
 
             let liveEl;
             if (liveElDiv != null) {
@@ -1040,19 +1058,24 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     };
 
     const addSettings = async () => {
-        const $followBtn = $(await waitForElement('[data-test-selector="follow-game-button-component"]'));
+        const $twitchBtn = $(await waitForElement(newLayout ? '[data-a-target="rec-feedback-card-button"]' : '[data-test-selector="follow-game-button-component"]'));
 
         if (document.querySelector('.tno-settings-btn') != null) return; // Switching from clips/videos back to channels
 
-        const $container = $followBtn.parent().parent();
+        const $container = newLayout ? $twitchBtn.parent().parent().parent().parent().parent() : $twitchBtn.parent().parent();
+        const $btnContainer = $('<div></div>');
         const $setEnglishBtn = $('<button>⚙️ Twitch NoPixel Only</button>');
-        $setEnglishBtn.addClass($followBtn.attr('class'));
+
+        $btnContainer.addClass($twitchBtn.parent().attr('class'));
+
+        $setEnglishBtn.addClass($twitchBtn.attr('class'));
         $setEnglishBtn.addClass('tno-settings-btn');
         $setEnglishBtn.css({
             margin: '0 0 0 10px',
             padding: '0 10px',
         });
-        $container.append($setEnglishBtn);
+
+        $container.append($btnContainer.append($setEnglishBtn));
 
         $setEnglishBtn.click(() => {
             Swal.fire({
@@ -1353,7 +1376,10 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
         console.log('filtered streams:', streams, curPage, initRollStart, 'rollStart', rollStart);
 
-        const baseEl = isLive() ? document.querySelector('[data-target="directory-first-item"]') : document.querySelector('[data-a-target="clips-card-0"]:not(.tno-stream)');
+        let baseEl = isLive() ? document.querySelector('[data-target="directory-first-item"]') : document.querySelector('[data-a-target="clips-card-0"]:not(.tno-stream)');
+        if (newLayout) {
+            baseEl = document.querySelector('.tw-tower > div');
+        }
         const baseParent = baseEl.parentElement;
         const wasRoll = rollIds.length > 0;
 
@@ -1839,9 +1865,9 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             if (isLive()) groupDiv.style.setProperty('position', 'relative');
 
             const searchDiv = makeEl(`<div class="tno-search-div${isClips() ? ' tno-search-div-clips' : ''}"></div>`);
-            const searchInput = makeEl(`<input class="tno-search-input${isDark ? '' : ' tno-search-input-lightmode'}" placeholder="Search for character name / nickname / ${isClips() ? 'clip title' : 'stream'}..."/>`);
+            const searchInput = makeEl(`<input class="tno-search-input${isDark ? '' : ' tno-search-input-lightmode'}" placeholder="Search character / nickname / ${isClips() ? 'clip title' : 'stream'}..."/>`);
             searchDiv.append(searchInput);
-            if (isLive()) groupDiv.prepend(searchDiv);
+            if (isLive()) groupDiv.firstChild.append(searchDiv);
             else groupDiv.append(searchDiv);
 
             if (isFilteringText) document.querySelector('.tno-search-input').value = filterStreamText;
@@ -1921,8 +1947,8 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
         if (!onTwitchView()) {
             waitForElement(() => {
-                const baseElLive = document.querySelector('[data-target="directory-first-item"]');
-                const baseElClips = document.querySelector('[data-a-target="clips-card-0"]:not(.tno-stream)');
+                const baseElLive = newLayout ? document.querySelector('.tw-tower > div') : document.querySelector('[data-target="directory-first-item"]');
+                const baseElClips = newLayout ? document.querySelector('.tw-tower > div:not(.tno-stream)') : document.querySelector('[data-a-target="clips-card-0"]:not(.tno-stream)');
                 return baseElLive || baseElClips || null;
             }).then(() => {
                 addFactionStreams(undefined);
@@ -1949,6 +1975,14 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     };
 
     handleStart = async (request) => {
+        await waitForElement('.tw-tower .tw-image'); // making sure tower is properly loaded before checking for new layout
+
+        // check if can find <article> in tower, if not, assume new layout. In the future might want to come up with better way of 'versioning' layouts,
+        // but surely Twitch wouldn't test multiple different layouts at the same time...
+        if (document.querySelector('.tw-tower').getElementsByTagName('article').length === 0) {
+            newLayout = true;
+        }
+
         if (request === undefined) {
             await activateInterval();
         } else if (request.bigChange) {
@@ -1977,8 +2011,8 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             resetFiltering(); // Reset twitch elements to original state (npChecked/remove)
             if (!onTwitchView()) {
                 await waitForElement(() => {
-                    const baseElLive = document.querySelector('[data-target="directory-first-item"]');
-                    const baseElClips = document.querySelector('[data-a-target="clips-card-0"]:not(.tno-stream)');
+                    const baseElLive = newLayout ? document.querySelector('.tw-tower > div') : document.querySelector('[data-target="directory-first-item"]');
+                    const baseElClips = newLayout ? document.querySelector('.tw-tower > div:not(.tno-stream)') : document.querySelector('[data-a-target="clips-card-0"]:not(.tno-stream)');
                     return baseElLive || baseElClips || null;
                 });
                 addFactionStreams(undefined);
@@ -1989,12 +2023,10 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         }
     };
 
-    setTimeout(() => {
-        if (onPage) {
-            curPage = checkClips() ? 'clips' : 'live';
-            handleStart();
-        }
-    }, 1000);
+    if (onPage) {
+        curPage = checkClips() ? 'clips' : 'live';
+        handleStart();
+    }
 };
 
 filterStreams();
