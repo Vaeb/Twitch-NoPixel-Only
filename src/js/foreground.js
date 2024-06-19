@@ -671,9 +671,10 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
             const isManualStream = element.classList.contains('npManual');
             element.classList.add('npChecked');
             element = getMainElFromArticle(element);
-            let channelEl = newLayout ? element.querySelector('p[title]') : element.querySelector("a[data-a-target='preview-card-channel-link']");
-            channelEl = channelEl.querySelector("p[data-a-target='preview-card-channel-link']") || channelEl; // old layout thing
-            const channelElNode = newLayout ? channelEl : [...channelEl.childNodes].find(node => node.nodeType === 3)
+
+            let channelEl = newLayout ? element.querySelector('p[title]') : element.querySelector("a[data-a-target='preview-card-channel-link'] > div");
+            channelEl = newLayout ? channelEl.querySelector("p[data-a-target='preview-card-channel-link']") || channelEl : channelEl; // old layout thing
+            const channelElNode = newLayout ? channelEl : [...channelEl.childNodes].find(node => node.nodeType === 3) || channelEl;
 
             let liveElDiv = isLive()
                 ? element.getElementsByClassName('tw-channel-status-text-indicator')[0]
