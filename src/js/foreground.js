@@ -443,7 +443,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     let rollStart = 0;
     alwaysRoll = tnoAlwaysCustom;
     realViews = REAL_VIEWS.get(alwaysRoll);
-    const rollAddMax = 30;
+    const rollAddMax = 41;
 
     // const resetFiltering = () => {
     //     const elements = Array.from(document.getElementsByTagName('article')).filter(element => element.classList.contains('npChecked'));
@@ -1378,7 +1378,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
         let baseEl = isLive() ? document.querySelector('[data-target="directory-first-item"]') : document.querySelector('[data-a-target="clips-card-0"]:not(.tno-stream)');
         if (newLayout) {
-            baseEl = document.querySelector('.tw-tower > div');
+            baseEl = document.querySelector('.tw-tower > div:not(.tno-stream)');
         }
         const baseParent = baseEl.parentElement;
         const wasRoll = rollIds.length > 0;
