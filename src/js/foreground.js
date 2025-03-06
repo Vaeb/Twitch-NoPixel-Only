@@ -627,6 +627,55 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
         const channelName = channelElNode.textContent.toLowerCase();
     };
 
+    const checkStreamState = (stream) => {
+        const isUniversalFaction = onUniversalFaction();
+        const nowFilterEnabled = filterEnabled && filterStreamFaction !== 'alltwitch';
+        const tnoWlOverrideNow = tnoWlOverride && stream && stream.wlOverride;
+        const tnoOthersNow = tnoOthers || filterStreamFaction === 'other' || tnoWlOverrideNow;
+        const tnoPublicNow = tnoPublic || filterStreamFaction === 'publicnp' || tnoWlOverrideNow;
+        const tnoInternationalNow = tnoInternational || filterStreamFaction === 'international' || tnoWlOverrideNow;
+
+        let streamState; // remove, mark-np, mark-other
+
+        if (nowFilterEnabled) {
+            // If filtering streams is enabled
+            if (!stream) {
+                // Not an RP stream
+                streamState = FSTATES.remove;
+            } else if (stream.tagFaction === 'other') {
+                // Non-NoPixel RP stream
+                if (tnoOthersNow || stream.noOthersInclude) {
+                    streamState = FSTATES.other;
+                } else {
+                    streamState = FSTATES.remove;
+                }
+            } else {
+                // NoPixel stream
+                if ((tnoPublicNow || stream.noPublicInclude) && (tnoInternationalNow || stream.noInternationalInclude)) {
+                    // NoPixel Public if allowed or NoPixel International if allowed or NoPixel WL Stream
+                    streamState = FSTATES.nopixel;
+                } else {
+                    // Public/International stream when not allowed
+                    streamState = FSTATES.remove;
+                }
+            }
+        } else {
+            if (stream && stream.tagFaction !== 'other') {
+                // If NoPixel streamer that isn't on another server
+                if (isUniversalFaction || isFilteringText || ((tnoPublicNow || stream.noPublicInclude) && (tnoInternationalNow || stream.noInternationalInclude))) {
+                    streamState = FSTATES.nopixel;
+                } else {
+                    // Public/International stream when not allowed and using filter
+                    streamState = FSTATES.remove;
+                }
+            } else {
+                streamState = FSTATES.other;
+            }
+        }
+
+        return streamState;
+    };
+
     const deleteOthers = () => {
         if (onPage == false) return;
         // if (onPage == false || isDeleting === true) return;
@@ -711,12 +760,6 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
 
             // console.log(elementIdx, 'Checking stream el:', channelName, stream?.tagText, element);
 
-            const nowFilterEnabled = filterEnabled && filterStreamFaction !== 'alltwitch';
-            const tnoWlOverrideNow = tnoWlOverride && stream && stream.wlOverride;
-            const tnoOthersNow = tnoOthers || filterStreamFaction === 'other' || tnoWlOverrideNow;
-            const tnoPublicNow = tnoPublic || filterStreamFaction === 'publicnp' || tnoWlOverrideNow;
-            const tnoInternationalNow = tnoInternational || filterStreamFaction === 'international' || tnoWlOverrideNow;
-
             if (isRealView && insertAfterReal[channelName] && isLive()) {
                 const addStream = insertAfterReal[channelName];
                 const removeEls = [...document.querySelectorAll(`#tno-stream-${addStream.id}`)];
@@ -728,7 +771,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                 allowNextManual = true;
             }
 
-            let streamState; // remove, mark-np, mark-other
+            let streamState;
             if (isManualStream === false && isRealView === false) { // If real-stream and on a view with manual-streams-only
                 streamState = FSTATES.hide;
             } else if (isManualStream === true && isRealView === true && allowNextManualNow === false) {
@@ -736,41 +779,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                 console.log('REMOVED BAD', channelName, element);
                 continue;
             } else {
-                if (nowFilterEnabled) {
-                    // If filtering streams is enabled
-                    if (!stream) {
-                        // Not an RP stream
-                        streamState = FSTATES.remove;
-                    } else if (stream.tagFaction === 'other') {
-                        // Non-NoPixel RP stream
-                        if (tnoOthersNow || stream.noOthersInclude) {
-                            streamState = FSTATES.other;
-                        } else {
-                            streamState = FSTATES.remove;
-                        }
-                    } else {
-                        // NoPixel stream
-                        if ((tnoPublicNow || stream.noPublicInclude) && (tnoInternationalNow || stream.noInternationalInclude)) {
-                            // NoPixel Public if allowed or NoPixel International if allowed or NoPixel WL Stream
-                            streamState = FSTATES.nopixel;
-                        } else {
-                            // Public/International stream when not allowed
-                            streamState = FSTATES.remove;
-                        }
-                    }
-                } else {
-                    if (stream && stream.tagFaction !== 'other') {
-                        // If NoPixel streamer that isn't on another server
-                        if (isUniversalFaction || isFilteringText || ((tnoPublicNow || stream.noPublicInclude) && (tnoInternationalNow || stream.noInternationalInclude))) {
-                            streamState = FSTATES.nopixel;
-                        } else {
-                            // Public/International stream when not allowed and using filter
-                            streamState = FSTATES.remove;
-                        }
-                    } else {
-                        streamState = FSTATES.other;
-                    }
-                }
+                streamState = checkStreamState(stream);
             }
 
             const hoverEl = element.querySelector('.tw-hover-accent-effect');
@@ -1058,11 +1067,11 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
     };
 
     const addSettings = async () => {
-        const $twitchBtn = $(await waitForElement(newLayout ? '[data-a-target="rec-feedback-card-button"]' : '[data-test-selector="follow-game-button-component"]'));
+        const $twitchBtn = $(await waitForElement(newLayout ? '.simplebar-content .tw-tabs' : '[data-test-selector="follow-game-button-component"]'));
 
         if (document.querySelector('.tno-settings-btn') != null) return; // Switching from clips/videos back to channels
 
-        const $container = newLayout ? $twitchBtn.parent().parent().parent().parent().parent() : $twitchBtn.parent().parent();
+        const $container = newLayout ? $twitchBtn : $twitchBtn.parent().parent();
         const $btnContainer = $('<div></div>');
         const $setEnglishBtn = $('<button>⚙️ Twitch NoPixel Only</button>');
 
@@ -1363,6 +1372,7 @@ const filterStreams = async () => { // Remember: The code here runs upon loading
                         const idx = rollStart;
                         const stream = streams[idx];
                         rollStart++;
+                        if (checkStreamState(stream) === FSTATES.remove) continue;
                         // Given stream is acceptable...
                         results.push(stream);
                         rollIds.push(idx);
